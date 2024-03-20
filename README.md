@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Ambientes
 sistema de reservas de ambientes
 =======
@@ -67,3 +68,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 >>>>>>> brayan
+=======
+
+>>>>>>> ae958d8a687ca93c9f461012a611d6f315f452ed
