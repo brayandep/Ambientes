@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
+
+Route::get('/materia', function () {
+    return view('materia');
+});
