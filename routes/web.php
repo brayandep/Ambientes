@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
+Route::get('/Registrar_Unidad', function () {
+    return view('RegistroUnidades');
+});
