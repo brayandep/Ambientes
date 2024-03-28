@@ -37,8 +37,7 @@ body{
     justify-content: center;
     margin-top: 5px;
     height: 75%;
-    
-    
+    position: relative; 
 }
 .registro{
     
@@ -46,7 +45,7 @@ body{
     padding: 5px;
     width: 50%;
 }
-.div1{
+.div1Label{
     
     display: flex;
     flex-direction: column;
@@ -67,7 +66,7 @@ body{
 .imput:focus, .imput:valid{
     outline: none;
 }
-.div2{
+.div2Seleccion{
     padding: 10px;
     display: flex;
     justify-content: space-around;
@@ -78,15 +77,18 @@ body{
     width: 40%;
 }
 
-.div3{
+.div3Botones{
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
     justify-content: end;
     display: flex;
     gap: 15px;
+    
 }
-.div3 button{
+.div3Botones button{
     padding: 7px;
+    padding-left: 12px;
+    padding-right: 12px;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
@@ -102,4 +104,80 @@ body{
 .footer{
     background-color: #498193;
     height: 10%;
+}
+#fondoGris{
+    background-color: #40505577;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.mensaje_emergente{
+    position: absolute; 
+    z-index: 2; /* un valor alto para estar por encima de otros elementos */
+    background-color: #89C2D9;
+    padding: 5px;
+    width: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.384);  
+    /*display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.info{
+    font-size: 16px;
+    justify-content: center;
+    margin-top: 5px;
+    margin-left: 3px;
+}
+/*visualizar unidades*/
+.visualizar{
+    height: 73%;
+    padding: 5px;
+    width: 50%;
+    
+}
+.pizarra{
+    background-color: #e2eaec;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+    
+}
+.columnas{
+    display: flex;
+}
+.nomCol{
+    background-color: #498193;
+    padding: 7px;
+    border-radius: 5px;
+    width: 25%;
+    color: #EBEBEB;
+    margin: 5px;
+}
+.datos{
+    width: 100%;
+    padding: 7px;
+    display: flex;
+}
+.datos p{
+    width: 25%;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.datos button{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.accion i{
+    background-color: none;
+    font-size: 20px;
 }
