@@ -55,3 +55,8 @@ body {
   .fondo{
     background: #445c83;
   }
+.contenido{
+  margin-top: 30%;
+  margin-left: 10%;
+  padding-top: 30px;
+}
