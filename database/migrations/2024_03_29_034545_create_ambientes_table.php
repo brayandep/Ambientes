@@ -15,12 +15,15 @@ class CreateAmbientesTable extends Migration
     {
         Schema::create('ambientes', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo')->unique(); // Código
-            $table->string('unidad'); // Unidad
-            $table->string('nombre'); // Nombre
-            $table->integer('capacidad'); // Capacidad (asumo que es un número entero)
-            $table->string('ubicacion'); // Ubicación
+            $table->unsignedBigInteger('id_tipoAmbiente');
+            $table->foreign('id_tipoAmbiente')->references('id')->on('tipo_ambientes');
+            $table->integer('codigo')->unique();
+            $table->string('unidad'); 
+            $table->string('nombre');
+            $table->integer('capacidad'); 
+            $table->string('ubicacion'); 
             $table->string('descripcion_ubicacion')->nullable();
+            $table->boolean('estadoAmbiente'); 
             $table->timestamps();
         });
     }

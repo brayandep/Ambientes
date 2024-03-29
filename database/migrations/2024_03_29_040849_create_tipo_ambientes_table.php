@@ -15,6 +15,9 @@ class CreateTipoAmbientesTable extends Migration
     {
         Schema::create('tipo_ambientes', function (Blueprint $table) {
             $table->id();
+            //$table->unsignedBigInteger('id_ambientes');
+            //$table->foreign('id_ambientes')->references('id')->on('ambientes');
+            $table->string('nombreTipo'); 
             $table->timestamps();
         });
     }

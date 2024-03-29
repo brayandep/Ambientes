@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ambiente;
+use App\Models\Equipo;
+use App\Models\HorarioDisponible;
+use App\Models\TipoAmbiente;
 use Illuminate\Http\Request;
 
 class AmbienteController extends Controller
@@ -14,7 +17,8 @@ class AmbienteController extends Controller
      */
     public function index()
     {
-        return view('registrarAmbiente.registro');
+        $ambientes = Ambiente::all();
+        return view('registrarAmbiente.index',$ambientes);
     }
 
     /**
@@ -24,7 +28,7 @@ class AmbienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('registrarAmbiente.registro');
     }
 
     /**
@@ -35,7 +39,8 @@ class AmbienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        
     }
 
     /**
@@ -55,7 +60,7 @@ class AmbienteController extends Controller
      * @param  \App\Models\Ambiente  $ambiente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ambiente $ambiente)
+    public function edit($id)
     {
         //
     }
@@ -67,7 +72,7 @@ class AmbienteController extends Controller
      * @param  \App\Models\Ambiente  $ambiente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ambiente $ambiente)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,7 +83,7 @@ class AmbienteController extends Controller
      * @param  \App\Models\Ambiente  $ambiente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ambiente $ambiente)
+    public function destroy($id)
     {
         //
     }
