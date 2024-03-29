@@ -26,7 +26,7 @@ Route::get('/index', function () {
 
 //prueba de encabezado
 Route::get('/', function () {
-    return view('Login');
+    return view('sliderBar');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('Login');
@@ -43,15 +43,13 @@ Route::get('/registro', function () {
     return view('registro');
 })->name('registro');
 
-
+//registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
 })->name('SolicitudAmbiente');
+Route::get('/solicitud', [SolicitudController::class, 'create']);
 
 
-Route::get('/Solicitudes', function () {
-    return view('Versolicitud');
-})->name('Versolicitud');
 
 
 

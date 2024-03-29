@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    color: #E3E5F3;
   }
   
   .menu-btn {
@@ -29,6 +30,7 @@ body {
     background: #141D2C;
     padding: 20px;
     transition: left 0.3s;
+    color: #E3E5F3;
   }
   
   .sidebar  {
@@ -59,4 +61,21 @@ body {
   margin-top: 30%;
   margin-left: 10%;
   padding-top: 30px;
+  font-size: 15px;
+  color:#E3E5F3;
+}
+
+.botones{
+  color: #E3E5F3;
+ 
+
+}
+.izq{
+  width: 20%;
+  height: 5%;
+  margin-left: 20%;
+  margin-top: 10%;
+  padding-top: 15px;
+  color: #141D2C;
+
 }

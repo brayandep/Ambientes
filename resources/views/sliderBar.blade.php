@@ -19,11 +19,11 @@
   <div class="sidebar">
      <p></p>
     <div class="contenido">
-        <a href="#">Gestionar Ambientes</a>
+        <a class = "botones" href="#">Gestionar Ambientes</a>
      <br>
-     <a href="{{ route('Login') }}">Solicitar Reserva</a>
+     <a class = "botones" href="{{ route('SolicitudAmbiente') }}">Solicitar Reserva</a>
      <br>
-         <a href="/SolicitudAmbiente">Gestionar Unidades</a>
+         <a class = "botones" href="/SolicitudAmbiente">Gestionar Unidades</a>
      </div> 
 
     

@@ -19,6 +19,9 @@ class CreateSolicitudTable extends Migration
             $table->foreign('id_usuario')->references('id')->on('usuarios');
             $table->date('fecha');
             $table->string('motivo');
+            $table->string('materia');
+            $table->string('grupo');
+            $table->time('horario');
             $table->timestamps();
         });
     }

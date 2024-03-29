@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
-
+use App\Models\Models\Usuario;
 class SolicitudController extends Controller
 {
     public function index()
@@ -14,18 +14,24 @@ class SolicitudController extends Controller
 
     public function store(Request $request)
     {
-        // Validación de campos y almacenamiento de la solicitud
         $request->validate([
-            'motivo' => 'required|string|max:255',
-            // Otros campos de solicitud según sea necesario
+           
+            'nro_aula' => 'required',
+            'materia' => 'required',
+            'grupo' => 'required',
+            'motivo' => 'required',
+            'fecha' => 'required|date',
+            'horario' => 'required',
         ]);
 
-        Solicitud::create([
-            'motivo' => $request->motivo,
-            // Otros campos de solicitud según sea necesario
-        ]);
+        Solicitud::create($request->all());
 
-        return redirect()->route('solicitud.index')->with('solicitud_enviada', true);
+        return redirect('/')->with('success', 'Solicitud creada exitosamente.');
 
+}
+public function create()
+{
+    $usuarios = Usuario::all(['nombre']); // Solo recuperamos el nombre de los usuarios
+    return view('SolicitudAmbiente', ['usuarios' => $usuarios]);
 }
 }
