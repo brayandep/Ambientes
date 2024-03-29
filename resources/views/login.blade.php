@@ -7,20 +7,23 @@
 </head>
 <body>
     <h1>Iniciar sesión</h1>
-    @if(session('message'))
-        <p>{{ session('message') }}</p>
-    @endif
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('Login') }}">
         @csrf
+    
         <div>
             <label for="nombre">Nombre de usuario:</label><br>
-            <input type="text" id="nombre" name="nombre" required autofocus>
+            <input id="nombre" type="text" name="nombre" required autofocus>
         </div>
+    
         <div>
             <label for="contraseña">Contraseña:</label><br>
-            <input type="password" id="contraseña" name="contraseña" required>
+            <input id="contraseña" type="password" name="contraseña" required>
         </div>
-        <button type="submit">Iniciar sesión</button>
+    
+        <div>
+            <button type="submit">Iniciar sesión</button>
+        </div>
     </form>
+  
 </body>
 </html>
