@@ -21,10 +21,11 @@
     <div class="contenido">
         <a href="#">Gestionar Ambientes</a>
      <br>
-     <a href="#">Solicitar Reserva</a>
+     <a href="/menu">Solicitar Reserva</a>
      <br>
-         <a href="SolicitudAmbiente">Gestionar Unidades</a>
+         <a href="/SolicitudAmbiente">Gestionar Unidades</a>
      </div> 
+     
     
   </div>
   
