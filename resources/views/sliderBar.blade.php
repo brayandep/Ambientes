@@ -30,4 +30,45 @@
 
   <script src="{{asset('js/script.js')}}"></script>
 </body>
+
+<!-- PRUEBA DE OPCIONES QUE SE PUEDEN INCREMENTAR -->
+<select id="opciones">
+    <option value="opcion1">Opción 1</option>
+    <option value="opcion2">Opción 2</option>
+    <option value="opcion3">Opción 3</option>
+    <option value="otro">Otro</option>
+</select>
+<input type="text" id="otroCampo" style="display: none;">
+<button onclick="agregarNuevaOpcion()">Agregar nueva opción</button>
+
+// Función para manejar la selección de "Otro"
+<script>
+function handleOtro() {
+    var select = document.getElementById("opciones");
+    var otroCampo = document.getElementById("otroCampo");
+    if (select.value === "otro") {
+        otroCampo.style.display = "inline-block";
+    } else {
+        otroCampo.style.display = "none";
+    }
+}
+
+// Función para agregar una nueva opción
+function agregarNuevaOpcion() {
+    var select = document.getElementById("opciones");
+    var otroCampo = document.getElementById("otroCampo");
+    var nuevoValor = otroCampo.value.trim();
+    if (nuevoValor !== "") {
+        var nuevaOpcion = document.createElement("option");
+        nuevaOpcion.value = nuevoValor;
+        nuevaOpcion.text = nuevoValor;
+        select.add(nuevaOpcion);
+        otroCampo.value = ""; // Limpiar el campo de texto
+        otroCampo.style.display = "none"; // Ocultar el campo de texto
+    }
+}
+
+// Escuchar los cambios en el select
+document.getElementById("opciones").addEventListener("change", handleOtro);
+</script>
 </html>
