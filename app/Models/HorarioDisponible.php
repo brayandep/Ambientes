@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class HorarioDisponible extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'ambiente_id',
+        'horaInicio',
+        'horaFin',
+        'estadoHorario',
+        'dia',
+    ];
+
 }

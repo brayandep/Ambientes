@@ -15,8 +15,10 @@ class CreateEquiposTable extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tipo_ambiente');
-            $table->foreign('id_tipo_ambiente')->references('id')->on('tipo_ambientes');
+            $table->unsignedBigInteger('tipo_ambiente_id');
+            $table->foreign('tipo_ambiente_id')->references('id')->on('tipo_ambientes');
+            $table->unsignedBigInteger('ambiente_id');
+            $table->foreign('ambiente_id')->references('id')->on('ambientes');
             $table->string('nombreEquipo');
             $table->boolean('estadoEquipo'); 
             $table->timestamps();

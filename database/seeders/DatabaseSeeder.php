@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         Schema::create('tipo_ambientes', function ($table) {
             $table->id();
+            //$table->unsignedBigInteger('id_ambientes');
+            //$table->foreign('id_ambientes')->references('id')->on('ambientes');
             $table->string('nombreTipo'); 
             $table->timestamps();
         });
@@ -26,7 +28,7 @@ class DatabaseSeeder extends Seeder
             $table->id();
             $table->unsignedBigInteger('tipo_ambiente_id');
             $table->foreign('tipo_ambiente_id')->references('id')->on('tipo_ambientes');
-            $table->integer('codigo')->unique();
+            $table->string('codigo')->unique();
             $table->string('unidad'); 
             $table->string('nombre');
             $table->integer('capacidad'); 
@@ -40,6 +42,8 @@ class DatabaseSeeder extends Seeder
             $table->id();
             $table->unsignedBigInteger('tipo_ambiente_id');
             $table->foreign('tipo_ambiente_id')->references('id')->on('tipo_ambientes');
+            $table->unsignedBigInteger('ambiente_id');
+            $table->foreign('ambiente_id')->references('id')->on('ambientes');
             $table->string('nombreEquipo');
             $table->boolean('estadoEquipo'); 
             $table->timestamps();
@@ -53,6 +57,16 @@ class DatabaseSeeder extends Seeder
             $table->time('horaFin');
             $table->boolean('estadoHorario'); 
             $table->date('dia'); 
+            $table->timestamps();
+        });
+
+        Schema::create('unidads', function ($table) {
+            $table->id();
+            $table->string('nombreUnidad');
+            $table->string('codigoUnidad');
+            $table->string('responsable'); 
+            $table->integer('nivel');
+            $table->string('dependencia');
             $table->timestamps();
         });
         

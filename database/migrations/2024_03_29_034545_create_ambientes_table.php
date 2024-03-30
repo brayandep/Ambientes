@@ -15,9 +15,9 @@ class CreateAmbientesTable extends Migration
     {
         Schema::create('ambientes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tipoAmbiente');
-            $table->foreign('id_tipoAmbiente')->references('id')->on('tipo_ambientes');
-            $table->integer('codigo')->unique();
+            $table->unsignedBigInteger('tipo_ambiente_id');
+            $table->foreign('tipo_ambiente_id')->references('id')->on('tipo_ambientes');
+            $table->string('codigo')->unique();
             $table->string('unidad'); 
             $table->string('nombre');
             $table->integer('capacidad'); 

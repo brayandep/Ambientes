@@ -15,8 +15,8 @@ class CreateHorarioDisponiblesTable extends Migration
     {
         Schema::create('horario_disponibles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_ambientes');
-            $table->foreign('id_ambientes')->references('id')->on('ambientes');
+            $table->unsignedBigInteger('ambiente_id');
+            $table->foreign('ambiente_id')->references('id')->on('ambientes');
             $table->time('horaInicio'); 
             $table->time('horaFin');
             $table->boolean('estadoHorario'); 

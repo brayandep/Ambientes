@@ -5,7 +5,6 @@ body {
     background: #E1DBE8;
   }
   
-/*/////////////////////////////// Para Registrar Ambiente //////////////////////////////////////////////*/
 h2{
   font-family: "Fjalla One", sans-serif;
   font-size: 30px;
@@ -60,6 +59,16 @@ h2{
     margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
   }
 
+  #lunes.columna,
+  #martes.columna,
+  #miercoles.columna,
+  #jueves.columna,
+  #viernes.columna,
+  #sabado.columna{
+    margin-right: 0px; 
+    margin-left: 0px;
+  }
+
   label {
     display: block;
     margin-bottom: 5px;
@@ -102,10 +111,10 @@ h2{
   button{
     background-color: #C384B2;
     color: #fff;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-bottom: 10px;
 
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -114,6 +123,11 @@ h2{
 
   .boton-eliminar {
     background-color: #F35D5D; /* Cambia el color de fondo aquí */
+
+    color: white; /* Cambia el color del texto del botón */
+    border: none; /* Elimina el borde del botón */
+    padding: 5px 10px; /* Ajusta el relleno del botón */
+    border-radius: 5px; /* Agrega bordes redondeados al botón */
   }
   
   button:hover {
@@ -140,7 +154,6 @@ h2{
     border-radius: 5px; /* Borde redondeado */
   }
 
-  /*///////////////////  Para seleccionar equipo /////////////////////*/
   .checkbox-columns {
     display: flex;
 
@@ -172,7 +185,6 @@ h2{
     margin-right: 10px;
   }
 
-  /*////////////////////////////// HEADER  y  FOOTER //////////////////////////////////*/
   /* Estilos generales */
 body {
   font-family: Arial, sans-serif;
@@ -219,4 +231,101 @@ footer {
   color: #fff; /* Color del texto */
   text-align: center;
   padding: 10px 0; /* Espaciado interno */
+}
+
+
+/* Estilos para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+}
+
+.modal-contenido {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+}
+
+.nuevo-tipo {
+  flex-grow: 1; /* Permite que el contenedor del label y el input ocupe todo el espacio disponible */
+  margin-right: 10px; /* Espacio entre el input y el botón */
+}
+
+.modal-contenido label,
+.modal-contenido input {
+  display: inline-block;
+  vertical-align: middle; /* Alinea verticalmente los elementos */
+  margin-bottom: 10px;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  align-self: flex-end; /* Alinea el botón "x" a la derecha */
+  margin-bottom: 10px; /* Agrega un margen inferior */
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para los inputs */
+.horarios {
+  display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Añade margen inferior */
+}
+
+.horarios label {
+  margin-right: 10px; /* Espacio entre las etiquetas y los inputs */
+  padding: 5px; /* Agrega espacio entre los inputs */
+}
+
+.horarios input{
+  padding: 5px; /* Agrega espacio entre los inputs */
+}
+
+/* Estilos para el botón "Aceptar" */
+#modalAceptar {
+  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
+  margin-top: 10px; /* Agrega un margen superior */
+}
+#aceptarModal {
+  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
+  margin-top: 10px; /* Agrega un margen superior */
 }
