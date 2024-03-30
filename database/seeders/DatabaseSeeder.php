@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             $table->time('horaInicio'); 
             $table->time('horaFin');
             $table->boolean('estadoHorario'); 
-            $table->date('dia'); 
+            $table->string('dia'); 
             $table->timestamps();
         });
 

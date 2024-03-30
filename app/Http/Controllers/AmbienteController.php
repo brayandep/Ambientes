@@ -31,8 +31,11 @@ class AmbienteController extends Controller
     {
         $unidades = Unidad::all();
         $tipoAmbientes = TipoAmbiente::all();
-
-        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes'));
+        $equiposDisponibles = Equipo::distinct()->pluck('nombreEquipo')->toArray();
+        $equiposSeleccionados = null;
+        $horariosExistente = null;
+        //dd($equiposDisponibles);
+        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','equiposDisponibles','equiposSeleccionados','horariosExistente'));
     }
 
     /**
@@ -43,13 +46,13 @@ class AmbienteController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         $tipoID = 0;
         $ambiente = new Ambiente();
         $tipoAmb = TipoAmbiente::where('nombreTipo', $request->input('tipo-ambiente'))->first();
         if ($tipoAmb === null) {
             $tipoAmbiente = new TipoAmbiente();
-            $tipoAmbiente->nombreTipo = $request->input('otroAmbiente');
+            $tipoAmbiente->nombreTipo = $request->input('tipo-ambiente');
             $tipoAmbiente->save();
 
             $ambiente->tipo_ambiente_id =$tipoAmbiente->id;
@@ -80,12 +83,27 @@ class AmbienteController extends Controller
             }
         }
 
-        //dd($ambiente);
-        //dd($tipoID);
+        $datosDiaSemana = $request->diaSemana;
+        
+        foreach ($datosDiaSemana as $dia => $dats) {
 
-        $horarioDisponible = new HorarioDisponible();
-
-        //dd($ambiente);
+            $datos = json_decode($dats, true);
+            
+            if ($datos !== null && is_array($datos)) {
+                foreach ($datos as $dato) {
+                    
+                    $inicio = $dato['inicio'];
+                    $fin = $dato['fin'];
+                    $horarioDisponible = new HorarioDisponible();
+                    $horarioDisponible->ambiente_id = $ambiente->id;
+                    $horarioDisponible->horaInicio = $inicio;
+                    $horarioDisponible->horaFin = $fin;
+                    $horarioDisponible->estadoHorario = 1;
+                    $horarioDisponible->dia = $dia;
+                    $horarioDisponible->save();
+                }
+            }  
+        }
         return redirect('registro');
     }
 
@@ -110,16 +128,28 @@ class AmbienteController extends Controller
     {
         $unidades = Unidad::all();
         $tipoAmbientes = TipoAmbiente::all();
-
         $ambienteDatos = Ambiente::find($id);
+
+        $equipos = Equipo::where('ambiente_id', $ambienteDatos->id)->get();
         
+        $tipoAmbienteID = TipoAmbiente::find($ambienteDatos->tipo_ambiente_id);
+        
+        $equiposDisponibles = Equipo::distinct()->pluck('nombreEquipo')->toArray();
+
+        if ($equipos->count() > 0) {
+            $equiposSeleccionados = $equipos->pluck('nombreEquipo')->toArray();
+        } else {
+            $equiposSeleccionados = null;
+        }
         //falta cargar equipos y horarios
 
         //$equipos = Equipo::find($id);
 
-        //$horarios = HorarioDisponible::find($id);
+        $horariosExistente = HorarioDisponible::where('ambiente_id', $ambienteDatos->id)->get()->groupBy('dia');;
+    
+        
 
-        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','ambienteDatos'));
+        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','ambienteDatos','equiposDisponibles','equiposSeleccionados','horariosExistente'));
     }
 
     /**
@@ -138,7 +168,7 @@ class AmbienteController extends Controller
         $tipoAmb = TipoAmbiente::where('nombreTipo', $request->input('tipo-ambiente'))->first();
         if ($tipoAmb === null) {
             $tipoAmbiente = new TipoAmbiente();
-            $tipoAmbiente->nombreTipo = $request->input('otroAmbiente');
+            $tipoAmbiente->nombreTipo = $request->input('tipo-ambiente');
             $tipoAmbiente->save();
 
             $ambiente->tipo_ambiente_id =$tipoAmbiente->id;
@@ -157,19 +187,59 @@ class AmbienteController extends Controller
         $ambiente->estadoAmbiente = 1;
         $ambiente->save();
 
-        /*$equiposSeleccionados = $request->input('equipos-disponibles');
-        if ($equiposSeleccionados) {
-            foreach ($equiposSeleccionados as $equipo) {
-                Equipo::create([
-                    'tipo_ambiente_id' => $tipoID,
-                    'ambiente_id' => $ambiente->id,
-                    'nombreEquipo' => $equipo,
-                    'estadoEquipo' => 1,
-                ]);
-            }
-        }*/
+        $equiposSeleccionados = $request->input('equipos-disponibles');
+        $equiposExistentes = Equipo::where('ambiente_id', $ambiente->id)->get();
 
-        //falta actualizar equipos y horarios
+            if ($equiposSeleccionados) {
+                foreach ($equiposSeleccionados as $equipo) {
+
+                    $equipoExistente = Equipo::where('ambiente_id', $ambiente->id)->get()
+                        ->where('nombreEquipo', $equipo)
+                        ->first();
+
+                    if (!$equipoExistente) {
+                        Equipo::create([
+                            'tipo_ambiente_id' => $tipoID,
+                            'ambiente_id' => $ambiente->id,
+                            'nombreEquipo' => $equipo,
+                            'estadoEquipo' => 1,
+                        ]);
+                    }
+                }
+            }
+
+        foreach ($equiposExistentes as $equipoExistente) {
+            if (!in_array($equipoExistente->nombreEquipo, $equiposSeleccionados)) {
+                $equipoExistente->delete();
+            }
+        }
+
+        $datosDiaSemana = $request->diaSemana;
+        
+        foreach ($datosDiaSemana as $dia => $dats) {
+
+            $datos = json_decode($dats, true);
+            
+            if ($datos !== null && is_array($datos)) {
+                foreach ($datos as $dato) {
+                    
+                    $inicio = $dato['inicio'];
+                    $fin = $dato['fin'];
+                    $horarioDisponible = new HorarioDisponible();
+                    $horarioDisponible->ambiente_id = $ambiente->id;
+                    $horarioDisponible->horaInicio = $inicio;
+                    $horarioDisponible->horaFin = $fin;
+                    $horarioDisponible->estadoHorario = 1;
+                    $horarioDisponible->dia = $dia;
+                    $horarioDisponible->save();
+                }
+            }  
+        }
+
+        if ($request->has('borrar')) {
+            $idsAEliminar = $request->borrar;
+            HorarioDisponible::destroy($idsAEliminar);
+        }
 
         return redirect()->route('registro.index');
 
@@ -185,8 +255,16 @@ class AmbienteController extends Controller
     {
         $ambiente = Ambiente::find($id);
         $ambiente->delete();
-        //falta equipos y horarios
 
+        $equipos= Equipo::where('ambiente_id', $ambiente->id)->get();
+        foreach ($equipos as $equipo) {
+            $equipo->delete();
+        }
+
+        $horarios= HorarioDisponible::where('ambiente_id', $ambiente->id)->get();
+        foreach ($horarios as $horario) {
+            $horario->delete();
+}
         return redirect()->route('registro.index');
     }
 }
