@@ -139,7 +139,7 @@ body{
 .visualizar{
     height: 73%;
     padding: 5px;
-    width: 50%;
+    width: 70%;
     
 }
 .pizarra{
@@ -151,27 +151,39 @@ body{
     flex-direction: column;
     display: flex;
     
+    
 }
 .columnas{
     display: flex;
+    width: 100%;
+    position: relative;
 }
 .nomCol{
     background-color: #498193;
     padding: 7px;
     border-radius: 5px;
-    width: 25%;
+    
     color: #EBEBEB;
     margin: 5px;
-}
-.datos{
     width: 100%;
-    padding: 7px;
-    display: flex;
 }
-.datos p{
-    width: 25%;
+/*.datos{
+    width: 100%;
+    padding-top: 7px;
+    display: flex;
+    gap: 3px;
+}*/
+.columnas p{
+    width: 15%;
     margin-top: 5px;
     margin-left: 5px;
+    padding: 7px;
+    
+}
+/*
+.EliEdi{
+    display: flex;
+    justify-content: end;
 }
 .datos button{
     margin-right: 10px;
@@ -180,4 +192,4 @@ body{
 .accion i{
     background-color: none;
     font-size: 20px;
-}
+}*/

@@ -19,24 +19,26 @@
         </div>
         <div class="registro-contenido">
             <div class=registro>
-                <form action="">
+                <form action="{{route('unidad.store')}}" method="POST">
+                @csrf
                     <div class="div1Label">
                             <h1 class=Titulo><i class="fas fa-building"></i> Registro de Unidad</h1>
                     
-                            <label class="titulo"for="Nombre">Nombre de la Unidad: </label>
-                            <input class="imput" type="text" id="Nombre" name="Nombre" required maxlength="40" autocomplete="off">
+                            <label class="titulo"for="nombreUnidad">Nombre de la Unidad: </label>
+                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off">
                             
-                            <label class="titulo" for="codigo">Codigo: </label>
-                            <input class="imput" type="text" id="codigo" name="codigo" required maxlength="6" autocomplete="off">
+                            <label class="titulo" for="codigoUnidad">Codigo: </label>
+                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" required maxlength="6" autocomplete="off">
 
-                            <label class="titulo"for="responsable">Responsable: </label>
-                            <input class="imput" type="text" id="responsable" name="responsable" required maxlength="30" autocomplete="off">
+                            <label class="titulo"for="Responsable">Responsable: </label>
+                            <input class="imput" type="text" id="Responsable" name="Responsable" required maxlength="30" autocomplete="off">
                     </div>
                     <div class="div2Seleccion">
                         <div class="seleccion">
-                            <label class="Titulo" for="nivel">Nivel:</label>
-                            <select class="imput" id="nivel" name="nivel">
+                            <label class="Titulo" for="Nivel">Nivel:</label>
+                            <select class="imput" id="Nivel" name="Nivel">
                                 <!-- Opciones de nivel aqu� -->
+                                <option selected>Seleccione un nivel</option>
                                 <option value="0">0  Facultad</option> 
                                 <option value="1">1  Decanato</option> 
                                 <option value="2">2  Departamento</option> 
@@ -44,8 +46,8 @@
                             </select>
                         </div>
                         <div class="seleccion">
-                            <label class="Titulo" for="dependencia">Dependencia:</label>
-                            <select class="imput" id="dependencia" name="dependencia">
+                            <label class="Titulo" for="Dependencia">Dependencia:</label>
+                            <select class="imput" id="Dependencia" name="Dependencia">
                                 <!-- Opciones de dependeia aqu� -->
                                 <option value="1">opcion 1</option> 
                                 <option value="2">opcion 2</option> 
@@ -56,7 +58,7 @@
                     </div>
                     <div class="div3Botones">
                         <button class= "cancelar">Cancelar</button>
-                        <button class="registrar">Registrar</button>
+                        <button type="submit" class="registrar">Registrar</button>
                     </div>
                 </form>
             </div>

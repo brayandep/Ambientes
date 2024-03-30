@@ -23,19 +23,26 @@
                     <h1 class="Titulo"><i class="fas fa-building"></i> Visualizar Unidad</h1>
                 </div>
                 <div class="pizarra">
-                    <div class="columnas">
-                        <button class="nomCol">Nombre de unidad</button>
+                    
+                    <!--<div class="columnas">
+                        <button class="nomCol">Codigo</button>
+                        <button class="nomCol">Nombre</button>
                         <button class="nomCol">Nivel</button>
                         <button class="nomCol">Dependencia</button>
+                        <button class="nomCol">Responsable</button>
                         <button class="nomCol">Acciones</button>
                     </div>
-                    <div class="datos">
+                    <div class="columnas">
+                        <p>aqui el codigo</p>
                         <p>aqui viene el nombre</p>
                         <p>aqui viene el nivel</p>
                         <p>aqui la dependencia</p>
-                        <button class="accion"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="accion"><i class="fa-solid fa-trash"></i></button>
-                    </div>
+                        <p>aqui el responsable</p>
+                        <div class="EliEdi">
+                            <button class="accion"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="accion"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>-->
                 </div>
             </div>
         </div>
