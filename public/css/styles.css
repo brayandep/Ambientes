@@ -1,7 +1,9 @@
 body {
-    margin: 0;
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0;
     font-family: Arial, sans-serif;
-    color: #E3E5F3;
+    color: #89C2D9;
+    
   }
   
   .menu-btn {
@@ -27,7 +29,7 @@ body {
     top: 0;
     height: 100vh;
     width: 250px;
-    background: #141D2C;
+    margin-top: 10%;
     padding: 20px;
     transition: left 0.3s;
     color: #E3E5F3;
@@ -35,11 +37,11 @@ body {
   
   .sidebar  {
     display: block;
-    color:#E3E5F3;
+    color:#090909;
     text-decoration: none;
     padding: 10px 0;
     
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #E3E5F3;
   }
   
   .content {
@@ -55,14 +57,18 @@ body {
     margin-left: 250px;
   }
   .fondo{
-    background: #445c83;
+    background: #E3E5F3;
   }
 .contenido{
   margin-top: 30%;
   margin-left: 10%;
-  padding-top: 30px;
   font-size: 15px;
-  color:#E3E5F3;
+  background: #89C2D9;
+  border-radius: 10px;
+  max-width: 1000px; /* Cambia este valor según el ancho máximo deseado */
+  margin: 0 auto; /* Centra el contenido horizontalmente */
+  padding: 20px; 
+
 }
 
 .botones{
@@ -71,11 +77,67 @@ body {
 
 }
 .izq{
-  width: 20%;
-  height: 5%;
+  width:calc(50%, 10px); 
+
+ 
+  padding-top: 100px;
+  
+
+}
+.input{
+  width: 150%;
+  height: 25px;
+  border-radius: 10px;
+  border-color: #141D2C;
+  border-style: calc();
+
+}
+.der{
+  display: block;
+  width:calc(60%, 20px); 
+  margin-right: 20%;
+ 
+  padding-top: 100px;
+}
+.text{
+  color: #090909;
+  margin-top: 10px;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+}
+.boton{
+  border-radius: 10px;
+  background-color: #0d1d37;
+  width: 10%;
+  height: 10%;
+  color: #E3E5F3;
+}
+.titulo{
   margin-left: 20%;
-  margin-top: 10%;
-  padding-top: 15px;
-  color: #141D2C;
+  color: rgb(17, 17, 17);
+  font-size: 40px;
+}
+.botones2{
+  background: #E3E5F3;
+  border-radius: 10px;
+  width: 50px;
+  margin-top: 15px;
+}
+.arriba{
+  width: 100%;
+  height: 50px;
+  background-color: #141D2C;
+  padding: 20px;
+
+}
+.abajo{
+  width: 100%;
+  height: 80px;
+  margin-top: 80%;
+  background-color: #141D2C;
 
 }

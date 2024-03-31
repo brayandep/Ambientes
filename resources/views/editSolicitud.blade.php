@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
     <iframe src="sliderBar.blade.php" width="100%" height="100"></iframe>
-   
     <title>Formulario de Solicitud</title>
 </head>
 
 <body>
     <h2 class="titulo">Formulario de Solicitud</h2>
    <div class="container">
-    <form class="container" method="POST" action="{{ route('solicitud.store') }}">
+    <form method="POST" action="{{ route('solicitud.store') }}">
 
             @csrf <!-- Incluye el campo csrf aquí -->
             <div class="izq">

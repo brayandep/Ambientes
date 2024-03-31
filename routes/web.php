@@ -47,10 +47,18 @@ Route::get('/registro', function () {
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
 })->name('SolicitudAmbiente');
-Route::get('/solicitud', [SolicitudController::class, 'create']);
 
+//versolicitudes
+Route::get('/Versolicitudes', [SolicitudController::class, 'index'])->name('VerSolicitud');
 
+Route::get('/Versolicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->name('solicitud.edit');
+Route::put('/Versolicitudes/{solicitud}', [SolicitudController::class, 'update'])->name('solicitud.update');
+Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destroy'])->name('solicitud.destroy');
+/*Route::get('/Versolicitudes', function () {
+    return view('Versolicitud');
+})->name('VerSolicitud');
+*/
 
-
-
+//envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
+Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');

@@ -3,38 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Solicitudes</title>
+    <title>Lista de Solicitudes</title>
 </head>
 <body>
-    <h2>Tabla de Solicitudes</h2>
+    <h2>Lista de Solicitudes</h2>
     <table border="1">
         <thead>
             <tr>
                 <th>Nro</th>
-                <th>Aula</th>
+                <th>Usuario</th>
+                <th>Número de Aula</th>
                 <th>Motivo</th>
                 <th>Fecha</th>
-                <th>Acción</th>
+                <th>Horario</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach($solicitudes as $solicitud)
-                <tr>
-                    <td>{{ $solicitud->id }}</td>
-                    <td>{{ $solicitud->nro_aula }}</td>
-                    <td>{{ $solicitud->motivo }}</td>
-                    <td>{{ $solicitud->fecha }}</td>
-                    <td>
-                        <a href="{{ route('solicitudes.edit', $solicitud->id) }}">Modificar</a>
-                        <form action="{{ route('solicitudes.destroy', $solicitud->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>{{ $solicitud->idsolicitud }}</td>
+                <td>{{ $solicitud->usuario }}</td>
+                <td>{{ $solicitud->nro_aula }}</td>
+                <td>{{ $solicitud->motivo }}</td>
+                <td>{{ $solicitud->fecha }}</td>
+                <td>{{ $solicitud->horario }}</td>
+                <td>
+                    
+                    <a href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
+                  
+                    
+                    <form action="#" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method ="POST"type="submit">Eliminar</button>
+                        @method('DELETE')
+                    </form>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 </body>
 </html>
+
