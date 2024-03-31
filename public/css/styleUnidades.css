@@ -148,7 +148,7 @@ body{
 .pizarra{
     background-color: #e2eaec;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     font-size: 14px;
     flex-direction: column;
@@ -156,43 +156,42 @@ body{
     
     
 }
-.columnas{
-    display: flex;
-    width: 100%;
-    position: relative;
-}
 .nomCol{
     background-color: #498193;
     padding: 7px;
     border-radius: 5px;
-    
     color: #EBEBEB;
     margin: 5px;
     width: 100%;
 }
-/*.datos{
+
+.filas{
     width: 100%;
-    padding-top: 7px;
-    display: flex;
-    gap: 3px;
-}*/
-.columnas p{
-    width: 15%;
-    margin-top: 5px;
-    margin-left: 5px;
-    padding: 7px;
-    
 }
-/*
+.fila{
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin-top: 7px;
+    width: 100%;
+}
+.fila p{
+    width: 16%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
 .EliEdi{
+    width: 15%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
-.datos button{
+.EliEdi button{
     margin-right: 10px;
     cursor: pointer;
 }
 .accion i{
     background-color: none;
     font-size: 20px;
-}*/
+}

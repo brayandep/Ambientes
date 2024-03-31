@@ -27,5 +27,15 @@ class registroUnidadesController extends Controller
         
         return redirect()->route('visualizar_unidad');/* este es el codigo para redireccionar a otra vista desde controller*/
     }
-    
+    public function show(){
+        $unidades = Unidad::all();
+
+        return view('GestionUnidades.VisualizarUnidades', compact('unidades'));
+
+    }
+    public function destroy(Unidad $unidad){
+        $unidad->delete();
+        return redirect()->route('visualizar_unidad');
+        
+    }
 }

@@ -24,11 +24,11 @@ Route::get('/index', function () {
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 });
+Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
 
-Route::get('/Visualizar_Unidad', function () {
-    return view('GestionUnidades.VisualizarUnidades');
-})->name('visualizar_unidad');
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
+
+Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 //prueba de encabezado
 Route::get('/', function () {
     return view('web');
