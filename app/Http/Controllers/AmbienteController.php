@@ -115,7 +115,7 @@ class AmbienteController extends Controller
      */
     public function show(Ambiente $ambiente)
     {
-        //
+        // Brayan es gay
     }
 
     /**
