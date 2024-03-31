@@ -12,32 +12,38 @@ a{
 
 body{
     height: 100vh;
-    background-color: #445C83;
+    background-color: #DED4EB;
     font-family: sans-serif;
+    color: #0B2C37;
 }
 
 .contenedor{
     display: flex;
-    height: 100%;
+    height: 90%;
+    position: relative;
 }
 
 .izquierda{
     width: 20%;
-    background-color: #141D2C;
+    background-color: #AE7791;
     color: #ffffff;
+    display: none;
+    position: absolute;
+    top: 67px;
+    border-bottom-right-radius: 5px;
 }
 .derecha{
-    width: 80%;
+    width: 100%;
+    color: #0B2C37;
 }
 
-.izquierda h1{
-    margin: 20px;
-    margin-bottom: 30px;
+.derecha h1{
     font-size: 24px;
+    cursor: pointer;
 }
 .menu{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px;
+    width: 100%;
 }
 .menu ul{
     font-size: 18px;
@@ -48,7 +54,7 @@ body{
     cursor: pointer;
 }
 .menu ul li:hover{
-    background-color: #6FABF3;
+    background-color: #933864;
 }
 
 .menu ul li a{
@@ -56,7 +62,7 @@ body{
 }
 
 .subMenu{
-    background-color: #445C83;
+    background-color: #CD9DC0;
     padding: 5px;
     border-radius: 10px;
     margin-left: 20px;
@@ -67,20 +73,91 @@ body{
     width: 100%;
 }
 
-.derecha{
-    color: #ffffff;
-}
-
 header{
-    margin: 20px;
-    margin-bottom: 30px;
+    padding: 20px;
+    display: flex;
+    font-size: 24px;
+    justify-content: space-between;
+    background-color: #933864;
+    color: #f5f6f7;
 }
 
 main{
-    margin-left: 10%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+main div{
+    width: 50%;
 }
 
 main h1{
-    font-size: 24px;
-    padding: 10px;
+    padding: 10px 0 10px 0;
+    margin-bottom: 10px;
 }
+
+footer{
+    height: 10%;
+    background-color: #933864;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.labMateria{
+    margin-bottom: 5px;
+}
+
+.inputMateria{
+    padding: 5px;
+    font-size: 16px;
+    background-color: #E3E5F3;
+    color: #0B2C37;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.inputMateria:focus, .inputMateria:hover {
+    outline: none;
+    box-shadow: 0 0 0 2px #b7b8c3;
+}
+
+.botones{
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.botones button{
+    padding: 5px 15px 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #f5f6f7;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.btnCancelar{
+    background-color: #F35D5D;
+}
+.btnRegistrar{
+    background-color: #538296;
+}
+
+.btnCancelar:hover{
+    background-color: #b94848;
+}
+.btnRegistrar:hover{
+    background-color: #4e798c;
+}
+
