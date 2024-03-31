@@ -20,31 +20,43 @@
         <div class="registro-contenido">
             <div class=registro>
                 <form action="{{route('unidad.store')}}" method="POST">
-                @csrf
+                    @csrf
                     <div class="div1Label">
                             <h1 class=Titulo><i class="fas fa-building"></i> Registro de Unidad</h1>
                     
                             <label class="titulo"for="nombreUnidad">Nombre de la Unidad: </label>
-                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off">
+                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{old('nombreUnidad')}}">
+                            @error('nombreUnidad')
+                                <span>*{{$message}}</span>
+                            @enderror
                             
                             <label class="titulo" for="codigoUnidad">Codigo: </label>
-                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" required maxlength="6" autocomplete="off">
+                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="8" maxlength="8" autocomplete="off" value="{{old('codigoUnidad')}}">
+                            @error('codigoUnidad')
+                                <span>*{{$message}}</span>
+                            @enderror
 
                             <label class="titulo"for="Responsable">Responsable: </label>
-                            <input class="imput" type="text" id="Responsable" name="Responsable" required maxlength="30" autocomplete="off">
+                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad" required maxlength="40" autocomplete="off" value="{{old('Responsable')}}">
+                            @error('Responsable')
+                                <span>*{{$message}}</span>
+                            @enderror
                     </div>
                     <div class="div2Seleccion">
                         <div class="seleccion">
                             <label class="Titulo" for="Nivel">Nivel:</label>
                             <select class="imput" id="Nivel" name="Nivel">
-                                <!-- Opciones de nivel aqu� -->
-                                <option selected>Seleccione un nivel</option>
+                                <!-- Opciones de nivel aqu� 
+                                <option selected>Seleccione un nivel</option>-->
                                 <option value="0">0  Facultad</option> 
                                 <option value="1">1  Decanato</option> 
                                 <option value="2">2  Departamento</option> 
                                 <option value="3">3  laboratorio</option> 
                             </select>
                         </div>
+                        @error('Nivel')
+                                <span>*{{$message}}</span>
+                        @enderror
                         <div class="seleccion">
                             <label class="Titulo" for="Dependencia">Dependencia:</label>
                             <select class="imput" id="Dependencia" name="Dependencia">
@@ -55,10 +67,13 @@
                                 <option value="4">opcion 4</option> 
                             </select>
                         </div>
+                        @error('Dependencia')
+                                <span>*{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="div3Botones">
-                        <button class= "cancelar">Cancelar</button>
-                        <button type="submit" class="registrar">Registrar</button>
+                        <button type="button" class= "cancelar" onclick="CancelarRegU()">Cancelar</button>
+                        <button type="submit" class="registrar"> Registrar</button>
                     </div>
                 </form>
             </div>
@@ -68,26 +83,26 @@
             gmail:SmartByte626@gmail.com
             celular: 6857499 
         </div>
-       
-    </div>
-    
-</body>
-<div id="fondoGris"></div>
-<!--<div class="mensaje_emergente" >
+        <div id="fondoGris"></div>
+        <div class="mensaje_emergente" id="PanelCancelarRegistroU">
             <div class="info">
                 ¿Esta seguro que desea cancelar el registro?
             </div>
-            <div class="div3">
-                <button class= "cancelar">Cancelar</button>
-                <button class="registrar">Aceptar</button>
+            <div class="div3Botones">
+                <button class= "registrar" onclick="VolverRegUnidades()" >No</button>
+                <button class="cancelar" onclick="location.href='{{ route('visualizar_unidad') }}';">Si</button>
             </div>
-</div>
-<div class="mensaje_emergente" >
+        </div>
+        <div class="mensaje_emergente" id="PanelRegistroGuardado">
             <div class="info">
                 ¡El registro se guardo exitosamente!
             </div>
-            <div class="div3">
+            <div class="div3Botones">
                 <button class="registrar">Cerrar</button>
             </div>
-</div>-->
+        </div>
+    </div>
+
+    <script src="{{ asset('js/scriptUnidades.js') }}"></script>
+</body>
 </html>

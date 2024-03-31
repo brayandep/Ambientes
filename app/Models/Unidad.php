@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Unidad extends Model
 {
     use HasFactory;
+    protected $fillable = ['nombreUnidad','codigoUnidad','Responsable','Nivel','Dependencia'];
 }

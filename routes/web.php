@@ -24,6 +24,7 @@ Route::get('/index', function () {
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 });
+
 Route::get('/Visualizar_Unidad', function () {
     return view('GestionUnidades.VisualizarUnidades');
 })->name('visualizar_unidad');

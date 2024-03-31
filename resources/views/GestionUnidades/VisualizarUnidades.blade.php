@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="contenedor">
+        
         <div class="encabezado">
             aqui viene el encabezado
         </div>
@@ -52,5 +53,6 @@
             celular: 6857499 
         </div>
     </div>
+    <script src="{{ asset('js/scriptUnidades.js') }}"></script>
 </body>
 </html>
