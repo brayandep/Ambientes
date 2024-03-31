@@ -9,10 +9,10 @@
     <style>
         body {
         font-family: sans-serif;
-        background-color: #D2DCDF; /* Cambia el color a tu preferencia */
+        background-color: #DED4EB; /* Cambia el color a tu preferencia */
         }
         header {
-            background-color: #904368;
+            background-color: #933864;
             color: white;
             padding: 20px 20px;
             display: flex;
@@ -25,7 +25,7 @@
         }
 
         footer {
-            background-color: #904368;
+            background-color: #933864;
             color: white;
             padding: 10px 20px;
             text-align: center;
@@ -55,7 +55,7 @@
         .dropdown-menu {
             /*display: none;*/
             position: absolute;
-            background-color: #89C2D9;
+            background-color: #AE7791;
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
@@ -70,7 +70,7 @@
             display: block;
         }
         .dropdown-menu a:hover {
-            background-color: #498193;
+            background-color: #933864;
         }
         .menu-container {
             display: flex;
@@ -87,7 +87,7 @@
             margin-top: 30px; /* Agrega un margen superior para separar el botón de los otros elementos */
         /* Ajusta otros márgenes según sea necesario */
             margin-left: 30px;
-            background-color:#538296;
+            background-color:#933864;
             color: #ffffff;
          }
          .main-content {
