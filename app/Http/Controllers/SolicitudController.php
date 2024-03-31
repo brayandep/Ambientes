@@ -63,11 +63,11 @@ class SolicitudController extends Controller
     return redirect()->route('VerSolicitud')->with('success', 'Solicitud actualizada exitosamente.');
 
 }
-public function destroy(Solicitud $solicitud){
-    $solicitud = Solicitud::findOrFail($solicitud);
+public function destroy($id)
+{
+    $solicitud = Solicitud::findOrFail($id);
     $solicitud->delete();
     return redirect()->route('VerSolicitud')->with('success', 'Solicitud eliminada correctamente.');
-
 }
 
 }

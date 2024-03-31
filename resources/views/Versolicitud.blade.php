@@ -33,12 +33,13 @@
                     <a href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
                   
                     
-                    <form action="#" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method ="POST"type="submit">Eliminar</button>
-                        @method('DELETE')
-                    </form>
+                    
+                        <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Eliminar</button>
+                        </form>
+                   
                 </td>
             </tr>
         @endforeach

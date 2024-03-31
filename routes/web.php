@@ -54,6 +54,7 @@ Route::get('/Versolicitudes', [SolicitudController::class, 'index'])->name('VerS
 Route::get('/Versolicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->name('solicitud.edit');
 Route::put('/Versolicitudes/{solicitud}', [SolicitudController::class, 'update'])->name('solicitud.update');
 Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destroy'])->name('solicitud.destroy');
+
 /*Route::get('/Versolicitudes', function () {
     return view('Versolicitud');
 })->name('VerSolicitud');
