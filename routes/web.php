@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/index', function () {
     return view('sliderBar');
 });
 
-Route::get('/materia', function () {
-    return view('materia');
-});
+Route::get('/materia', materiaController::class);

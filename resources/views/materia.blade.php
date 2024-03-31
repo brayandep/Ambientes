@@ -129,6 +129,7 @@
         <br>
         <p>Este es un footer</p>
     </footer>
+    
 </body>
 <script src="{{asset('js/scriptMateria.js')}}"></script>
 </html>
