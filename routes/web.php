@@ -25,3 +25,20 @@ Route::get('/index', function () {
 Route::get('/', function () {
     return view('web');
 });
+
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('pagina_principal');
+
+Route::get('/gestion-ambiente', function () {
+    // Lógica para la gestión de ambientes
+})->name('gestion_ambiente');
+
+Route::get('/gestion-reserva', function () {
+    // Lógica para la gestión de reservas
+})->name('gestion_reserva');
+
+Route::get('/buscar_ambientes', function () {
+    return view('buscador');
+})->name('buscar_ambientes');
