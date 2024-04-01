@@ -1,14 +1,6 @@
-<!--@extends('layoutes.plantilla')
-@section('links')*/-->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Ambientes</title>
-    <!-- Agrega aquí tus enlaces a CSS si los necesitas -->
-    <style>
+@extends('layoutes.plantilla')
+@section('estilos')
+<style>
         
         form {
             margin: 0 auto; /* Establece márgenes superior e inferior a 0 y centra horizontalmente */
@@ -39,10 +31,9 @@
 
 
     </style>
-</head>
-<body>
-   
-    <div class="main-content">
+@endsection
+@section('contenido')
+<div class="main-content">
         <div>
                 <h1>Buscador de Ambientes</h1>
         </div>
@@ -80,6 +71,11 @@
         <button type="submit"class="buscar-btn">Buscar</button>
     </form>
     </div> 
+@endsection
+
+
+   
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
