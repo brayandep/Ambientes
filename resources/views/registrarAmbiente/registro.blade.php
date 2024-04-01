@@ -1,7 +1,10 @@
 @extends('layoutes.plantilla')
+
 @section('links')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/registroAmbiente/stylesAmbiente.css') }}">
 @endsection
+
+@section('titulo', 'Registro de Ambiente')
 
 @section('contenido')
 <main class="content-wrapper">
