@@ -15,7 +15,7 @@
             <nav class="menu" >
                 <ul>
                     <li>
-                        <a href="#"><i class='fas fa-home'></i> Inicio</a>
+                        <a href="{{ route('inicio') }}"><i class='fas fa-home'></i> Inicio</a>
                         
                     </li>
                     <li>
@@ -28,7 +28,7 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="#"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
+                                <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
                                 <a href="#"><i class='fas fa-pen-to-square'></i> Editar Informacion de ambiente</a>
