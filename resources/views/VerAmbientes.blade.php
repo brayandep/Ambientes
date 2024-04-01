@@ -43,10 +43,14 @@
                                 <button class="accion" onclick="location.href='{{ route('registro.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
                             
                             </div>
-                            <div class="boton">
-                                <input type="checkbox" id="btn-switch-{{ $ambiente->id }}">
-                                <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
-                            </div>
+                            <form action="{{ route('cambiar.estado', $ambiente->id) }}" method="POST">
+                                @csrf
+                                @method('GET')
+                                <div class="boton">
+                                    <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }}>
+                                    <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
+                                </div>
+                            </form>
                             
                             
                         </div>

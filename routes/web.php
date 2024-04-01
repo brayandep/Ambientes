@@ -37,3 +37,4 @@ Route::resource('/registro', AmbienteController::class);
 
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
 
+Route::get('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');

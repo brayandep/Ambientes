@@ -22,5 +22,12 @@ class EstadoAmbienteController extends Controller
         return view('VerAmbientes', compact('ambientes'));
     }
 
-    
+    public function cambiarEstado(Request $request, $id)
+    {
+    $ambiente = Ambiente::find($id);
+    $ambiente->estadoAmbiente = $request->estado == 1 ? 0 : 1;
+    $ambiente->save();
+
+    return redirect()->back()->with('success', 'Estado del ambiente actualizado correctamente');
+    }
 }
