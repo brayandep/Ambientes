@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\registroUnidadesController;
+
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
@@ -22,8 +25,15 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
+Route::get('/Registrar_Unidad', function () {
+    return view('GestionUnidades.RegistroUnidades');
+})->name('unidad.registrar');
 
+Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
 
+Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
+
+Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 //prueba de encabezado
 Route::get('/', function () {
     return view('sliderBar');
@@ -63,3 +73,6 @@ Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destr
 //envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
+    return view('Inicio');
+})->name('inicio');
+Route::get('/materia', materiaController::class);

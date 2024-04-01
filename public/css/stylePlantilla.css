@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+body{
+    min-height: 100vh;
+    background-color: #DED4EB;
+    font-family: sans-serif;
+    color: #0B2C37;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor{
+    display: flex;
+}
+
+.izquierda{
+    width: 300px;
+    background-color: #AE7791;
+    color: #ffffff;
+    display: none;
+    position: absolute;
+    top: 67px;
+    border-bottom-right-radius: 5px;
+    z-index: 1;
+}
+
+.derecha{
+    color: #0B2C37;
+    width: 100%;
+}
+
+.derecha h1{
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.menu{
+    margin: 10px;
+    width: 100%;
+}
+.menu ul{
+    font-size: 18px;
+}
+.menu ul li{
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.menu ul li:hover{
+    background-color: #933864;
+}
+
+.menu ul li a{
+    color: #ffffff;
+}
+
+.subMenu{
+    background-color: #CD9DC0;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 20px;
+    display: none;
+}
+
+.subMenu ul {
+    width: 100%;
+}
+
+header{
+    padding: 20px;
+    display: flex;
+    font-size: 24px;
+    justify-content: space-between;
+    background-color: #933864;
+    color: #f5f6f7;
+}
+
+/*parte de maelvi*/
+footer {
+    background-color: #933864;
+    color: #f5f6f7;
+    padding: 10px 20px;
+    margin-top: auto;
+}
+.logo {
+    width: 65px; 
+    height: auto; 
+    margin-right: 10px; 
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}  
+
+.contact-info {
+    
+}
+
+@media only screen and (max-width: 768px) {
+    .contact-info {
+        margin-left: 0; 
+        text-align: center; 
+        line-height: 1; 
+    }
+}
