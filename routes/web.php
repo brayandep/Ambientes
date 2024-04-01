@@ -30,9 +30,12 @@ Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->na
 
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
 
+Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->name('unidad.edit');
+
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 //prueba de encabezado
 Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
+
 Route::get('/materia', materiaController::class);

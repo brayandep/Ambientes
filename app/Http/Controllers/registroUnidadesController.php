@@ -33,6 +33,12 @@ class registroUnidadesController extends Controller
         return view('GestionUnidades.VisualizarUnidades', compact('unidades'));
 
     }
+
+    public function edit(Unidad $unidad) {
+        
+        return view('GestionUnidades.EditarUnidades', compact('unidad'));
+    }
+
     public function destroy(Unidad $unidad){
         $unidad->delete();
         return redirect()->route('visualizar_unidad');
