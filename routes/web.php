@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\buscadorController
@@ -21,6 +22,7 @@ Route::get('/index', function () {
     return view('sliderBar');
 });
 
+Route::get('/materia', materiaController::class);
 
 //prueba de encabezado
 Route::get('/', function () {
