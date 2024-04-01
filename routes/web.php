@@ -24,7 +24,7 @@ Route::get('/index', function () {
 });
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
-});
+})->name('unidad.registrar');
 Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
 
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
@@ -32,6 +32,6 @@ Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->n
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 //prueba de encabezado
 Route::get('/', function () {
-    return view('web');
-});
+    return view('Inicio');
+})->name('inicio');
 Route::get('/materia', materiaController::class);

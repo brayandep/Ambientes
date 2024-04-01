@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+@extends('layoutes.plantilla')
+@section('links')
     <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}">
-    <title>Visualizar unidades</title>
-</head>
-<body>
-    <div class="contenedor">
-        
-        <div class="encabezado">
-            aqui viene el encabezado
-        </div>
+@endsection
+@section('titulo', 'Visualizar unidades')
+  
+@section('contenido')
         <div class="Navegacion-contenido">
             <div class="Navegacion">
                 Inicio > Gestion de unidades > Visualizar unidad
@@ -33,7 +25,7 @@
                         <button class="nomCol">Responsable</button>
                         <button class="nomCol">Acciones</button>
                     </div>
-                    <div>
+                        <div>
                             @foreach ($unidades as $unidad)
                                 <div class="fila">
                                     <p>{{$unidad->nombreUnidad}}</p>
@@ -78,17 +70,11 @@
                                 </div>
                                 
                             @endforeach
-                    </div>
+                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="footer">
-            copyright R 2024, SmartByte.srl contactenos
-            gmail:SmartByte626@gmail.com
-            celular: 6857499 
-        </div>
-    </div>
+@endsection
+@section('scripts')
     <script src="{{ asset('js/scriptUnidades.js') }}"></script>
-</body>
-</html>
+@endsection

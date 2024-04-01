@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @yield('links')
-    <title>SmartByte</title>
+    <title>@yield('titulo')</title>
 </head>
 @yield('estilos')
 <body>
@@ -15,7 +15,7 @@
             <nav class="menu" >
                 <ul>
                     <li>
-                        <a href="#"><i class='fas fa-home'></i> Inicio</a>
+                        <a href='{{ route('inicio') }}'><i class='fas fa-home'></i> Inicio</a>
                         
                     </li>
                     <li>
@@ -36,22 +36,22 @@
                         </ul>
                     </nav>
                     <li onclick="gesUnidad()">
-                        <p><i class='fas fa-clipboard'></i> Registrar Nueva Unidad</p>
+                        <p><i class='fas fa-clipboard'></i> Gestionar Unidad</p>
                     </li>
                     <nav class="subMenu" id="sub2">
                         <ul>
                             <li>
-                                <a href="#"><i class="fas fa-building"></i> Registrar Facultad</a>
+                                <a href='{{ route('unidad.registrar') }}'><i class="fas fa-building"></i> Registrar unidad nueva</a>
                             </li>
                             <li>
-                                <a href="#"><i class='fas fa-graduation-cap'></i> Registrar Carrera</a>
+                                <a href='{{ route('visualizar_unidad') }}'><i class='fas fa-clipboard'></i> Visualizar unidad</a>
                             </li>
-                            <li>
+                           <!-- <li>
                                 <a href="#"><i class='fas fa-book'></i> Registrar Materia</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fas fa-user-group"></i> Registrar Grupo</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </nav>
                     <li>
