@@ -35,6 +35,4 @@ Route::get('/Registro', function () {
 })->name('registro');
 Route::resource('/registro', AmbienteController::class);
 
-Route::get('/ver-ambientes', function () {
-    return view('VerAmbientes');
-})->name('AmbientesRegistrados');
+Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');

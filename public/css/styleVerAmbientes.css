@@ -1,24 +1,82 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+}
+.Navegacion-contenido-ver{
+  display: flex;
+  justify-content: center;
+}
+.Navegacion-ver{
+  
+  height: 4%;
+  margin-top: 5px;
+  width: 50%;
+  font-size: 14px;
+  
+}
+.ver-contenido{
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  height: 75%;
+  position: relative; 
+}
 
-  .tituloVer {
-    color: #0b2c37;
-    text-align: left;
-  }
+/*visualizar unidades*/
+.visualizar-ambiente{
+  height: 73%;
+  padding: 5px;
+  width: 70%;
+}
+.tabla{
+  background-color: #e2eaec;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
   
-  .tablaVer {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
   
-  .tablaVer th,
-  .tabla td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #CD9DC0;
-  }
-  
-  .tablaVer th {
-    background-color: #933864;
-    color: #f5f6f7;
-  }
-  
+}
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  margin: 5px;
+  width: 100%;
+}
+
+.filas{
+  width: 100%;
+}
+.fila{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin-top: 7px;
+  width: 100%;
+}
+.fila p{
+  width: 16%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.EditHab{
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+.EditHab button{
+  margin-right: 10px;
+  cursor: pointer;
+}
+.accion i{
+  background-color: none;
+  font-size: 20px;
+}
