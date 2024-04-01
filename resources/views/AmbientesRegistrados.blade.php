@@ -24,7 +24,26 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Aquí puedes colocar los registros de ambientes -->
+      <!-- Iterar sobre los ambientes y mostrarlos en la tabla -->
+      @foreach ($ambientes as $ambiente)
+      <tr>
+        <td>{{ $ambiente->nombre }}</td>
+        <td>{{ $ambiente->capacidad }}</td>
+        <td>{{ $ambiente->equipos_disponibles }}</td>
+        <td>{{ $ambiente->dia }}</td>
+        <td>{{ $ambiente->fecha }}</td>
+        <td>{{ $ambiente->horas }}</td>
+        <td>
+          <!-- Formulario para cambiar el estado del ambiente -->
+          <form method="POST" action="{{ route('cambiar.estado') }}">
+            @csrf
+            <input type="hidden" name="ambiente_id" value="{{ $ambiente->id }}">
+            <input type="hidden" name="nuevo_estado" value="{{ $ambiente->estadoAmbiente == 0 ? 1 : 0 }}">
+            <button type="submit" class="btn btn-primary">{{ $ambiente->estadoAmbiente == 0 ? 'Habilitar' : 'Deshabilitar' }}</button>
+          </form>
+        </td>
+      </tr>
+      @endforeach
     </tbody>
   </table>
 </body>
