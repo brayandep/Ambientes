@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
     <iframe src="sliderBar.blade.php" width="100%" height="100"></iframe>
    
     <title>Formulario de Solicitud</title>

@@ -41,11 +41,13 @@ class SolicitudController extends Controller
         return redirect()->route('SolicitudAmbiente')->with('success', 'Solicitud creada exitosamente.');
 
 }       
-    public function edit(Solicitud $solicitud ){
-        $solicitud = Solicitud::findOrFail($solicitud);
-        return view('edit', compact('solicitud'));
+    public function edit($id ){
+        
+        $solicitud = Solicitud::findOrFail($id);
+       // return $solicitud;
+        return view('editSolicitud', compact('solicitud'));
     }
-    public function update(Request $request, $solicitud)
+    public function update(Request $request, Solicitud $solicitud)
 {
     $request->validate([
         'usuario' => 'required',
@@ -57,8 +59,16 @@ class SolicitudController extends Controller
         'horario' => 'required',
     ]);
 
-    $solicitud = Solicitud::findOrFail($solicitud);
-    $solicitud->update($request->all());
+    
+    $solicitud ->usuario = $request->usuario;
+    $solicitud ->nro_aula = $request->nro_aula;
+    $solicitud ->materia = $request->materia;
+    $solicitud ->grupo = $request->grupo;
+    $solicitud ->motivo = $request->motivo;
+    $solicitud ->fecha = $request->fecha;
+    $solicitud ->horario = $request->horario;
+    $solicitud->save();
+  //  $solicitud->update($request->all());
 
     return redirect()->route('VerSolicitud')->with('success', 'Solicitud actualizada exitosamente.');
 

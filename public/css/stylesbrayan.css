@@ -3,6 +3,7 @@ body {
   padding: 0;
     font-family: Arial, sans-serif;
     color: #89C2D9;
+    background: #E1DBE8;
     
   }
   
@@ -111,13 +112,13 @@ body {
 }
 .boton{
   border-radius: 10px;
-  background-color: #0d1d37;
+  background-color: #C384B2;
   width: 10%;
   height: 10%;
-  color: #E3E5F3;
+  color: #141D2C;
 }
 .titulo{
-  margin-left: 20%;
+  margin-left: 15%;
   color: rgb(17, 17, 17);
   font-size: 40px;
 }
@@ -140,4 +141,54 @@ body {
   margin-top: 80%;
   background-color: #141D2C;
 
+}
+.centro{
+  width: 70%; /* Ajusta el ancho de la tabla */
+  border-collapse: collapse; /* Ajusta el ancho según sea necesario */
+  height: 50%; /* Ajusta la altura según sea necesario */
+  margin: auto; /* Esto centra horizontalmente */
+  /* Esto centra verticalmente  position: absolute;  */
+  top: 0; bottom: 0; left: 0; right: 0;
+  font-size: 16px;
+  background: #EBEBEB;
+  margin-top: 10%;
+  
+}
+.colorcolumna{
+  color: #E1DBE8;
+  background-color: #C384B2 ;
+  font-size: 17px;
+  margin-left: 5px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
+}
+.contentcolumna{
+  text-align: center;
+  color: #090909;
+
+}
+.botones-container {
+  align-items: center;
+  text-align: center;
+  display: flex; 
+  padding: 10px;
+  justify-content: center;
+}
+
+.botones{
+  color: #EBEBEB;
+  background-color: #F35D5D;
+  border-radius: 5px;
+  border: 0.5px solid black;
+  font-size: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.botonedit{
+  color: #EBEBEB;
+  background-color: #C384B2;
+  border-radius: 5px;
+  border: 0.5px solid black;
+  font-size: 20px;
 }

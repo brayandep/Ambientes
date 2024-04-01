@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
     <title>Lista de Solicitudes</title>
 </head>
-<body>
-    <h2>Lista de Solicitudes</h2>
-    <table border="1">
+<body >
+    <h2 class="titulo">Lista de Solicitudes</h2>
+    <table class="centro" border="1">
         <thead>
-            <tr>
+            <tr class="colorcolumna">
                 <th>Nro</th>
                 <th>Usuario</th>
                 <th>Número de Aula</th>
@@ -21,7 +22,7 @@
         </thead>
         <tbody>
             @foreach($solicitudes as $solicitud)
-            <tr>
+            <tr class="contentcolumna">
                 <td>{{ $solicitud->idsolicitud }}</td>
                 <td>{{ $solicitud->usuario }}</td>
                 <td>{{ $solicitud->nro_aula }}</td>
@@ -30,15 +31,14 @@
                 <td>{{ $solicitud->horario }}</td>
                 <td>
                     
-                    <a href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
-                  
-                    
-                    
+                    <div class="botones-container">
+                        <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
                         <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Eliminar</button>
+                            <button class="botones" type="submit">Cancelar</button>
                         </form>
+                    </div>
                    
                 </td>
             </tr>
