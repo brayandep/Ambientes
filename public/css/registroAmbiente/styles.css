@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #E1DBE8;
+  }
+  
+h2{
+  font-family: "Fjalla One", sans-serif;
+  font-size: 30px;
+}
+
+.content-wrapper {
+  height: 710px;
+  overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
+}
+
+.container {
+  max-width: 60%;
+  margin: 0px auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+
+  align-items: center; /* Alinea los elementos verticalmente */
+  gap: 10px; /* Espacio entre el label y el input */
+}
+
+
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  flex: 1; /* El input ocupa todo el espacio restante */
+}
+  .form-grupo {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    width: 80px; /* Ancho fijo para los labels */
+  }
+
+  #descripcion{
+    max-height: calc(3 * 1.2em); /* Establece la altura máxima a 5 líneas (asumiendo 1.2em de altura de línea) */
+    overflow: hidden; /* Oculta el contenido que se desborda */
+    /* Ajusta otras propiedades según sea necesario */
+  }
+
+  #capacidad{
+      margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+  }
+  #unidad{
+    margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+  }
+  #tipo-ambiente{
+    margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+  }
+
+  #lunes.columna,
+  #martes.columna,
+  #miercoles.columna,
+  #jueves.columna,
+  #viernes.columna,
+  #sabado.columna{
+    margin-right: 0px; 
+    margin-left: 0px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+
+    font-family: "Fjalla One", sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #EBEBEB;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  .checkbox-group {
+    margin-top: 5px;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .botones {
+    display: flex; /* Utiliza flexbox para alinear los botones */
+    justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio por encima de los botones */
+  }
+
+  button{
+    background-color: #C384B2;
+    color: #fff;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  } 
+
+  .boton-eliminar {
+    background-color: #F35D5D; /* Cambia el color de fondo aquí */
+
+    color: white; /* Cambia el color del texto del botón */
+    border: none; /* Elimina el borde del botón */
+    padding: 5px 10px; /* Ajusta el relleno del botón */
+    border-radius: 5px; /* Agrega bordes redondeados al botón */
+  }
+  
+  button:hover {
+    background-color: #904368;
+  }
+
+    /* Estilos para el primer botón */
+  .btn-cancelar {
+    background-color: #F35D5D;
+    color: #fff; /* Texto en color blanco */
+
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Borde redondeado */
+  }
+
+  /* Estilos para el segundo botón */
+  .btn-registrar {
+    background-color: #C384B2; 
+    color: #fff; /* Texto en color blanco */
+
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Borde redondeado */
+  }
+
+  .checkbox-columns {
+    display: flex;
+
+    border: 1px solid #858585; /* Debes separar las propiedades con dos puntos (:) */
+    padding-bottom: 0px;
+    padding-top: 15px;
+  }
+  
+  .column {
+    flex: 1;
+  }
+
+  #diasSemana option[value=""] {
+    color: #757575; /* Color de letra más claro (gris en este caso) */
+  }
+  #tipo-ambiente option[value=""] {
+    color: #757575; /* Color de letra más claro (gris en este caso) */
+  }
+  #unidad option[value=""] {
+    color: #757575; /* Color de letra más claro (gris en este caso) */
+  }
+
+/* Estilos opcionales para mejorar la apariencia de la tabla de dias //////////////////////////////////////*/
+  .columna {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    float: left;
+    margin-right: 10px;
+  }
+
+  /* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para el header */
+header {
+  background-color: #904368;
+  color: #fff;
+  padding: 10px 0;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  position: fixed; /* Fijar la posición */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #904368; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  text-align: center;
+  padding: 10px 0; /* Espaciado interno */
+}
+
+
+/* Estilos para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+}
+
+.modal-contenido {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+}
+
+.nuevo-tipo {
+  flex-grow: 1; /* Permite que el contenedor del label y el input ocupe todo el espacio disponible */
+  margin-right: 10px; /* Espacio entre el input y el botón */
+}
+
+.modal-contenido label,
+.modal-contenido input {
+  display: inline-block;
+  vertical-align: middle; /* Alinea verticalmente los elementos */
+  margin-bottom: 10px;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  align-self: flex-end; /* Alinea el botón "x" a la derecha */
+  margin-bottom: 10px; /* Agrega un margen inferior */
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para los inputs */
+.horarios {
+  display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Añade margen inferior */
+}
+
+.horarios label {
+  margin-right: 10px; /* Espacio entre las etiquetas y los inputs */
+  padding: 5px; /* Agrega espacio entre los inputs */
+}
+
+.horarios input{
+  padding: 5px; /* Agrega espacio entre los inputs */
+}
+
+/* Estilos para el botón "Aceptar" */
+#modalAceptar {
+  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
+  margin-top: 10px; /* Agrega un margen superior */
+}
+#aceptarModal {
+  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
+  margin-top: 10px; /* Agrega un margen superior */
+}

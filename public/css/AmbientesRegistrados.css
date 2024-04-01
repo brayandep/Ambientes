@@ -1,0 +1,28 @@
+/* Estilos adicionales */
+.fondo {
+    background-color: #f5f6f7;
+  }
+  
+  .titulo {
+    color: #0b2c37;
+    text-align: left;
+  }
+  
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .tabla th,
+  .tabla td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #89c2d9;
+  }
+  
+  .tabla th {
+    background-color: #904368;
+    color: #f5f6f7;
+  }
+  

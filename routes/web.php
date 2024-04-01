@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AmbienteController;
+use App\Http\Controllers\EstadoAmbienteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +22,6 @@ Route::get('/index', function () {
     return view('sliderBar');
 });
 
+Route::resource('/registro', AmbienteController::class);
 
-//prueba de encabezado
-Route::get('/', function () {
-    return view('web');
-});
+Route::post('/ambientes-registrados', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
