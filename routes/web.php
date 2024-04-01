@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
@@ -33,3 +34,4 @@ Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 
 Route::get('/', function () {
     return view('web');
 });
+Route::get('/materia', materiaController::class);
