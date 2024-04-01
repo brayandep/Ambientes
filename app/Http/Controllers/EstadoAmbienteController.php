@@ -2,35 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ambiente;
+use Illuminate\Http\Request;
 
 class EstadoAmbienteController extends Controller
 {
-    // Otros métodos del controlador
-
     /**
-     * Cambiar el estado de Habilitado de 0 a 1.
+     * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Ambiente  $ambiente
      * @return \Illuminate\Http\Response
      */
-    public function cambiarEstado(Request $request)
+    public function show()
     {
-        // Obtener el ID del ambiente y el nuevo estado de la solicitud
-        $ambienteId = $request->input('ambiente_id');
-        $nuevoEstado = $request->input('nuevo_estado');
-
-        // Buscar el ambiente por su ID
-        $ambiente = Ambiente::find($ambienteId);
-
-        // Verificar si se encontró el ambiente y actualizar su estado si es así
-        if ($ambiente) {
-            $ambiente->estadoAmbiente = $nuevoEstado;
-            $ambiente->save();
-            return redirect()->back()->with('success', 'Estado cambiado correctamente.');
-        } else {
-            return redirect()->back()->with('error', 'No se encontró el ambiente.');
-        }
+        // Obtener todos los ambientes
+        $ambientes = Ambiente::all();
+        
+        // Retornar la vista con los ambientes
+        return view('VerAmbientes', compact('ambientes'));
     }
 }

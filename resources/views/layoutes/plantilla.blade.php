@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @yield('links')
-    <title>SmartByte</title>
+    <title>@yield('titulo')</title>
 </head>
 @yield('estilos')
 <body>
@@ -15,7 +15,7 @@
             <nav class="menu" >
                 <ul>
                     <li>
-                        <a href="#"><i class='fas fa-home'></i> Inicio</a>
+                        <a href="{{ route('inicio') }}"><i class='fas fa-home'></i> Inicio</a>
                         
                     </li>
                     <li>
@@ -28,10 +28,10 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="#"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
+                                <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
-                                <a href="#"><i class='fas fa-pen-to-square'></i> Editar Informacion de ambiente</a>
+                                <a href="{{ route('AmbientesRegistrados') }}"><i class='fas fa-pen-to-square'></i> Editar Informacion de ambiente</a>
                             </li>
                         </ul>
                     </nav>

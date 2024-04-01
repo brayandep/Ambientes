@@ -11,5 +11,3 @@
         <button type="submit" class="btn btn-danger">Eliminar</button>
     </form>
 @endforeach
-
-

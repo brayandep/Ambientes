@@ -1,28 +1,24 @@
-/* Estilos adicionales */
-.fondo {
-    background-color: #f5f6f7;
-  }
-  
-  .titulo {
+
+  .tituloVer {
     color: #0b2c37;
     text-align: left;
   }
   
-  .tabla {
+  .tablaVer {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
   
-  .tabla th,
+  .tablaVer th,
   .tabla td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #89c2d9;
+    border-bottom: 1px solid #CD9DC0;
   }
   
-  .tabla th {
-    background-color: #904368;
+  .tablaVer th {
+    background-color: #933864;
     color: #f5f6f7;
   }
   

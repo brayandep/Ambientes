@@ -20,10 +20,21 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('welcome');
 });*/
+Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');
+
 Route::get('/index', function () {
     return view('sliderBar');
 });
 
 Route::get('/materia', materiaController::class);
 
+Route::get('/Registro', function () {
+    return view('registrarAmbiente.index');
+})->name('registro');
 Route::resource('/registro', AmbienteController::class);
+
+Route::get('/ver-ambientes', function () {
+    return view('VerAmbientes');
+})->name('AmbientesRegistrados');
