@@ -46,7 +46,7 @@
                             <li>
                                 <a href='{{ route('visualizar_unidad') }}'><i class='fas fa-clipboard'></i> Visualizar unidad</a>
                             </li>
-                           <!-- <li>
+                       <!-- <li>
                                 <a href="#"><i class='fas fa-book'></i> Registrar Materia</a>
                             </li>
                             <li>

@@ -25,6 +25,7 @@ Route::get('/index', function () {
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
+
 Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
 
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
