@@ -43,10 +43,12 @@
                                 <button class="accion" onclick="location.href='{{ route('registro.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
                             
                             </div>
-                            <div class="EditHab">
-                                <button class="accion"><i class="fa-solid fa-pen-to-square"></i></button>
-                                
+                            <div class="boton">
+                                <input type="checkbox" id="btn-switch-{{ $ambiente->id }}">
+                                <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
                             </div>
+                            
+                            
                         </div>
                     @endforeach
                 </div>

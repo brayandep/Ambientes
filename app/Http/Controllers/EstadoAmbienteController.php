@@ -21,4 +21,6 @@ class EstadoAmbienteController extends Controller
         // Retornar la vista con los ambientes
         return view('VerAmbientes', compact('ambientes'));
     }
+
+    
 }
