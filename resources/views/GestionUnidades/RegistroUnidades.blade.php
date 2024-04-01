@@ -44,7 +44,7 @@
                     </div>
                     <div class="div2Seleccion">
                         <div class="seleccion">
-                            <label class="Titulo" for="Nivel">Nivel:</label>
+                            <label class="titulo" for="Nivel">Nivel:</label>
                             <select class="imput" id="Nivel" name="Nivel">
                                 <!-- Opciones de nivel aqu� 
                                 <option selected>Seleccione un nivel</option>-->
@@ -58,7 +58,7 @@
                                 <span>*{{$message}}</span>
                         @enderror
                         <div class="seleccion">
-                            <label class="Titulo" for="Dependencia">Dependencia:</label>
+                            <label class="titulo" for="Dependencia">Dependencia:</label>
                             <select class="imput" id="Dependencia" name="Dependencia">
                                 <!-- Opciones de dependeia aqu� -->
                                 <option value="1">opcion 1</option> 

@@ -5,10 +5,11 @@
     font-size: 100%;
 }
 html{
-background-color: #C5DCE4;
+background-color: #DED4EB;
 height: 100%;
 width: 100%;
-
+font-size: 16px;
+font-family: sans-serif;
 }
 body{
     height: 100vh;
@@ -17,7 +18,7 @@ body{
     height: 100%;
 }
 .encabezado{
-    background-color: #498193;
+    background-color: #933864;
     height: 15%;
 }
 .Navegacion-contenido{
@@ -53,6 +54,8 @@ body{
 }
 .Titulo{
     margin-bottom: 12px;
+    font-size: 24px;
+    
 }
 .titulo{
     margin-top: 12px;
@@ -101,11 +104,11 @@ body{
     
 }
 .registrar{
-    background-color: #538296;
+    background-color: #933864;
 
 }
 .footer{
-    background-color: #498193;
+    background-color: #933864;
     height: 10%;
 }
 #fondoGris{
@@ -123,7 +126,7 @@ body{
 .mensaje_emergente{
     position: absolute; 
     z-index: 2; /* un valor alto para estar por encima de otros elementos */
-    background-color: #89C2D9;
+    background-color: #AE7791;
     padding: 5px;
     width: 20%;
     top: 50%;
@@ -134,9 +137,11 @@ body{
 }
 .info{
     font-size: 16px;
-    justify-content: center;
+    
+   padding-left: 10px;
     margin-top: 5px;
-    margin-left: 3px;
+    margin-left: 5px;
+
 }
 /*visualizar unidades*/
 .visualizar{
@@ -157,7 +162,7 @@ body{
     
 }
 .nomCol{
-    background-color: #498193;
+    background-color: #AE7791;
     padding: 7px;
     border-radius: 5px;
     color: #EBEBEB;
