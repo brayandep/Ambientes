@@ -1,86 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-ul{
-    list-style-type: none;
-}
-a{
-    text-decoration: none;
-    color: #ffffff;
-}
-
-body{
-    height: 100vh;
-    background-color: #DED4EB;
-    font-family: sans-serif;
-    color: #0B2C37;
-}
-
-.contenedor{
-    display: flex;
-    height: 90%;
-    position: relative;
-}
-
-.izquierda{
-    width: 20%;
-    background-color: #AE7791;
-    color: #ffffff;
-    display: none;
-    position: absolute;
-    top: 67px;
-    border-bottom-right-radius: 5px;
-}
-.derecha{
-    width: 100%;
-    color: #0B2C37;
-}
-
-.derecha h1{
-    font-size: 24px;
-    cursor: pointer;
-}
-.menu{
-    margin: 10px;
-    width: 100%;
-}
-.menu ul{
-    font-size: 18px;
-}
-.menu ul li{
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-.menu ul li:hover{
-    background-color: #933864;
-}
-
-.menu ul li a{
-    color: #ffffff;
-}
-
-.subMenu{
-    background-color: #CD9DC0;
-    padding: 5px;
-    border-radius: 10px;
-    margin-left: 20px;
-    display: none;
-}
-
-.subMenu ul {
-    width: 100%;
-}
-
-header{
-    padding: 20px;
-    display: flex;
-    font-size: 24px;
-    justify-content: space-between;
-    background-color: #933864;
-    color: #f5f6f7;
-}
 
 main{
     display: flex;
@@ -95,11 +12,6 @@ main div{
 main h1{
     padding: 10px 0 10px 0;
     margin-bottom: 10px;
-}
-
-footer{
-    height: 10%;
-    background-color: #933864;
 }
 
 .input-group{
@@ -160,4 +72,6 @@ footer{
 .btnRegistrar:hover{
     background-color: #4e798c;
 }
+
+
 
