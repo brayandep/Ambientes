@@ -32,3 +32,12 @@ function desMenu(){
         //btnPanelUsr.classList.remove('seleccionado');
     }
 }
+
+document.addEventListener('click', function (event) {
+    var targetElement = event.target; // Elemento que se hizo clic
+
+    // Verifica si el clic no fue dentro del div y el div está visible
+    if (menu.style.display === 'flex' && !menu.contains(targetElement) && !btnMenu.contains(targetElement)) {
+        menu.style.display = 'none';
+    }
+});

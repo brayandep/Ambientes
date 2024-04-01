@@ -1,5 +1,7 @@
 @extends('layoutes.plantilla')
 
+@section('titulo', 'Materia')
+
 @section('links')
     <link rel="stylesheet" href="{{asset('css/styleMateria.css')}}">
 @endsection
@@ -73,4 +75,3 @@
 @section('scripts')
     <script src="{{asset('js/scriptMateria.js')}}"></script>
 @endsection
-
