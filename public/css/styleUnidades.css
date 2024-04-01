@@ -4,22 +4,6 @@
     border: 0;
     font-size: 100%;
 }
-html{
-background-color: #C5DCE4;
-height: 100%;
-width: 100%;
-
-}
-body{
-    height: 100vh;
-}
-.contenedor{
-    height: 100%;
-}
-.encabezado{
-    background-color: #498193;
-    height: 15%;
-}
 .Navegacion-contenido{
     display: flex;
     justify-content: center;
@@ -37,8 +21,7 @@ body{
     justify-content: center;
     margin-top: 5px;
     height: 75%;
-    
-    
+    position: relative; 
 }
 .registro{
     
@@ -46,7 +29,7 @@ body{
     padding: 5px;
     width: 50%;
 }
-.div1{
+.div1Label{
     
     display: flex;
     flex-direction: column;
@@ -54,6 +37,8 @@ body{
 }
 .Titulo{
     margin-bottom: 12px;
+    font-size: 24px;
+    
 }
 .titulo{
     margin-top: 12px;
@@ -64,10 +49,13 @@ body{
     padding:5px;
     border-radius: 5px;
 }
+.registro span{
+    color:#F35D5D;
+}
 .imput:focus, .imput:valid{
     outline: none;
 }
-.div2{
+.div2Seleccion{
     padding: 10px;
     display: flex;
     justify-content: space-around;
@@ -77,16 +65,18 @@ body{
     flex-direction: column;
     width: 40%;
 }
-
-.div3{
+.div3Botones{
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
     justify-content: end;
     display: flex;
     gap: 15px;
+    
 }
-.div3 button{
+.div3Botones button{
     padding: 7px;
+    padding-left: 12px;
+    padding-right: 12px;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
@@ -96,10 +86,98 @@ body{
     
 }
 .registrar{
-    background-color: #538296;
+    background-color: #933864;
 
 }
 .footer{
-    background-color: #498193;
+    background-color: #933864;
     height: 10%;
+}
+#fondoGris{
+    background-color: #40505577;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.mensaje_emergente{
+    position: absolute; 
+    z-index: 2; /* un valor alto para estar por encima de otros elementos */
+    background-color: #AE7791;
+    padding: 5px;
+    width: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.384);  
+    display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.info{
+    font-size: 16px;
+    
+   padding-left: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+
+}
+/*visualizar unidades*/
+.visualizar{
+    height: 73%;
+    padding: 5px;
+    width: 70%;
+}
+.pizarra{
+    background-color: #e2eaec;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+    
+    
+}
+.nomCol{
+    background-color: #AE7791;
+    padding: 7px;
+    border-radius: 5px;
+    color: #EBEBEB;
+    margin: 5px;
+    width: 100%;
+}
+
+.filas{
+    width: 100%;
+}
+.fila{
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin-top: 7px;
+    width: 100%;
+}
+.fila p{
+    width: 16%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.EliEdi{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+}
+.EliEdi button{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.accion i{
+    background-color: none;
+    font-size: 20px;
 }

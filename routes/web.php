@@ -3,6 +3,8 @@
 use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\registroUnidadesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +22,17 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
+Route::get('/Registrar_Unidad', function () {
+    return view('GestionUnidades.RegistroUnidades');
+})->name('unidad.registrar');
 
+Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
+
+Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
+
+Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
+//prueba de encabezado
+Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');
 Route::get('/materia', materiaController::class);
