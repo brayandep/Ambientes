@@ -17,10 +17,15 @@
   
   <!-- Menú Lateral -->
   <div class="sidebar">
-     <p>Menú</p>
-    <a href="#">Botón 1</a>
-    <a href="#">Botón 2</a>
-    <a href="#">Botón 3</a>
+     <p></p>
+    <div class="contenido">
+        <a href="#">Gestionar Ambientes</a>
+     <br>
+     <a href="#">Solicitar Reserva</a>
+     <br>
+         <a href="SolicitudAmbiente">Gestionar Unidades</a>
+     </div> 
+    
   </div>
   
   <!-- Contenido Principal -->

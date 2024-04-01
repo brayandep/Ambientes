@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+html{
+background-color: #C5DCE4;
+height: 100%;
+width: 100%;
+
+}
+body{
+    height: 100vh;
+}
+.contenedor{
+    height: 100%;
+}
+.encabezado{
+    background-color: #498193;
+    height: 15%;
+}
+.Navegacion-contenido{
+    display: flex;
+    justify-content: center;
+}
+.Navegacion{
+    
+    height: 4%;
+    margin-top: 5px;
+    width: 50%;
+    font-size: 14px;
+    
+}
+.registro-contenido{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    height: 75%;
+    
+    
+}
+.registro{
+    
+    height: 73%;
+    padding: 5px;
+    width: 50%;
+}
+.div1{
+    
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.Titulo{
+    margin-bottom: 12px;
+}
+.titulo{
+    margin-top: 12px;
+}
+.imput{
+    background: #EBEBEB;
+    font-size: 14px;
+    padding:5px;
+    border-radius: 5px;
+}
+.imput:focus, .imput:valid{
+    outline: none;
+}
+.div2{
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.seleccion{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.div3{
+    padding: 10px;
+    margin: 10px;
+    justify-content: end;
+    display: flex;
+    gap: 15px;
+}
+.div3 button{
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.cancelar{
+    background-color: #F35D5D;
+    
+}
+.registrar{
+    background-color: #538296;
+
+}
+.footer{
+    background-color: #498193;
+    height: 10%;
+}
