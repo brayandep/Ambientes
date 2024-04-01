@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\buscadorController
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,6 @@ Route::get('/gestion-reserva', function () {
     // Lógica para la gestión de reservas
 })->name('gestion_reserva');
 
-Route::get('/buscar_ambientes', function () {
+Route::get('/buscar_ambientes', buscadorController::class {
     return view('buscador');
 })->name('buscar_ambientes');

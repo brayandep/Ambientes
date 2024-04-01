@@ -1,3 +1,5 @@
+<!--@extends('layoutes.plantilla')
+@section('links')*/-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,74 +9,10 @@
     <title>Buscador de Ambientes</title>
     <!-- Agrega aquí tus enlaces a CSS si los necesitas -->
     <style>
-        body {
-        font-family: sans-serif;
-        background-color: #DED4EB; /* Cambia el color a tu preferencia */
-        }
-        header {
-            background-color: #933864;
-            color: white;
-            padding: 20px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        
         form {
             margin: 0 auto; /* Establece márgenes superior e inferior a 0 y centra horizontalmente */
             width: 80%; /* Ajusta el ancho del formulario según sea necesario */
-        }
-
-        footer {
-            background-color: #933864;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .logo {
-        width: 65px; /* ajusta el ancho según sea necesario */
-        height: auto; /* Esto mantendrá la proporción del logo */
-        margin-right: 10px; /* Espacio entre el logo y el texto */
-        }
-        .footer-content {
-       
-        align-items: center; /* Alinea verticalmente los elementos */
-        display: inline-flex;
-        justify-content: space-between;
-        }
-        .contact-info {
-         margin-left: 100px; /* Agrega un margen izquierdo para separar el logo del contenido de contacto */
-         line-height: 0; 
-        }
-
-        .footer-content img {
-          max-width: 50px; /* Limita el ancho del logo para evitar que se extienda demasiado */
-        }
-        .dropdown-menu {
-            /*display: none;*/
-            position: absolute;
-            background-color: #AE7791;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown.active .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu a {
-            color:#FFFFFF;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-menu a:hover {
-            background-color: #933864;
-        }
-        .menu-container {
-            display: flex;
-            align-items: center;
         }
         .search-container {
             margin-top: 10px;
@@ -103,22 +41,7 @@
     </style>
 </head>
 <body>
-    <header>
-            
-           
-        <div class="menu-container">
-            <div class="dropdown" id="dropdown">
-                <span id="menu-toggle">Menú</span>
-                <div class="dropdown-menu" id="dropdown-menu">
-                <a href="{{ route('pagina_principal') }}">Ir a la página principal</a>
-                <a href="{{ route('gestion_ambiente') }}">Gestionar Ambiente</a>
-                <a href="{{ route('gestion_reserva') }}">Gestionar Reserva</a>
-                <a href="{{ route('buscar_ambientes') }}">Buscar</a>
-                </div>
-            </div>
-            
-        </div>
-    </header>
+   
     <div class="main-content">
         <div>
                 <h1>Buscador de Ambientes</h1>
@@ -156,19 +79,7 @@
         <input type="number" name="capacidad" placeholder="Capacidad">
         <button type="submit"class="buscar-btn">Buscar</button>
     </form>
-    </div>
-    <footer>
-        <div class="footer-content">
-            <img src="\Ambientes\public\images\logo.png" alt="Logo" class="logo">
-            
-            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.srl</p>
-            <div class="contact-info">
-                
-                <p>Contactenos: Gmail: SmartByte@gmail.com</p>
-                <p>Celular: 6954890</p>
-            </div>
-        </div>          
-    </footer>
+    </div> 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
