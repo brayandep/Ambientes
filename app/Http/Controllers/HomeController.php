@@ -10,6 +10,6 @@ class HomeController extends Controller
     public function index()
     {
         $usuarios = Usuario::all();;
-        return view('Inicio');
+        return view('inicio');
     }
 }

@@ -22,11 +22,9 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('inicio');
 /*
-Route::get('/index', function () {
-    return view('sliderBar');
-});*/
+*/
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
@@ -37,9 +35,7 @@ Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->n
 
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 //prueba de encabezado
-Route::get('/', function () {
-    return view('sliderBar');
-});
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('Login');
 Route::post('/login', [LoginController::class, 'Login']);
@@ -75,6 +71,8 @@ Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destr
 //envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
-    //
+Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create');
     
 Route::get('/materia', materiaController::class);
+
+

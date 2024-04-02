@@ -10,8 +10,15 @@ class SolicitudController extends Controller
     public function index()
     {
         $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
+        $usuarios = Usuario::all();;
+  return view('VerSolicitud', compact('solicitudes','usuarios'));
+    }
+    public function create()
+    {
+        $usuarios = Usuario::all();
+        $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
       //  $usuarios = Usuario::all();;
-  return view('VerSolicitud', compact('solicitudes'));
+  return view('SolicitudAmbiente', compact( 'usuarios'));
     }
 
     public function store(Request $request)
@@ -38,7 +45,7 @@ class SolicitudController extends Controller
        
         
         $Solicitud->save();
-        return redirect()->route('SolicitudAmbiente')->with('success', 'Solicitud creada exitosamente.');
+        return redirect()->route('solicitud.store')->with('success', 'Solicitud creada exitosamente.');
 
 }       
     public function edit($id ){

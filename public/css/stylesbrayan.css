@@ -81,24 +81,26 @@ body {
   width:calc(50%, 10px); 
 
  
-  padding-top: 100px;
+  padding-top: 150px;
   
 
 }
 .input{
-  width: 150%;
+  width: 170%;
   height: 25px;
   border-radius: 10px;
   border-color: #141D2C;
   border-style: calc();
+  font-size: 16px;
 
 }
 .der{
   display: block;
-  width:calc(60%, 20px); 
-  margin-right: 20%;
- 
-  padding-top: 100px;
+  width:calc(50%, 20px); 
+  margin-right: 15%;
+ margin-left: 30%;
+  padding-top: 150px;
+  margin-top: 19px;
 }
 .text{
   color: #090909;
@@ -107,18 +109,27 @@ body {
 .container{
   display: flex;
   justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+}
+.container2{
+  display: flex;
+  justify-content: space-between;
   width: 70%;
   margin: 0 auto;
+  margin-left: 20%;
 }
 .boton{
   border-radius: 10px;
   background-color: #C384B2;
-  width: 10%;
-  height: 10%;
-  color: #141D2C;
+  width: 25%;
+  height: 23px;
+  color: #E1DBE8;
+  font-size: 18px;
+  margin-top: 200px;
 }
 .titulo{
-  margin-left: 15%;
+  margin-left: 18%;
   color: rgb(17, 17, 17);
   font-size: 40px;
 }
@@ -132,7 +143,7 @@ body {
   width: 100%;
   height: 50px;
   background-color: #141D2C;
-  padding: 20px;
+  padding: 25px;
 
 }
 .abajo{
@@ -145,13 +156,13 @@ body {
 .centro{
   width: 70%; /* Ajusta el ancho de la tabla */
   border-collapse: collapse; /* Ajusta el ancho según sea necesario */
-  height: 50%; /* Ajusta la altura según sea necesario */
+  height: 100px; /* Ajusta la altura según sea necesario */
   margin: auto; /* Esto centra horizontalmente */
   /* Esto centra verticalmente  position: absolute;  */
   top: 0; bottom: 0; left: 0; right: 0;
   font-size: 16px;
   background: #EBEBEB;
-  margin-top: 10%;
+  margin-top: 5%;
   
 }
 .colorcolumna{
@@ -191,4 +202,13 @@ body {
   border-radius: 5px;
   border: 0.5px solid black;
   font-size: 20px;
+}
+.input2{
+  border-radius: 15px;
+  background: #E3E5F3;
+  width: 10%;
+  margin-left: 15%;
+  margin-top: 30px;
+  display: flex;
+
 }
