@@ -16,6 +16,17 @@
 
             @csrf <!-- Incluye el campo csrf aquí -->
             <div class="izq">
+            <div>
+                <select id="usuario" name="usuario" style="width: 40%;" >
+                    <option>Selecciona un usuario </option>
+                    @foreach($usuarios as $usuario)
+                      <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+                    @endforeach
+                     
+                  </select>
+
+
+            </div>
                 <label class="text" for="usuario">Usuario:</label><br>
                 <input class="input" type="text" id="usuario" name="usuario" required>
                 <br>

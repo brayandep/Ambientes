@@ -10,13 +10,13 @@ class SolicitudController extends Controller
     public function index()
     {
         $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
-  //  return view('Versolicitud', compact('solicitudes'));
- // dd($Solicitud);
+      //  $usuarios = Usuario::all();;
   return view('VerSolicitud', compact('solicitudes'));
     }
 
     public function store(Request $request)
     {
+        
         $request->validate([
             'usuario' => 'required',
             'nro_aula' => 'required',

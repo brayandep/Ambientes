@@ -22,9 +22,11 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('welcome');
 });*/
+Route::get('/', [HomeController::class, 'index']);
+/*
 Route::get('/index', function () {
     return view('sliderBar');
-});
+});*/
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
@@ -73,6 +75,6 @@ Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destr
 //envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
-    return view('Inicio');
-})->name('inicio');
+    //
+    
 Route::get('/materia', materiaController::class);
