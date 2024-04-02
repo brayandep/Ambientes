@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\buscadorController
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +16,15 @@ use App\Http\Controllers\buscadorController
 Route::get('/', function () {
     return view('welcome');
 });*/
+use App\Http\Controllers\AmbientesController;
+use App\Http\Controllers\buscadorController;
+
+
+Route::post('/buscar-ambientes', [BuscadorController::class, 'buscarAmbientes'])->name('ambientes.buscar');
+
+
+
+
 Route::get('/index', function () {
     return view('sliderBar');
 });
@@ -40,6 +48,6 @@ Route::get('/gestion-reserva', function () {
     // Lógica para la gestión de reservas
 })->name('gestion_reserva');
 
-Route::get('/buscar_ambientes', buscadorController::class {
+Route::get('/buscar_ambientes', function () {
     return view('buscador');
 })->name('buscar_ambientes');

@@ -1,7 +1,14 @@
-@extends('layoutes.plantilla')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Ambientes</title>
+    <!-- Agrega aquí tus enlaces a CSS si los necesitas -->
 @section('estilos')
-<style>
-        
+    <style>
+       
         form {
             margin: 0 auto; /* Establece márgenes superior e inferior a 0 y centra horizontalmente */
             width: 80%; /* Ajusta el ancho del formulario según sea necesario */
@@ -20,20 +27,55 @@
             background-color:#933864;
             color: #ffffff;
          }
-         .main-content {
-            transition: margin-left 0.3s ease; /* Agrega una transición suave para el desplazamiento */
-            margin-left: 0; /* Establece el margen izquierdo inicial */
+        /* Estilos para la tabla de resultados */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .menu-open .main-content {
-              margin-left: 200px; /* Desplaza el contenido hacia la derecha cuando el menú está abierto */
+        thead {
+            background-color: #933864; /* Color de fondo del encabezado */
+            color: white;
         }
 
+        thead th {
+            padding: 10px;
+            text-align: left;
+        }
 
+        tbody tr:nth-child(even) {
+            background-color: #F2F2F2; /* Color de fondo para las filas pares */
+        }
+
+        tbody tr:hover {
+            background-color: #CCCCCC; /* Color de fondo cuando se pasa el mouse sobre una fila */
+        }
+
+        tbody td {
+            padding: 10px;
+           
+        }
+
+        /* Estilos para distribuir las columnas uniformemente */
+        thead th, tbody td {
+            width: calc(100% / 6); /* Dividir el ancho igualmente entre las 6 columnas */
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Añadir bordes a las celdas */
+        }
+
+        /* Ajustar estilos para pantallas pequeñas */
+        @media screen and (max-width: 768px) {
+            thead th, tbody td {
+                width: auto; /* Permitir que las celdas se ajusten automáticamente en pantallas pequeñas */
+            }
+        }
     </style>
-@endsection
-@section('contenido')
-<div class="main-content">
+    @endsection
+</head>
+<body>
+    
+    <div class="main-content">
         <div>
                 <h1>Buscador de Ambientes</h1>
         </div>
@@ -69,13 +111,41 @@
         </select>
         <input type="number" name="capacidad" placeholder="Capacidad">
         <button type="submit"class="buscar-btn">Buscar</button>
+        <div>
+        <h2>Resultados de la búsqueda:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Equipos disponibles</th>
+                    <th>Día</th>
+                    <th>Fecha</th>
+                    <th>Rango de horario disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se mostrarán los resultados dinámicamente -->
+                <!-- Por ahora, puedes dejar esta parte vacía -->
+            </tbody>
+            </table>
+        </div>
+</div>
+
     </form>
-    </div> 
-@endsection
-
-
-   
-    
+    </div>
+    <footer>
+        <div class="footer-content">
+            <img src="\Ambientes\public\images\logo.png" alt="Logo" class="logo">
+            
+            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.srl</p>
+            <div class="contact-info">
+                
+                <p>Contactenos: Gmail: SmartByte@gmail.com</p>
+                <p>Celular: 6954890</p>
+            </div>
+        </div>          
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
