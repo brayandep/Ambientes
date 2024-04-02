@@ -18,49 +18,51 @@
                 <h1 class="Titulo"><i class="fa-solid fa-rectangle-list"></i> Ver Ambientes Registrados </h1>
             </div>
 
-            <!-- Tabla de Ambientes -->
-            <div class="tabla">
-                <div class="fila">
-                    <button class="nomCol">Codigo</button>
-                    <button class="nomCol">Unidad</button>
-                    <button class="nomCol">Nombre</button>
-                    <button class="nomCol">Capacidad</button>
-                    <button class="nomCol">Ubicación</button>
-                    <button class="nomCol">Descripción</button>
-                    <button class="nomCol">Editar</button>
-                    <button class="nomCol">Habilitar</button>
-                </div>
-                <div>
-                    @foreach ($ambientes as $ambiente)
-                        <div class="fila">
-                            <p>{{$ambiente->codigo}}</p>
-                            <p>{{$ambiente->unidad}}</p>
-                            <p>{{$ambiente->nombre}}</p>
-                            <p>{{$ambiente->capacidad}}</p>
-                            <p>{{$ambiente->ubicacion}}</p>
-                            <p>{{$ambiente->descripcion_ubicacion}}</p>
-                            <div class="EditHab">
-                                <button class="accion" onclick="location.href='{{ route('registro.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
-                            
-                            </div>
-                            <form action="{{ route('cambiar.estado', $ambiente->id) }}" method="POST">
-                                @csrf
-                                @method('GET')
-                                <div class="boton">
-                                    <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }}>
-                                    <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
-                                </div>
-                            </form>
-                            
-                            
-                        </div>
-                    @endforeach
-                </div>
+            <!-- Contenedor centrado y responsivo -->
+            <div class="tabla-responsive">
+                <table class="tabla-ver">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Unidad</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Capacidad</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Habilitar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($ambientes as $ambiente)
+                            <tr>
+                                <td>{{$ambiente->codigo}}</td>
+                                <td>{{$ambiente->unidad}}</td>
+                                <td>{{$ambiente->nombre}}</td>
+                                <td>{{$ambiente->capacidad}}</td>
+                                <td>{{$ambiente->ubicacion}}</td>
+                                <td>{{$ambiente->descripcion_ubicacion}}</td>
+                                <td>
+                                    <div class="EditHab">
+                                        <button class="accion" onclick="location.href='{{ route('registro.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <form action="{{ route('cambiar.estado', $ambiente->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="boton">
+                                            <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }}>
+                                            <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
 @endsection
-
-
-

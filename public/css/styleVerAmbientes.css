@@ -1,91 +1,89 @@
-*{
+* {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
 }
-.Navegacion-contenido-ver{
+
+.Navegacion-contenido-ver {
   display: flex;
   justify-content: center;
 }
-.Navegacion-ver{
-  
+
+.Navegacion-ver {
   height: 4%;
   margin-top: 5px;
   width: 50%;
   font-size: 14px;
-  
+  color: #0b2c37; /* Color del texto */
 }
-.ver-contenido{
+
+.Titulo {
+  margin-top: 20px; /* Agrega espaciado hacia abajo */
+}
+
+.ver-contenido {
   display: flex;
   justify-content: center;
   margin-top: 5px;
   height: 75%;
-  position: relative; 
+  position: relative;
 }
 
-/*visualizar unidades*/
-.visualizar-ambiente{
+/* Visualizar unidades */
+.visualizar-ambiente {
   height: 73%;
   padding: 5px;
   width: 70%;
 }
-.tabla{
-  background-color: #e2eaec;
+
+/* Estilos de la tabla */
+.table-responsive {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto; /* Permite desplazamiento horizontal en dispositivos pequeños */
+}
+
+.tabla-ver {
+  background-color: #AE7791; /* Color de fondo de la tabla */
   width: 100%;
   padding: 5px;
   border-radius: 5px;
   font-size: 14px;
-  flex-direction: column;
-  display: flex;
-  
-  
-}
-.nomCol{
-  background-color: #AE7791;
-  padding: 7px;
-  border-radius: 5px;
-  color: #EBEBEB;
-  margin: 5px;
-  width: 100%;
+  margin-top: 20px; 
 }
 
-.filas{
-  width: 100%;
-}
-.fila{
-  display: flex;
-  align-items: center;
-  padding: 4px;
-  margin-top: 7px;
-  width: 100%;
-}
-.fila p{
-  width: 16%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+.tabla-ver th {
+  background-color: #AE7791; /* Color de fondo de las columnas en la cabecera */
+  color: #0b2c37; /* Color del texto en la cabecera */
 }
 
-.EditHab{
-  width: 20%;
+.tabla-ver td {
+  background-color: #EBEBEB; /* Color de fondo de las columnas */
+  color: #0b2c37; /* Color del texto */
+  padding: 5px;
+}
+
+.EditHab {
+  width: 150%;
   display: flex;
   justify-content: center;
 }
-.EditHab button{
+
+.EditHab button {
   margin-right: 25px;
   cursor: pointer;
 }
-.accion i{
+
+.accion i {
   background-color: none;
   font-size: 20px;
 }
 
-/*switch*/
-/*switch*/
+/* Switch */
 .boton {
-  margin: 5px;
-  margin-right: 35px;
+  margin: 3px;
+  margin-left: 20px;
 }
 
 .lbl-switch {
