@@ -13,8 +13,7 @@ class CreateUnidadesTable extends Migration
      */
     public function up()
     {   /**es unidads porque como el modelo se llama Unidad,los proximos registros solo aumentara una s y serian unidads*/
-        Schema::create('unidade
-        s', function (Blueprint $table) {
+        Schema::create('unidades', function (Blueprint $table) {
             $table->id();
             $table->string('nombreUnidad');
             $table->integer('codigoUnidad');
