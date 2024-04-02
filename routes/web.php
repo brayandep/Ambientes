@@ -4,6 +4,7 @@ use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
+use Illuminate\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,5 @@ Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 
 Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
+
 Route::get('/materia', materiaController::class);
