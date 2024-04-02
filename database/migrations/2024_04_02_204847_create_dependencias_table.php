@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUnidadesTable extends Migration
+class CreateDependenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,9 @@ class CreateUnidadesTable extends Migration
      * @return void
      */
     public function up()
-    {  
-        Schema::create('unidades', function (Blueprint $table) {
+    {
+        Schema::create('dependencias', function (Blueprint $table) {
             $table->id();
-            $table->string('nombreUnidad');
-            $table->integer('codigoUnidad');
-            $table->string('Responsable');
-            $table->integer('Nivel');
-            $table->integer('UnidadHabilitada');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateUnidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unidades');
+        Schema::dropIfExists('dependencias');
     }
 }
