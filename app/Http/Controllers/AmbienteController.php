@@ -11,31 +11,6 @@ use Illuminate\Http\Request;
 
 class AmbienteController extends Controller
 {
-    public function storeValidation(Request $request){
-        
-        $request -> validate([
-            'codigo' => 'required|digits:8|numeric|unique:ambientes,codigo',
-            'unidad' => 'required|max:40|regex:/^[a-zA-Z\s]+$/|unique:ambientes,unidad',
-            'nombre' => 'required|max:40|regex:/^[a-zA-Z\s]+$/|unique:ambientes,nombre',
-            'capacidad'=> 'required|digits:8|numeric|unique:ambientes,capacidada',
-            'ubicacion'=> 'required|max:40|regex:/^[a-zA-Z\s]+$/|unique:ambientes,ubicacion',
-            'descripcion_ubicacion' => 'required|max:40|regex:/^[a-zA-Z\s]+$/|unique:unidades,descripcion_ubicacion'
-        ]);
-        
-        $ambiente = new Ambiente();
-        $ambiente->codigo = $request->codigo;
-        $ambiente->unidad = $request->unidad;
-        $ambiente->nombre = $request->nombre;
-        $ambiente->capacidad = $request->capacidad;
-        $ambiente->ubicacion = $request->ubicacion;
-        $ambiente->descripcion_ubicacion = $request->descripcion_ubicacion;
-        $ambiente ->save();
-
-        // Aquí asumimos que en el formulario se está enviando el 'id' de la unidad padre en el campo 'Dependencia'
-     // También se debe verificar que cuando el nivel es 0, lo que significa que es la facultad, no debería tener una dependencia.
-        
-        return redirect()->route('AmbientesRegistrados');/* este es el codigo para redireccionar a otra vista desde controller*/
-    }
     /**
      * Display a listing of the resource.
      *
@@ -149,8 +124,7 @@ class AmbienteController extends Controller
      * @param  \App\Models\Ambiente  $ambiente
      * @return \Illuminate\Http\Response
      */
-    
-     public function edit($id)
+    public function edit($id)
     {
         $unidades = Unidad::all();
         $tipoAmbientes = TipoAmbiente::all();
@@ -267,7 +241,7 @@ class AmbienteController extends Controller
             HorarioDisponible::destroy($idsAEliminar);
         }
 
-        return redirect()->route('AmbientesRegistrados');
+        return redirect()->route('registro.index');
 
     }
 

@@ -44,5 +44,4 @@ Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('Am
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
-Route::post('/registro',[AmbienteController::class, 'storeValidaton'])->name('ambiente.storeValidation');
-
+Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
