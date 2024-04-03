@@ -27,6 +27,9 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 /*
 */
+
+
+
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
@@ -49,52 +52,25 @@ Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEst
 
 Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
 
-//prueba de encabezado
-
-
-Route::get('/login', [LoginController::class, 'index'])->name('Login');
-Route::post('/login', [LoginController::class, 'Login']);
-Route::get('/dashboard', function () {
-    // Esta ruta solo será accesible para usuarios autenticados
-})->middleware('auth');
-
-//Route::get('/solicitud', 'SolicitudController')->name('solicitud.index');
-//Route::post('/solicitud', 'SolicitudController@store')->name('solicitud.store');
-
-
 Route::get('/registro', function () {
     return view('registro');
 })->name('registro');
-
 //registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
 })->name('SolicitudAmbiente');
-
 //versolicitudes
 Route::get('/Versolicitudes', [SolicitudController::class, 'index'])->name('VerSolicitud');
-
 Route::get('/Versolicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->name('solicitud.edit');
 Route::put('/Versolicitudes/{solicitud}', [SolicitudController::class, 'update'])->name('solicitud.update');
 Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destroy'])->name('solicitud.destroy');
-
-/*Route::get('/Versolicitudes', function () {
-    return view('Versolicitud');
-})->name('VerSolicitud');
-*/
-
 //envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
-
-
-
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
-Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create');
-    
+Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create'); 
 Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
-
 Route::get('/materia', materiaController::class);
 
 
