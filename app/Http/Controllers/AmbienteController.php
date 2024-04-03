@@ -104,7 +104,7 @@ class AmbienteController extends Controller
                 }
             }  
         }
-        return redirect('registro');
+        return redirect('ver-ambientes');
     }
 
     /**

@@ -3,6 +3,7 @@
 use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmbienteController;
+use App\Http\Controllers\EstadoAmbienteController;
 
 use App\Http\Controllers\HomeController;
 /*
@@ -33,3 +34,9 @@ Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
 Route::resource('/registro', AmbienteController::class);
+
+Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
+
+Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+
+Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');

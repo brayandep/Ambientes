@@ -9,7 +9,7 @@
 @section('contenido')
 <main class="content-wrapper">
             <div class="container">
-                <h2 style="padding-bottom:20px">Registro de Ambiente</h2>
+            <h2 style="padding-bottom:20px" >{{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
                 <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
@@ -128,7 +128,7 @@
                 
                 <div class="botones">
                   <button class="btn-cancelar">
-                    <a href="{{ route('registro.index') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
+                    <a href="{{ route('AmbientesRegistrados') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
                 </button>
   
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
