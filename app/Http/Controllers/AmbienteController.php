@@ -25,7 +25,7 @@ class AmbienteController extends Controller
         $ambiente = new Ambiente();
         $ambiente->codigo = $request->codigo;
         $ambiente->unidad = $request->unidad;
-        $ambiente->nombre = $request->Rnombre;
+        $ambiente->nombre = $request->nombre;
         $ambiente->capacidad = $request->capacidad;
         $ambiente->ubicacion = $request->ubicacion;
         $ambiente->descripcion_ubicacion = $request->descripcion_ubicacion;
@@ -129,7 +129,7 @@ class AmbienteController extends Controller
                 }
             }  
         }
-        return redirect('registro');
+        return redirect('ver-ambientes');
     }
 
     /**

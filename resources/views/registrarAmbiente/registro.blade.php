@@ -9,7 +9,7 @@
 @section('contenido')
 <main class="content-wrapper">
             <div class="container">
-                <h2 style="padding-bottom:20px" >{{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
+                <h2 style="padding-bottom:20px">Registro de Ambiente</h2>
                 <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
@@ -117,7 +117,7 @@
 
                   </div>
                 </div>
-    
+                <div id="camposHorarios"></div>
                 <div id="camposDiasSemana" name= "diaSemana[]"></div>
 </div>
 <div id="mensaje-no-auditorio" style="display: none;">
@@ -155,7 +155,7 @@
                 </button>
   
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
-                  <button type="submit" class="btn-registrar" onclick="obtenerDatos()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
+                  <button type="submit" class="btn-registrar" onclick="obtenerDatos2()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
     
               </div>
                 </form>
@@ -282,17 +282,17 @@
     }
     
     // Función para obtener los datos en el formato requerido
-    function obtenerDatos() {
+    /*function obtenerDatos() {
         console.log(diasSemana);
         convertirAFormatoHTML();
          // Inserta los campos generados en el div correspondiente
          document.getElementById("camposDiasSemana").innerHTML = convertirAFormatoHTML();
-    }
+    }*/
     
     function convertirAFormatoHTML() {
                 let formHTML = '';
                 for (const dia in diasSemana) {
-                    formHTML += `<input type="hidden" name="diaSemana[${dia}]" value='${JSON.stringify(diasSemana[dia])}'>\n`;
+                    formHTML += <input type="hidden" name="diaSemana[${dia}]" value='${JSON.stringify(diasSemana[dia])}'>\n;
                 }
                 return formHTML;
             }
@@ -302,7 +302,161 @@
    
     <!-- Horarios version 2-->
     <script>
-function crearHorario() {
+      var horarioSeleccionado = {}; // Variable para almacenar los horarios seleccionados
+    var diasHorarios = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    var intervalos = [
+        ["6:45", "8:15"],
+        ["8:15", "9:45"],
+        ["9:45", "11:15"],
+        ["11:15", "12:45"],
+        ["12:45", "14:15"],
+        ["14:15", "15:45"],
+        ["15:45", "17:15"],
+        ["17:15", "18:45"],
+        ["18:45", "20:15"],
+        ["20:15", "21:45"]
+    ];
+
+    function crearHorario() {
+        var horario = document.getElementById('horario');
+
+        for (var i = 0; i < intervalos.length; i++) {
+            var fila = document.createElement('tr');
+            for (var j = 0; j < 6; j++) {
+                var celda = document.createElement('td');
+                if (j === 5 && i >= 6) { // Para sábado, solo mostrar hasta la sexta fila
+                    break;
+                }
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'horario_checkbox';
+                checkbox.addEventListener('change', function (i, j) {
+                    return function () {
+                        handleCheckboxChange(i, j);
+                    };
+                }(i, j));
+                celda.appendChild(checkbox);
+                var horaInicio = intervalos[i][0];
+                var horaFin = intervalos[i][1];
+                celda.appendChild(document.createTextNode(' ' + horaInicio + ' - ' + horaFin));
+                fila.appendChild(celda);
+            }
+            horario.appendChild(fila);
+        }
+
+        // Agregar botones "Seleccionar todos" y "Deseleccionar todos" al final de cada columna
+        var columnas = horario.getElementsByTagName('th');
+        for (var k = 0; k < columnas.length; k++) {
+            var botonSeleccionarTodos = document.createElement('button');
+            botonSeleccionarTodos.textContent = 'Seleccionar todos';
+            botonSeleccionarTodos.type='button';
+            botonSeleccionarTodos.onclick = (function(k) {
+                return function() {
+                    marcarTodos(k, true);
+                };
+            })(k);
+            columnas[k].appendChild(botonSeleccionarTodos);
+            
+            var botonDeseleccionarTodos = document.createElement('button');
+            botonDeseleccionarTodos.textContent = 'Deseleccionar todos';
+            botonDeseleccionarTodos.type='button';
+            botonDeseleccionarTodos.onclick = (function(k) {
+                return function() {
+                    if (haySeleccionados(k)) {
+                        marcarTodos(k, false);
+                    }
+                };
+            })(k);
+            columnas[k].appendChild(botonDeseleccionarTodos);
+        }
+    }
+
+    function handleCheckboxChange(i, j) {
+        var dia = diasHorarios[j];
+        if (!horarioSeleccionado[dia]) {
+            horarioSeleccionado[dia] = [];
+        }
+        var horaInicio = intervalos[i][0];
+        var horaFin = intervalos[i][1];
+        var checkbox = document.getElementById('horario').getElementsByTagName('tr')[i + 1].getElementsByTagName('td')[j].getElementsByTagName('input')[0];
+        if (checkbox.checked) {
+            horarioSeleccionado[dia].push({ inicio: horaInicio, fin: horaFin });
+        } else {
+            var index = horarioSeleccionado[dia].findIndex(function (element) {
+                return element.inicio === horaInicio && element.fin === horaFin;
+            });
+            if (index !== -1) {
+                horarioSeleccionado[dia].splice(index, 1);
+            }
+        }
+        console.log(horarioSeleccionado);
+    }
+
+    function marcarTodos(columna, estado) {
+        var checkboxes = document.querySelectorAll('#horario tr td:nth-child(' + (columna + 1) + ') input[type="checkbox"]');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = estado;
+            handleCheckboxChange(checkbox.parentNode.parentNode.rowIndex - 1, columna);
+        });
+    }
+
+    function haySeleccionados(columna) {
+        var checkboxes = document.querySelectorAll('#horario tr td:nth-child(' + (columna + 1) + ') input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*function obtenerDatos2() {
+        convertirAFormatoHTML();
+         // Inserta los campos generados en el div correspondiente
+         document.getElementById("camposHorarios").innerHTML = convertirAFormatoHTML2();
+    }*/
+    function obtenerDatos2() {
+    const formHTML = convertirAFormatoHTML();
+    const formHTML2 = convertirAFormatoHTML2();
+    document.getElementById("camposDiasSemana").innerHTML = formHTML;
+    document.getElementById("camposHorarios").innerHTML = formHTML2;
+}
+
+
+    function convertirAFormatoHTML2() {
+        let formHTML2 = '';
+        for (const dia2 in horarioSeleccionado) {
+            formHTML2 += <input type="hidden" name="horario[${dia2}]" value='${JSON.stringify(horarioSeleccionado[dia2])}'>\n;
+        }
+        return formHTML2;
+    }
+
+    crearHorario();
+
+    // Recuperar los horarios existentes y marcar los checkbox correspondientes
+    function marcarCheckboxSegunDatos() {
+        const horariosExistente = @json($horariosExistente);
+        for (const dia in horariosExistente) {
+            const indiceDia = diasHorarios.indexOf(dia);
+            if (indiceDia !== -1) {
+                horariosExistente[dia].forEach(horario => {
+                    const indiceIntervalo = intervalos.findIndex(([inicio, fin]) => {
+                        return inicio === horario.horaInicio && fin === horario.horaFin;
+                    });
+                    if (indiceIntervalo !== -1) {
+                        const checkbox = document.getElementById('horario').getElementsByTagName('tr')[indiceIntervalo + 1].getElementsByTagName('td')[indiceDia].getElementsByTagName('input')[0];
+                        checkbox.checked = true;
+                        handleCheckboxChange(indiceIntervalo, indiceDia);
+                    }
+                });
+            }
+        }
+    }
+
+    // Llamar a la función para marcar los checkbox al cargar la página
+    marcarCheckboxSegunDatos();
+
+/*function crearHorario() {
   var horario = document.getElementById('horario');
 
   var diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -383,7 +537,7 @@ function marcarTodosSabado() {
   });
 }
 
-crearHorario();
+crearHorario();*/
 </script>
    
    
@@ -397,6 +551,13 @@ crearHorario();
           document.getElementById("modalOtro").style.display = "none";
       }
   
+      document.addEventListener('DOMContentLoaded', function() {
+        // Obtener el elemento select
+        var select = document.getElementById('tipo-ambiente');
+
+        // Llamar a la función verificarOtro con el valor seleccionado actualmente
+        verificarOtro(select);
+    });
       function verificarOtro(select) {
           var selectedOption = select.options[select.selectedIndex].value;
           if (selectedOption === "Otro") {
