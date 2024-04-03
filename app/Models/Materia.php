@@ -12,6 +12,9 @@ class Materia extends Model
     use HasFactory;
     protected $table = "materia";
 
+    // protected $fillable = ['departamento','carrera','nombre','codigo','nivel', 'cantGrupo'];
+    protected $guarded = [];
+
     public function getNombreAttribute($value){
         return ucwords($value);
     }

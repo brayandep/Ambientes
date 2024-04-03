@@ -27,7 +27,7 @@ class RegistrarMateria extends FormRequest
             'departamento' => 'required',
             'carrera' => 'required',
             'nombre' => 'required|unique:materia,nombre|max:100|regex:/^[a-zA-Z\s]+$/',
-            'codigo' => 'required|size:6|unique:materia,codigo|numeric',
+            'codigo' => 'required|numeric|digits:6|unique:materia,codigo',
             'nivel' => 'required',
             'cantGrupo' => 'required'
         ];

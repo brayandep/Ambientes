@@ -10,7 +10,7 @@ class materiaController extends Controller
 {
     public function show()
     {
-        $materias = Materia::all();
+        $materias = Materia::orderBy('id', 'desc')->paginate();
         
         return view('materia.lista', compact('materias'));
     }
@@ -22,18 +22,9 @@ class materiaController extends Controller
 
     public function store(RegistrarMateria $request)
     {
-        $materia = new Materia();
+        $materia = Materia::create($request->all());
 
-        $materia->departamento = $request->departamento;
-        $materia->carrera = $request->carrera;
-        $materia->nombre = $request->nombre;
-        $materia->codigo = $request->codigo;
-        $materia->nivel = $request->nivel;
-        $materia->cantGrupo = $request->cantGrupo;
-
-        $materia->save();
-
-        return redirect()->route('materia.reg');
+        return redirect()->route('materia.show');
     }
 
     public function editar(Materia $materia)
@@ -47,20 +38,16 @@ class materiaController extends Controller
             'departamento' => 'required',
             'carrera' => 'required',
             'nombre' => 'required|max:100|regex:/^[a-zA-Z\s]+$/',
-            'codigo' => 'required|size:6|numeric',
+            'codigo' => 'required|digits:6|numeric',
             'nivel' => 'required',
             'cantGrupo' => 'required'
+        ],
+        [
+            'cantGrupo.required' => 'El grupo es requerido'
         ]);
+        
+        $materia->update($request->all());
 
-        $materia->departamento = $request->departamento;
-        $materia->carrera = $request->carrera;
-        $materia->nombre = $request->nombre;
-        $materia->codigo = $request->codigo;
-        $materia->nivel = $request->nivel;
-        $materia->cantGrupo = $request->cantGrupo;
-
-        $materia->save();
-
-        return redirect()->route('materia.reg');
+        return redirect()->route('materia.show');
     }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     @yield('links')
     <title>@yield('titulo')</title>
 </head>
@@ -46,12 +47,19 @@
                             <li>
                                 <a href='{{ route('visualizar_unidad') }}'><i class='fas fa-clipboard'></i> Visualizar unidad</a>
                             </li>
-                       <!-- <li>
-                                <a href="#"><i class='fas fa-book'></i> Registrar Materia</a>
+                        </ul>
+                    </nav>
+                    <li onclick="gesMateria()">
+                        <p><i class='fas fa-clipboard'></i> Gestionar Materia</p>
+                    </li>
+                    <nav class="subMenu" id="subMateria">
+                        <ul>
+                            <li>
+                                <a href='{{ route('materia.reg') }}'><i class="fas fa-book"></i> Registrar Materia</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fas fa-user-group"></i> Registrar Grupo</a>
-                            </li>-->
+                                <a href='{{ route('materia.show') }}'><i class='fas fa-rectangle-list'></i> Lista de Materias</a>
+                            </li>
                         </ul>
                     </nav>
                     <li>

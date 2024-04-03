@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(MateriaSeeder::class); //para usar un seeeder
 
-        Materia::factory(10)->create();
+        Materia::factory(66)->create();
     }
 }

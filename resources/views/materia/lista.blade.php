@@ -7,15 +7,13 @@
 @section('titulo', 'Lista de Materias')
 
 @section('contenido')
-    <div class="Navegacion-contenido-ver">
-        <div class="Navegacion-ver">
-            Inicio > Gestionar Materia > Ver Materia
-        </div>
-    </div>
     <div class="ver-contenido">
         <div class="visualizar-Materia">
+            <div class="navegacion">
+                Inicio > Materia > Lista
+            </div>
             <div>
-                <h1 class="Titulo"><i class="fa-solid fa-rectangle-list"></i> Ver Materias Registradas </h1>
+                <h1 class="titulo"><i class="fa-solid fa-rectangle-list"></i> Ver Materias Registradas </h1>
             </div>
 
             <!-- Tabla de Materias -->
@@ -40,22 +38,12 @@
                             <p>{{$Materia->cantGrupo}}</p>
                             <div class="EditHab">
                                 <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
-                            
                             </div>
-                            {{-- <form action="{{ route('cambiar.estado', $Materia->id) }}" method="POST">
-                                @csrf
-                                @method('GET')
-                                <div class="boton">
-                                    <input type="checkbox" id="btn-switch-{{ $Materia->id }}" name="estado" {{ $Materia->estadoMateria == 1 ? 'checked' : '' }}>
-                                    <label for="btn-switch-{{ $Materia->id }}" class="lbl-switch"></label>
-                                </div>
-                            </form> --}}
-                            
-                            
                         </div>
                     @endforeach
                 </div>
             </div>
+            {{$materias->links()}}
         </div>
     </div>
 
