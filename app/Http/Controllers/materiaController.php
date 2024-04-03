@@ -39,8 +39,8 @@ class materiaController extends Controller
         $request->validate([
             'departamento' => 'required',
             'carrera' => 'required',
-            'nombre' => 'required',
-            'codigo' => 'required',
+            'nombre' => 'required|max:100|regex:/^[a-zA-Z\s]+$/',
+            'codigo' => 'required|size:6|numeric',
             'nivel' => 'required',
             'cantGrupo' => 'required'
         ]);
