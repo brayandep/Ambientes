@@ -27,7 +27,9 @@
                         ?> 
                         <option value="Departamento1">Departamento1</option> 
                         <option value="Departamento2">Departamento2</option> 
-                        <option value="Departamento3">Departamento3</option> 
+                        <option value="Departamento3">Departamento3</option>
+                        <option value="Departamento4">Departamento4</option> 
+                        <option value="Departamento5">Departamento5</option>  
                     </select>
 
                     @error('departamento')
@@ -55,14 +57,14 @@
 
                 <div class="input-group">
                     <label class="labMateria" id="labMateria">Nombre</label>
-                    <input name="nombre" class="inputMateria" id="nomPl" placeholder="Max. 100 caracteres" value="{{old('nombre')}}">
+                    <input name="nombre" autocomplete="off" class="inputMateria" id="nomPl" placeholder="Ingrese el nombre" value="{{old('nombre')}}">
                     @error('nombre')
                         <span class="msgError">*{{$message}}</span>
                     @enderror
                 </div>
                 <div class="input-group">
                     <label class="labMateria" id="labMateria">Codigo</label>
-                    <input name="codigo" autocomplete="off" class="inputMateria" id="nomPl" placeholder="Max. 6 cifras" value="{{old('codigo')}}">
+                    <input name="codigo" autocomplete="off" class="inputMateria" id="nomPl" placeholder="Ingrese el codigo" value="{{old('codigo')}}">
                     @error('codigo')
                         <span class="msgError">*{{$message}}</span>
                     @enderror

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrarMateria;
 use App\Models\Materia;
 use Illuminate\Http\Request;
 
@@ -12,18 +13,8 @@ class materiaController extends Controller
         return view('materia.registrar');
     }
 
-    public function store(Request $request)
+    public function store(RegistrarMateria $request)
     {
-        $request->validate([
-            'departamento' => 'required',
-            'carrera' => 'required',
-            'nombre' => 'required',
-            'codigo' => 'required',
-            'nivel' => 'required',
-            'cantGrupo' => 'required'
-        ]);
-
-
         $materia = new Materia();
 
         $materia->departamento = $request->departamento;
@@ -45,6 +36,15 @@ class materiaController extends Controller
 
     public function update(Request $request, Materia $materia)
     {
+        $request->validate([
+            'departamento' => 'required',
+            'carrera' => 'required',
+            'nombre' => 'required',
+            'codigo' => 'required',
+            'nivel' => 'required',
+            'cantGrupo' => 'required'
+        ]);
+
         $materia->departamento = $request->departamento;
         $materia->carrera = $request->carrera;
         $materia->nombre = $request->nombre;
