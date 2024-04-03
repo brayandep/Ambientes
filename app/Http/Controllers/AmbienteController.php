@@ -270,7 +270,7 @@ class AmbienteController extends Controller
 
         
 
-        return redirect()->route('registro.index');
+        return redirect()->route('AmbientesRegistrados');
 
     }
 

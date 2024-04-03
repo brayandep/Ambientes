@@ -151,7 +151,7 @@
                 
                 <div class="botones">
                   <button class="btn-cancelar">
-                    <a href="{{ route('registro.index') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
+                    <a href="{{ route('AmbientesRegistrados') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
                 </button>
   
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">

@@ -11,7 +11,7 @@
 @yield('estilos')
 <body>
     <div class="contenedor">
-        <div class="izquierda" id="menu">
+        <div class="izquierda"  id="menu">
             <nav class="menu" >
                 <ul>
                     <li>
@@ -31,7 +31,7 @@
                                 <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
-                                <a href="#"><i class='fas fa-pen-to-square'></i> Editar Informacion de ambiente</a>
+                                <a href="{{ route('AmbientesRegistrados') }}"><i class="fa-solid fa-rectangle-list"></i> Ver Informacion de ambiente</a>
                             </li>
                         </ul>
                     </nav>
