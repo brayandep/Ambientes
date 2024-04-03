@@ -38,6 +38,7 @@ Route::get('/', function () {
 })->name('inicio');
 
 //rutas de materia
+Route::get('materia', [materiaController::class, 'show'])->name('materia.show');
 Route::get('materia/registrar', [materiaController::class, 'create'])->name('materia.reg');
 Route::post('materia', [materiaController::class, 'store'])->name('materia.store');
 Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->name('materia.editar');

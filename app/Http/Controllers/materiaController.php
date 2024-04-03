@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class materiaController extends Controller
 {
+    public function show()
+    {
+        $materias = Materia::all();
+        
+        return view('materia.lista', compact('materias'));
+    }
+
     public function create()
     {
         return view('materia.registrar');
