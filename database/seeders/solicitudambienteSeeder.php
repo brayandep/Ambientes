@@ -14,7 +14,7 @@ class solicitudambienteSeeder extends Seeder
      */
     public function run()
     {
-        $Usuario = new Usuario();
+      /*  $Usuario = new Usuario();
         $Usuario -> usuario = "brayan Julio Quispe Jauregui";
         $Usuario -> contraseña = 11111111;
       
@@ -40,7 +40,7 @@ class solicitudambienteSeeder extends Seeder
         $Usuario -> contraseña = 11111111;
       
         $Usuario -> save();
-
+*/
 
 
     }

@@ -17,7 +17,7 @@ class CreateSolicitudTable extends Migration
             $table->id('idsolicitud');
           //  $table->unsignedBigInteger('id_usuario');
         //    $table->foreign('id_usuario')->references('id')->on('usuarios');
-              $table->integer('usuario');
+              $table->String('usuario');
             $table->date('fecha');
             $table->string('motivo');
             $table->string('materia');
