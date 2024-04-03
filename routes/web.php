@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AmbienteController;
+use App\Http\Controllers\EstadoAmbienteController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -20,6 +23,10 @@ use Illuminate\Routing\Route as RoutingRoute;
 Route::get('/', function () {
     return view('welcome');
 });*/
+Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');
+
 Route::get('/index', function () {
     return view('sliderBar');
 });
@@ -44,3 +51,14 @@ Route::post('materia', [materiaController::class, 'store'])->name('materia.store
 Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->name('materia.editar');
 Route::put('materia/{materia}', [materiaController::class, 'update'])->name('materia.update');
 //termina rutas de materia
+
+Route::get('/Registro', function () {
+    return view('registrarAmbiente.index');
+})->name('registro');
+Route::resource('/registro', AmbienteController::class);
+
+Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
+
+Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+
+Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
