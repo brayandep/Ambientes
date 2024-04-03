@@ -32,9 +32,14 @@ Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->na
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
 
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
-//prueba de encabezado
+
 Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
 
-Route::get('/materia', materiaController::class);
+//rutas de materia
+Route::get('materia/registrar', [materiaController::class, 'create'])->name('materia.reg');
+Route::post('materia', [materiaController::class, 'store'])->name('materia.store');
+Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->name('materia.editar');
+Route::put('materia/{materia}', [materiaController::class, 'update'])->name('materia.update');
+//termina rutas de materia

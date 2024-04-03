@@ -73,5 +73,10 @@ main h1{
     background-color: #4e798c;
 }
 
+.msgError{
+    color: #b94848;
+    padding: 2px 0 0 6px;
+}
+
 
 
