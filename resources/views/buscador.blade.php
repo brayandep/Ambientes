@@ -2,10 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Ambientes</title>
-    <!-- Agrega aquí tus enlaces a CSS si los necesitas -->
+   
 @section('estilos')
     <style>
        
@@ -73,6 +70,7 @@
     </style>
     @endsection
 </head>
+@section('cuerpo')
 <body>
     
     <div class="main-content">
@@ -132,20 +130,11 @@
         </div>
 </div>
 
+
     </form>
     </div>
-    <footer>
-        <div class="footer-content">
-            <img src="\Ambientes\public\images\logo.png" alt="Logo" class="logo">
-            
-            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.srl</p>
-            <div class="contact-info">
-                
-                <p>Contactenos: Gmail: SmartByte@gmail.com</p>
-                <p>Celular: 6954890</p>
-            </div>
-        </div>          
-    </footer>
+    @endsection
+    @section('script')   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
@@ -172,6 +161,6 @@
             });
         });
     </script>
-
+ @endsection
 </body>
 </html>
