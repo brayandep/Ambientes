@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
     {
         //$this->call(Materia::class);
         // \App\Models\User::factory(10)->create();
+        $this -> call(UnidadSeeder::class);
         /*Schema::create('tipo_ambientes', function ($table) {
             $table->id();
             //$table->unsignedBigInteger('id_ambientes');
