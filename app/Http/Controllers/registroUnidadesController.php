@@ -41,7 +41,9 @@ class registroUnidadesController extends Controller
         return redirect()->route('visualizar_unidad');/* este es el codigo para redireccionar a otra vista desde controller*/
     }
     public function show(){
-        $unidades = Unidad::all();
+        $unidades = Unidad::orderBy('id', 'desc')->get();
+
+        //$unidades = Unidad::all();
 
         return view('GestionUnidades.VisualizarUnidades', compact('unidades'));
 
@@ -75,10 +77,10 @@ class registroUnidadesController extends Controller
         return back(); 
     }
     public function toggleEstado(Request $request, $unidadId){
-    $unidad = Unidad::findOrFail($unidadId);
-    $unidad->UnidadHabilitada = $request->has('UnidadHabilitada') ? 1 : 2;
-    $unidad->save();
+        $unidad = Unidad::findOrFail($unidadId);
+        $unidad->UnidadHabilitada = $request->has('UnidadHabilitada') ? 1 : 0;
+        $unidad->save();
 
-    return back(); // Redirige de vuelta a la página anterior
-}
+        return back(); // Redirige de vuelta a la página anterior
+    }
 }
