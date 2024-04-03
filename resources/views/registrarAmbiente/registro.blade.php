@@ -9,10 +9,7 @@
 @section('contenido')
 <main class="content-wrapper">
             <div class="container">
-                <div class="regAmbiente">
-                    <h2>Registro de Ambiente</h2>
-                </div>
-               
+                <h2 style="padding-bottom:20px" >{{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
                 <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
@@ -43,26 +40,20 @@
                     <label for="ubicacion">Ubicación:</label>
                     <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                 
-                  <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
-                    <option>Selecciona una unidad</option>
-                    @foreach($tipoAmbientes as $tipoAmbiente)
-                      <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
-                    @endforeach
-                      <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
-                  </select>
+                    <label for="tipo-ambiente">Tipo de ambiente:</label>
+<select id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)" >
+    <option>Selecciona una unidad</option>
+    @foreach($tipoAmbientes as $tipoAmbiente)
+        <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
+    @endforeach
+    <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
+</select>
               </div>
-    
-  
-  
-    
-  
   
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
                     <textarea id="descripcion" name="descripcion" >{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
                 </div>
-                
                 
                 
                 <div class="form-grupo">
@@ -82,7 +73,8 @@
                     </div>
                 </div>
     
-                <div class="form-group">
+                <div id="mensaje-auditorio" style="display: none;">
+                <div class="form-grupo">
                     <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
                     <select id="diasSemana" onchange="agregarColumna()" style="width: 20%;">
     
@@ -96,7 +88,7 @@
                   </select>
     
                 </div>
-    
+
                 <div class="form-group">
                   <div id="filaExistente" class="filaExistente">
                       <!-- Aquí se añadirán las columnas -->
@@ -127,6 +119,34 @@
                 </div>
     
                 <div id="camposDiasSemana" name= "diaSemana[]"></div>
+</div>
+<div id="mensaje-no-auditorio" style="display: none;">
+<div class="form-grupo">
+                  <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
+                  <table id="horario">
+                    <tr>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                    </tr>
+                    </table>
+    
+                </div>
+</div>
+                <div>
+                    <!-- Contenido específico para cuando se selecciona "auditorio" -->
+                    <!-- Puedes colocar aquí cualquier contenido HTML o Blade que desees mostrar -->
+                    
+    
+                </div>
+                
+                
+                
+    
+                
   
                 
                 <div class="botones">
@@ -280,6 +300,91 @@
     </script>
     
    
+    <!-- Horarios version 2-->
+    <script>
+function crearHorario() {
+  var horario = document.getElementById('horario');
+
+  var diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  var intervalos = [
+    ["6:45", "8:15"],
+    ["8:15", "9:45"],
+    ["9:45", "11:15"],
+    ["11:15", "12:45"],
+    ["12:45", "14:15"],
+    ["14:15", "15:45"],
+    ["15:45", "17:15"],
+    ["17:15", "18:45"],
+    ["18:45", "20:15"],
+    ["20:15", "21:45"]
+  ];
+
+  for (var i = 0; i < intervalos.length; i++) {
+    var fila = document.createElement('tr');
+    for (var j = 0; j < 6; j++) {
+      var celda = document.createElement('td');
+      if (j === 5 && i >= 6) { // Para sábado, solo mostrar hasta la sexta fila
+        break;
+      }
+      var checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.name = 'horario_checkbox';
+      celda.appendChild(checkbox);
+      var horaInicio = intervalos[i][0];
+      var horaFin = intervalos[i][1];
+      celda.appendChild(document.createTextNode(' '+ horaInicio + ' - ' + horaFin));
+      fila.appendChild(celda);
+    }
+    horario.appendChild(fila);
+  }
+  
+  // Agregar botones "Todos" al final de cada columna
+  var columnas = horario.getElementsByTagName('th');
+  for (var k = 0; k < columnas.length; k++) {
+    var botonTodos = document.createElement('button');
+    botonTodos.textContent = 'Todos';
+    botonTodos.type='button';
+    if (k === 5) { // Para sábado
+      botonTodos.onclick = marcarTodosSabado;
+    } else { // Para lunes a viernes
+      botonTodos.onclick = (function(k) {
+        return function() {
+          toggleMarcarTodosLunesAViernes(k);
+        };
+      })(k);
+    }
+    columnas[k].appendChild(botonTodos);
+  }
+}
+
+function toggleMarcarTodosLunesAViernes(columna) {
+  var checkboxes = document.querySelectorAll('#horario tr td:nth-child(' + (columna + 1) + ') input[type="checkbox"]');
+  var todosMarcados = true;
+  checkboxes.forEach(function(checkbox) {
+    if (!checkbox.checked) {
+      todosMarcados = false;
+    }
+  });
+  checkboxes.forEach(function(checkbox) {
+    checkbox.checked = !todosMarcados;
+  });
+}
+
+function marcarTodosSabado() {
+  var checkboxes = document.querySelectorAll('#horario tr td:nth-child(6) input[type="checkbox"]');
+  var todosMarcados = true;
+  checkboxes.forEach(function(checkbox) {
+    if (!checkbox.checked) {
+      todosMarcados = false;
+    }
+  });
+  checkboxes.forEach(function(checkbox) {
+    checkbox.checked = !todosMarcados;
+  });
+}
+
+crearHorario();
+</script>
    
    
    <!-- JavaScript  modal otro tipo ambiente -->
@@ -302,7 +407,17 @@
                   select.removeChild(optionOtro);
                   select.appendChild(optionOtro);
               }
-          }
+          }var selectedOption = select.options[select.selectedIndex].value;
+        var mensajeAuditorio = document.getElementById('mensaje-auditorio');
+        var mensajeNoAuditorio = document.getElementById('mensaje-no-auditorio');
+
+        if (selectedOption === 'Auditorio') {
+            mensajeAuditorio.style.display = 'block';
+            mensajeNoAuditorio.style.display = 'none';
+        } else {
+            mensajeAuditorio.style.display = 'none';
+            mensajeNoAuditorio.style.display = 'block';
+        }
       }
   
       function agregarOtroAmbiente() {
@@ -330,4 +445,20 @@
       }
   }
   </script>
+
+<script>
+    function verificarAuditorio(select) {
+        var selectedOption = select.options[select.selectedIndex].value;
+        var mensajeAuditorio = document.getElementById('mensaje-auditorio');
+        var mensajeNoAuditorio = document.getElementById('mensaje-no-auditorio');
+
+        if (selectedOption === 'Auditorio') {
+            mensajeAuditorio.style.display = 'block';
+            mensajeNoAuditorio.style.display = 'none';
+        } else {
+            mensajeAuditorio.style.display = 'none';
+            mensajeNoAuditorio.style.display = 'block';
+        }
+    }
+</script>
 @endsection
