@@ -42,8 +42,6 @@ class SolicitudController extends Controller
         $Solicitud->grupo = $request['grupo'];
         $Solicitud->nro_aula = $request['nro_aula'];
         $Solicitud->horario = $request['horario'];
-       
-        
         $Solicitud->save();
         return redirect()->route('solicitud.store')->with('success', 'Solicitud creada exitosamente.');
 

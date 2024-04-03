@@ -70,6 +70,9 @@ Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destr
 
 //envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
+
+
+
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
 Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create');
     
