@@ -17,8 +17,8 @@ class CreateHorarioDisponiblesTable extends Migration
             $table->id();
             $table->integer('ambiente_id');
             //$table->foreign('ambiente_id')->references('id')->on('ambientes');
-            $table->time('horaInicio'); 
-            $table->time('horaFin');
+            $table->string('horaInicio'); 
+            $table->string('horaFin');
             $table->boolean('estadoHorario'); 
             $table->string('dia'); 
             $table->timestamps();
