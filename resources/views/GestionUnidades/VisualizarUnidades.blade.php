@@ -40,7 +40,7 @@
                                         @elseif ($unidad->Nivel == 3)
                                         <p>Laboratorio</p>
                                     @endif
-                              <!--  <p>{{$unidad->Dependencia}}</p>-->
+                                <p>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</p>
                                     
                                 <div class="EliEdi">
                                     <button class="accion" onclick="location.href='{{ route('unidad.edit', $unidad) }}';"><i class="fa-solid fa-pen-to-square"></i></button>

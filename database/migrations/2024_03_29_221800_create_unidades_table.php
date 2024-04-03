@@ -19,6 +19,7 @@ class CreateUnidadesTable extends Migration
             $table->integer('codigoUnidad');
             $table->string('Responsable');
             $table->integer('Nivel');
+            $table->integer('Dependencia');
             $table->integer('UnidadHabilitada');
             $table->timestamps();
         });

@@ -52,5 +52,20 @@ function EliminarUnidad(id){
     }
     fondoGris.style.display = 'flex';
 }*/
+/**Carga las dependencias */
+function cargarDependencias(nivel){
+    // Limpia las opciones existentes
+    const dependenciaSelect = document.getElementById('Dependencia');
+    dependenciaSelect.innerHTML = '';
+    fetch(`/unidad/dependencia/${nivel}`)
+    .then(response => response.json())
+    .then(unidades => {
+        unidades.forEach(unidad => {
+            const option = new Option(unidad.nombreUnidad, unidad.id);
+            dependenciaSelect.add(option);
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 

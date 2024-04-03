@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unidad;
+use App\Models\Dependencia;
 use Illuminate\Http\Request;
 
 class registroUnidadesController extends Controller
@@ -26,6 +27,16 @@ class registroUnidadesController extends Controller
         $unidad->Dependencia = $request->Dependencia;
         $unidad->UnidadHabilitada = $request->UnidadHabilitada;
         $unidad ->save();
+
+        // Aquí asumimos que en el formulario se está enviando el 'id' de la unidad padre en el campo 'Dependencia'
+     // También se debe verificar que cuando el nivel es 0, lo que significa que es la facultad, no debería tener una dependencia.
+        if ($request->filled('Dependencia') && $request->Nivel > 0) {
+            // Crear o actualizar la entrada en la tabla 'dependencias'
+            $dependencia = new Dependencia;
+            $dependencia->idunidadPadre = $request->Dependencia;
+            $dependencia->idunidadHijo = $unidad->id;
+            $dependencia->save();
+        }
         
         return redirect()->route('visualizar_unidad');/* este es el codigo para redireccionar a otra vista desde controller*/
     }

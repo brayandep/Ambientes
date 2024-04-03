@@ -15,6 +15,17 @@ class CreateDependenciasTable extends Migration
     {
         Schema::create('dependencias', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('IdunidadPadre')->nullable();
+            $table->foreign('IdunidadPadre')
+                  ->references('id')->on('unidades')
+                  ->onDelete('set null');
+
+
+            $table->unsignedBigInteger('IdunidadHijo')->nullable();
+            $table->foreign('IdunidadHijo')
+                  ->references('id')->on('unidades')
+                  ->onDelete('set null');
+
             $table->timestamps();
         });
     }

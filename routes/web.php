@@ -4,6 +4,8 @@ use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
+use App\Http\Controllers\DependenciaUnidadController;
+use App\Models\Dependencia;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,8 @@ Route::get('/Registrar_Unidad', function () {
 Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
 
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
+
+Route::get('/unidad/dependencia/{nivel}',[DependenciaUnidadController::class, 'buscar'])->name('dependencia.buscar');
 
 Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->name('unidad.edit');
 

@@ -41,28 +41,28 @@
                             @enderror
                     </div>
                     <div class="div2Seleccion">
-                        <div class="seleccion">
-                            <label class="titulo" for="Nivel">Nivel:</label>
-                            <select class="imput" id="Nivel" name="Nivel">
-                                <!-- Opciones de nivel aqu� 
-                                <option selected>Seleccione un nivel</option>-->
-                                <option value="">seleccione el nivel</option> 
-                                <option value="1">1  Decanato</option> 
-                                <option value="2">2  Departamento</option> 
-                                <option value="3">3  laboratorio</option> 
-                            </select>
-                        </div>
+                            <div class="seleccion">
+                                <label class="titulo" for="Nivel">Nivel:</label>
+                                <select class="imput" id="Nivel" name="Nivel" onchange="cargarDependencias(this.value)">
+                                    <!-- Opciones de nivel aqu� 
+                                    <option selected>Seleccione un nivel</option>-->
+                                    <option value="">seleccione el nivel</option> 
+                                    <option value="0">0  Facultad</option>
+                                    <option value="1">1  Decanato</option> 
+                                    <option value="2">2  Departamento</option> 
+                                    <option value="3">3  laboratorio</option> 
+                                </select>
+                            </div>
+            
                         @error('Nivel')
                                 <span>*{{$message}}</span>
                         @enderror
                         <div class="seleccion">
                             <label class="titulo" for="Dependencia">Dependencia:</label>
-                            <select class="imput" id="Dependencia" name="Dependencia">
+                            <select class="imput" id="Dependencia" name="Dependencia" >
                                 <!-- Opciones de dependeia aqu� -->
                                 <option value="">Seleccione la dependencia</option>
-                                <option value="2">opcion 2</option> 
-                                <option value="3">opcion 3</option> 
-                                <option value="4">opcion 4</option> 
+
                             </select>
                         </div>
                         @error('Dependencia')
