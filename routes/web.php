@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\grupoController;
 use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -44,3 +45,8 @@ Route::post('materia', [materiaController::class, 'store'])->name('materia.store
 Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->name('materia.editar');
 Route::put('materia/{materia}', [materiaController::class, 'update'])->name('materia.update');
 //termina rutas de materia
+
+//rutas de grupo
+Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->name('grupo.create');
+Route::put('grupo/{grupo}', [grupoController::class, 'store'])->name('grupo.store');
+//termina rutas de grupo
