@@ -5,12 +5,12 @@ h2{
 
 .content-wrapper {
   
-  height: 710px;
+  height: auto;
   overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
 }
 
 .container {
-  max-width: 60%;
+  max-width: 70%;
   margin: 0px auto;
   padding: 20px;
 }
