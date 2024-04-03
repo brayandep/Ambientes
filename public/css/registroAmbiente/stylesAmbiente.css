@@ -3,16 +3,27 @@ h2{
   font-size: 30px;
 }
 
+.tituloReg{
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
 .content-wrapper {
   
-  height: 710px;
+
   overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  height: 75%;
+  position: relative;
+
 }
 
 .container {
-  max-width: 60%;
-  margin: 0px auto;
-  padding: 20px;
+  height: 73%;
+  padding: 5px;
+  width: 70%;
 }
 
 .form-group {

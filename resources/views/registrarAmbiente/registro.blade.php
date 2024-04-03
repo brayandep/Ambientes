@@ -9,7 +9,10 @@
 @section('contenido')
 <main class="content-wrapper">
             <div class="container">
-                <h2 style="padding-bottom:20px">Registro de Ambiente</h2>
+                <div class="regAmbiente">
+                    <h2>Registro de Ambiente</h2>
+                </div>
+               
                 <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
