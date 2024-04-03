@@ -15,7 +15,7 @@ class UnidadSeeder extends Seeder
      */
     public function run()
     {
-        $unidad1 = new Unidad();
+       $unidad1 = new Unidad();
         $unidad1 -> nombreUnidad = "Consejo facultativo de la FCyT";
         $unidad1 -> codigoUnidad = 11111111;
         $unidad1 -> Responsable = "Doc Responsable";
@@ -93,6 +93,5 @@ class UnidadSeeder extends Seeder
         $dependencia5 -> idunidadPadre = 2;
         $dependencia5 -> idunidadHijo = 6;
         $dependencia5 -> save();
-
     }
 }
