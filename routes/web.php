@@ -4,6 +4,8 @@ use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
+use App\Http\Controllers\DependenciaUnidadController;
+use App\Models\Dependencia;
 
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
@@ -33,7 +35,20 @@ Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->na
 
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
 
+Route::get('/unidad/dependencia/{nivel}',[DependenciaUnidadController::class, 'buscar'])->name('dependencia.buscar');
+
+Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->name('unidad.edit');
+
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
+
+Route::put('/Editar_unidad/{unidad}',[registroUnidadesController::class, 'update'])->name('unidad.update');
+
+Route::put('/Visualizar_unidad/{unidad}',[registroUnidadesController::class, 'updateEstado'])->name('unidad.updateEstado');
+
+Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEstado'])->name('unidad.habilitar');
+
+Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
+
 //prueba de encabezado
 
 
@@ -76,6 +91,10 @@ Route::post('/registro', [RegistroController::class, 'store'])->name('registro.s
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
 Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create');
     
+Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');
+
 Route::get('/materia', materiaController::class);
 
 
