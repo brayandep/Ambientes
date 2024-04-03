@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+<<<<<<< HEAD
         Schema::create('tipo_ambientes', function ($table) {
             $table->id();
             //$table->unsignedBigInteger('id_ambientes');
@@ -71,5 +72,8 @@ class DatabaseSeeder extends Seeder
             $table->timestamps();
         });
         
+=======
+        $this -> call(UnidadSeeder::class);
+>>>>>>> brayan2
     }
 }

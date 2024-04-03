@@ -2,67 +2,63 @@
 @section('links')
     <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}">
 @endsection
-@section('titulo', 'Registrar unidad')
+@section('titulo', 'Editar unidad')
 @section('contenido')
         <div class="Navegacion-contenido">
             <div class="Navegacion">
-            Inicio > Gestion de unidades > Registro de unidad
+            Inicio > Gestion de unidades > Editar unidad
             </div>
         </div>
         <div class="registro-contenido">
             <div class=registro>
-                <form action="{{route('unidad.store')}}" method="POST">
+                <form action="{{route('unidad.update', $unidad)}}" method="POST">
                     @csrf
+                    @method('put')
                     <div class="div1Label">
-                            <h1 class=Titulo><i class="fas fa-building"></i> Registro de Unidad</h1>
-                            <div class="seleccion">
-                                <label class="titulo" for="UnidadHabilitada">Habilitado:</label>
-                                <select class="imput" id="UnidadHabilitada" name="UnidadHabilitada">
-                                    <option value="1">Si</option> 
-                                    <option value="2">No</option> 
-                                </select>
-                            </div>
+                            <h1 class=Titulo><i class="fas fa-building"></i> Editar Unidad</h1>
+                    
                             <label class="titulo"for="nombreUnidad">Nombre de la Unidad: </label>
-                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{old('nombreUnidad')}}">
+                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{$unidad->nombreUnidad}}">
                             @error('nombreUnidad')
                                 <span>*{{$message}}</span>
                             @enderror
                             
                             <label class="titulo" for="codigoUnidad">Codigo: </label>
-                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="8" maxlength="8" autocomplete="off" value="{{old('codigoUnidad')}}">
+                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="8" maxlength="8" autocomplete="off" value="{{$unidad->codigoUnidad}}"disabled>
                             @error('codigoUnidad')
                                 <span>*{{$message}}</span>
                             @enderror
 
                             <label class="titulo"for="Responsable">Responsable: </label>
-                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad" required maxlength="40" autocomplete="off" value="{{old('Responsable')}}">
+                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad" required maxlength="40" autocomplete="off" value="{{$unidad->Responsable}}">
                             @error('Responsable')
                                 <span>*{{$message}}</span>
                             @enderror
                     </div>
                     <div class="div2Seleccion">
-                            <div class="seleccion">
-                                <label class="titulo" for="Nivel">Nivel:</label>
-                                <select class="imput" id="Nivel" name="Nivel" onchange="cargarDependencias(this.value)">
-                                    <!-- Opciones de nivel aqu� 
-                                    <option selected>Seleccione un nivel</option>-->
-                                    <option value="">seleccione el nivel</option> 
-                                    <option value="0">0  Facultad</option>
-                                    <option value="1">1  Decanato</option> 
-                                    <option value="2">2  Departamento</option> 
-                                    <option value="3">3  laboratorio</option> 
-                                </select>
-                            </div>
-            
+                        <div class="seleccion">
+                            <label class="titulo" for="Nivel">Nivel:</label>
+                            <select class="imput" id="Nivel" name="Nivel" disabled>
+                               
+                               
+                               @if ($unidad->Nivel == 1)
+                                <option selected value="1">Decanato</option>
+                                @elseif ($unidad->Nivel == 2)
+                                    <option selected value="2">Departamento</option>
+                                @elseif ($unidad->Nivel == 3)
+                                    <option selected value="3">Laboratorio</option>
+                                @endif
+                               
+                            </select>
+                        </div>
                         @error('Nivel')
                                 <span>*{{$message}}</span>
                         @enderror
                         <div class="seleccion">
                             <label class="titulo" for="Dependencia">Dependencia:</label>
-                            <select class="imput" id="Dependencia" name="Dependencia" >
-                                <!-- Opciones de dependeia aqu� -->
-                                <option value="">Seleccione la dependencia</option>
-
+                            <select class="imput" id="Dependencia" name="Dependencia" value="{{$unidad->Dependencia}}"disabled>
+                                
+                               
                             </select>
                         </div>
                         @error('Dependencia')
@@ -71,7 +67,7 @@
                     </div>
                     <div class="div3Botones">
                         <button type="button" class= "cancelar" onclick="CancelarRegU()">Cancelar</button>
-                        <button type="submit" class="registrar"> Registrar</button>
+                        <button type="submit" class="registrar"> Actualizar</button>
                     </div>
                 </form>
             </div>

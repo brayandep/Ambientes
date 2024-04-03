@@ -62,9 +62,32 @@
                             </li>
                         </ul>
                     </nav>
-                    <li>
-                        <p><i class='fas fa-clipboard'></i> Solicitar Reserva</p>
+                    <li onclick="gesReserva()">
+                        <p><i class='fas fa-clipboard'></i> Gestionar reserva</p>
+
+                    
                     </li>
+                    <nav class="subMenu" id="sub3">
+                        <ul>
+                            <li>
+                                <a href='{{ route('solicitud.create') }}'><i class="fas fa-building"></i> Solicitar reserva</a>
+                            </li>
+                            <li>
+                                <a href='{{ route('VerSolicitud') }}'><i class='fas fa-clipboard'></i> Ver mis solicitudes</a>
+                            </li>
+                       <!-- <li>
+                                <a href="#"><i class='fas fa-book'></i> Registrar Materia</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-user-group"></i> Registrar Grupo</a>
+                            </li>-->
+                        </ul>
+                    </nav>
+
+
+
+
+                    
                 </ul>
             </nav>
         </div>
