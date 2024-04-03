@@ -52,7 +52,7 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="boton">
-                                            <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }}>
+                                            <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }} onchange="this.form.submit()">
                                             <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
                                         </div>
                                     </form>

@@ -23,11 +23,14 @@ class EstadoAmbienteController extends Controller
     }
 
     public function cambiarEstado(Request $request, $id)
-    {
+{
     $ambiente = Ambiente::find($id);
-    $ambiente->estadoAmbiente = $request->estado == 1 ? 0 : 1;
+    
+    // Cambiar el estado de 1 a 0 y viceversa
+    $ambiente->estadoAmbiente = $ambiente->estadoAmbiente == 1 ? 0 : 1;
+    
     $ambiente->save();
 
     return redirect()->back()->with('success', 'Estado del ambiente actualizado correctamente');
-    }
+}
 }
