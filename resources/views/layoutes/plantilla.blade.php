@@ -29,10 +29,10 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="#"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
+                                <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
-                                <a href="#"><i class='fas fa-pen-to-square'></i> Editar Informacion de ambiente</a>
+                                <a href="{{ route('AmbientesRegistrados') }}"><i class="fa-solid fa-rectangle-list"></i> Ver Informacion de ambiente</a>
                             </li>
                         </ul>
                     </nav>
@@ -62,9 +62,32 @@
                             </li>
                         </ul>
                     </nav>
-                    <li>
-                        <p><i class='fas fa-clipboard'></i> Solicitar Reserva</p>
+                    <li onclick="gesReserva()">
+                        <p><i class='fas fa-clipboard'></i> Gestionar reserva</p>
+
+                    
                     </li>
+                    <nav class="subMenu" id="sub3">
+                        <ul>
+                            <li>
+                                <a href='{{ route('solicitud.create') }}'><i class="fas fa-building"></i> Solicitar reserva</a>
+                            </li>
+                            <li>
+                                <a href='{{ route('VerSolicitud') }}'><i class='fas fa-clipboard'></i> Ver mis solicitudes</a>
+                            </li>
+                       <!-- <li>
+                                <a href="#"><i class='fas fa-book'></i> Registrar Materia</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fas fa-user-group"></i> Registrar Grupo</a>
+                            </li>-->
+                        </ul>
+                    </nav>
+
+
+
+
+                    
                 </ul>
             </nav>
         </div>

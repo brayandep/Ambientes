@@ -10,54 +10,47 @@
 
 @section('contenido')
 
-<h2 class="titulo">Formulario de Solicitud</h2>
-<div class="container">
- <form class="container" method="POST" action="{{ route('solicitud.store') }}">
+
+
+<h2 class="titulo">Editar Solicitud</h2>
+<div >
+ <form class="container2" method="POST" action="{{ route('solicitud.update',$solicitud) }}">
 
          @csrf <!-- Incluye el campo csrf aquí -->
+         @method('put')
          <div class="izq">
-         <div>
-            <label class="text" for="nro_aula">Usuario:</label><br>
-             <select class="input" id="usuario" name="usuario">
-                 <option>Selecciona un usuario </option>
-                 @foreach($usuarios as $usuario)
-                   <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
-                 @endforeach
-                  
-               </select>
-         </div>
-            
+             <label class="text" for="usuario">Usuario:</label><br>
+             <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario" required>
              <br>
              <br>
              <br>
              <div>
                  <label class="text" for="nro_aula">Número de Aula:</label><br>
-                 <input class="input" type="text" id="nro_aula" name="nro_aula" required>
+                 <input class="input" type="text" id="nro_aula" name="nro_aula" value="{{$solicitud->nro_aula}}" required>
              </div>
              <br>
              <br>
              <div>
                  <label class="text" for="materia">Materia:</label><br>
-                 <input class="input" type="text" id="materia" name="materia" required>
+                 <input class="input" type="text" id="materia" name="materia" value="{{$solicitud->materia}}" required>
              </div>
-
              <br>
              <br>
              <div>
                 <label class="text" for="horario">Horario:</label><br>
-                <input class="input" type="text" id="horario" name="horario" placeholder="HH:MM - HH:MM" required>
+                <input class="input" type="text" id="horario" name="horario" placeholder="HH:MM - HH:MM"  value="{{$solicitud->horario}}"required>
             </div>
          </div>
          <div class="der">
              <div>
                  <label for="grupo">Grupo:</label><br>
-                 <input class="input" type="text" id="grupo" name="grupo" required>
+                 <input class="input" type="text" id="grupo" name="grupo" value="{{$solicitud->grupo}}" required>
              </div>
              <br>
              <br>
              <div>
                  <label class="text" for="motivo">Motivo:</label><br>
-                 <select class="input" id="motivo" name="motivo" required>
+                 <select class="input" id="motivo" name="motivo" value="{{$solicitud->motivo}}" required>
                      <option value="Clase">Clase</option>
                      <option value="Examen">Examen</option>
                      <option value="Otro">Otro</option>
@@ -67,15 +60,16 @@
              <br>
              <div>
                  <label class="text" for="fecha">Fecha:</label><br>
-                 <input class="input" type="date" id="fecha" name="fecha" required>
+                 <input class="input" type="date" id="fecha" name="fecha"  value="{{$solicitud->fecha}}" required>
              </div>
              <br>
             
              <br>
          </div>
-         <button class="boton" type="submit">Enviar Solicitud</button>   
+         <button class="boton" type="submit">Actualizar Solicitud</button>   
      </form>  
 </div>    
+
 @endsection
 
 

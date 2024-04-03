@@ -1,6 +1,10 @@
 const sub1 = document.getElementById("sub1");
 const sub2 = document.getElementById("sub2");
+<<<<<<< HEAD
 const subMateria = document.getElementById("subMateria");
+=======
+const sub3 = document.getElementById("sub3");
+>>>>>>> brayan2
 const btnMenu = document.getElementById("btnMenu");
 const menu = document.getElementById("menu");
 
@@ -24,6 +28,15 @@ function gesUnidad(){
         //btnPanelUsr.classList.add('seleccionado');
     } else {
         sub2.style.display = 'none';
+        //btnPanelUsr.classList.remove('seleccionado');
+    }
+}
+function gesReserva(){
+    if (sub3.style.display === 'none' || sub3.style.display === '') {
+        sub3.style.display = 'flex';
+        //btnPanelUsr.classList.add('seleccionado');
+    } else {
+        sub3.style.display = 'none';
         //btnPanelUsr.classList.remove('seleccionado');
     }
 }

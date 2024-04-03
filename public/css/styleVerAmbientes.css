@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+}
+
+.Navegacion-contenido-ver {
+  display: flex;
+  justify-content: center;
+}
+
+.Navegacion-ver {
+  height: 4%;
+  margin-top: 5px;
+  width: 50%;
+  font-size: 14px;
+  color: #0b2c37; /* Color del texto */
+}
+
+.Titulo {
+  margin-top: 20px; /* Agrega espaciado hacia abajo */
+}
+
+.ver-contenido {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  height: 75%;
+  position: relative;
+}
+
+/* Visualizar unidades */
+.visualizar-ambiente {
+  height: 73%;
+  padding: 5px;
+  width: 70%;
+}
+
+/* Estilos de la tabla */
+.table-responsive {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto; /* Permite desplazamiento horizontal en dispositivos pequeños */
+}
+
+.tabla-ver {
+  background-color: #AE7791; /* Color de fondo de la tabla */
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 20px; 
+}
+
+.tabla-ver th {
+  background-color: #AE7791; /* Color de fondo de las columnas en la cabecera */
+  color: #0b2c37; /* Color del texto en la cabecera */
+}
+
+.tabla-ver td {
+  background-color: #EBEBEB; /* Color de fondo de las columnas */
+  color: #0b2c37; /* Color del texto */
+  padding: 5px;
+}
+
+.EditHab {
+  width: 150%;
+  display: flex;
+  justify-content: center;
+}
+
+.EditHab button {
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.accion i {
+  background-color: none;
+  font-size: 20px;
+}
+
+/* Switch */
+.boton {
+  margin: 3px;
+  margin-left: 20px;
+}
+
+.lbl-switch {
+  display: inline-block;
+  width: 48px;
+  height: 22px;
+  background: #aaa;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.boton input:checked + .lbl-switch {
+  background: #AE7791;
+}
+
+.lbl-switch:after {
+  position: absolute;
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: #f5f6f7;
+  border-radius: 100px;
+  top: 3px;
+  left: 3px;
+  transition: 0.2s;
+}
+
+.boton input:checked + .lbl-switch:after {
+  left: 28px;
+}
+
+.boton input {
+  display: none;
+}
