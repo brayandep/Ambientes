@@ -12,8 +12,8 @@ class registroUnidadesController extends Controller
     public function store(Request $request){
         
         $request -> validate([
-            'nombreUnidad' => 'required|max:40|regex:/^[a-zA-Z\s]+$/|unique:unidades,nombreUnidad',
-            'codigoUnidad' => 'required|digits:8|numeric|unique:unidades,codigoUnidad',
+            'nombreUnidad' => 'required|max:50|regex:/^[a-zA-Z\s]+$/|unique:unidades,nombreUnidad',
+            'codigoUnidad' => 'required|digits:6|numeric|unique:unidades,codigoUnidad',
             'Responsable' => 'required|max:40|regex:/^[a-zA-Z\s]+$/',
             'Nivel' => 'required',
             'Dependencia' => 'required',
