@@ -1,6 +1,6 @@
 
-h2{
-  font-size: 30px;
+.ambienteTitulo{
+  font-size: 24px;
 }
 
 .content-wrapper {
@@ -48,9 +48,18 @@ h2{
   }
   #unidad{
     margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+    
   }
   #tipo-ambiente{
     margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+  }
+
+  .selectAmbiente{
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #EBEBEB;
   }
 
   #lunes.columna,
