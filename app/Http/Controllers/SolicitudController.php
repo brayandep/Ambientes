@@ -17,8 +17,8 @@ class SolicitudController extends Controller
     {
         $usuarios = Usuario::all();
         $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
-      //  $usuarios = Usuario::all();;
-  return view('SolicitudAmbiente', compact( 'usuarios'));
+        //  $usuarios = Usuario::all();;
+        return view('SolicitudAmbiente', compact( 'usuarios'));
     }
 
     public function store(Request $request)

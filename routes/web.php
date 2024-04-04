@@ -13,6 +13,8 @@ use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DependenciaUnidadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +36,7 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
+
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
@@ -48,10 +51,6 @@ Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'
 
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
-
 //rutas de materia
 Route::get('materia', [materiaController::class, 'show'])->name('materia.show');
 Route::get('materia/registrar', [materiaController::class, 'create'])->name('materia.reg');
@@ -63,6 +62,7 @@ Route::put('materia/{materia}', [materiaController::class, 'update'])->name('mat
 Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
+
 Route::resource('/registro', AmbienteController::class);
 
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
