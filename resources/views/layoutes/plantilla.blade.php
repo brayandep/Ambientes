@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     @yield('links')
     <title>@yield('titulo')</title>
 </head>
@@ -28,10 +29,10 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="#"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
+                                <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
-                                <a href="#"><i class='fas fa-pen-to-square'></i> Editar Informacion de ambiente</a>
+                                <a href="{{ route('AmbientesRegistrados') }}"><i class="fa-solid fa-rectangle-list"></i> Ver Informacion de ambiente</a>
                             </li>
                         </ul>
                     </nav>
@@ -46,6 +47,34 @@
                             <li>
                                 <a href='{{ route('visualizar_unidad') }}'><i class='fas fa-clipboard'></i> Visualizar unidad</a>
                             </li>
+                        </ul>
+                    </nav>
+                    <li onclick="gesMateria()">
+                        <p><i class='fas fa-clipboard'></i> Gestionar Materia</p>
+                    </li>
+                    <nav class="subMenu" id="subMateria">
+                        <ul>
+                            <li>
+                                <a href='{{ route('materia.reg') }}'><i class="fas fa-book"></i> Registrar Materia</a>
+                            </li>
+                            <li>
+                                <a href='{{ route('materia.show') }}'><i class='fas fa-rectangle-list'></i> Lista de Materias</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <li onclick="gesReserva()">
+                        <p><i class='fas fa-clipboard'></i> Gestionar reserva</p>
+
+                    
+                    </li>
+                    <nav class="subMenu" id="sub3">
+                        <ul>
+                            <li>
+                                <a href='{{ route('solicitud.create') }}'><i class="fas fa-building"></i> Solicitar reserva</a>
+                            </li>
+                            <li>
+                                <a href='{{ route('VerSolicitud') }}'><i class='fas fa-clipboard'></i> Ver mis solicitudes</a>
+                            </li>
                        <!-- <li>
                                 <a href="#"><i class='fas fa-book'></i> Registrar Materia</a>
                             </li>
@@ -54,9 +83,11 @@
                             </li>-->
                         </ul>
                     </nav>
-                    <li>
-                        <p><i class='fas fa-clipboard'></i> Solicitar Reserva</p>
-                    </li>
+
+
+
+
+                    
                 </ul>
             </nav>
         </div>

@@ -30,7 +30,8 @@ class registroUnidadesController extends Controller
         $unidad ->save();
 
         // Aquí asumimos que en el formulario se está enviando el 'id' de la unidad padre en el campo 'Dependencia'
-     // También se debe verificar que cuando el nivel es 0, lo que significa que es la facultad, no debería tener una dependencia.
+        // También se debe verificar que cuando el nivel es 0, lo que significa que es la facultad, no debería tener una dependencia.
+        
         if ($request->filled('Dependencia') && $request->Nivel > 0) {
             // Crear o actualizar la entrada en la tabla 'dependencias'
             $dependencia = new Dependencia;
