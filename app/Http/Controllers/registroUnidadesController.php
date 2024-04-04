@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Unidad;
 use App\Models\Dependencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class registroUnidadesController extends Controller
 {
@@ -71,16 +72,40 @@ class registroUnidadesController extends Controller
         $unidad->save();
         return redirect()->route('visualizar_unidad');
     }
-    public function habilitarEstado(Request $request, Unidad $unidad){
-        $unidad->UnidadHabilitada = $request->has('UnidadHabilitada') ? 1 : 0;
+    /*public function habilitarEstado(Request $request, Unidad $unidad){
         $unidad->save();
         return back(); 
+    }*/
+    //deshabilitar de forma jerarquica
+    public function habilitarEstado(Request $request, $id) {
+        // Iniciar una transacción para asegurarse de que todas las operaciones sean atómicas
+        DB::transaction(function () use ($request, $id) {
+            // Asegúrate de que el formulario ha sido enviado
+            if ($request->input('form_submitted')) {
+                // Encuentra la unidad usando el ID
+                $unidad = Unidad::with('unidadesHijas')->findOrFail($id);
+    
+                // Determina el nuevo estado de habilitación
+                // El checkbox marcado enviará "1", de lo contrario, asume que es "0"
+                $estadoHabilitado = $request->has('UnidadHabilitada') ? 1 : 0;
+    
+                // Actualiza la unidad y sus hijas
+                $this->actualizarEstadoHabilitado($unidad, $estadoHabilitado);
+            }
+        });
+    
+        // Redireccionar a la página anterior con un mensaje de éxito
+        return back()->with('success', 'Estado actualizado correctamente.');
     }
-    public function toggleEstado(Request $request, $unidadId){
-        $unidad = Unidad::findOrFail($unidadId);
-        $unidad->UnidadHabilitada = $request->has('UnidadHabilitada') ? 1 : 0;
+    // Asegúrate de que la función actualizarEstadoHabilitado sea accesible
+    private function actualizarEstadoHabilitado($unidad, $estadoHabilitado) {
+        $unidad->UnidadHabilitada = $estadoHabilitado;
         $unidad->save();
-
-        return back(); // Redirige de vuelta a la página anterior
+    
+        foreach ($unidad->unidadesHijas as $unidadHija) {
+            $this->actualizarEstadoHabilitado($unidadHija, $estadoHabilitado);
+        }
     }
+    
+    
 }

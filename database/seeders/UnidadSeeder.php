@@ -26,7 +26,7 @@ class UnidadSeeder extends Seeder
 
         $unidad2 = new Unidad();
         $unidad2 -> nombreUnidad = "Decano de FCyt";
-        $unidad2 -> codigoUnidad = 12111111;
+        $unidad2 -> codigoUnidad = 12222222;
         $unidad2 -> Responsable = "Ing MARCELO TORREJON";
         $unidad2 -> Nivel = 1;
         $unidad2 -> Dependencia = 0;

@@ -50,6 +50,7 @@
                                     <form action="{{ route('unidad.habilitar', $unidad->id) }}" method="post">
                                         @csrf
                                         @method('put')
+                                        <input type="hidden" name="form_submitted" value="1">
                                         <div class="boton">
                                             <input type="checkbox" id="btn-switch-{{ $unidad->id }}" name="UnidadHabilitada" {{ $unidad->UnidadHabilitada == 1 ? 'checked' : '' }} onchange="this.form.submit()">
                                             <label for="btn-switch-{{ $unidad->id }}" class="lbl-switch"></label>
