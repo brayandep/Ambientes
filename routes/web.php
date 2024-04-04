@@ -55,6 +55,7 @@ Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggl
 Route::get('/registro', function () {
     return view('registro');
 })->name('registro');
+
 //registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
@@ -68,9 +69,7 @@ Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destr
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
 Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create'); 
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
+
 Route::get('/materia', materiaController::class);
 
 
