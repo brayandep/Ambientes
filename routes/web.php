@@ -42,7 +42,7 @@ Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('Am
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
-Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
+//Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
 
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
