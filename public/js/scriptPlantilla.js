@@ -1,10 +1,7 @@
 const sub1 = document.getElementById("sub1");
 const sub2 = document.getElementById("sub2");
-<<<<<<< HEAD
 const subMateria = document.getElementById("subMateria");
-=======
 const sub3 = document.getElementById("sub3");
->>>>>>> brayan2
 const btnMenu = document.getElementById("btnMenu");
 const menu = document.getElementById("menu");
 

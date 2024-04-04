@@ -96,6 +96,4 @@ Route::post('/registro', [RegistroController::class, 'store'])->name('registro.s
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
 Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create'); 
 
-Route::get('/materia', materiaController::class);
-
 
