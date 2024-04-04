@@ -36,6 +36,13 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
+Route::resource('/registro', AmbienteController::class);
+
+Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
+
+Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+
+Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
 
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
@@ -70,13 +77,6 @@ Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
 
-Route::resource('/registro', AmbienteController::class);
-
-Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
-
-Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
-
-Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
 
 //rutas de grupo
 Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->name('grupo.create');

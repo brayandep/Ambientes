@@ -17,7 +17,7 @@ class Unidad extends Model
     public function unidadPadre(){
         return $this->belongsTo(Unidad::class, 'Dependencia', 'id');
     }
-
+    
     /*public function unidadesHijas(){
         return $this->hasMany('App\Models\Unidad');
     }*/
