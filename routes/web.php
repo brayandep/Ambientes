@@ -51,6 +51,13 @@ Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'
 
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 
+Route::put('/Editar_unidad/{unidad}',[registroUnidadesController::class, 'update'])->name('unidad.update');
+
+Route::put('/Visualizar_unidad/{unidad}',[registroUnidadesController::class, 'updateEstado'])->name('unidad.updateEstado');
+
+Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEstado'])->name('unidad.habilitar');
+
+Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
 //rutas de materia
 Route::get('materia', [materiaController::class, 'show'])->name('materia.show');
 Route::get('materia/registrar', [materiaController::class, 'create'])->name('materia.reg');
@@ -75,3 +82,20 @@ Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('uni
 Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->name('grupo.create');
 Route::put('grupo/{grupo}', [grupoController::class, 'store'])->name('grupo.store');
 //termina rutas de grupo
+//registrar solicitudes de ambientes
+Route::get('/Solicitud', function () {
+    return view('SolicitudAmbiente');
+})->name('SolicitudAmbiente');
+//versolicitudes
+Route::get('/Versolicitudes', [SolicitudController::class, 'index'])->name('VerSolicitud');
+Route::get('/Versolicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->name('solicitud.edit');
+Route::put('/Versolicitudes/{solicitud}', [SolicitudController::class, 'update'])->name('solicitud.update');
+Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destroy'])->name('solicitud.destroy');
+//envia datos
+Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
+Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
+Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create'); 
+
+Route::get('/materia', materiaController::class);
+
+
