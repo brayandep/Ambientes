@@ -47,10 +47,10 @@
                                     <!-- Opciones de nivel aqu� 
                                     <option selected>Seleccione un nivel</option>-->
                                     <option value="">seleccione el nivel</option> 
-                                    <option value="0">0  Facultad</option>
-                                    <option value="1">1  Decanato</option> 
-                                    <option value="2">2  Departamento</option> 
-                                    <option value="3">3  laboratorio</option> 
+                                    <option value="1">Facultad</option>
+                                    <option value="2">Decanato</option> 
+                                    <option value="3">Departamento</option> 
+                                    <option value="4">laboratorio</option> 
                                 </select>
                             </div>
             

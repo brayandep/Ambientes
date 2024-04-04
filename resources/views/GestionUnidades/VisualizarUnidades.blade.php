@@ -31,13 +31,13 @@
                                 <p>{{$unidad->nombreUnidad}}</p>
                                 <p>{{$unidad->codigoUnidad}}</p>
                                 <p>{{$unidad->Responsable}}</p>
-                                    @if ($unidad->Nivel == 0)
+                                    @if ($unidad->Nivel == 1)
                                         <p>Facultad</p>
-                                        @elseif ($unidad->Nivel == 1)
-                                        <p>Decanato</p>
                                         @elseif ($unidad->Nivel == 2)
-                                        <p>Departamento</p>
+                                        <p>Decanato</p>
                                         @elseif ($unidad->Nivel == 3)
+                                        <p>Departamento</p>
+                                        @elseif ($unidad->Nivel == 4)
                                         <p>Laboratorio</p>
                                     @endif
                                 <p>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</p>
