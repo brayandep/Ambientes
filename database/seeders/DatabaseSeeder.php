@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this -> call(UnidadSeeder::class);
         $this -> call(MateriaSeeder::class);
+        $this -> call(AmbienteSeeder::class);
     }
 }
