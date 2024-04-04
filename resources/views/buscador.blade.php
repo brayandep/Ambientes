@@ -1,6 +1,4 @@
 @extends('layoutes.plantilla')
-
-<head>
    
 @section('estilos')
     <style>
@@ -68,7 +66,7 @@
         }
     </style>
     @endsection
-</head>
+
 @section('cuerpo')
 <body>
     
@@ -132,8 +130,9 @@
 
     </form>
     </div>
-    @endsection
-    @section('script')   
+@endsection
+    
+@section('script')   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
