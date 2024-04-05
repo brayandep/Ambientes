@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
+use App\Models\Ambiente;
 use App\Models\Models\Usuario;
 class SolicitudController extends Controller
 {
@@ -15,10 +16,17 @@ class SolicitudController extends Controller
     }
     public function create()
     {
-        $usuarios = Usuario::all();
-        $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
-        //  $usuarios = Usuario::all();;
-        return view('SolicitudAmbiente', compact( 'usuarios'));
+        
+        
+$usuarios = Usuario::all();
+$solicitudes = Solicitud::all(); 
+$ambientes = Ambiente::all();;
+// Obtén todas las solicitudes desde el modelo Solicitud
+//  $usuarios = Usuario::all();;
+return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes'));
+
+
+
     }
 
     public function store(Request $request)

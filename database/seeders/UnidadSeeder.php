@@ -17,19 +17,19 @@ class UnidadSeeder extends Seeder
     {
        $unidad1 = new Unidad();
         $unidad1 -> nombreUnidad = "Consejo facultativo de la FCyT";
-        $unidad1 -> codigoUnidad = 11111111;
+        $unidad1 -> codigoUnidad = 111111;
         $unidad1 -> Responsable = "Doc Responsable";
-        $unidad1 -> Nivel = 0;
+        $unidad1 -> Nivel = 1;
         $unidad1 -> Dependencia = 0;
         $unidad1 -> UnidadHabilitada = 1;
         $unidad1 -> save();
 
         $unidad2 = new Unidad();
         $unidad2 -> nombreUnidad = "Decano de FCyt";
-        $unidad2 -> codigoUnidad = 12111111;
+        $unidad2 -> codigoUnidad = 122222;
         $unidad2 -> Responsable = "Ing MARCELO TORREJON";
-        $unidad2 -> Nivel = 1;
-        $unidad2 -> Dependencia = 0;
+        $unidad2 -> Nivel = 2;
+        $unidad2 -> Dependencia = 1;
         $unidad2 -> UnidadHabilitada = 1;
         $unidad2 -> save();
 
@@ -40,10 +40,10 @@ class UnidadSeeder extends Seeder
 
         $unidad3 = new Unidad();
         $unidad3 -> nombreUnidad = "Depto de Informatica";
-        $unidad3 -> codigoUnidad = 345345000;
+        $unidad3 -> codigoUnidad = 345345;
         $unidad3 -> Responsable = "Lic BORIS CALANCHA";
-        $unidad3 -> Nivel = 2;
-        $unidad3 -> Dependencia = 1;
+        $unidad3 -> Nivel = 3;
+        $unidad3 -> Dependencia = 2;
         $unidad3 -> UnidadHabilitada = 1;
         $unidad3 -> save();
 
@@ -54,10 +54,10 @@ class UnidadSeeder extends Seeder
 
         $unidad4 = new Unidad();
         $unidad4 -> nombreUnidad = "Depto de Industrial";
-        $unidad4 -> codigoUnidad = 31834100;
+        $unidad4 -> codigoUnidad = 318341;
         $unidad4 -> Responsable = "Ing MIGUEL GUTIERREZ";
-        $unidad4 -> Nivel = 2;
-        $unidad4 -> Dependencia = 1;
+        $unidad4 -> Nivel = 3;
+        $unidad4 -> Dependencia = 2;
         $unidad4 -> UnidadHabilitada = 1;
         $unidad4 -> save();
 
@@ -68,10 +68,10 @@ class UnidadSeeder extends Seeder
 
         $unidad5 = new Unidad();
         $unidad5 -> nombreUnidad = "Depto de Matematica";
-        $unidad5 -> codigoUnidad = 31000000;
+        $unidad5 -> codigoUnidad = 310000;
         $unidad5 -> Responsable = "Ing ALFREDO DELGADILLO";
-        $unidad5 -> Nivel = 2;
-        $unidad5 -> Dependencia = 1;
+        $unidad5 -> Nivel = 3;
+        $unidad5 -> Dependencia = 2;
         $unidad5 -> UnidadHabilitada = 1;
         $unidad5 -> save();
 
@@ -82,10 +82,10 @@ class UnidadSeeder extends Seeder
 
         $unidad6 = new Unidad();
         $unidad6 -> nombreUnidad = "Depto de Sistemas";
-        $unidad6 -> codigoUnidad = 34434500;
+        $unidad6 -> codigoUnidad = 344345;
         $unidad6 -> Responsable = "Ing RICHARD AYAROA";
-        $unidad6 -> Nivel = 2;
-        $unidad6 -> Dependencia = 1;
+        $unidad6 -> Nivel = 3;
+        $unidad6 -> Dependencia = 2;
         $unidad6 -> UnidadHabilitada = 1;
         $unidad6 -> save();
 

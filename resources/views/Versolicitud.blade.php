@@ -47,19 +47,21 @@
                 <div class="botones-container">
                     <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
                     
-                        <button  id="boton-cancelar" class="botones" type="submit">Cancelar</button>
+                       
+                    <button  id="boton-cancelar" class="botones" type="submit">Cancelar</button>
+                    <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
+                <div id="modal-confirmacion" class="modal">
 
-                    <div id="modal-confirmacion" class="modal">
-                        <div class="modal-contenido">
+                    <div class="modal-contenido">
 
-                            <p>¿Está seguro de que desea eliminar?</p>
-                            <button id="boton-salir" class="botones" type="button">Salir</button>
+                        <p>¿Está seguro de que desea eliminar?</p>
+                        <button id="boton-salir"  class="botones" type="button">Salir</button>
 
-                            <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                            <button id="boton-confirmar" class="botones" type="submit">Confirmar</button>
-                        </form>
+                       
+                            @csrf
+                            @method('DELETE')
+                        <button id="boton-confirmar" class="botones" type="submit">Confirmar</button>
+                    </form>
                         </div>
                     </div>
                 </div>

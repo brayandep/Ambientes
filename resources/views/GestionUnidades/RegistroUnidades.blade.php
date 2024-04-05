@@ -23,13 +23,13 @@
                                 </select>
                             </div>
                             <label class="titulo"for="nombreUnidad">Nombre de la Unidad: </label>
-                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{old('nombreUnidad')}}">
+                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="50" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{old('nombreUnidad')}}">
                             @error('nombreUnidad')
                                 <span>*{{$message}}</span>
                             @enderror
                             
                             <label class="titulo" for="codigoUnidad">Codigo: </label>
-                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="8" maxlength="8" autocomplete="off" value="{{old('codigoUnidad')}}">
+                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="6" maxlength="6" autocomplete="off" value="{{old('codigoUnidad')}}">
                             @error('codigoUnidad')
                                 <span>*{{$message}}</span>
                             @enderror
@@ -47,10 +47,10 @@
                                     <!-- Opciones de nivel aqu� 
                                     <option selected>Seleccione un nivel</option>-->
                                     <option value="">seleccione el nivel</option> 
-                                    <option value="0">0  Facultad</option>
-                                    <option value="1">1  Decanato</option> 
-                                    <option value="2">2  Departamento</option> 
-                                    <option value="3">3  laboratorio</option> 
+                                    <!--<option value="1">Facultad</option>-->
+                                    <option value="2">Decanato</option> 
+                                    <option value="3">Departamento</option> 
+                                    <option value="4">laboratorio</option> 
                                 </select>
                             </div>
             
