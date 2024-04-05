@@ -20,13 +20,18 @@
          @method('put')
          <div class="izq">
              <label class="text" for="usuario">Usuario:</label><br>
-             <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario" required>
+             <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario"  required disabled>
              <br>
              <br>
              <br>
              <div>
-                 <label class="text" for="nro_aula">Número de Aula:</label><br>
-                 <input class="input" type="text" id="nro_aula" name="nro_aula" value="{{$solicitud->nro_aula}}" required>
+                <select class="input"  id="nro_aula" name="nro_aula">
+                    <option</option>
+                    @foreach($ambientes as $ambiente)
+                      <option value="{{ $ambiente->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $ambiente->nombre }}</option>
+                    @endforeach
+                     
+                  </select>
              </div>
              <br>
              <br>
@@ -69,6 +74,7 @@
          <button class="boton" type="submit">Actualizar Solicitud</button>   
      </form>  
 </div>    
+
 
 @endsection
 
