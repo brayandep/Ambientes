@@ -1,4 +1,4 @@
 @extends('layoutes.plantilla')
 @section('contenido')
-   Pagina principal de Smaryte
+    pagina principal
 @endsection
