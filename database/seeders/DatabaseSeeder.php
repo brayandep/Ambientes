@@ -7,6 +7,7 @@ use App\Models\Unidad;
 use App\Models\TipoAmbiente;
 use App\Models\Ambiente;
 use App\Models\Equipo;
+use App\Models\Models\Usuario;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -149,6 +150,18 @@ class DatabaseSeeder extends Seeder
             'ambiente_id' => null,
             'nombreEquipo' => 'Pizarra',
             'estadoEquipo' => true,
+        ]);
+        Usuario::create([
+            'nombre' => 'brayan',
+            'contraseña'=> '123',
+        ]);
+        Usuario::create([
+            'nombre' => 'Lucas',
+            'contraseña'=> '123',
+        ]);
+        Usuario::create([
+            'nombre' => 'Orellana',
+            'contraseña'=> '123',
         ]);
         /*Unidad::create([
             'nombreUnidad' => 'Facultad',
