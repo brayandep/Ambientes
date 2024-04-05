@@ -57,8 +57,9 @@ return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes'));
     public function edit($id ){
         
         $solicitud = Solicitud::findOrFail($id);
+        $ambientes = Ambiente::all();;
        // return $solicitud;
-        return view('editSolicitud', compact('solicitud'));
+        return view('editSolicitud', compact('solicitud','ambientes'));
     }
     public function update(Request $request, Solicitud $solicitud)
 {
