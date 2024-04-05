@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   margin-top: 5px;
-  height: 75%;
   width: 100%;
   position: relative; 
 }
@@ -18,6 +17,10 @@
   width: 70%;
 }
 
+.visualizar-Materia{
+  width: 70%;
+}
+
 .tabla{
   background-color: #e2eaec;
   padding: 5px;
@@ -25,15 +28,22 @@
   font-size: 14px;
   flex-direction: column;
   display: flex;
-  
+  overflow: auto;
   
 }
+
+.contBotones{
+  min-width: 140px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
 .nomCol{
   background-color: #AE7791;
   padding: 7px;
   border-radius: 5px;
   color: #EBEBEB;
-  margin: 5px;
   width: 100%;
 }
 
@@ -43,9 +53,12 @@
   padding: 4px;
   margin-top: 7px;
   width: 100%;
+  gap: 5px;
+  min-width: 822px;
 }
 .fila p{
-  width: 16%;
+  min-width: 140px;
+  width: 30%;
   text-align: center;
   justify-content: center;
   display: flex;
@@ -53,12 +66,11 @@
 }
 
 .EditHab{
-  width: 20%;
+  
   display: flex;
   justify-content: center;
 }
 .EditHab button{
-  margin-right: 25px;
   cursor: pointer;
   padding: 5px;
   border-radius: 5px;
@@ -77,37 +89,9 @@
   margin: 5px;
   margin-right: 35px;
 }
+
+#columnaPeque{
+  min-width: 90px;
+  max-width: 90px;
+}
   
-  /* .lbl-switch {
-    display: inline-block;
-    width: 48px;
-    height: 22px;
-    background: #aaa;
-    border-radius: 100px;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .boton input:checked + .lbl-switch {
-    background: #AE7791;
-  }
-  
-  .lbl-switch:after {
-    position: absolute;
-    content: '';
-    width: 16px;
-    height: 16px;
-    background: #f5f6f7;
-    border-radius: 100px;
-    top: 3px;
-    left: 3px;
-    transition: 0.2s;
-  }
-  
-  .boton input:checked + .lbl-switch:after {
-    left: 28px;
-  }
-  
-  .boton input {
-    display: none;
-  } */

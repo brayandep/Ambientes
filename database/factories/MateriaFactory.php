@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Grupo;
 use App\Models\Materia;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -118,5 +119,14 @@ class MateriaFactory extends Factory
             'nivel'=> $this->faker->randomElement(['A','B','C','D','E','F','G','H','I','J']), 
             'cantGrupo' => $this->faker->randomElement([1,2,3,4,5])
         ];
+
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Materia $materia) {
+            // Crear los grupos asociados a la materia
+            Grupo::factory()->count($materia->cantidad_de_grupos)->create(['materia_id' => $materia->id]);
+        });
     }
 }
