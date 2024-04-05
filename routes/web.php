@@ -9,7 +9,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
 use App\Http\Controllers\DependenciaUnidadController;
 use App\Models\Dependencia;
-use Illuminate\Routing\Route as RoutingRoute;
 
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
@@ -92,7 +91,7 @@ Route::put('materia/{materia}', [materiaController::class, 'update'])->name('mat
 
 //rutas de grupo
 Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->name('grupo.create');
-Route::put('grupo/{grupo}', [grupoController::class, 'store'])->name('grupo.store');
+Route::put('grupo/{cantGrupo}', [grupoController::class, 'jhosemar'])->name('grupo.update');
 //termina rutas de grupo
 
 Route::get('/Registro', function () {
