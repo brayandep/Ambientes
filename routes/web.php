@@ -14,6 +14,8 @@ use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\grupoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,6 +89,11 @@ Route::post('materia', [materiaController::class, 'store'])->name('materia.store
 Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->name('materia.editar');
 Route::put('materia/{materia}', [materiaController::class, 'update'])->name('materia.update');
 //termina rutas de materia
+
+//rutas de grupo
+Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->name('grupo.create');
+Route::put('grupo/{grupo}', [grupoController::class, 'store'])->name('grupo.store');
+//termina rutas de grupo
 
 Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
