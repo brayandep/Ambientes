@@ -73,9 +73,9 @@
              <br>
              <br>
              <div>
-                 <label class="text" for="fecha">Fecha:</label><br>
-                 <input class="input" type="date" id="fecha" name="fecha" required>
-             </div>
+                <label class="text" for="fecha">Fecha:</label><br>
+                <input class="input" type="date" id="fecha" name="fecha" required>
+            </div>
              <br>
             
              <br>
@@ -83,6 +83,21 @@
          <button class="boton" type="submit">Enviar Solicitud</button>   
      </form>  
 </div>    
+
+
+<script>
+    var fechaInput = document.getElementById('fecha');
+    var hoy = new Date();
+    var mañana = new Date(hoy);
+    mañana.setDate(mañana.getDate() + 1); // Suma un día a la fecha actual
+
+    var año = mañana.getFullYear();
+    var mes = (mañana.getMonth() + 1).toString().padStart(2, '0');
+    var día = mañana.getDate().toString().padStart(2, '0');
+
+    var fechaMinima = año + '-' + mes + '-' + día;
+    fechaInput.setAttribute('min', fechaMinima);
+</script>
 @endsection
 
 
