@@ -39,6 +39,10 @@
                             <div class="EditHab">
                                 <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
                             </div>
+
+                            <div class="EditHab">
+                                <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';"><i class="fa-solid fa-user-group"></i></button>
+                            </div>
                         </div>
                     @endforeach
                 </div>

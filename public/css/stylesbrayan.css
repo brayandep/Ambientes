@@ -111,6 +111,9 @@ body {
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8%;
 }
 .container2{
   display: flex;
@@ -192,16 +195,22 @@ body {
   background-color: #F35D5D;
   border-radius: 5px;
   border: 0.5px solid black;
-  font-size: 20px;
+  font-size: 15px;
   margin-right: 10px;
   margin-left: 10px;
+  padding: 10px 20px;
+  margin: 10px;
 }
 .botonedit{
   color: #EBEBEB;
   background-color: #C384B2;
   border-radius: 5px;
   border: 0.5px solid black;
-  font-size: 20px;
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  margin: 10px;
 }
 .input2{
   border-radius: 15px;
@@ -211,4 +220,43 @@ body {
   margin-top: 30px;
   display: flex;
 
+}
+
+/* Estilos del modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+  background-color: white;
+  margin: 25% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+
+/* Estilos para el botón de cancelar */
+#boton-cancelar {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+/* Estilos para el botón de salir */
+
+
+/* Estilos para el botón de confirmar */
+#boton-confirmar {
+  background-color: #4caf50;
+  color: white;
 }

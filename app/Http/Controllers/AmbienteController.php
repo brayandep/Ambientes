@@ -29,7 +29,7 @@ class AmbienteController extends Controller
      */
     public function create()
     {
-        $unidades = Unidad::all();
+        $unidades = Unidad::where('UnidadHabilitada', 1)->get();
         $tipoAmbientes = TipoAmbiente::all();
         $equiposDisponibles = Equipo::distinct()->pluck('nombreEquipo')->toArray();
         $equiposSeleccionados = null;

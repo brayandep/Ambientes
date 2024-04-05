@@ -9,7 +9,7 @@
 @section('contenido')
 <main class="content-wrapper">
             <div class="container">
-            <h2 style="padding-bottom:20px" >{{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
+            <h2 class="ambienteTitulo" style="padding-bottom:20px" ><i class='fas fa-book'></i> {{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
                 <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
@@ -20,7 +20,7 @@
                     <label for="codigo">Código:</label>
                     <input type="text" id="codigo" name="codigo" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
                     <label for="unidad">Unidad:</label>
-                        <select id="unidad" name="unidad" style="width: 40%;">
+                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;">
                         <option value="">Selecciona una unidad</option>
                         @foreach($unidades as $unidad)
                           <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
@@ -41,7 +41,7 @@
                     <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                 
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
+                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
                     <option>Selecciona una unidad</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
@@ -81,7 +81,7 @@
     
                 <div class="form-group">
                     <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
-                    <select id="diasSemana" onchange="agregarColumna()" style="width: 20%;">
+                    <select class="selectAmbiente" id="diasSemana" onchange="agregarColumna()" style="width: 20%;">
     
                     <option value="">Añade un dia</option>
                     <option value="lunes">Lunes</option>
