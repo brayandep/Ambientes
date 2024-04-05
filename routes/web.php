@@ -33,9 +33,19 @@ Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
 
+<<<<<<< HEAD
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 /*
 */
+=======
+Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');
+
+Route::get('/index', function () {
+    return view('sliderBar');
+});
+>>>>>>> katherine
 
 
 
@@ -92,11 +102,16 @@ Route::put('materia/{materia}', [materiaController::class, 'update'])->name('mat
 Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
+
 Route::resource('/registro', AmbienteController::class);
 
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
+<<<<<<< HEAD
 //Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
 
+=======
+Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
+>>>>>>> katherine

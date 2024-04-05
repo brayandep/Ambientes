@@ -1,16 +1,21 @@
+<<<<<<< HEAD
 
 .ambienteTitulo{
   font-size: 24px;
+=======
+h2{
+  font-size: 30px;
+>>>>>>> katherine
 }
 
 .content-wrapper {
   
-  height: 100%;
+  height: auto;
   overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
 }
 
 .container {
-  max-width: 60%;
+  max-width: 70%;
   margin: 0px auto;
   padding: 20px;
 }
