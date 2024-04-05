@@ -173,11 +173,11 @@
                         <div class="horarios">
                         <label for="modalHoraInicio">Hora inicio:</label>
                         <input type="time" id="modalHoraInicio" name="modalHoraInicio" pattern="[0-9]{2}:[0-9]{2}">
-                        <label for="modalHoraFin" style="margin-left:30px">Hora fin:</label>
-                        <input type="time" id="modalHoraFin" name="modalHoraFin" style="margin-right:50px" pattern="[0-9]{2}:[0-9]{2}">
+                        <label for="modalHoraFin" >Hora fin:</label>
+                        <input type="time" id="modalHoraFin" name="modalHoraFin"pattern="[0-9]{2}:[0-9]{2}">
                         </div>
                         
-                        <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->
+                        <button type="button" id="modalAfceptar">Aceptar</button> <!-- Añade un id al botón -->
                         
                     </div>
                 </div>
