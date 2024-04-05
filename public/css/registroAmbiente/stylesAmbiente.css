@@ -288,3 +288,8 @@ h2{
   align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
   margin-top: 10px; /* Agrega un margen superior */
 }
+
+/*boton añadir */
+.btnAnadir{
+  background-color: #C384B2;
+}
