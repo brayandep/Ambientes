@@ -34,11 +34,7 @@ Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
 
-<<<<<<< HEAD
-Route::get('/', [HomeController::class, 'index'])->name('inicio');
-/*
-*/
-=======
+
 Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
@@ -46,7 +42,6 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('sliderBar');
 });
->>>>>>> katherine
 
 
 
@@ -115,9 +110,6 @@ Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('Am
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
-<<<<<<< HEAD
 //Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
 
-=======
 Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
->>>>>>> katherine
