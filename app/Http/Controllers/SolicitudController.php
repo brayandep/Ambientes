@@ -6,6 +6,7 @@ use App\Models\Ambiente;
 use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
 use App\Models\Models\Usuario;
+use App\Models\HorarioDisponible;
 class SolicitudController extends Controller
 {
     public function index()
@@ -20,9 +21,10 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();
         $solicitudes = Solicitud::all(); 
         $ambientes = Ambiente::all();;
+        $horarios = HorarioDisponible::all();;
         // Obtén todas las solicitudes desde el modelo Solicitud
       //  $usuarios = Usuario::all();;
-  return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes'));
+  return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes','horarios'));
     }
 
     public function store(Request $request)
