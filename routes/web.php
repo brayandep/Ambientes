@@ -21,7 +21,9 @@ use App\Http\Controllers\buscadorController;
 
 
 Route::post('/buscar-ambientes', [BuscadorController::class, 'buscarAmbientes'])->name('ambientes.buscar');
-
+Route::get('/buscar_ambientes', function () {
+    return view('buscador');
+})->name('buscar_ambientes');
 
 
 
@@ -48,6 +50,4 @@ Route::get('/gestion-reserva', function () {
     // Lógica para la gestión de reservas
 })->name('gestion_reserva');
 
-Route::get('/buscar_ambientes', function () {
-    return view('buscador');
-})->name('buscar_ambientes');
+

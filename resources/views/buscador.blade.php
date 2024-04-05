@@ -64,18 +64,28 @@
                 width: auto; /* Permitir que las celdas se ajusten automáticamente en pantallas pequeñas */
             }
         }
+        .busqueda-titulo{
+            margin-left: 50px;
+            padding: 30px;
+            cursor: auto !important; 
+        }
+        .titulo-resultados{
+            padding: 30px;
+            cursor: auto !important; 
+        }
     </style>
     @endsection
 
-@section('cuerpo')
+@section('contenido')
 <body>
     
     <div class="main-content">
         <div>
-                <h1>Buscador de Ambientes</h1>
+                
+                <h1 class="busqueda-titulo">Buscador de Ambientes</h1>
         </div>
       <form action="{{ route('ambientes.buscar') }}" method="POST">
-       Nombre del ambiente:
+      @csrf 
         <input type="text" name="nombre" placeholder="Nombre del ambiente" class="search-form">
         <select name="dia">
             <option value="">Día</option>
@@ -106,22 +116,36 @@
         </select>
         <input type="number" name="capacidad" placeholder="Capacidad">
         <button type="submit"class="buscar-btn">Buscar</button>
+        
         <div>
-        <h2>Resultados de la búsqueda:</h2>
+         <h1 class="titulo-resultados">Resultados de la búsqueda:</h1>
         <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Capacidad</th>
-                    <th>Equipos disponibles</th>
-                    <th>Día</th>
-                    <th>Fecha</th>
-                    <th>Rango de horario disponible</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                <!-- Aquí se mostrarán los resultados dinámicamente -->
-                <!-- Por ahora, puedes dejar esta parte vacía -->
+            @if ($sinDisponibilidad)
+                <p>No se encontraron ambientes disponibles para el día especificado.</p>
+            @else
+
+                @if(isset($ambientes) && count($ambientes) > 0)
+                            @foreach ($ambientes as $ambiente)
+                                <tr>
+                                    <td>{{ $ambiente->nombre }}</td>
+                                    <td>{{ $ambiente->capacidad }}</td>
+                                    <!-- Agrega más columnas según tus necesidades -->
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="2">No se encontraron resultados</td>
+                            </tr>
+                        @endif
+            @endif
             </tbody>
             </table>
         </div>
@@ -134,30 +158,7 @@
     
 @section('script')   
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menu-toggle');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-
-            // Función para cerrar el menú y restablecer el contenido cuando se hace clic en cualquier parte del documento
-            function closeMenuAndResetContent() {
-                dropdownMenu.classList.remove('active'); // Oculta el menú desplegable
-                document.body.classList.remove('menu-open'); // Elimina la clase para indicar que el menú está abierto
-            }
-
-            // Agregamos un evento de clic al botón del menú
-            menuToggle.addEventListener('click', function() {
-                dropdownMenu.classList.toggle('active'); // Activa/desactiva el menú desplegable
-                document.body.classList.toggle('menu-open'); // Agrega/elimina una clase al cuerpo para indicar si el menú está abierto
-            });
-
-            // Agregamos un manejador de eventos de clic al documento
-            document.body.addEventListener('click', function(event) {
-                // Verificamos si el clic no ocurrió dentro del menú o del botón de menú
-                if (!dropdownMenu.contains(event.target) && event.target !== menuToggle) {
-                    closeMenuAndResetContent(); // Cerramos el menú y restablecemos el contenido
-                }
-            });
-        });
+        
     </script>
  @endsection
 </body>
