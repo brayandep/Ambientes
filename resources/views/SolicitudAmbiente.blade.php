@@ -33,6 +33,8 @@
             
 
  <div>
+    <label class="text" for="nro_aula">Ambiente:</label><br>
+
     <select class="input"  id="nro_aula" name="nro_aula">
         <option>Selecciona un ambiente </option>
         @foreach($ambientes as $ambiente)

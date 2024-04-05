@@ -111,6 +111,9 @@ body {
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8%;
 }
 .container2{
   display: flex;
