@@ -46,7 +46,7 @@
             <td>
                 
                 <div class="botones-container">
-                    <a  class="botonedit">Modificar</a>
+                    <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
                   
                     <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Cancelar</button>
                          <div id="modal-confirmacion" class="modal">
@@ -60,7 +60,7 @@
 
                             @csrf
                             @method('DELETE')
-                        <button id="boton-confirmar"href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}"  class="botones" type="submit">Confirmar</button>
+                        <button id="boton-confirmar"  class="botones" type="submit">Confirmar</button>
                     </form>
                         </div>
                     </div>
