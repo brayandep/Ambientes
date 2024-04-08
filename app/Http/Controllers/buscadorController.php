@@ -51,7 +51,7 @@ class buscadorController extends Controller
         $sinDisponibilidad = $dia && $ambientes->isEmpty();
 
         // Pasar los resultados a la vista
-        return view('buscador', compact('ambientes', 'sinDisponibilidad'));
+        return view('buscador', compact('ambientes'));
     }
     /*public function buscarAmbientes(Request $request)
     {

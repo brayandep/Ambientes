@@ -128,9 +128,7 @@
                 </tr>
             </thead>
             <tbody>
-            @if ($sinDisponibilidad)
-                <p>No se encontraron ambientes disponibles para el día especificado.</p>
-            @else
+            
 
                 @if(isset($ambientes) && count($ambientes) > 0)
                             @foreach ($ambientes as $ambiente)
@@ -145,7 +143,7 @@
                                 <td colspan="2">No se encontraron resultados</td>
                             </tr>
                         @endif
-            @endif
+           
             </tbody>
             </table>
         </div>
