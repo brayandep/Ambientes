@@ -24,15 +24,6 @@ class SolicitudController extends Controller
     public function store(Request $request)
     {
         
-        $request->validate([
-            'usuario' => 'required',
-            'nro_aula' => 'required',
-            'materia' => 'required',
-            'grupo' => 'required',
-            'motivo' => 'required',
-            'fecha' => 'required|date',
-            'horario' => 'required',
-        ]);
         $Solicitud = new Solicitud();
         
         $Solicitud->usuario = $request['usuario'];
@@ -43,7 +34,7 @@ class SolicitudController extends Controller
         $Solicitud->nro_aula = $request['nro_aula'];
         $Solicitud->horario = $request['horario'];
         $Solicitud->save();
-        return redirect()->route('solicitud.store')->with('success', 'Solicitud creada exitosamente.');
+        return redirect()->route('VerSolicitud');
 
 }       
     public function edit($id ){

@@ -76,9 +76,7 @@ Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destr
 Route::post('/registro', [RegistroController::class, 'store'])->name('registro.store');
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->name('solicitud.store');
 Route::get('/Solicitud', [SolicitudController::class, 'create'])->name('solicitud.create'); 
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
+
 
 //rutas de materia
 Route::get('materia', [materiaController::class, 'show'])->name('materia.show');
