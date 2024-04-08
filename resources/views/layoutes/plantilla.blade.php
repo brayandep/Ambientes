@@ -20,7 +20,7 @@
                         
                     </li>
                     <li>
-                        <a href="#"><i class='fas fa-search'></i> Buscar</a>
+                        <a href="{{ route('buscador') }}"><i class='fas fa-search'></i> Buscar</a>
                     </li>
                     <li onclick="gesAmbiente()">
                         <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>

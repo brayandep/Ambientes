@@ -110,3 +110,7 @@ Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('Am
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
+Route::get('/busqueda-ambiente', function () {
+    return view('Buscador');
+})->name('buscador');
+

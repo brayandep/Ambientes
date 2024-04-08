@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+
+  .Navegacion-contenido-search {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Navegacion-search {
+    height: 4%;
+    margin-top: 5px;
+    width: 50%;
+    font-size: 14px;
+    color: #0b2c37; /* Color del texto */
+  }
+  
+  .Titulo-search {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .Resultado-search {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .search-contenido {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    height: 75%;
+    position: relative; 
+  }
+
+  /*visualizar unidades*/
+.visualizar-busqueda{
+    padding: 5px;
+    width: 95%;
+}
+.pizarra-search{
+    background-color: #e2eaec;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+    margin-top: 10px;
+}
+.nomCol{
+    background-color: #AE7791;
+    padding: 7px;
+    border-radius: 5px;
+    color: #EBEBEB;
+    margin: 5px;
+    width: 100%;
+}
+
+.fila{
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin-top: 7px;
+    width: 100%;
+}
+.fila p{
+    width: 16%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.EliEdi{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+}
+.EliEdi button{
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.Limpiar{
+    background-color: #F35D5D;
+    color:#f5f6f7;
+}
+.Buscar{
+    background-color: #933864;
+    color:#f5f6f7;
+}
+
+.button-fila{
+    padding: 10px;
+    margin: 5px;
+    justify-content: end;
+    display: flex;
+    gap: 15px;
+    
+}
+.button-fila button{
+    padding: 7px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/*Buscador*/
+.form-fila {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 15px;
+
+}
+.form-fila label {
+    margin-left: 10px;
+}
+
+.form-fila input,
+.form-fila select {
+    margin-left: 5px; /* Separación entre input/select y label */
+    border-radius: 5px;
+    background-color:#ebebeb;
+    color: #0b2c37;
+    padding: 4px;
+}
+
+.button-fila{
+    margin-top: 10px;
+    display: flex; /* Usar flexbox para alinear los botones */
+    justify-content: flex-start; /* Alinear los elementos al principio (izquierda) */
+}
+
+.button-fila button:last-child {
+    margin-right: 0; /* Eliminar el margen derecho del último botón */
+}
+
+.button-fila button {
+    margin-right: 10px; /* Separación entre botones */
+    margin-bottom: 20px;
+    cursor: pointer;
+}

@@ -10,7 +10,7 @@
     <div class="Navegacion-contenido-ver">
         <div class="Navegacion-ver">
             Inicio > Gestionar Ambiente > Ver Ambiente
-        </div>
+        </div> 
     </div>
     <div class="ver-contenido">
         <div class="visualizar-ambiente">
