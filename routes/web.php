@@ -40,4 +40,4 @@ Route::get('/', function () {
 
 Route::get('/materia', materiaController::class);
 
-Route::get('/publicaciones', [PublicacionController::class, 'index']);
+Route::get('/publicaciones', [PublicacionController::class, 'inipubli']);

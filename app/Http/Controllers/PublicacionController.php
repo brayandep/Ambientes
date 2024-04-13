@@ -7,7 +7,7 @@ use App\Models\Publicacion;
 
 class PublicacionController extends Controller
 {
-    public function index()
+    public function inipubli()
     {
         // Recuperar todas las publicaciones de la base de datos
         $publicaciones = Publicacion::all();
