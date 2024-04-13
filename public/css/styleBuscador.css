@@ -100,8 +100,7 @@
     margin: 5px;
     justify-content: end;
     display: flex;
-    gap: 15px;
-    
+    gap: 15px; 
 }
 .button-fila button{
     padding: 7px;
@@ -114,38 +113,38 @@
 }
 
 /*Buscador*/
-.form-fila {
+.form-fila-s {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     margin-top: 15px;
-
-}
-.form-fila label {
-    margin-left: 10px;
 }
 
-.form-fila input,
-.form-fila select {
-    margin-left: 5px; /* Separación entre input/select y label */
+/* Estilos para etiquetas (labels) dentro de las filas del formulario */
+.form-fila-s label {
+    width: 120px; /* Ancho fijo para las etiquetas */
+    margin-right: 10px; 
+    text-align: right; 
+}
+
+/* Estilos para inputs y selects dentro de las filas del formulario */
+.form-fila-s input,
+.form-fila-s select {
+    flex: 1; /* El input/select ocupa todo el espacio restante */
     border-radius: 5px;
-    background-color:#ebebeb;
+    background-color: #ebebeb;
     color: #0b2c37;
-    padding: 4px;
+    padding: 6px;
+    box-sizing: border-box; 
 }
 
 .button-fila{
     margin-top: 10px;
-    display: flex; /* Usar flexbox para alinear los botones */
-    justify-content: flex-start; /* Alinear los elementos al principio (izquierda) */
-}
-
-.button-fila button:last-child {
-    margin-right: 0; /* Eliminar el margen derecho del último botón */
+    display: flex; 
 }
 
 .button-fila button {
-    margin-right: 10px; /* Separación entre botones */
+    margin-right: 10px;
     margin-bottom: 20px;
     cursor: pointer;
 }

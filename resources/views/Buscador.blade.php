@@ -21,17 +21,17 @@
             </div>
             <div>
                 <form>
-                    <div class="form-fila">
+                    <div class="form-fila-s">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre">
-                        
+                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="15" autocomplete="off" placeholder="Nombre del ambiente">
+
                         <label for="capacidad">Capacidad:</label>
-                        <input type="number" id="capacidad" name="capacidad">
-                        
+                        <input type="text" id="capacidadSearch" name="capacidadSearch" maxlength="3" autocomplete="off" placeholder="Capacidad">
+
                         <label for="dia">Día:</label>
                         <!-- Utilizamos un select (combobox) para los días de la semana -->
                         <select id="dia" name="dia">
-                            <option value="lunes">Seleccionar</option>
+                            <option value="">Seleccionar</option>
                             <option value="lunes">Lunes</option>
                             <option value="martes">Martes</option>
                             <option value="miercoles">Miércoles</option>
@@ -41,15 +41,15 @@
                         </select>
                     </div>
                 
-                    <div class="form-fila">
+                    <div class="form-fila-s">
                         <label for="fecha">Fecha:</label>
                         <input type="date" id="fecha" name="fecha">
                         
-                        <label for="hora">Hora:</label>
+                        <label for="horaIni">Hora de inicio:</label>
                         <input type="time" id="hora" name="hora">
                         
-                        <label for="equipo">Equipo:</label>
-                        <input type="text" id="equipo" name="equipo">
+                        <label for="horaFin">Hora de fin:</label>
+                        <input type="time" id="hora" name="hora">
                     </div>
                 
                     <div class="button-fila">
@@ -67,8 +67,8 @@
                     <button class="nomCol">Capacidad</button>
                     <button class="nomCol">Dia</button>
                     <button class="nomCol">Fecha</button>
-                    <button class="nomCol">Hora</button>
-                    <button class="nomCol">Equipos disponibles</button>
+                    <button class="nomCol">Hora inicio</button>
+                    <button class="nomCol">Hora fin</button>
                     <button class="nomCol">Reservar</button>
                 </div>
             </div>
