@@ -4,7 +4,7 @@ use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
-
+use App\Http\Controllers\PublicacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,3 +39,5 @@ Route::get('/', function () {
 })->name('inicio');
 
 Route::get('/materia', materiaController::class);
+
+Route::get('/publicaciones', [PublicacionController::class, 'index']);
