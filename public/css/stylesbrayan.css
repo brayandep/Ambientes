@@ -79,9 +79,7 @@ body {
 }
 .izq{
   width:calc(50%, 10px); 
-
- 
-  padding-top: 150px;
+  padding-top: 60px;
   
 
 }
@@ -96,10 +94,10 @@ body {
 }
 .der{
   display: block;
-  width:calc(50%, 20px); 
-  margin-right: 15%;
- margin-left: 30%;
-  padding-top: 150px;
+  width:calc(50%, 5px); 
+  margin-right: 10%;
+ margin-left: 10%;
+ padding-top: 60px;
   margin-top: 19px;
 }
 .text{
@@ -109,8 +107,9 @@ body {
 .container{
   display: flex;
   justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
+  width: 70%;
+ 
+  margin-left: 10%;
 }
 .container2{
   display: flex;
@@ -122,11 +121,12 @@ body {
 .boton{
   border-radius: 10px;
   background-color: #C384B2;
-  width: 25%;
+  width: 10%;
   height: 23px;
   color: #E1DBE8;
   font-size: 18px;
   margin-top: 200px;
+  margin-right: 10%;
 }
 .titulo{
   margin-left: 18%;
@@ -192,16 +192,22 @@ body {
   background-color: #F35D5D;
   border-radius: 5px;
   border: 0.5px solid black;
-  font-size: 20px;
+  font-size: 15px;
   margin-right: 10px;
   margin-left: 10px;
+  padding: 10px 20px;
+  margin: 10px;
 }
 .botonedit{
   color: #EBEBEB;
   background-color: #C384B2;
   border-radius: 5px;
   border: 0.5px solid black;
-  font-size: 20px;
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  margin: 10px;
 }
 .input2{
   border-radius: 15px;
@@ -235,12 +241,6 @@ body {
   text-align: center;
 }
 
-.botones {
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
-}
-
 /* Estilos para el botón de cancelar */
 #boton-cancelar {
   background-color: #f44336;
@@ -249,12 +249,25 @@ body {
 }
 
 /* Estilos para el botón de salir */
-#boton-salir {
-  background-color: #ccc;
-}
+
 
 /* Estilos para el botón de confirmar */
 #boton-confirmar {
   background-color: #4caf50;
   color: white;
+}
+.botonesCentro{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.botonupdate{
+  border-radius: 10px;
+  background-color: #C384B2;
+  width: 10%;
+  height: 23px;
+  color: #E1DBE8;
+  font-size: 18px;
+  margin-right: 10%;
+  margin-left: 70%;
 }

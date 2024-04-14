@@ -12,20 +12,20 @@ class CreateSolicitudTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('solicitud', function (Blueprint $table) {
-            $table->id('idsolicitud');
-          //  $table->unsignedBigInteger('id_usuario');
-        //    $table->foreign('id_usuario')->references('id')->on('usuarios');
-              $table->String('usuario');
-            $table->date('fecha');
-            $table->string('motivo');
-            $table->string('materia');
-            $table->string('grupo');
-            $table->string('nro_aula');
-            $table->String('horario');
-            $table->timestamps();
-        });
+    {Schema::create('solicitud', function (Blueprint $table) {
+        $table->id('idsolicitud');
+      //  $table->unsignedBigInteger('id_usuario');
+    //    $table->foreign('id_usuario')->references('id')->on('usuarios');
+          $table->String('usuario');
+        $table->date('fecha');
+        $table->string('motivo');
+        $table->string('materia');
+        $table->string('grupo');
+        $table->string('nro_aula');
+        $table->string('horario');
+        $table->string('estado')->nullable();
+        $table->timestamps();
+    });
     }
 
     /**

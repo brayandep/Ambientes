@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
+use App\Models\Ambiente;
+use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
 class SolicitudController extends Controller
 {
@@ -11,19 +13,44 @@ class SolicitudController extends Controller
     {
         $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
         $usuarios = Usuario::all();;
-  return view('VerSolicitud', compact('solicitudes','usuarios'));
+        $horarios = HorarioDisponible::all();;
+        $ambientes = Ambiente::all();;
+  return view('VerSolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
+    }
+
+    public function index2()
+    {
+        $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
+        $usuarios = Usuario::all();;
+        $horarios = HorarioDisponible::all();;
+        $ambientes = Ambiente::all();;
+  return view('HabilitaReserva', compact('solicitudes','usuarios','horarios','ambientes'));
     }
     public function create()
     {
-        $usuarios = Usuario::all();
-        $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
-        //  $usuarios = Usuario::all();;
-        return view('SolicitudAmbiente', compact( 'usuarios'));
-    }
+        
+        
+$usuarios = Usuario::all();
+$solicitudes = Solicitud::all(); 
+$ambientes = Ambiente::all();;
+$horarios = HorarioDisponible::all();;
+// Obtén todas las solicitudes desde el modelo Solicitud
+//  $usuarios = Usuario::all();;
+return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes','horarios'));
 
+    }
     public function store(Request $request)
     {
         
+        $request->validate([
+            'usuario' => 'required',
+            'nro_aula' => 'required',
+            'materia' => 'required',
+            'grupo' => 'required',
+            'motivo' => 'required',
+            'fecha' => 'required|date',
+            'horario' => 'required',
+        ]);
         $Solicitud = new Solicitud();
         
         $Solicitud->usuario = $request['usuario'];
@@ -33,15 +60,19 @@ class SolicitudController extends Controller
         $Solicitud->grupo = $request['grupo'];
         $Solicitud->nro_aula = $request['nro_aula'];
         $Solicitud->horario = $request['horario'];
+        $Solicitud->estado = 'Sin confirmar';;
         $Solicitud->save();
-        return redirect()->route('VerSolicitud');
+        return redirect()->route('solicitud.store')->with('success', 'Solicitud creada exitosamente.');
 
 }       
     public function edit($id ){
         
         $solicitud = Solicitud::findOrFail($id);
+        $ambientes = Ambiente::all();;
+        $horarios = HorarioDisponible::all();;
+        $idAmbienteSeleccionado = $solicitud->ambiente_id;
        // return $solicitud;
-        return view('editSolicitud', compact('solicitud'));
+        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado'));
     }
     public function update(Request $request, Solicitud $solicitud)
 {
@@ -53,6 +84,8 @@ class SolicitudController extends Controller
         'motivo' => 'required',
         'fecha' => 'required|date',
         'horario' => 'required',
+      
+
     ]);
 
     
