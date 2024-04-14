@@ -97,3 +97,7 @@ Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEst
 
 //Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
 
+
+
+//habilitar reservas
+Route::get('/habilitar', [SolicitudController::class, 'index2'])->name('habilitarReservas');

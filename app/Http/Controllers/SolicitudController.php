@@ -24,7 +24,7 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-  return view('HabilitaReserva', compact('solicitudes','usuarios','horarios','ambientes'));
+  return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes'));
     }
     public function create()
     {
