@@ -10,12 +10,13 @@
 
 @section('contenido')
 
-<h2 class="titulo">Lista de Solicitudes</h2>
+<h2 class="titulo">Visualizar solicitudes de reservas</h2>
 <div>
+    <label> Estado de solicitud</label>
     <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
-        <option>Selecciona un usuario </option>
-        @foreach($usuarios as $usuario)
-          <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+        <option>Estado de solicitud </option>
+        @foreach($solicitudes as $solicitud)
+          <option value="{{ $solicitud->estado}}" {{ isset($estado) ? 'selected' : '' }}>{{ $solicitud->estado}}</option>
         @endforeach
          
       </select>
@@ -24,42 +25,42 @@
 <table  id="tablaSolicitudes" class="centro" border="1">
     <thead>
         <tr class="colorcolumna">
-            <th>Nro</th>
-            <th>Usuario</th>
-            <th>Número de Aula</th>
-            <th>Motivo</th>
+            <th>Estado</th>
             <th>Fecha</th>
             <th>Horario</th>
+            <th>Aula</th>
+            <th>Motivo</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach($solicitudes as $solicitud)
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
-            <td>{{ $solicitud->idsolicitud }}</td>
-            <td>{{ $solicitud->usuario }}</td>
-            <td>{{ $solicitud->nro_aula }}</td>
-            <td>{{ $solicitud->motivo }}</td>
+            <td>{{ $solicitud->estado }}</td>
             <td>{{ $solicitud->fecha }}</td>
             <td>{{ $solicitud->horario }}</td>
+            <td>{{ $solicitud->nro_aula }}</td>
+            <td>{{ $solicitud->motivo }}</td>
+            
             <td>
                 
                 <div class="botones-container">
-                    <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
+                    <a  class="botonedit" href="">Habilitar</a>
                     
-                        <button  id="boton-cancelar" class="botones" type="submit">Cancelar</button>
-
+                    
+                    <button  id="detalles" class="botones" type="submit">Ver mas</button>
+                    <button  id="boton-cancelar" class="botones" >Cancelar</button>
                     <div id="modal-confirmacion" class="modal">
                         <div class="modal-contenido">
-
+                            
                             <p>¿Está seguro de que desea eliminar?</p>
                             <button id="boton-salir" class="botones" type="button">Salir</button>
 
                             <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                            <button id="boton-confirmar" class="botones" type="submit">Confirmar</button>
-                        </form>
+                                <button id="boton-confirmar-{{ $loop->index }}" class="botones" type="submit">Confirmar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
 </table>
 <script>
     function filtrarSolicitudes() {
-        var seleccionado = document.getElementById("usuario").value;
+        var seleccionado = document.getElementById("solicitud").value;
         var filas = document.querySelectorAll("#tablaSolicitudes tbody tr");
         
         filas.forEach(function(fila) {
