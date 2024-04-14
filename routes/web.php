@@ -3,6 +3,7 @@
 use App\Http\Controllers\materiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\registroUnidadesController;
 
 /*
@@ -39,3 +40,15 @@ Route::get('/', function () {
 })->name('inicio');
 
 Route::get('/materia', materiaController::class);
+
+
+//publicaciones
+Route::post('/publicaciones', 'PublicacionController@store')->name('guardar.publicacion');
+
+Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
+Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('publicaciones.crear');
+
+Route::delete('/publicaciones/{id}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');
+
+Route::get('/publicaciones/{id}/editar', 'PublicacionController@editar')->name('editar.publicacion');
+
