@@ -2,6 +2,7 @@
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}">
 @endsection
 
 
@@ -46,23 +47,23 @@
                 
                 <div class="botones-container">
                     <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
-                    
-                       
-                    <button  id="boton-cancelar" class="botones" type="submit">Cancelar</button>
-                    <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
-                <div id="modal-confirmacion" class="modal">
-
+                  
+                    <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Cancelar</button>
+                         <div id="modal-confirmacion" class="modal">
+                
                     <div class="modal-contenido">
-
                         <p>¿Está seguro de que desea eliminar?</p>
-                        <button id="boton-salir"  class="botones" type="button">Salir</button>
+                        <div class="botonesCentro">
+                        <button id="boton-salir"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
 
-                       
+                        <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
+
                             @csrf
                             @method('DELETE')
-                        <button id="boton-confirmar" class="botones" type="submit">Confirmar</button>
+                        <button id="boton-confirmar"  class="botones" type="submit">Confirmar</button>
                     </form>
                         </div>
+                    </div>
                     </div>
                 </div>
                
@@ -87,26 +88,22 @@
 </script>
 
 <script>
-    // Obtener el botón de cancelar y el modal
-    var botonCancelar = document.getElementById("boton-cancelar");
-    var modal = document.getElementById("modal-confirmacion");
-    
-    // Cuando se hace clic en el botón de cancelar, mostrar el modal
-    botonCancelar.onclick = function() {
-      modal.style.display = "block";
+    function botonCancelar() {
+        var modal = document.getElementById("modal-confirmacion");
+        modal.style.display = "block";
     }
-    
+
     // Obtener el botón de salir del modal
     var botonSalir = document.getElementById("boton-salir");
     
     // Cuando se hace clic en el botón de salir, ocultar el modal
-    botonSalir.onclick = function() {
-      modal.style.display = "none";
+    function botonSalirClick() {
+        var modal = document.getElementById("modal-confirmacion");
+        modal.style.display = "none";
     }
-    </script>
+
+</script>
 @endsection
-
-
 
 
 

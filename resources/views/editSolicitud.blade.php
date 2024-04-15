@@ -20,7 +20,7 @@
          @method('put')
          <div class="izq">
              <label class="text" for="usuario">Usuario:</label><br>
-             <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario"  required disabled>
+             <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario"  required >
              <br>
              <br>
              <br>
