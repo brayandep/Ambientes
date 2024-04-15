@@ -14,6 +14,8 @@ use App\Models\Dependencia;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BusacadorController;
+use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\grupoController;
 
 /*
@@ -106,11 +108,12 @@ Route::get('/Registro', function () {
 
 Route::resource('/registro', AmbienteController::class);
 
+//rutas visualizacion ambientes
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
+Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+//termina rutas visualizacion ambientes
 
-Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+//rutas buscador
+Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
 
-Route::get('/busqueda-ambiente', function () {
-    return view('Buscador');
-})->name('buscador');
-
+//termina rutas buscador

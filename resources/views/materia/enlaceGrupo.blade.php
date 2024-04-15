@@ -12,7 +12,7 @@
 @endsection
 
 @section('contenido')
-    <main>
+    <main> 
         <div class="primerDiv">
             <div class="navegacion">
                 Inicio > Materia > Grupos

@@ -53,7 +53,7 @@
     display: flex;
     margin-top: 10px;
 }
-.nomCol{
+.nomCol-b{
     background-color: #AE7791;
     padding: 7px;
     border-radius: 5px;
@@ -62,28 +62,34 @@
     width: 100%;
 }
 
-.fila{
+.fila-b{
     display: flex;
-    align-items: center;
+    justify-content: space-between; /* Alinear el contenido de las columnas */
     padding: 4px;
     margin-top: 7px;
     width: 100%;
 }
-.fila p{
+
+.fila-b p{
     width: 16%;
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
-.EliEdi{
+.Buscar-Reservar{
     width: 15%;
     display: flex;
     justify-content: center;
 }
-.EliEdi button{
+.Buscar-Reservar button{
     margin-right: 10px;
     cursor: pointer;
+}
+
+.buscaReserva i{
+    background-color: none;
+    font-size: 20px;
 }
 
 .Limpiar{
@@ -95,14 +101,15 @@
     color:#f5f6f7;
 }
 
-.button-fila{
+.button-fila-b{
     padding: 10px;
     margin: 5px;
     justify-content: end;
     display: flex;
     gap: 15px; 
 }
-.button-fila button{
+
+.button-fila-b button{
     padding: 7px;
     padding-left: 12px;
     padding-right: 12px;
@@ -120,7 +127,7 @@
     margin-top: 15px;
 }
 
-/* Estilos para etiquetas (labels) dentro de las filas del formulario */
+/* Estilos para etiquetas */
 .form-fila-s label {
     width: 120px; /* Ancho fijo para las etiquetas */
     margin-right: 10px; 
@@ -138,12 +145,12 @@
     box-sizing: border-box; 
 }
 
-.button-fila{
+.button-fila-b{
     margin-top: 10px;
     display: flex; 
 }
 
-.button-fila button {
+.button-fila-b button {
     margin-right: 10px;
     margin-bottom: 20px;
     cursor: pointer;
