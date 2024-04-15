@@ -7,14 +7,6 @@
 @section('titulo', 'Buscar')
 
 @section('contenido')
-    <?php 
-    if(!isset($_POST['buscarNombre'])){$_POST['buscarNombre'] = '';}
-    if(!isset($_POST['buscarCapacidad'])){$_POST['buscarCapacidad'] = '';}
-    if(!isset($_POST['buscarDia'])){$_POST['buscarDia'] = '';}
-    if(!isset($_POST['buscarHoraIni'])){$_POST['buscarHoraFin'] = '';}
-    if(!isset($_POST['buscarHoraIni'])){$_POST['buscarHoraFin'] = '';}
-    ?>
-
     <div class="Navegacion-search">
         <div class="Navegacion-contenido-search">
             Inicio > Buscar 
@@ -31,20 +23,18 @@
                 <form>
                     <div class="form-fila-s">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="15" autocomplete="off" placeholder="Nombre del ambiente" value="<?php echo $_POST['buscarNombre'] ?>">
+                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="15" autocomplete="off" placeholder="Nombre del ambiente">
                         @error('nombre')
                         <span class="msgError">*{{$message}}</span>
                         @enderror
 
                         <label for="capacidad">Capacidad:</label>
-                        <input type="text" id="capacidadSearch" name="capacidadSearch" maxlength="3" autocomplete="off" placeholder="Capacidad" value="<?php echo $_POST['buscarCapacidad'] ?>">
+                        <input type="text" id="capacidadSearch" name="capacidadSearch" maxlength="3" autocomplete="off" placeholder="Capacidad">
 
                         <label for="dia">Día:</label>
                         <!-- Utilizamos un select (combobox) para los días de la semana -->
                         <select id="dia" name="dia">
-                            <?php if($_POST['buscarDia'] !='') {?>
-                            <option value="<?php echo $_POST['buscarDia']; ?>"><?php echo $_POST['buscarDia']; ?></option>
-                            <?php } ?>
+
                             <option value="todos">Seleccionar</option>
                             <option value="lunes">Lunes</option>
                             <option value="martes">Martes</option>
@@ -60,10 +50,10 @@
                         <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}">
                         
                         <label for="horaIni">Hora de inicio:</label>
-                        <input type="time" id="hora" name="hora" value="<?php echo $_POST['buscarHoraIni'] ?>">
+                        <input type="time" id="hora" name="hora">
                         
                         <label for="horaFin">Hora de fin:</label>
-                        <input type="time" id="hora" name="hora" value="<?php echo $_POST['buscarHoraFin'] ?>">
+                        <input type="time" id="hora" name="hora">
                     </div>
                 
                     <div class="button-fila-b">
@@ -72,42 +62,6 @@
                     </div>
                 </form>
             </div>
-
-            <?php
-            if($_POST['buscarNombre'] == ''){$_POST['buscarNombre'] = ' ';}
-            $aKeyword = explode(" ", $_POST['buscarNombre']);
-            if($_POST['buscarNombre'] == '' AND $_POST['buscarCapacidad'] == '' AND $_POST['buscarDia'] == '' AND $_POST['buscarHoraIni'] == '' AND $_POST['buscarHoraFin'] == '')
-                $query = "SELECT * FROM Ambientes, Horario";
-            else{
-                $query = "SELECT * FROM Ambientes, Horario";
-                if($_POST['buscarNombre'] != ''){
-                    $query .= "WHERE (nombre LIKE LOWER('%".$aKeyword[0]. "%')) ";
-
-                    for($i=1; $i<count($aKeyword); $i++){
-                        if(!empty($aKeyword[$i])){
-                            $query .= " OR nombre LIKE '%" .$aKeyword[$i]. "%'":
-                        }
-                    }
-                }
-
-                if($_POST['buscarCapacidad'] != ''){
-                    $query .= "AND capacidad >='".$POST_['buscarCapacidad']."' ";
-                }
-
-                if($_POST['buscarDia'] != ''){
-                    $query .= "AND dia ='".$POST_['buscarDia']."' ";
-                }
-
-                if($_POST['buscarHoraIni'] != ''){
-                    $query .= "AND horaInicio >='".$POST_['buscarHoraIni']."' ";
-                }
-
-                if($_POST['buscarHoraFin'] != ''){
-                    $query .= "AND horaFin <='".$POST_['buscarHoraFin']."' ";
-                }
-            }
-          
-            ?>
 
             <div>
                 <h2 class="Resultado-search"> Resultado de la búsqueda </h2>
