@@ -15,15 +15,21 @@
     <h2 class="titulo">Visualizar solicitudes de reservas</h2>
     </div>
 </div>
-<div>
-    <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
-        <option value="">Estado de solicitud</option>
-        <option value="Sin confirmar">Sin confirmar</option>
-        <option value="confirmado">Confirmado</option>
-        <option value="denegado">Denegado</option>
-    </select>
+<div class="contenidoFyR">
+    <div class="FiltroyReporte">
+        <div>
+            <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
+                <option value="">Estado de solicitud</option>
+                <option value="Sin confirmar">Sin confirmar</option>
+                <option value="confirmado">Confirmado</option>
+                <option value="denegado">Denegado</option>
+            </select>
+        </div>
+        <div>
+            <button class="botonReporte">Generar Reporte</button>
+        </div>
+    </div>
 </div>
-
 <table  id="tablaSolicitudes" class="centro" border="1">
     <thead>
         <tr class="colorcolumna">

@@ -2,6 +2,7 @@
   width: 100%;
   justify-content: center;
   display: flex;
+  
 }
 .navegacion{
   width: 70%;
@@ -202,12 +203,20 @@
   margin-left: 5px;
   padding: 5px 10px;
 }
+.contenidoF{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.F{
+  width: 70%;
+  margin-top: 20px;
+  
+}
 .input2{
   border-radius: 5px;
   background: #E3E5F3;
   width: 200px;
-  margin-left: 15%;
-  margin-top: 30px;
   display: flex;
   padding: 7px;
 
@@ -268,4 +277,22 @@
   font-size: 18px;
   margin-right: 10%;
   margin-left: 70%;
+}
+.contenidoFyR{
+  width: 100%;
+ display: flex; 
+ justify-content: center;
+ margin-top: 20px;
+}
+.FiltroyReporte{
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+}
+.botonReporte{
+  background-color: #C384B2;
+  color: #efebf3;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
 }

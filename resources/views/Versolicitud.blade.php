@@ -15,14 +15,16 @@
     <h2 class="titulo">Lista de Solicitudes</h2>
     </div>
 </div>
-<div>
-    <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
-        <option>Selecciona un usuario </option>
-        @foreach($usuarios as $usuario)
-          <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
-        @endforeach
-         
-      </select>
+<div class="contenidoF">
+    <div class="F">
+        <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
+            <option>Selecciona un usuario </option>
+            @foreach($usuarios as $usuario)
+            <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+            @endforeach
+            
+        </select>
+    </div>
 </div>
 
 <table  id="tablaSolicitudes" class="centro" border="1">
