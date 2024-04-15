@@ -1,3 +1,7 @@
+@section('links')
+    <link rel="stylesheet" href="{{ asset('css/stylePublicacion.css') }}">
+
+@endsection
 <div id="formulario-crear-publicacion" class="modal">
     <div class="modal-content">
         <span class="close" onclick="cerrarFormulario()">&times;</span>
