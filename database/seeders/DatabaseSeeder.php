@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         
         $this -> call(UnidadSeeder::class);
         $this -> call(EquipoSeeder::class);
-        $this -> call(TipoAmbiente::class);
+        $this -> call(TipoAmbienteSeeder::class);
         $this -> call(UsuarioSeeder::class);
     }
     
