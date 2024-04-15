@@ -47,9 +47,11 @@
                  
                     <button><i class="fa-solid fa-circle-check"></i></button>
                     <button id="boton-cancelar" type="submit" onclick="botonCancelar()"  ><i class="fa-solid fa-circle-xmark" ></i></button>
-                    <a  class="detalles" href="">Ver mas</a>
+                    <a  class="detalles"  href="">Ver mas</a>
                          <div id="modal-confirmacion" class="modal">
                 
+
+                            
                     <div class="modal-contenido">
                         <p>¿Está seguro de que desea eliminar?</p>
                         <div class="botonesCentro">
