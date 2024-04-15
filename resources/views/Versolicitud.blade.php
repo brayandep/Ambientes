@@ -9,8 +9,12 @@
 
 
 @section('contenido')
-
-<h2 class="titulo">Lista de Solicitudes</h2>
+<div class="NavegacionContenido">
+    <div class="navegacion">
+    Inicio > Gestionar mis solicitudes > Ver mis solicitudes
+    <h2 class="titulo">Lista de Solicitudes</h2>
+    </div>
+</div>
 <div>
     <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
         <option>Selecciona un usuario </option>

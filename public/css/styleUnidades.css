@@ -91,10 +91,7 @@
     background-color: #933864;
 
 }
-.footer{
-    background-color: #933864;
-    height: 10%;
-}
+
 #fondoGris{
     background-color: #40505577;
     width: 100%;
@@ -121,7 +118,6 @@
 }
 .info{
     font-size: 16px;
-    
    padding-left: 10px;
     margin-top: 5px;
     margin-left: 5px;
@@ -143,7 +139,7 @@
     overflow: auto;
 }
 .nomCol{
-    background-color: #AE7791;
+    background-color: #C384B2;
     padding: 7px;
     border-radius: 5px;
     color: #EBEBEB;
@@ -190,38 +186,38 @@
 .boton {
     margin: 5px;
     margin-right: 35px;
-  }
+}
   
-  .lbl-switch {
-    display: inline-block;
-    width: 48px;
-    height: 22px;
-    background: #aaa;
-    border-radius: 100px;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .boton input:checked + .lbl-switch {
-    background: #AE7791;
-  }
-  
-  .lbl-switch:after {
-    position: absolute;
-    content: '';
-    width: 16px;
-    height: 16px;
-    background: #f5f6f7;
-    border-radius: 100px;
-    top: 3px;
-    left: 3px;
-    transition: 0.2s;
-  }
-  
-  .boton input:checked + .lbl-switch:after {
-    left: 28px;
-  }
-  
-  .boton input {
-    display: none;
-  }
+.lbl-switch {
+display: inline-block;
+width: 48px;
+height: 22px;
+background: #aaa;
+border-radius: 100px;
+position: relative;
+cursor: pointer;
+}
+
+.boton input:checked + .lbl-switch {
+background: #AE7791;
+}
+
+.lbl-switch:after {
+position: absolute;
+content: '';
+width: 16px;
+height: 16px;
+background: #f5f6f7;
+border-radius: 100px;
+top: 3px;
+left: 3px;
+transition: 0.2s;
+}
+
+.boton input:checked + .lbl-switch:after {
+left: 28px;
+}
+
+.boton input {
+display: none;
+}

@@ -10,61 +10,54 @@
 
 @section('contenido')
 
-
-
-<h2 class="titulo">Editar Solicitud</h2>
-<div >
- <form class="container2" method="POST" action="{{ route('solicitud.update',$solicitud) }}">
+<div class="contenedor1">
+    <div class="NavegacionContenido">
+        <div class="navegacion">
+        Inicio > Gestionar mis solicitudes > Editar solicitud
+        <h2 class="titulo">Editar Solicitud</h2>
+        </div>
+    </div>
+    <form class="container2" method="POST" action="{{ route('solicitud.update',$solicitud) }}">
 
          @csrf <!-- Incluye el campo csrf aquí -->
          @method('put')
          <div class="izq">
-             <label class="text" for="usuario">Usuario:</label><br>
+            <div>
+             <label class="texto" for="usuario">Usuario:</label><br>
              <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario"  readonly required >
+            </div>
              <br>
-             <br>
-
              <div>
-                <label class="text" for="materia">Materia:</label><br>
+                <label class="texto" for="materia">Materia:</label><br>
                 <input class="input" type="text" id="materia" name="materia" value="{{$solicitud->materia}}" required>
             </div>
+            <br>
     
-             <br>
-             <br>
              <div>
-                <label for="grupo">Nro Grupo:</label><br>
+                <label class="texto" for="grupo">Nro Grupo:</label><br>
                 <input class="input" type="text" id="grupo" name="grupo" value="{{$solicitud->grupo}}" required>
             </div>
             <br>
-            <br>
             <div>
-                <label class="text" for="motivo">Motivo:</label><br>
+                <label class="texto" for="motivo">Motivo:</label><br>
                 <select class="input" id="motivo" name="motivo" value="{{$solicitud->motivo}}" required>
                     <option value="Clase">Clase</option>
                     <option value="Examen">Examen</option>
                     <option value="Otro">Otro</option>
                 </select>
             </div>
-            <br>
-             <br>
-             <br>
-            
-           
+            <br>   
          </div>
-
-
 
          <div class="der">
             <div>
-                <label class="text" for="fecha">Fecha:</label><br>
+                <label class="texto" for="fecha">Fecha:</label><br>
                 <input class="input" type="date" id="fecha" name="fecha"  value="{{$solicitud->fecha}}" required>
             </div>
-            
-             <br>
-             <br>
-
+            <br>
+             
              <div>
-                <label class="text" for="nro_aula">Ambiente:</label><br>
+                <label class="texto" for="nro_aula">Ambiente:</label><br>
                 <select class="input" id="nro_aula" name="nro_aula">
                     <option>Selecciona un ambiente</option>
                     @foreach($ambientes as $ambiente)
@@ -74,21 +67,19 @@
                     @endforeach
                 </select>
             </div>
-
-             <br>
-             <br>
-             <div>
-                <label class="text" for="horario">Horario:</label><br>
+            <br>
+            <div>
+                <label class="texto" for="horario">Horario:</label><br>
                 <select class="input" id="horario" name="horario" value="{{$solicitud->horario}}">
                     <option></option>
                 </select>
             </div>
             <br>
-            <br>
         </div>
             
-         </div>
-         <button class="botonupdate" type="submit">Actualizar Solicitud</button>   
+         <div>
+         <button class="boton" type="submit">Actualizar Solicitud</button> 
+         </div>  
      </form>  
 </div>    
 

@@ -1,12 +1,12 @@
-body {
-  margin: 0; /* Elimina el margen predeterminado */
-  padding: 0;
-    font-family: Arial, sans-serif;
-    color: #89C2D9;
-    background: #E1DBE8;
-    
-  }
+.NavegacionContenido{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+.navegacion{
+  width: 70%;
   
+}
   .menu-btn {
     position: fixed;
     top: 20px;
@@ -78,60 +78,54 @@ body {
 
 }
 .izq{
-  width:calc(50%, 10px); 
-  padding-top: 60px;
-  
-
+  width:35%; 
 }
 .input{
-  width: 170%;
-  height: 25px;
-  border-radius: 10px;
-  border-color: #141D2C;
-  border-style: calc();
-  font-size: 16px;
-
+  width: 100%; 
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
+  margin-top: 5px;
 }
 .der{
   display: block;
-  width:calc(50%, 5px); 
-  margin-right: 10%;
- margin-left: 10%;
- padding-top: 60px;
-  margin-top: 19px;
+  width:35%; 
+  
 }
-.text{
-  color: #090909;
+.texto{
+  
   margin-top: 10px;
 }
 .container{
   display: flex;
   justify-content: space-between;
   width: 70%;
- 
   margin-left: 10%;
+}
+.contenedor1{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .container2{
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   width: 70%;
-  margin: 0 auto;
-  margin-left: 20%;
 }
 .boton{
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #C384B2;
-  width: 10%;
-  height: 23px;
+  width: 160px;
   color: #E1DBE8;
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 200px;
   margin-right: 10%;
+  padding: 5px;
 }
 .titulo{
-  margin-left: 18%;
-  color: rgb(17, 17, 17);
-  font-size: 40px;
+  font-size: 24px;
+  font-weight: bold;
 }
 .botones2{
   background: #E3E5F3;
@@ -166,56 +160,58 @@ body {
   
 }
 .colorcolumna{
-  color: #E1DBE8;
+  color: #EBEBEB;
   background-color: #C384B2 ;
-  font-size: 17px;
+  font-size: 16px;
   margin-left: 5px;
-  padding: 10px;
+  padding: 7px;
   text-align: center;
-  border: 1px solid black;
+  
 }
 .contentcolumna{
   text-align: center;
-  color: #090909;
+  
 
 }
 .botones-container {
   align-items: center;
   text-align: center;
   display: flex; 
-  padding: 10px;
+  padding: 5px;
   justify-content: center;
+  gap: 7px;
+}
+.botones-container i{
+  font-size: 20px;
 }
 
 .botones{
   color: #EBEBEB;
   background-color: #F35D5D;
   border-radius: 5px;
-  border: 0.5px solid black;
-  font-size: 15px;
-  margin-right: 10px;
-  margin-left: 10px;
-  padding: 10px 20px;
-  margin: 10px;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  
 }
 .botonedit{
   color: #EBEBEB;
   background-color: #C384B2;
   border-radius: 5px;
-  border: 0.5px solid black;
-  font-size: 15px;
-  margin-right: 10px;
-  margin-left: 10px;
-  padding: 10px 20px;
-  margin: 10px;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 5px 10px;
 }
 .input2{
-  border-radius: 15px;
+  border-radius: 5px;
   background: #E3E5F3;
-  width: 10%;
+  width: 200px;
   margin-left: 15%;
   margin-top: 30px;
   display: flex;
+  padding: 5px;
 
 }
 
@@ -262,10 +258,9 @@ body {
   justify-content: center;
 }
 .botonupdate{
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #C384B2;
-  width: 10%;
-  height: 23px;
+  width: 200px;
   color: #E1DBE8;
   font-size: 18px;
   margin-right: 10%;

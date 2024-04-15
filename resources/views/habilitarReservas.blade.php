@@ -9,10 +9,13 @@
 
 
 @section('contenido')
-
-<h2 class="titulo">Visualizar solicitudes de reservas</h2>
+<div class="NavegacionContenido">
+    <div class="navegacion">
+    Inicio > Gestionar reservas > Ver solicitudes
+    <h2 class="titulo">Visualizar solicitudes de reservas</h2>
+    </div>
+</div>
 <div>
-    <label> Estado de solicitud</label>
     <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
         <option value="">Estado de solicitud</option>
         <option value="Sin confirmar">Sin confirmar</option>
@@ -44,37 +47,31 @@
             <td>
                 
                 <div class="botones-container">
-                 
+                    <div>
                     <button><i class="fa-solid fa-circle-check"></i></button>
-                    <button id="boton-cancelar" type="submit" onclick="botonCancelar()"  ><i class="fa-solid fa-circle-xmark" ></i></button>
-                    <a  class="detalles"  href="">Ver mas</a>
-                         <div id="modal-confirmacion" class="modal">
-                
-
-                            
-                    <div class="modal-contenido">
-                        <p>¿Está seguro de que desea eliminar?</p>
-                        <div class="botonesCentro">
-                        <button id="boton-salir"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-
-                        <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                        <button id="boton-confirmar"  class="botones" type="submit">Confirmar</button>
-                    </form>
-
-                        </div>
+                    </div>
+                    <div>
+                    <button><i class="fa-solid fa-circle-xmark" ></i></button>
+                    </div>
+                    <div>
+                    <button  type="submit" onclick="botonInfo()"><i class="fa-solid fa-circle-info"></i></button>
                     </div>
                 </div>
-               
             </td>
         </tr>
-    @endforeach
+        @endforeach
     </tbody>
 </table>
-
-
-
+<div id="modal-confirmacion" class="modal">
+    <div class="modal-contenido">
+        <p>aqui se debe visualizar la informacion del docente que reservo</p>
+        <div class="botonesCentro">
+            <button id="boton-salir"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+        </div>
+    </div>
+</div>
+@endsection
+@section('scripts')
 <script>
     function filtrarSolicitudes() {
         var seleccionado = document.getElementById("estado").value;
@@ -90,11 +87,7 @@
             }
         });
     }
-</script>
-
-
-<script>
-    function botonCancelar() {
+    function botonInfo() {
         var modal = document.getElementById("modal-confirmacion");
         modal.style.display = "block";
     }
@@ -110,7 +103,6 @@
 
 </script>
 @endsection
-
 
 
 
