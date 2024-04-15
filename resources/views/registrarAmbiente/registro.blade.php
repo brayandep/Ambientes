@@ -10,7 +10,7 @@
 <main class="content-wrapper">
             <div class="container">
             <h2 class="ambienteTitulo" style="padding-bottom:20px" ><i class='fas fa-book'></i> {{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
-                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
+                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('ambiente.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
                       @method('PUT')
@@ -148,7 +148,7 @@
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
                   <button type="submit" class="btn-registrar" onclick="obtenerDatos()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
     
-              </div>
+                </div>
                 </form>
             </div>
          </main>
@@ -177,7 +177,7 @@
                         <input type="time" id="modalHoraFin" name="modalHoraFin"pattern="[0-9]{2}:[0-9]{2}">
                         </div>
                         
-                        <button type="button" id="modalAfceptar">Aceptar</button> <!-- Añade un id al botón -->
+                        <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->
                         
                     </div>
                 </div>

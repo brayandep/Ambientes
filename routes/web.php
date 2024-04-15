@@ -14,6 +14,7 @@ use App\Models\Dependencia;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\grupoController;
 
 /*
@@ -105,8 +106,15 @@ Route::get('/Registro', function () {
 })->name('registro');
 
 Route::get('/ambiente/create', [AmbienteController::class, 'create'])->name('ambiente.create');
+Route::post('/ambiente', [AmbienteController::class, 'store'])->name('ambiente.store');
+Route::get('/ambiente', [AmbienteController::class, 'update'])->name('ambiente.update');
 
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+
+//rutas calendario
+Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
+Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])->name('calendario.individual');
+//termina rutas calendario
 
