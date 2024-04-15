@@ -54,13 +54,13 @@
                 
                 <div class="botones-container">
                     <div>
-                    <button><i class="fa-solid fa-circle-check"></i></button>
+                    <button title="Confirmar solicitud"><i class="fa-solid fa-circle-check"></i></button>
                     </div>
                     <div>
-                    <button><i class="fa-solid fa-circle-xmark" ></i></button>
+                    <button title="Rechazar Solicitud"><i class="fa-solid fa-circle-xmark" ></i></button>
                     </div>
                     <div>
-                    <button  type="submit" onclick="botonInfo()"><i class="fa-solid fa-circle-info"></i></button>
+                    <button title="Mas informacion" type="submit" onclick="botonInfo()"><i class="fa-solid fa-circle-info"></i></button>
                     </div>
                 </div>
             </td>
