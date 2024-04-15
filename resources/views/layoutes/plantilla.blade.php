@@ -63,7 +63,7 @@
                         </ul>
                     </nav>
                     <li onclick="gesReserva()">
-                        <p><i class='fas fa-clipboard'></i> Gestionar reserva</p>
+                        <p><i class='fas fa-clipboard'></i> Gestionar mis solicitudes</p>
 
                     
                     </li>
@@ -83,7 +83,10 @@
                             </li>-->
                         </ul>
                     </nav>
-
+                    <li >
+                        <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
+                        
+                    </li>
 
 
 
