@@ -15,7 +15,7 @@
                   @if(isset($ambienteDatos))
                       @method('PUT')
                   @endif
-  
+                    
                 <div class="form-group">
                     <label for="codigo">Código:</label>
                     <input type="text" id="codigo" name="codigo" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
