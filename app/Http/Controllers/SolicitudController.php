@@ -62,7 +62,7 @@ return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes','horarios'));
         $Solicitud->horario = $request['horario'];
         $Solicitud->estado = 'Sin confirmar';;
         $Solicitud->save();
-        return redirect()->route('solicitud.store')->with('success', 'Solicitud creada exitosamente.');
+        return redirect()->route('VerSolicitud');
 
 }       
     public function edit($id ){
