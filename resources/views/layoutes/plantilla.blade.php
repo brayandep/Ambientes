@@ -29,7 +29,7 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
+                                <a href="{{ route('ambiente.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
                                 <a href="{{ route('AmbientesRegistrados') }}"><i class="fa-solid fa-rectangle-list"></i> Ver Informacion de ambiente</a>
