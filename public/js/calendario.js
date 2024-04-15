@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         headerToolbar:{
             start:'prev,next prevYear,nextYear today',
             center:'title',
-            end:'dayGridMonth,timeGridWeek'
+            end:'listYear dayGridMonth,timeGridWeek'
         },
 
         buttonText:{
@@ -72,6 +72,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     interval: 1, // Cada 1 año
                     dtstart: '2024-05-01', 
                 }	
+            },
+            { 
+                title: 'Corpus Christi', 
+                start: '2024-05-30', 
+                allDay: true,
+                backgroundColor: 'orange',
+                rrule: {
+                    freq: 'yearly',
+                    interval: 1, // Cada 1 año
+                    dtstart: '2024-05-30', 
+                }	
+
+            },
+            { 
+                title: 'Año Nuevo Aymara', 
+                start: '2024-06-21', 
+                allDay: true,
+                backgroundColor: 'orange',
+                rrule: {
+                    freq: 'yearly',
+                    interval: 1, // Cada 1 año
+                    dtstart: '2024-06-21', 
+                }	
+
             },
             { 
                 title: 'Evento Universitario', 

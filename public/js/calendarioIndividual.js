@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         headerToolbar:{
             start:'prev,next prevYear,nextYear today',
             center:'title',
-            end:''
+            end:'listWeek,timeGridWeek'
         },
 
         buttonText:{
