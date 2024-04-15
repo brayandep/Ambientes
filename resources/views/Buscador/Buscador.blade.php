@@ -17,7 +17,7 @@
 
     <div class="Navegacion-search">
         <div class="Navegacion-contenido-search">
-            Inicio > Buscar
+            Inicio > Buscar 
         </div>
     </div>
 
