@@ -7,59 +7,59 @@
   width: 70%;
   
 }
-  .menu-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 1000;
-  }
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.btn-line {
+  width: 30px;
+  height: 3px;
+  background: #E3E5F3;
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
   
-  .btn-line {
-    width: 30px;
-    height: 3px;
-    background: #E3E5F3;
-    margin: 5px 0;
-    transition: transform 0.3s, opacity 0.3s;
-    
-  }
+}
+
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  margin-top: 10%;
+  padding: 20px;
+  transition: left 0.3s;
+  color: #E3E5F3;
+}
+
+.sidebar  {
+  display: block;
+  color:#090909;
+  text-decoration: none;
+  padding: 10px 0;
   
-  .sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    height: 100vh;
-    width: 250px;
-    margin-top: 10%;
-    padding: 20px;
-    transition: left 0.3s;
-    color: #E3E5F3;
-  }
-  
-  .sidebar  {
-    display: block;
-    color:#090909;
-    text-decoration: none;
-    padding: 10px 0;
-    
-    border-bottom: 1px solid #E3E5F3;
-  }
-  
-  .content {
-    margin-left: 0;
-    transition: margin-left 0.3s;
-  }
-  
-  .sidebar.active {
-    left: 0;
-  }
-  
-  .sidebar.active + .content {
-    margin-left: 250px;
-  }
-  .fondo{
-    background: #E3E5F3;
-  }
+  border-bottom: 1px solid #E3E5F3;
+}
+
+.content {
+  margin-left: 0;
+  transition: margin-left 0.3s;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar.active + .content {
+  margin-left: 250px;
+}
+.fondo{
+  background: #E3E5F3;
+}
 .contenido{
   margin-top: 30%;
   margin-left: 10%;
@@ -150,13 +150,12 @@
 .centro{
   width: 70%; /* Ajusta el ancho de la tabla */
   border-collapse: collapse; /* Ajusta el ancho según sea necesario */
-  height: 100px; /* Ajusta la altura según sea necesario */
+ /* height: 100px; Ajusta la altura según sea necesario */
   margin: auto; /* Esto centra horizontalmente */
   /* Esto centra verticalmente  position: absolute;  */
-  top: 0; bottom: 0; left: 0; right: 0;
   font-size: 16px;
   background: #EBEBEB;
-  margin-top: 5%;
+  margin-top: 15px;
   
 }
 .colorcolumna{
@@ -170,7 +169,6 @@
 }
 .contentcolumna{
   text-align: center;
-  
 
 }
 .botones-container {
@@ -211,7 +209,7 @@
   margin-left: 15%;
   margin-top: 30px;
   display: flex;
-  padding: 5px;
+  padding: 7px;
 
 }
 
@@ -224,17 +222,22 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.418);
 }
 
 .modal-contenido {
-  background-color: white;
-  margin: 25% auto;
+  background-color: #f5f6f7;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
   max-width: 400px;
   text-align: center;
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-contenido p{
+  margin-bottom: 10px;
 }
 
 /* Estilos para el botón de cancelar */
