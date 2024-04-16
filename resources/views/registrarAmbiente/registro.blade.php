@@ -238,20 +238,20 @@
     }
     
     function eliminarFila(boton, horarioId) {
-      var fila = boton.parentNode.parentNode;
-      var tabla = fila.parentNode;
-  
-      // Eliminar la fila de la tabla
-      tabla.removeChild(fila);
-  
-      // Agregar el ID del horario al array "borrar[]"
-      var borrarDiv = document.querySelector('[name="borrar[]"]');
-      var input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'borrar[]';
-      input.value = horarioId;
-      borrarDiv.appendChild(input);
-  }
+        var fila = boton.parentNode.parentNode;
+        var tabla = fila.parentNode;
+    
+        // Eliminar la fila de la tabla
+        tabla.removeChild(fila);
+    
+        // Agregar el ID del horario al array "borrar[]"
+        var borrarDiv = document.querySelector('[name="borrar[]"]');
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'borrar[]';
+        input.value = horarioId;
+        borrarDiv.appendChild(input);
+    }
     
     function abrirOtroModal(seleccion) {
         document.getElementById("otroModal").style.display = "block";
@@ -287,9 +287,9 @@
    
     <!-- Horarios version 2-->
     <script>
-      var horarioSeleccionado = {}; // Variable para almacenar los horarios seleccionados
-    var diasHorarios = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-    var intervalos = [
+        var horarioSeleccionado = {}; // Variable para almacenar los horarios seleccionados
+        var diasHorarios = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        var intervalos = [
         ["6:45", "8:15"],
         ["8:15", "9:45"],
         ["9:45", "11:15"],
