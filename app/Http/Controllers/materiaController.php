@@ -19,7 +19,7 @@ class materiaController extends Controller
 
     public function create()
     {
-        $departamentos = Unidad::where('nivel', '2')->get();
+        $departamentos = Unidad::where('nivel', '3')->get();
 
         return view('materia.registrar', compact('departamentos'));
     }
