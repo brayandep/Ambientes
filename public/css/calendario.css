@@ -1,0 +1,28 @@
+body{
+    background-color: #DED4EB;
+    font-family: sans-serif;
+    color: #0B2C37;
+}
+
+.cont1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cont2{
+    width: 70%;
+}
+
+#calendar{
+    margin-top: 10px;
+    background-color: #f5f6f7;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.navegacion h1{
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}

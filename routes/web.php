@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmbienteController;
 use App\Http\Controllers\EstadoAmbienteController;
 
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\registroUnidadesController;
 use App\Http\Controllers\DependenciaUnidadController;
@@ -13,6 +14,7 @@ use App\Models\Dependencia;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\grupoController;
 
 /*
@@ -33,9 +35,14 @@ Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
 
-Route::get('/', [HomeController::class, 'index'])->name('inicio');
-/*
-*/
+
+Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');
+
+Route::get('/index', function () {
+    return view('sliderBar');
+});
 
 
 
@@ -95,13 +102,19 @@ Route::put('grupo/{cantGrupo}', [grupoController::class, 'jhosemar'])->name('gru
 Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
-Route::resource('/registro', AmbienteController::class);
+
+Route::get('/ambiente/create', [AmbienteController::class, 'create'])->name('ambiente.create');
+Route::post('/ambiente', [AmbienteController::class, 'store'])->name('ambiente.store');
+Route::get('/ambiente', [AmbienteController::class, 'update'])->name('ambiente.update');
 
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
-//Route::post('/Registrar_Unidad',[AmbienteController::class, 'store'])->name('unidad.store');
+//rutas calendario
+Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
+Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])->name('calendario.individual');
+//termina rutas calendario
 
 
 
