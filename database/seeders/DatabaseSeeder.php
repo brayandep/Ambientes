@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this -> call(UnidadSeeder::class);
-        $this -> call(MateriaSeeder::class);
+        Materia::factory(35)->create();
         $this -> call(EquipoSeeder::class);
         $this -> call(TipoAmbienteSeeder::class);
         $this -> call(DocenteSeeder::class);

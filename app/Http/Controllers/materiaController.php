@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegistrarMateria;
 use App\Models\Grupo;
 use App\Models\Materia;
+use App\Models\Unidad;
 use Illuminate\Http\Request;
 
 class materiaController extends Controller
@@ -18,7 +19,9 @@ class materiaController extends Controller
 
     public function create()
     {
-        return view('materia.registrar');
+        $departamentos = Unidad::where('nivel', '2')->get();
+
+        return view('materia.registrar', compact('departamentos'));
     }
 
     public function store(RegistrarMateria $request)

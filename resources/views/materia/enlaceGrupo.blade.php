@@ -1,6 +1,6 @@
 @extends('layoutes.plantilla')
 
-@section('titulo', 'Registrar Materia')
+@section('titulo', "Grupos de Materia")
 
 @section('links')
     <link rel="stylesheet" href="{{asset('css/styleMateria.css')}}">
@@ -19,21 +19,24 @@
             </div>
             <h1><i class='fas fa-book'></i> Grupos de {{$mimateria->nombre}}</h1>
             
-            @foreach ($grupos as $grupo)
-                <div class="input-goup">
-                    <h2 class="grupo" id="labMateria">Grupo {{$grupo->nombre}}</h2>
-                </div>
 
-                <form action="{{route('grupo.store', $grupo)}}" method="POST" class="grupo" id="grupo{{$grupo->nombre}}">
-                    @csrf
-                    @method('put')
-                    <input class="invisible" value="{{$grupo->nombre}}">
+            <form action="{{route('grupo.update' ,$mimateria->cantGrupo)}}" method="POST" >
+                @csrf
+                @method('put')
+
+                @foreach ($grupos as $grupo)
+                    <div class="input-goup">
+                        <h2 class="grupo" id="labMateria">Grupo {{$grupo->nombre}}</h2>
+                    </div>
+
+                    <input type="hidden" name="grupo_id[]" value="{{ $grupo->id }}">
+                    <input class="invisible" name="nombre[]" value="{{$grupo->nombre}}">
 
                     <div class="input-goup">
                         <label class="labMateria">Docente</label>
-                        <select class="inputMateria" id="nivel" name="docente">
+                        <select class="inputMateria" id="nivel" name="docente[]">
                             <option value="">Seleccione el nivel</option> 
-                            <option value="{{old('docente', $grupo->docente)}}" selected>{{old('docente', $grupo->docente)}}</option>
+                            <option value="{{$grupo->docente}}" selected>{{$grupo->docente}}</option>
                             <option value="SORUCO MAITA JOSE ANTONIO">SORUCO MAITA JOSE ANTONIO</option> 
                             <option value="OMONTE OJALVO JOSE ROBERTO">OMONTE OJALVO JOSE ROBERTO</option> 
                             <option value="MOREIRA CALIZAYA RENE">MOREIRA CALIZAYA RENE</option>
@@ -46,15 +49,14 @@
                         @enderror
                     </div>
 
-                    <input class="invisible" value="{{$grupo->materia}}">
-                </form>
-                <hr>
-            @endforeach 
-
-            <div class="botones">
-                <button onclick="CancelarReg()" type="button" class="btnCancelar">Cancelar</button>
-                <button onclick="regGrupos()" id='btnGrupos' class="btnRegistrar">Actualizar Materia</button>
-            </div>
+                    <input class="invisible" name="materia[]" value="{{$grupo->materia}}">
+                    <br>
+                @endforeach 
+                <div class="botones">
+                    <button onclick="CancelarReg()" type="button" class="btnCancelar">Cancelar</button>
+                    <button type="submit" id='btnGrupos' class="btnRegistrar">Actualizar Materia</button>
+                </div>
+            </form>
         </div>
 
         <div id="fondoGris"></div>
