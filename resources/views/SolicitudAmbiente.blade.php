@@ -19,60 +19,62 @@
 
     <form class="container2" method="POST" action="{{ route('solicitud.store') }}">
         @csrf <!-- Incluye el campo csrf aquí -->
-        <div class="izq">
-            <div>
-                <label class="texto" for="nro_aula">Solicitante:</label><br>
-                <select class="input" id="usuario" name="usuario">
-                    <option>Selecciona un usuario </option>
-                    @foreach($usuarios as $usuario)
-                    <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
-                    @endforeach
-                    
-                </select>
+        <div class="izqDer">
+            <div class="izq">
+                <div>
+                    <label class="texto" for="nro_aula">Solicitante:</label><br>
+                    <select class="input" id="usuario" name="usuario">
+                        <option>Selecciona un usuario </option>
+                        @foreach($usuarios as $usuario)
+                        <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+                        @endforeach
+                        
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="materia">Materia:</label><br>
+                    <input class="input" type="text" id="materia" name="materia" required>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="grupo">Nro Grupo:</label><br>
+                    <input class="input" type="text" id="grupo" name="grupo" required>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="motivo">Motivo:</label><br>
+                    <select class="input" id="motivo" name="motivo" required>
+                        <option value="Clase">Clase</option>
+                        <option value="Examen">Examen</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>    
             </div>
-            <br>
-            <div>
-                <label class="texto" for="materia">Materia:</label><br>
-                <input class="input" type="text" id="materia" name="materia" required>
-            </div>
-            <br>
-            <div>
-                <label class="texto" for="grupo">Nro Grupo:</label><br>
-                <input class="input" type="text" id="grupo" name="grupo" required>
-            </div>
-            <br>
-            <div>
-                <label class="texto" for="motivo">Motivo:</label><br>
-                <select class="input" id="motivo" name="motivo" required>
-                    <option value="Clase">Clase</option>
-                    <option value="Examen">Examen</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>    
-        </div>
-        <div class="der">
-            <div>
-                <label class="texto" for="fecha">Fecha:</label><br>
-                <input class="input" type="date" id="fecha" name="fecha" required>
-            </div>
-            <br>
-            <div>
-                <label class="texto" for="nro_aula">Ambiente:</label><br>
-                <select class="input" id="nro_aula" name="nro_aula">
-                    <option>Selecciona un ambiente</option>
-                    @foreach($ambientes as $ambiente)
-                        <option value="{{ $ambiente->id }}" {{ isset($id) && $id == $ambiente->id ? 'selected' : '' }}>
-                            {{ $ambiente->nombre }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <br>
-            <div>
-                <label class="texto" for="horario">Horario:</label><br>
-                <select class="input" id="horario" name="horario">
-                    <option>Selecciona un horario:</option>
-                </select>
+            <div class="der">
+                <div>
+                    <label class="texto" for="fecha">Fecha:</label><br>
+                    <input class="input" type="date" id="fecha" name="fecha" required>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="nro_aula">Ambiente:</label><br>
+                    <select class="input" id="nro_aula" name="nro_aula">
+                        <option>Selecciona un ambiente</option>
+                        @foreach($ambientes as $ambiente)
+                            <option value="{{ $ambiente->id }}" {{ isset($id) && $id == $ambiente->id ? 'selected' : '' }}>
+                                {{ $ambiente->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="horario">Horario:</label><br>
+                    <select class="input" id="horario" name="horario">
+                        <option>Selecciona un horario:</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div>

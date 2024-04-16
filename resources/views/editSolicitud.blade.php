@@ -19,66 +19,67 @@
     </div>
     <form class="container2" method="POST" action="{{ route('solicitud.update',$solicitud) }}">
 
-         @csrf <!-- Incluye el campo csrf aquí -->
-         @method('put')
-         <div class="izq">
-            <div>
-             <label class="texto" for="usuario">Usuario:</label><br>
-             <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario"  readonly required >
+        @csrf <!-- Incluye el campo csrf aquí -->
+        @method('put')
+        <div class="izqDer">
+            <div class="izq">
+                <div>
+                <label class="texto" for="usuario">Usuario:</label><br>
+                <input class="input" type="text" id="usuario" value="{{$solicitud->usuario}}" name="usuario"  readonly required >
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="materia">Materia:</label><br>
+                    <input class="input" type="text" id="materia" name="materia" value="{{$solicitud->materia}}" required>
+                </div>
+                <br>
+        
+                <div>
+                    <label class="texto" for="grupo">Nro Grupo:</label><br>
+                    <input class="input" type="text" id="grupo" name="grupo" value="{{$solicitud->grupo}}" required>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="motivo">Motivo:</label><br>
+                    <select class="input" id="motivo" name="motivo" value="{{$solicitud->motivo}}" required>
+                        <option value="Clase">Clase</option>
+                        <option value="Examen">Examen</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <br>   
             </div>
-             <br>
-             <div>
-                <label class="texto" for="materia">Materia:</label><br>
-                <input class="input" type="text" id="materia" name="materia" value="{{$solicitud->materia}}" required>
+            <div class="der">
+                <div>
+                    <label class="texto" for="fecha">Fecha:</label><br>
+                    <input class="input" type="date" id="fecha" name="fecha"  value="{{$solicitud->fecha}}" required>
+                </div>
+                <br>
+                
+                <div>
+                    <label class="texto" for="nro_aula">Ambiente:</label><br>
+                    <select class="input" id="nro_aula" name="nro_aula">
+                        <option>Selecciona un ambiente</option>
+                        @foreach($ambientes as $ambiente)
+                            <option value="{{ $ambiente->id }}" {{ $idAmbienteSeleccionado == $ambiente->id ? 'selected' : '' }}>
+                                {{ $ambiente->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="horario">Horario:</label><br>
+                    <select class="input" id="horario" name="horario" value="{{$solicitud->horario}}">
+                        <option></option>
+                    </select>
+                </div>
+                <br>
             </div>
-            <br>
-    
-             <div>
-                <label class="texto" for="grupo">Nro Grupo:</label><br>
-                <input class="input" type="text" id="grupo" name="grupo" value="{{$solicitud->grupo}}" required>
-            </div>
-            <br>
-            <div>
-                <label class="texto" for="motivo">Motivo:</label><br>
-                <select class="input" id="motivo" name="motivo" value="{{$solicitud->motivo}}" required>
-                    <option value="Clase">Clase</option>
-                    <option value="Examen">Examen</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-            <br>   
-         </div>
-
-         <div class="der">
-            <div>
-                <label class="texto" for="fecha">Fecha:</label><br>
-                <input class="input" type="date" id="fecha" name="fecha"  value="{{$solicitud->fecha}}" required>
-            </div>
-            <br>
-             
-             <div>
-                <label class="texto" for="nro_aula">Ambiente:</label><br>
-                <select class="input" id="nro_aula" name="nro_aula">
-                    <option>Selecciona un ambiente</option>
-                    @foreach($ambientes as $ambiente)
-                        <option value="{{ $ambiente->id }}" {{ $idAmbienteSeleccionado == $ambiente->id ? 'selected' : '' }}>
-                            {{ $ambiente->nombre }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <br>
-            <div>
-                <label class="texto" for="horario">Horario:</label><br>
-                <select class="input" id="horario" name="horario" value="{{$solicitud->horario}}">
-                    <option></option>
-                </select>
-            </div>
-            <br>
         </div>
             
          <div>
-         <button class="boton" type="submit">Actualizar Solicitud</button> 
+         <button class="boton" type="submit">Actualizar</button> 
          </div>  
      </form>  
 </div>    

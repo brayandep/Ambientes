@@ -75,9 +75,14 @@
 
 .botones{
   color: #E3E5F3;
- 
-
 }
+
+.izqDer{
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
 .izq{
   width:35%; 
 }
@@ -87,15 +92,22 @@
   font-size: 14px;
   padding: 5px;
   margin-top: 5px;
+  background-color: #E3E5F3;
 }
+
+.input:focus, .input:hover {
+  outline: none;
+  box-shadow: 0 0 0 2px #b7b8c3;
+}
+
 .der{
   display: block;
-  width:35%; 
+  width:40%; 
   
 }
 .texto{
-  
   margin-top: 10px;
+  font-weight: bold;
 }
 .container{
   display: flex;
@@ -111,15 +123,18 @@
 }
 .container2{
   display: flex;
+  flex-direction: column;
   gap: 20px;
   width: 70%;
+  margin-top: 10px;
 }
 .boton{
   border-radius: 5px;
-  background-color: #C384B2;
+  background-color: #538296;
   width: 160px;
-  color: #E1DBE8;
+  color: #f5f6f7;
   font-size: 16px;
+  font-weight: bold;
   padding: 5px;
 }
 .titulo{
