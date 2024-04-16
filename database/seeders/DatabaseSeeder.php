@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this -> call(MateriaSeeder::class);
         $this -> call(EquipoSeeder::class);
         $this -> call(TipoAmbienteSeeder::class);
+        $this -> call(DocenteSeeder::class);
     }
 }
