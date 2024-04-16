@@ -2,15 +2,18 @@
 .ambienteTitulo{
   font-size: 24px;
 }
+h2{
+  font-size: 30px;
+}
 
 .content-wrapper {
   
-  height: 100%;
+  height: auto;
   overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
 }
 
 .container {
-  max-width: 60%;
+  max-width: 70%;
   margin: 0px auto;
   padding: 20px;
 }
@@ -284,4 +287,9 @@
 #aceptarModal {
   align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
   margin-top: 10px; /* Agrega un margen superior */
+}
+
+/*boton añadir */
+.btnAnadir{
+  background-color: #C384B2;
 }

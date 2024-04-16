@@ -10,7 +10,7 @@
 <main class="content-wrapper">
             <div class="container">
             <h2 class="ambienteTitulo" style="padding-bottom:20px" ><i class='fas fa-book'></i> {{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
-                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
+                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('ambiente.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
                       @method('PUT')
@@ -18,7 +18,10 @@
                     
                 <div class="form-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
+                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
+                    @error('codigo')
+                        <span>*{{$message}}</span>
+                    @enderror
                     <label for="unidad">Unidad:</label>
                         <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;">
                         <option value="">Selecciona una unidad</option>
@@ -29,17 +32,25 @@
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
+                    <input type="text" id="nombre" name="nombre" style="width: 40%;" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
+                    @error('nombre')
+                        <span>*{{$message}}</span>
+                    @enderror
                     <label for="capacidad">Capacidad:</label>
-                    <input type="number" id="capacidad" name="capacidad" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
-                </div>
+                    <input type="number" id="capacidad" name="capacidad" style="width: 40%;" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
+                    @error('capacidad')
+                        <span>*{{$message}}</span>
+                    @enderror
+                  </div>
     
     
     
                 <div class="form-group">
                     <label for="ubicacion">Ubicación:</label>
-                    <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
-                
+                    <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
+                    @error('ubicacion')
+                        <span>*{{$message}}</span>
+                    @enderror
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
                   <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
                     <option>Selecciona una unidad</option>
@@ -57,7 +68,10 @@
   
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" >{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
+                    <textarea id="descripcion" name="descripcion" required maxlength="150" autocomplete="off">{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
+                    @error('descripcion')
+                        <span>*{{$message}}</span>
+                    @enderror
                 </div>
                 
                 
@@ -134,7 +148,7 @@
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
                   <button type="submit" class="btn-registrar" onclick="obtenerDatos()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
     
-              </div>
+                </div>
                 </form>
             </div>
          </main>
@@ -159,8 +173,8 @@
                         <div class="horarios">
                         <label for="modalHoraInicio">Hora inicio:</label>
                         <input type="time" id="modalHoraInicio" name="modalHoraInicio" pattern="[0-9]{2}:[0-9]{2}">
-                        <label for="modalHoraFin" style="margin-left:30px">Hora fin:</label>
-                        <input type="time" id="modalHoraFin" name="modalHoraFin" style="margin-right:50px" pattern="[0-9]{2}:[0-9]{2}">
+                        <label for="modalHoraFin" >Hora fin:</label>
+                        <input type="time" id="modalHoraFin" name="modalHoraFin"pattern="[0-9]{2}:[0-9]{2}">
                         </div>
                         
                         <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->

@@ -22,6 +22,9 @@
                     <li>
                         <a href="#"><i class='fas fa-search'></i> Buscar</a>
                     </li>
+                    <li>
+                        <a href="{{ route('calendario.index') }}"><i class='fas fa-calendar-days'></i> Calendario</a>
+                    </li>
                     <li onclick="gesAmbiente()">
                         <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>
                         
@@ -29,7 +32,7 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="{{ route('registro.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
+                                <a href="{{ route('ambiente.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
                             <li>
                                 <a href="{{ route('AmbientesRegistrados') }}"><i class="fa-solid fa-rectangle-list"></i> Ver Informacion de ambiente</a>
