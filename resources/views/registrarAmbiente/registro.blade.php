@@ -7,25 +7,25 @@
 @section('titulo', 'Registro de Ambiente')
 
 @section('contenido')
-<main class="content-wrapper">
-            <div class="container">
-                <h2 style="padding-bottom:20px">Registro de Ambiente</h2>
-                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
-                  @csrf
-                  @if(isset($ambienteDatos))
-                      @method('PUT')
-                  @endif
-  
+    <main class="content-wrapper">
+        <div class="container">
+            <h2 style="padding-bottom:20px">Registro de Ambiente</h2>
+            <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
+                @csrf
+                    @if(isset($ambienteDatos))
+                    @method('PUT')
+                @endif
+
                 <div class="form-group">
                     <label for="codigo">Código:</label>
                     <input type="text" id="codigo" name="codigo" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
                     <label for="unidad">Unidad:</label>
-                        <select id="unidad" name="unidad" style="width: 40%;">
+                    <select id="unidad" name="unidad" style="width: 40%;">
                         <option value="">Selecciona una unidad</option>
                         @foreach($unidades as $unidad)
-                          <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
+                        <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
                         @endforeach
-                        </select>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -33,29 +33,29 @@
                     <label for="capacidad">Capacidad:</label>
                     <input type="number" id="capacidad" name="capacidad" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
                 </div>
-    
-    
-    
+
+
+
                 <div class="form-group">
                     <label for="ubicacion">Ubicación:</label>
                     <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                 
                     <label for="tipo-ambiente">Tipo de ambiente:</label>
-<select id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)" >
-    <option>Selecciona una unidad</option>
-    @foreach($tipoAmbientes as $tipoAmbiente)
-        <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
-    @endforeach
-    <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
-</select>
-              </div>
-  
+                    <select id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)" >
+                        <option>Selecciona una unidad</option>
+                        @foreach($tipoAmbientes as $tipoAmbiente)
+                            <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
+                        @endforeach
+                        <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
+                    </select>
+                </div>
+
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
                     <textarea id="descripcion" name="descripcion" >{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
                 </div>
-                
-                
+            
+            
                 <div class="form-grupo">
                     <label>Equipos disponibles:</label><br>
                     <div class="checkbox-columns" style="padding-left: 20px;">
@@ -72,124 +72,109 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div id="mensaje-auditorio" style="display: none;">
-                <div class="form-grupo">
-                    <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
-                    <select id="diasSemana" onchange="agregarColumna()" style="width: 20%;">
-    
-                    <option value="">Añade un dia</option>
-                    <option value="lunes">Lunes</option>
-                    <option value="martes">Martes</option>
-                    <option value="miercoles">Miércoles</option>
-                    <option value="jueves">Jueves</option>
-                    <option value="viernes">Viernes</option>
-                    <option value="sabado">Sábado</option>
-                  </select>
-    
+                    <div class="form-grupo">
+                        <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
+                        <select id="diasSemana" onchange="agregarColumna()" style="width: 20%;">
+                            <option value="">Añade un dia</option>
+                            <option value="lunes">Lunes</option>
+                            <option value="martes">Martes</option>
+                            <option value="miercoles">Miércoles</option>
+                            <option value="jueves">Jueves</option>
+                            <option value="viernes">Viernes</option>
+                            <option value="sabado">Sábado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div id="filaExistente" class="filaExistente">
+                            <!-- Aquí se añadirán las columnas -->
+                            @if($horariosExistente != null)
+                                @foreach($horariosExistente as $dia => $horarios)
+                                    <div id="{{ strtolower($dia) }}" class="columna">
+                                        {{ ucfirst($dia) }}
+                                        <button type="button" onclick="abrirOtroModal('{{ strtolower($dia) }}')">Añadir</button>
+                                        <table>
+                                            @foreach($horarios as $horario)
+                                            <tr data-horario-id="{{ $horario->id }}"> <!-- Agregar data-horario-id con el ID del horario -->
+                                                <td>{{ $horario->horaInicio }} -</td>
+                                                <td>{{ $horario->horaFin }}</td>
+                                                <td><button onclick="eliminarFila(this, {{ $horario->id }})" class="boton-eliminar">X</button></td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <!-- Div para almacenar los IDs de los horarios a borrar -->
+                            <div name="borrar[]"></div>
+                        </div>
+                    </div>
+                    <div id="camposHorarios"></div>
+                    <div id="camposDiasSemana" name= "diaSemana[]"></div>
                 </div>
 
-                <div class="form-group">
-                  <div id="filaExistente" class="filaExistente">
-                      <!-- Aquí se añadirán las columnas -->
-                      @if($horariosExistente != null)
-                        @foreach($horariosExistente as $dia => $horarios)
-                            <div id="{{ strtolower($dia) }}" class="columna">
-                                {{ ucfirst($dia) }}
-                                <button type="button" onclick="abrirOtroModal('{{ strtolower($dia) }}')">Añadir</button>
-                                <table>
-                                    @foreach($horarios as $horario)
-                                    <tr data-horario-id="{{ $horario->id }}"> <!-- Agregar data-horario-id con el ID del horario -->
-                                        <td>{{ $horario->horaInicio }} -</td>
-                                        <td>{{ $horario->horaFin }}</td>
-                                        <td><button onclick="eliminarFila(this, {{ $horario->id }})" class="boton-eliminar">X</button></td>
-                                    </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                        @endforeach
-                      @endif
-                      
-                      
-                      <!-- Div para almacenar los IDs de los horarios a borrar -->
-                      <div name="borrar[]"></div>
-                      
-
-                  </div>
+                <div id="mensaje-no-auditorio" style="display: none;">
+                    <div class="form-grupo">
+                        <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
+                        <table id="horario">
+                            <tr>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miércoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                                <th>Sábado</th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <div id="camposHorarios"></div>
-                <div id="camposDiasSemana" name= "diaSemana[]"></div>
-</div>
-<div id="mensaje-no-auditorio" style="display: none;">
-<div class="form-grupo">
-                  <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
-                  <table id="horario">
-                    <tr>
-                        <th>Lunes</th>
-                        <th>Martes</th>
-                        <th>Miércoles</th>
-                        <th>Jueves</th>
-                        <th>Viernes</th>
-                        <th>Sábado</th>
-                    </tr>
-                    </table>
-    
-                </div>
-</div>
                 <div>
                     <!-- Contenido específico para cuando se selecciona "auditorio" -->
                     <!-- Puedes colocar aquí cualquier contenido HTML o Blade que desees mostrar -->
-                    
-    
                 </div>
-                
-                
-                
-    
-                
-  
-                
                 <div class="botones">
-                  <button class="btn-cancelar">
+                    <button class="btn-cancelar">
                     <a href="{{ route('AmbientesRegistrados') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
-                </button>
-  
-                  <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
-                  <button type="submit" class="btn-registrar" onclick="obtenerDatos2()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
-    
-              </div>
-                </form>
-            </div>
-         </main>
+                    </button>
 
-         <!-- Modal Ambiente -->
-         <div id="modalOtro" class="modal">
-                  <div class="modal-contenido">
-                      <span class="close" onclick="cerrarModal()">&times;</span>
-                      <div class="nuevo-tipo">
-                      <label for="otroAmbiente">Ingrese otro tipo de ambiente:</label>
-                      <input type="text" id="otroAmbiente" name="otroAmbiente">
-                      </div>
-                      <button type="button" id="aceptarModal" onclick="agregarOtroAmbiente()">Aceptar</button> <!-- Cambiar el tipo de botón a "button" -->
-                  </div>
-              </div>
-  
-                <!-- Modal para AÑADIR HORA -->
-                <div id="otroModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="cerrarOtroModal()">&times;</span>
-            
-                        <div class="horarios">
-                        <label for="modalHoraInicio">Hora inicio:</label>
-                        <input type="time" id="modalHoraInicio" name="modalHoraInicio" pattern="[0-9]{2}:[0-9]{2}">
-                        <label for="modalHoraFin" style="margin-left:30px">Hora fin:</label>
-                        <input type="time" id="modalHoraFin" name="modalHoraFin" style="margin-right:50px" pattern="[0-9]{2}:[0-9]{2}">
-                        </div>
-                        
-                        <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->
-                        
-                    </div>
+                    <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
+                    <button type="submit" class="btn-registrar" onclick="obtenerDatos2()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
+
                 </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Modal Ambiente -->
+    <div id="modalOtro" class="modal">
+        <div class="modal-contenido">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <div class="nuevo-tipo">
+            <label for="otroAmbiente">Ingrese otro tipo de ambiente:</label>
+            <input type="text" id="otroAmbiente" name="otroAmbiente">
+            </div>
+            <button type="button" id="aceptarModal" onclick="agregarOtroAmbiente()">Aceptar</button> <!-- Cambiar el tipo de botón a "button" -->
+        </div>
+    </div>
+
+    <!-- Modal para AÑADIR HORA -->
+    <div id="otroModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarOtroModal()">&times;</span>
+
+            <div class="horarios">
+            <label for="modalHoraInicio">Hora inicio:</label>
+            <input type="time" id="modalHoraInicio" name="modalHoraInicio" pattern="[0-9]{2}:[0-9]{2}">
+            <label for="modalHoraFin" style="margin-left:30px">Hora fin:</label>
+            <input type="time" id="modalHoraFin" name="modalHoraFin" style="margin-right:50px" pattern="[0-9]{2}:[0-9]{2}">
+            </div>
+            
+            <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->
+            
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -607,19 +592,19 @@ crearHorario();*/
   }
   </script>
 
-<script>
-    function verificarAuditorio(select) {
-        var selectedOption = select.options[select.selectedIndex].value;
-        var mensajeAuditorio = document.getElementById('mensaje-auditorio');
-        var mensajeNoAuditorio = document.getElementById('mensaje-no-auditorio');
+    <script>
+        function verificarAuditorio(select) {
+            var selectedOption = select.options[select.selectedIndex].value;
+            var mensajeAuditorio = document.getElementById('mensaje-auditorio');
+            var mensajeNoAuditorio = document.getElementById('mensaje-no-auditorio');
 
-        if (selectedOption === 'Auditorio') {
-            mensajeAuditorio.style.display = 'block';
-            mensajeNoAuditorio.style.display = 'none';
-        } else {
-            mensajeAuditorio.style.display = 'none';
-            mensajeNoAuditorio.style.display = 'block';
+            if (selectedOption === 'Auditorio') {
+                mensajeAuditorio.style.display = 'block';
+                mensajeNoAuditorio.style.display = 'none';
+            } else {
+                mensajeAuditorio.style.display = 'none';
+                mensajeNoAuditorio.style.display = 'block';
+            }
         }
-    }
-</script>
+    </script>
 @endsection
