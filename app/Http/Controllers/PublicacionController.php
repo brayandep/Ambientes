@@ -48,12 +48,15 @@ class PublicacionController extends Controller
         return view('modalPublicacion', compact('publicacion'));
     }
 
-    public function destroy($id)
-    {
-        // Encontrar y eliminar la publicación con el ID proporcionado
+    public function eliminarPublicacion($id) {
+        // Encuentra y elimina la publicación con el ID proporcionado
         Publicacion::destroy($id);
-
-        // Redireccionar al usuario con un mensaje de éxito
-        return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido eliminada exitosamente.');
+    
+        // Redirige a la página de publicaciones o a donde sea apropiado después de eliminar
+        return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada correctamente');
     }
+    
+    
+    
+    
 }

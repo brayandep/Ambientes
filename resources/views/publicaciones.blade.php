@@ -11,10 +11,13 @@
         <div class="publicaciones-list">
             @foreach($reglamentos as $publicacion)
                 <div class="publicacion">
+                    
                     <span>{{ $publicacion->titulo }}</span>
                     
                     <div class="acciones-publicacion">
-                       <a onclick="eliminarPublicacion({{ $publicacion->id }})" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    
+                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+
                         <a href="{{ isset($publicacion->id) ? route('editar.publicacion', $publicacion->id) : '#' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
                     </div>
@@ -31,7 +34,7 @@
                     
                     <span>{{ $publicacion->titulo }}</span>
                     <div class="acciones-publicacion">
-                       <a onclick="eliminarPublicacion({{ $publicacion->id }})" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
                         <a href="{{ isset($publicacion->id) ? route('editar.publicacion', $publicacion->id) : '#' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
                     </div>

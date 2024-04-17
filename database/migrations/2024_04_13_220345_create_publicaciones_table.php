@@ -14,7 +14,7 @@ class CreatePublicacionesTable extends Migration
     public function up()
     {
         Schema::create('publicaciones', function (Blueprint $table) {
-            $table->id();
+            $table->id_publicaciones();
             $table->enum('tipo', ['reglamento', 'anuncio']);
             $table->string('titulo');
             $table->text('descripcion');
