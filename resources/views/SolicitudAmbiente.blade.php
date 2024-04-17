@@ -25,8 +25,8 @@
                     <label class="texto" for="nro_aula">Solicitante:</label><br>
                     <select class="input" id="usuario" name="usuario">
                         <option>Selecciona un usuario </option>
-                        @foreach($usuarios as $usuario)
-                        <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+                        @foreach($docentes as $docente)
+                        <option value="{{ $docente->nombreDocente}}" {{ isset($nombreDocente) ? 'selected' : '' }}>{{ $docente->nombreDocente }}</option>
                         @endforeach
                         
                     </select>
