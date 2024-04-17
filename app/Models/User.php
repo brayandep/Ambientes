@@ -17,28 +17,23 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'usuarios';
+
+    use HasFactory, Notifiable;
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre',
+        'contraseña', // Nombre del campo de contraseña personalizado
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
+        'contraseña', // Nombre del campo de contraseña personalizado
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getAuthPassword()
+    {
+        return $this->contraseña;
+    }
+    
 }

@@ -1,0 +1,16 @@
+.invisible{
+    display: none;
+}
+
+.grupo{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.inputMateria{
+    width: 100%;
+}
+
+.labMateria{
+    font-weight: normal;
+}

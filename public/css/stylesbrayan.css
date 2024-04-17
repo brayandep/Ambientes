@@ -1,0 +1,265 @@
+body {
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0;
+    font-family: Arial, sans-serif;
+    color: #89C2D9;
+    background: #E1DBE8;
+    
+  }
+  
+  .menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  .btn-line {
+    width: 30px;
+    height: 3px;
+    background: #E3E5F3;
+    margin: 5px 0;
+    transition: transform 0.3s, opacity 0.3s;
+    
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    margin-top: 10%;
+    padding: 20px;
+    transition: left 0.3s;
+    color: #E3E5F3;
+  }
+  
+  .sidebar  {
+    display: block;
+    color:#090909;
+    text-decoration: none;
+    padding: 10px 0;
+    
+    border-bottom: 1px solid #E3E5F3;
+  }
+  
+  .content {
+    margin-left: 0;
+    transition: margin-left 0.3s;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  .sidebar.active + .content {
+    margin-left: 250px;
+  }
+  .fondo{
+    background: #E3E5F3;
+  }
+.contenido{
+  margin-top: 30%;
+  margin-left: 10%;
+  font-size: 15px;
+  background: #89C2D9;
+  border-radius: 10px;
+  max-width: 1000px; /* Cambia este valor según el ancho máximo deseado */
+  margin: 0 auto; /* Centra el contenido horizontalmente */
+  padding: 20px; 
+
+}
+
+.botones{
+  color: #E3E5F3;
+ 
+
+}
+.izq{
+  width:calc(50%, 10px); 
+
+ 
+  padding-top: 150px;
+  
+
+}
+.input{
+  width: 170%;
+  height: 25px;
+  border-radius: 10px;
+  border-color: #141D2C;
+  border-style: calc();
+  font-size: 16px;
+
+}
+.der{
+  display: block;
+  width:calc(50%, 20px); 
+  margin-right: 15%;
+ margin-left: 30%;
+  padding-top: 150px;
+  margin-top: 19px;
+}
+.text{
+  color: #090909;
+  margin-top: 10px;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+}
+.container2{
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  margin-left: 20%;
+}
+.boton{
+  border-radius: 10px;
+  background-color: #C384B2;
+  width: 25%;
+  height: 23px;
+  color: #E1DBE8;
+  font-size: 18px;
+  margin-top: 200px;
+}
+.titulo{
+  margin-left: 18%;
+  color: rgb(17, 17, 17);
+  font-size: 40px;
+}
+.botones2{
+  background: #E3E5F3;
+  border-radius: 10px;
+  width: 50px;
+  margin-top: 15px;
+}
+.arriba{
+  width: 100%;
+  height: 50px;
+  background-color: #141D2C;
+  padding: 25px;
+
+}
+.abajo{
+  width: 100%;
+  height: 80px;
+  margin-top: 80%;
+  background-color: #141D2C;
+
+}
+.centro{
+  width: 70%; /* Ajusta el ancho de la tabla */
+  border-collapse: collapse; /* Ajusta el ancho según sea necesario */
+  height: 100px; /* Ajusta la altura según sea necesario */
+  margin: auto; /* Esto centra horizontalmente */
+  /* Esto centra verticalmente  position: absolute;  */
+  top: 0; bottom: 0; left: 0; right: 0;
+  font-size: 16px;
+  background: #EBEBEB;
+  margin-top: 5%;
+  
+}
+.colorcolumna{
+  color: #E1DBE8;
+  background-color: #C384B2 ;
+  font-size: 17px;
+  margin-left: 5px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
+}
+.contentcolumna{
+  text-align: center;
+  color: #090909;
+
+}
+.botones-container {
+  align-items: center;
+  text-align: center;
+  display: flex; 
+  padding: 10px;
+  justify-content: center;
+}
+
+.botones{
+  color: #EBEBEB;
+  background-color: #F35D5D;
+  border-radius: 5px;
+  border: 0.5px solid black;
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  margin: 10px;
+}
+.botonedit{
+  color: #EBEBEB;
+  background-color: #C384B2;
+  border-radius: 5px;
+  border: 0.5px solid black;
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  margin: 10px;
+}
+.input2{
+  border-radius: 15px;
+  background: #E3E5F3;
+  width: 10%;
+  margin-left: 15%;
+  margin-top: 30px;
+  display: flex;
+
+}
+
+/* Estilos del modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+  background-color: white;
+  margin: 25% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  
+}
+
+
+/* Estilos para el botón de cancelar */
+#boton-cancelar {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+/* Estilos para el botón de salir */
+
+
+/* Estilos para el botón de confirmar */
+#boton-confirmar {
+  background-color: #4caf50;
+  color: white;
+}
+.botonesCentro{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
