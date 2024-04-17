@@ -42,13 +42,9 @@ Route::get('/', function () {
 Route::get('/materia', materiaController::class);
 
 
-//publicaciones
-Route::post('/publicaciones', 'PublicacionController@store')->name('guardar.publicacion');
-
+// Rutas para las publicaciones
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
-Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('publicaciones.crear');
-
+Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
+Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
 Route::delete('/publicaciones/{id}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');
-
-Route::get('/publicaciones/{id}/editar', 'PublicacionController@editar')->name('editar.publicacion');
-
+Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'editar'])->name('editar.publicacion');

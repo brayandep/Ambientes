@@ -12,9 +12,11 @@
             @foreach($reglamentos as $publicacion)
                 <div class="publicacion">
                     <span>{{ $publicacion->titulo }}</span>
+                    
                     <div class="acciones-publicacion">
                        <a onclick="eliminarPublicacion({{ $publicacion->id }})" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         <a href="{{ isset($publicacion->id) ? route('editar.publicacion', $publicacion->id) : '#' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                        <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
                     </div>
 
                 </div>
@@ -26,13 +28,13 @@
         <div class="publicaciones-list">
             @foreach($anuncios as $publicacion)
                 <div class="publicacion">
+                    
                     <span>{{ $publicacion->titulo }}</span>
                     <div class="acciones-publicacion">
                        <a onclick="eliminarPublicacion({{ $publicacion->id }})" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         <a href="{{ isset($publicacion->id) ? route('editar.publicacion', $publicacion->id) : '#' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                        <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
                     </div>
-
-
                 </div>
             @endforeach
         </div>

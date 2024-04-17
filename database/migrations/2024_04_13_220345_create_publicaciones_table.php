@@ -20,7 +20,9 @@ class CreatePublicacionesTable extends Migration
             $table->text('descripcion');
             $table->string('archivo')->nullable();
             $table->date('fecha_vencimiento');
+            $table->boolean('visible')->default(true);
             $table->timestamps();
+
         });
     }
 
