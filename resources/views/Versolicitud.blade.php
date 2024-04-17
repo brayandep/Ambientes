@@ -90,10 +90,7 @@
             }
         });
     }
-</script>
 
-
-<script>
     function botonCancelar() {
         var modal = document.getElementById("modal-confirmacion");
         modal.style.display = "block";
