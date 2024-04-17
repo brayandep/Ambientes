@@ -45,8 +45,8 @@
                 <div>
                     <label class="texto" for="motivo">Motivo:</label><br>
                     <select class="input" id="motivo" name="motivo" required>
-                        <option value="Clase">Clase</option>
                         <option value="Examen">Examen</option>
+                        <option value="Reunion">Reunion</option>
                         <option value="Otro">Otro</option>
                     </select>
                 </div>    
