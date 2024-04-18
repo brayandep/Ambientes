@@ -2,10 +2,12 @@
 @section('contenido')
 <style>
     .prueba {
-    font-size: 18px;
-    color: #333;
-    margin-top: 20px;
-}
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-size: 200%;  
+    }
 </style>
+
     <p class="prueba">pagina principal</p>
 @endsection
