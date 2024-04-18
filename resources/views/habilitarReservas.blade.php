@@ -55,25 +55,78 @@
             <td>{{ $solicitud->motivo }}</td>
             
             <td>
-                
                 <div class="botones-container">
-                    <div>
-                        <button title="Confirmar solicitud" onclick="confirmarSolicitud(this)" data-solicitud-id="{{ $solicitud->id }}"><i class="fa-solid fa-circle-check"></i></button>
+                    @if($solicitud->estado == 'Sin confirmar')
 
+                    <div>
+                                    <form action="{{ route('solicitud.habilitar', $solicitud->idsolicitud) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <button title="Confirmar solicitud" onclick="botonCancelar2()" ><i class="fa-solid fa-circle-check"></i></button>
+                                    </form>
+                               
                     </div>
 
                     <div>
-                    <button title="Rechazar Solicitud"><i class="fa-solid fa-circle-xmark" ></i></button>
+                    <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                    <div id="modal-confirmacion" class="modal">
+                
+                        <div class="modal-contenido">
+                            <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                            <div class="botonesCentro">
+                                <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                    @csrf
+                                    @method('put')
+                                    <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     
                     <div>
                         <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
+                    </div> 
+
+
+
+                    @elseif($solicitud->estado == 'confirmado')   
+                    <div>
+                        <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                        <div id="modal-confirmacion" class="modal">
                     
-                </div>
+                            <div class="modal-contenido">
+                                <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                                <div class="botonesCentro">
+                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                    <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div>
+                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
+                         </div> 
+
+                    @elseif($solicitud->estado == 'denegado')
+                    <div>
+                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
+                         </div> 
+                    @elseif($solicitud->estado == 'suspendido')
+                          <div>
+                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
+                         </div> 
+                    @endif
+                        
                 </div>
             </td>
         </tr>
-        <div id="modal-confirmacion" class="modal">
+        <div id="modal-confirmacion2" class="modal">
             <div class="modal-contenido">
                 <p>Nombre: <span class="Nombre-solicitud"></span></p>
                 <p>Materia: <span class="Materia-solicitud"></span></p>
@@ -109,76 +162,31 @@
         });
     }
     function botonInfo() {
-        var modal = document.getElementById("modal-confirmacion");
+        var modal = document.getElementById("modal-confirmacion2");
         modal.style.display = "block";
     }
 
+    function botonCancelar() {
+        var modal = document.getElementById("modal-confirmacion");
+        modal.style.display = "block";
+    }
     // Obtener el botón de salir del modal
     var botonSalir = document.getElementById("boton-salir");
-    
+    // Obtener el botón de confirmar del modal
+    var botonConfirmar = document.getElementById("boton-confirmar");
     // Cuando se hace clic en el botón de salir, ocultar el modal
     function botonSalirClick() {
         var modal = document.getElementById("modal-confirmacion");
         modal.style.display = "none";
     }
-
-</script>
-<script>
-    // Función para mostrar la información de los elementos de la tabla ambientes en el modal
-    function mostrarInformacion(button) {
-        // Obtener el ID del ambiente desde un atributo data-* de la fila
-        var ambienteId = button.closest('tr').getAttribute('data-ambiente-id');
-
-        // Realizar una solicitud AJAX al backend para obtener la información del ambiente
-        fetch('/Versolicitudes/' + solicitudId + '/confirmar', {
-            .then(response => response.json())
-            .then(data => {
-                // Actualizar el contenido del modal con la información obtenida del backend
-                var modal = document.getElementById("modal-confirmacion");
-                modal.querySelector('.nombre-ambiente').textContent = data.nombre;
-                modal.querySelector('.materia-ambiente').textContent = data.materia;
-                modal.querySelector('.aula-ambiente').textContent = data.aula;
-                modal.querySelector('.horario-ambiente').textContent = data.horario;
-
-                // Mostrar el modal
-                modal.style.display = "block";
-            })
-            .catch(error => {
-                console.error('Error al obtener información del ambiente:', error);
-            });
+    // Cuando se hace clic en el botón de confirmar, ocultar el modal
+    function botonConfirmarClick() {
+        var modal = document.getElementById("modal-confirmacion");
+        modal.style.display = "none";
     }
+    
 </script>
 
-
-<script>
-    // Función para confirmar una solicitud
-    function confirmarSolicitud(button) {
-        // Obtener el ID de la solicitud desde el atributo data-solicitud-id del botón
-        var solicitudId = button.getAttribute('data-solicitud-id');
-
-        // Realizar una solicitud AJAX al backend para actualizar el estado de la solicitud
-        fetch(`/Versolicitudes/${solicitudId}/confirmar`, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Si estás utilizando Laravel y necesitas el token CSRF
-    },
-    body: JSON.stringify({})
-})
-        .then(response => {
-            if (response.ok) {
-                // Actualizar el estado de la solicitud en la interfaz de usuario si la solicitud fue exitosa
-                var fila = button.closest('tr');
-                fila.querySelector('td:first-child').textContent = 'confirmado';
-            } else {
-                console.error('Error al actualizar el estado de la solicitud');
-            }
-        })
-        .catch(error => {
-            console.error('Error al realizar la solicitud AJAX:', error);
-        });
-    }
-</script>
 
 
     
