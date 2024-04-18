@@ -113,7 +113,7 @@
         </div>          
     </footer>
 </body>
-<script src="{{asset('js/scriptPlantilla.js')}}"></script>
+<script src="js/scriptPlantilla.js"></script>
 @yield('scripts')
 </html>
 
