@@ -1,4 +1,4 @@
 @extends('layoutes.plantilla')
 @section('contenido')
-    pagina principal
+pagina principal
 @endsection
