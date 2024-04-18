@@ -120,3 +120,5 @@ Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])-
 
 //habilitar reservas
 Route::get('/habilitar', [SolicitudController::class, 'index2'])->name('habilitarReservas');
+//cambia estado d
+Route::put('/Versolicitudes/{solicitud}/confirmar', [SolicitudController::class, 'confirmar'])->name('solicitud.confirmar');
