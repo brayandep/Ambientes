@@ -130,7 +130,7 @@
 }
 .boton{
   border-radius: 5px;
-  background-color: #538296;
+  background-color: #C384B2;
   width: 160px;
   color: #f5f6f7;
   font-size: 16px;
@@ -183,8 +183,10 @@
 }
 .contentcolumna{
   text-align: center;
+  
 
 }
+
 .botones-container {
   align-items: center;
   text-align: center;
@@ -192,6 +194,7 @@
   padding: 5px;
   justify-content: center;
   gap: 7px;
+  
 }
 .botones-container i{
   font-size: 20px;

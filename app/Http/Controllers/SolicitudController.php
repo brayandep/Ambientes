@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
 use App\Models\Ambiente;
+use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
 class SolicitudController extends Controller
@@ -30,13 +31,12 @@ class SolicitudController extends Controller
     {
         
         
-$usuarios = Usuario::all();
-$solicitudes = Solicitud::all(); 
+$docentes = Docente::all(); 
 $ambientes = Ambiente::all();;
 $horarios = HorarioDisponible::all();;
 // Obtén todas las solicitudes desde el modelo Solicitud
 //  $usuarios = Usuario::all();;
-return view('SolicitudAmbiente', compact( 'usuarios', 'ambientes','horarios'));
+return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios'));
 
     }
     public function store(Request $request)
@@ -107,6 +107,11 @@ public function destroy($id)
     $solicitud = Solicitud::findOrFail($id);
     $solicitud->delete();
     return redirect()->route('VerSolicitud')->with('success', 'Solicitud eliminada correctamente.');
+}
+public function suspender(Solicitud $id){
+    $id->estado = "suspendido";
+    $id->save();
+    return redirect()->route('VerSolicitud');
 }
 
 public function confirmar(Solicitud $solicitud)

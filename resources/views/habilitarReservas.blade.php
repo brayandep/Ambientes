@@ -24,6 +24,7 @@
                 <option value="Sin confirmar">Sin confirmar</option>
                 <option value="confirmado">Confirmado</option>
                 <option value="denegado">Denegado</option>
+                <option value="suspendido">Suspendido</option>
             </select>
         </div>
         <div>
