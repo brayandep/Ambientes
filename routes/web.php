@@ -117,3 +117,4 @@ Route::put('/suspender/{id}', [SolicitudController::class, 'suspender'])->name('
 Route::put('/habilitar/{id}', [SolicitudController::class, 'habilitar'])->name('solicitud.habilitar');
 //denegar
 Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('solicitud.denegar');
+Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');

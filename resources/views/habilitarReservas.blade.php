@@ -86,8 +86,22 @@
                     </div>
                     
                     <div>
-                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
-                    </div> 
+                        <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </button>
+                        <div id="modal-mensaje" class="modal">
+                            <div class="modal-contenido">
+                                <p class="subtitulo">Información del solicitante</p>
+                                <div class="datos">
+                                    <p id="nombre"></p>
+                                    <p id="materia"></p>
+                                    <p id="aula"></p>
+                                    <p id="horario"></p>
+                                </div>
+                                <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -109,35 +123,68 @@
                             </div>
                         </div>
                         </div>
-                    <div>
-                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
-                         </div> 
+                        <div>
+                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                            <div id="modal-mensaje" class="modal">
+                                <div class="modal-contenido">
+                                    <p class="subtitulo">Información del solicitante</p>
+                                    <div class="datos">
+                                        <p id="nombre"></p>
+                                        <p id="materia"></p>
+                                        <p id="aula"></p>
+                                        <p id="horario"></p>
+                                    </div>
+                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
 
                     @elseif($solicitud->estado == 'denegado')
-                    <div>
-                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
-                         </div> 
+                        <div>
+                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                            <div id="modal-mensaje" class="modal">
+                                <div class="modal-contenido">
+                                    <p class="subtitulo">Información del solicitante</p>
+                                    <div class="datos">
+                                        <p id="nombre"></p>
+                                        <p id="materia"></p>
+                                        <p id="aula"></p>
+                                        <p id="horario"></p>
+                                    </div>
+                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                         
                     @elseif($solicitud->estado == 'suspendido')
-                          <div>
-                        <button title="Mas informacion" type="submit" onclick="mostrarInformacion(button)"><i class="fa-solid fa-circle-info"></i></button>
-                         </div> 
+                    <div>
+                        <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </button>
+                        <div id="modal-mensaje" class="modal">
+                            <div class="modal-contenido">
+                                <p class="subtitulo">Información del solicitante</p>
+                                <div class="datos">
+                                    <p id="nombre"></p>
+                                    <p id="materia"></p>
+                                    <p id="aula"></p>
+                                    <p id="horario"></p>
+                                </div>
+                                <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
                     @endif
                         
                 </div>
             </td>
         </tr>
-        <div id="modal-confirmacion2" class="modal">
-            <div class="modal-contenido">
-                <p>Nombre: <span class="Nombre-solicitud"></span></p>
-                <p>Materia: <span class="Materia-solicitud"></span></p>
-                <p>Aula: <span class="Aula-solicitud"></span></p>
-                <p>Horario: <span class="Horario-solicitud"></span></p>
-              
-                <div class="botonesCentro">
-                    <button id="boton-salir" class="botones" type="button" onclick="botonSalirClick()">Salir</button>
-                </div>
-            </div>
-        </div>
+       
 
         @endforeach
 
@@ -185,6 +232,26 @@
         modal.style.display = "none";
     }
     
+  
+
+
+    function mostrarModalMensaje(nombre, materia, aula, horario) {
+    // Llenar el modal con los datos recibidos
+    document.getElementById('nombre').innerText = 'Nombre: ' + nombre;
+    document.getElementById('materia').innerText = 'Materia: ' + materia;
+    document.getElementById('aula').innerText = 'Aula: ' + aula;
+    document.getElementById('horario').innerText = 'Horario: ' + horario;
+
+    // Mostrar el modal
+    var modal = document.getElementById('modal-mensaje');
+    modal.style.display = 'block';
+}
+
+function cerrarModalMensaje() {
+    var modal = document.getElementById('modal-mensaje');
+    modal.style.display = 'none';
+}
+
 </script>
 
 
