@@ -26,3 +26,8 @@ body{
     font-size: 24px;
     font-weight: bold;
 }
+
+.izquierda{
+    z-index: 3;
+    top: 69px;
+}

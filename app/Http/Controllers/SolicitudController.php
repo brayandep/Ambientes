@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
 use App\Models\Ambiente;
+use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
 class SolicitudController extends Controller
@@ -30,8 +31,7 @@ class SolicitudController extends Controller
     {
         
         
-$usuarios = Usuario::all();
-$solicitudes = Solicitud::all(); 
+$docentes = Docente::all();
 $ambientes = Ambiente::all();;
 $horarios = HorarioDisponible::all();;
 // Obtén todas las solicitudes desde el modelo Solicitud

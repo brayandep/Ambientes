@@ -17,18 +17,21 @@ class UsuarioSeeder extends Seeder
         $usuario = new User();
         $usuario -> nombre = "Brayan";
         $usuario -> contraseña = "123";
+        $usuario -> tipoUsuario = 2;//docente
      
         $usuario -> save();
 
         $usuario = new User();
         $usuario -> nombre = "Lucas";
         $usuario -> contraseña = "123";
+        $usuario -> tipoUsuario = 2;//docente
      
         $usuario -> save();
 
         $usuario = new User();
         $usuario -> nombre = "Marcos";
         $usuario -> contraseña = "123";
+        $usuario -> tipoUsuario = 2;//docente
      
         $usuario -> save();
 

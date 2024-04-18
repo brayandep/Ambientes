@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         validRange: {
             start: today, // El día actual será el primer día permitido
         },
+        nowIndicator: true,
 
         headerToolbar:{
             start:'prev,next prevYear,nextYear today',
