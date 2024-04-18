@@ -45,28 +45,20 @@ Route::get('/index', function () {
 });
 
 
-
+//rutas unidades
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
-
 Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->name('visualizar_unidad');
-
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->name('unidad.store');
-
 Route::get('/unidad/dependencia/{nivel}',[DependenciaUnidadController::class, 'buscar'])->name('dependencia.buscar');
-
 Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->name('unidad.edit');
-
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
-
 Route::put('/Editar_unidad/{unidad}',[registroUnidadesController::class, 'update'])->name('unidad.update');
-
 Route::put('/Visualizar_unidad/{unidad}',[registroUnidadesController::class, 'updateEstado'])->name('unidad.updateEstado');
-
 Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEstado'])->name('unidad.habilitar');
-
 Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
+//termina rutas unidades
 
 Route::get('/registro', function () {
     return view('registro');
@@ -120,3 +112,4 @@ Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])-
 
 //habilitar reservas
 Route::get('/habilitar', [SolicitudController::class, 'index2'])->name('habilitarReservas');
+Route::put('/suspender/{id}', [SolicitudController::class, 'suspender'])->name('solicitud.suspender');

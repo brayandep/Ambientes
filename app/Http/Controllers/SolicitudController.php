@@ -108,5 +108,10 @@ public function destroy($id)
     $solicitud->delete();
     return redirect()->route('VerSolicitud')->with('success', 'Solicitud eliminada correctamente.');
 }
+public function suspender(Solicitud $id){
+    $id->estado = "suspendido";
+    $id->save();
+    return redirect()->route('VerSolicitud');
+}
 
 }

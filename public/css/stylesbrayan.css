@@ -183,8 +183,10 @@
 }
 .contentcolumna{
   text-align: center;
+  
 
 }
+
 .botones-container {
   align-items: center;
   text-align: center;
@@ -192,6 +194,7 @@
   padding: 5px;
   justify-content: center;
   gap: 7px;
+  
 }
 .botones-container i{
   font-size: 20px;
