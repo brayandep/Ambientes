@@ -77,19 +77,7 @@
                         </div>
                         <div>
                             <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
-                            <div id="modal-confirmacion" class="modal">
-                                <div class="modal-contenido">
-                                    <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                    <div class="botonesCentro">
-                                        <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                        <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div>
                             <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
@@ -100,20 +88,7 @@
                     @elseif($solicitud->estado == 'confirmado')   
                         <div>
                             <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
-                            <div id="modal-confirmacion" class="modal">
-                        
-                                <div class="modal-contenido">
-                                    <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                    <div class="botonesCentro">
-                                        <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                        <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div>
                             <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
@@ -149,6 +124,19 @@
                         <p id="horario"></p>
                     </div>
                     <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                </div>
+            </div>
+            <div id="modal-confirmacion" class="modal">
+                <div class="modal-contenido">
+                    <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                    <div class="botonesCentro">
+                        <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                        <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                            @csrf
+                            @method('put')
+                            <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
