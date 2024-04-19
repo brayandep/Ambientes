@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         validRange: {
             start: firstDayOfMonth, // Primer día del mes actual
         },
+        nowIndicator: true,
+        themeSystem: 'bootstrap5',
 
         headerToolbar:{
             start:'prev,next prevYear,nextYear today',
