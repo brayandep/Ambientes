@@ -40,7 +40,7 @@
             <th><a href="#" onclick="ordenarPorFecha()">Fecha</a></th>
             <th>Horario</th>
             <th>Aula</th>
-            <th>Motivo</th>
+            <th><a href="#" onclick="ordenarPorMotivo()">Motivo</a></th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -264,7 +264,25 @@ function cerrarModalMensaje() {
 
         rows.forEach(row => table.appendChild(row));
     }
+    function ordenarPorMotivo() {
+        const table = document.getElementById("tablaSolicitudes");
+        const rows = Array.from(table.rows).slice(1);
 
+        rows.sort((a, b) => {
+            const motivoA = a.cells[4].textContent.trim().toLowerCase();
+            const motivoB = b.cells[4].textContent.trim().toLowerCase();
+
+            if (motivoA === "examen" && motivoB !== "examen") return -1;
+            if (motivoB === "examen" && motivoA !== "examen") return 1;
+
+            if (motivoA === "otro" && motivoB !== "otro") return 1;
+            if (motivoB === "otro" && motivoA !== "otro") return -1;
+
+            return motivoA.localeCompare(motivoB);
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
    
 </script>
 
