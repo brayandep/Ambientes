@@ -43,7 +43,11 @@
     font-size: 14px;
     flex-direction: column;
     display: flex;
+}
+
+.datos {
     overflow: auto;
+    height: 500px;
 }
 
 .contBotones{

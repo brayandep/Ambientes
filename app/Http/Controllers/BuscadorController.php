@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BuscadorR;
 use Illuminate\Http\Request;
-use App\Models\Ambiente;
 use App\Models\HorarioDisponible;
 use Illuminate\Support\Facades\DB;
 

@@ -92,7 +92,7 @@
                         <button class="nomCol-b">Calendario</button>
                     </div>             
                 </div>
-                
+                <div class="datos">
                 @foreach ($ambientes as $ambiente)
                     @if ($ambiente->estadoAmbiente == 1)
                         @foreach ($horarios as $horario)
@@ -118,6 +118,7 @@
                         @endforeach
                     @endif    
                 @endforeach
+                </div>
             </div>
         </div>
     </div>
