@@ -59,98 +59,98 @@
         </div>
         <div id="tbody">
             @foreach($solicitudes as $solicitud)
-            <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
-                <!-- Contenido de la fila -->
-                <p>{{ $solicitud->estado }}</p>
-                <p>{{ $solicitud->fecha }}</p>
-                <p>{{ $solicitud->horario }}</p>
-                <p>{{ $solicitud->nro_aula }}</p>
-                <p>{{ $solicitud->motivo }}</p>
-                <div class="botones-container" id="botcontenedor">
-                    @if($solicitud->estado == 'Sin confirmar')
-                        <div>
-                                        <form action="{{ route('solicitud.habilitar', $solicitud->idsolicitud) }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <button title="Confirmar solicitud" onclick="botonCancelar2()" ><i class="fa-solid fa-circle-check"></i></button>
-                                        </form>
-                        </div>
-                        <div>
-                            <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
-                            <div id="modal-confirmacion" class="modal">
-                                <div class="modal-contenido">
-                                    <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                    <div class="botonesCentro">
-                                        <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                        <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                        </form>
+                <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
+                    <!-- Contenido de la fila -->
+                    <p>{{ $solicitud->estado }}</p>
+                    <p>{{ $solicitud->fecha }}</p>
+                    <p>{{ $solicitud->horario }}</p>
+                    <p>{{ $solicitud->nro_aula }}</p>
+                    <p>{{ $solicitud->motivo }}</p>
+                    <div class="botones-container" id="botcontenedor">
+                        @if($solicitud->estado == 'Sin confirmar')
+                            <div>
+                                            <form action="{{ route('solicitud.habilitar', $solicitud->idsolicitud) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button title="Confirmar solicitud" onclick="botonCancelar2()" ><i class="fa-solid fa-circle-check"></i></button>
+                                            </form>
+                            </div>
+                            <div>
+                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                <div id="modal-confirmacion" class="modal">
+                                    <div class="modal-contenido">
+                                        <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                                        <div class="botonesCentro">
+                                            <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </button>
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                
+                            </div>
+                        @elseif($solicitud->estado == 'confirmado')   
+                            <div>
+                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                <div id="modal-confirmacion" class="modal">
                             
-                        </div>
-                    @elseif($solicitud->estado == 'confirmado')   
-                        <div>
-                            <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
-                            <div id="modal-confirmacion" class="modal">
-                        
-                                <div class="modal-contenido">
-                                    <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                    <div class="botonesCentro">
-                                        <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                        <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                        </form>
+                                    <div class="modal-contenido">
+                                        <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                                        <div class="botonesCentro">
+                                            <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </button>
-                           
-                        </div>
-                    @elseif($solicitud->estado == 'denegado')
-                        <div>
-                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </button>
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
                             
-                        </div>  
-                    @elseif($solicitud->estado == 'suspendido')
-                        <div>
-                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </button>
-                            
-                        </div>
-                    @endif
-                </div>
-                
-            </div>
-            <div id="modal-mensaje" class="modal">
-                <div class="modal-contenido">
-                    <p class="subtitulo">Información del solicitante</p>
-                    <div class="datos">
-                        <p id="nombre"></p>
-                        <p id="materia"></p>
-                        <p id="aula"></p>
-                        <p id="horario"></p>
+                            </div>
+                        @elseif($solicitud->estado == 'denegado')
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                
+                            </div>  
+                        @elseif($solicitud->estado == 'suspendido')
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                
+                            </div>
+                        @endif
                     </div>
-                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                    
                 </div>
-            </div>
+                <div id="modal-mensaje" class="modal">
+                    <div class="modal-contenido">
+                        <p class="subtitulo">Información del solicitante</p>
+                        <div class="datos">
+                            <p id="nombre"></p>
+                            <p id="materia"></p>
+                            <p id="aula"></p>
+                            <p id="horario"></p>
+                        </div>
+                        <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                    </div>
+                </div>
 
             @endforeach
             
