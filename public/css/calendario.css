@@ -31,3 +31,52 @@ body{
     z-index: 3;
     top: 69px;
 }
+
+.labEvento{
+    font-weight: bold;
+}
+
+.inputEvento{
+    padding: 3px;
+    background-color: #E3E5F3;
+    color: #0B2C37;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    box-shadow: 0 0 0 2px transparent;
+    margin-bottom: 15px;
+}
+.inputEvento:focus, .inputEvento:hover {
+    outline: none;
+    box-shadow: 0 0 0 2px #b7b8c3;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+}
+
+#fechaStart{
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+#descripcion{
+    padding: 3px;
+    background-color: #E3E5F3;
+    color: #0B2C37;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    box-shadow: 0 0 0 2px transparent;
+    height: 85px;
+    margin-bottom: 15px;
+    resize: none;
+}
+
+#descripcion:focus, #descripcion:hover {
+    outline: none;
+    box-shadow: 0 0 0 2px #b7b8c3;
+}
