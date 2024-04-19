@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Models\Solicitud;
 use App\Models\Ambiente;
 use App\Models\Docente;
-use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
 class SolicitudController extends Controller
