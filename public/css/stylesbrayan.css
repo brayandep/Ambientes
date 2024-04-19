@@ -198,10 +198,14 @@
   width: 30%;
 }
 .botones-container i{
-  font-size: 20px;
-  
+  font-size: 20px; 
 }
-
+.fa-circle-check {
+ color: #4caf50;
+}
+.fa-circle-xmark {
+ color: #f44336;
+}
 .botones{
   color: #EBEBEB;
   background-color: #F35D5D;
@@ -345,19 +349,23 @@
   margin-top: 7px;
   
 }
+.datosSolicitud{
+  overflow: auto;
+  height: 500px;
+}
 .contBotones{
   min-width: 140px;
   width: 30%;
   display: flex;
   justify-content: center;
 }
-
 .nomCol{
   background-color: #AE7791;
   padding: 7px;
   border-radius: 5px;
   color: #EBEBEB;
   width: 100%;
+  transition: background-color 0.3s ease;
 }
 .fila{
   display: flex;
@@ -377,4 +385,10 @@
   display: flex;
   padding: 5px;
   
+}
+#activar:hover{
+  background-color: #4a44a5;
+}
+#noActivar{
+  cursor: default;
 }

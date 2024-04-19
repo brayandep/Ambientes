@@ -38,26 +38,26 @@
     <div class="tabla" id="tablaSolicitudes">
         <div class="fila">
             <div class="contBotones">
-                <button class="nomCol">Estado</button>
+                <button class="nomCol" id="noActivar">Estado</button>
             </div>
             <div class="contBotones">
-                <button class="nomCol"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
+                <button class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
             </div>
             <div class="contBotones">
-                <button class="nomCol">Horario</button>
+                <button class="nomCol" id="noActivar">Horario</button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol">Aula</button>
+                <button class="nomCol" id="noActivar">Aula</button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
+                <button class="nomCol" id="activar"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol">Acciones</button>
+                <button class="nomCol" id="noActivar">Acciones</button>
             </div>
         
         </div>
-        <div id="tbody">
+        <div id="tbody" class="datosSolicitud">
             @foreach($solicitudes as $solicitud)
                 <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
                     <!-- Contenido de la fila -->
@@ -76,7 +76,7 @@
                                             </form>
                             </div>
                             <div>
-                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark"></i></button>
                                 <div id="modal-confirmacion" class="modal">
                                     <div class="modal-contenido">
                                         <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
@@ -99,7 +99,7 @@
                             </div>
                         @elseif($solicitud->estado == 'confirmado')   
                             <div>
-                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark"></i></button>
                                 <div id="modal-confirmacion" class="modal">
                             
                                     <div class="modal-contenido">
@@ -209,7 +209,7 @@
         modal.style.display = 'none';
     }
 
-    function ordenarPorFecha() {
+function ordenarPorFecha() {
     const table = document.getElementById("tablaSolicitudes");
     const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
 
