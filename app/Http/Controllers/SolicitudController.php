@@ -113,5 +113,25 @@ public function suspender(Solicitud $id){
     $id->save();
     return redirect()->route('VerSolicitud');
 }
+public function habilitar(Solicitud $id){
+    $id->estado = "confirmado";
+    $id->save();
+    return redirect()->route('habilitarReservas');
+}
+public function denegar(Solicitud $id){
+    $id->estado = "denegado";
+    $id->save();
+    return redirect()->route('habilitarReservas');
+}
+
+public function confirmar(Solicitud $solicitud)
+{
+    // Actualiza el estado de la solicitud a "confirmado"
+    $solicitud->estado = 'confirmado';
+    $solicitud->save();
+
+    // Puedes devolver una respuesta JSON si lo prefieres
+    return response()->json(['message' => 'Solicitud confirmada exitosamente']);
+}
 
 }

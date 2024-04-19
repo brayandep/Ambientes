@@ -113,3 +113,8 @@ Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])-
 //habilitar reservas
 Route::get('/habilitar', [SolicitudController::class, 'index2'])->name('habilitarReservas');
 Route::put('/suspender/{id}', [SolicitudController::class, 'suspender'])->name('solicitud.suspender');
+//habilitar
+Route::put('/habilitar/{id}', [SolicitudController::class, 'habilitar'])->name('solicitud.habilitar');
+//denegar
+Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('solicitud.denegar');
+Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');
