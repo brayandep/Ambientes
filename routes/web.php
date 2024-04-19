@@ -43,13 +43,17 @@ Route::get('/materia', materiaController::class);
 
 
 // Rutas para las publicaciones
+
+
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
 Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
-Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
+//Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
+Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->name('publicaciones.detalles');
 
-//Route::get('/eliminar-publicacion/{id}', 'PublicacionController@eliminarPublicacion')->name('eliminar.publicacion');
 Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
 
-Route::delete('/publicaciones/{id}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');
-Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'editar'])->name('editar.publicacion');
+
+Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
+
+

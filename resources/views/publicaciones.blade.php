@@ -11,14 +11,15 @@
         <div class="publicaciones-list">
             @foreach($reglamentos as $publicacion)
                 <div class="publicacion">
-                    
-                    <span>{{ $publicacion->titulo }}</span>
-                    
-                    <div class="acciones-publicacion">
-                    
-                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+                    <!-- <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a> //nueva pestania-->
+                    <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a>
 
-                        <a href="{{ isset($publicacion->id) ? route('editar.publicacion', $publicacion->id) : '#' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                    <div class="acciones-publicacion">
+                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+                    <a href="#" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
+                        <i class="fa fa-edit"></i> <!-- Este es tu icono de editar -->
+                    </a>
+                       
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
                     </div>
 
@@ -31,11 +32,17 @@
         <div class="publicaciones-list">
             @foreach($anuncios as $publicacion)
                 <div class="publicacion">
-                    
-                    <span>{{ $publicacion->titulo }}</span>
+               
+                  <!--<a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a>-->
+                <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a>
+
                     <div class="acciones-publicacion">
                     <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
-                        <a href="{{ isset($publicacion->id) ? route('editar.publicacion', $publicacion->id) : '#' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                       
+                    <a href="{{ route('publicaciones.detalles', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
+                        <i class="fa fa-edit"></i> <!-- Este es tu icono de editar -->
+                    </a>
+
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
                     </div>
                 </div>
@@ -115,6 +122,31 @@
     function eliminarPublicacion(id) {
         // Aquí puedes implementar la lógica para eliminar la publicación con el ID proporcionado
     }
+
+    function editarPublicacion(id) {
+    fetch(`/publicaciones/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('tipo').value = data.tipo;
+            document.getElementById('titulo').value = data.titulo;
+            document.getElementById('descripcion').value = data.descripcion;
+            // Llenar otros campos según sea necesario
+
+            // Cambiar el texto del botón a "Actualizar"
+           // document.getElementById("btn btn-primary").innerText = "Actualizar";
+
+            // Mostrar el modal
+           
+                btnCrearPublicacion.addEventListener('click', function() {
+            // Muestra el modal para crear publicación
+            document.getElementById("formulario-crear-publicacion").style.display = "block";
+        });
+
+        })
+        .catch(error => console.error('Error al obtener los datos de la publicación:', error));
+    }
+
+
 
 </script>
 

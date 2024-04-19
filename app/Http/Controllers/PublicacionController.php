@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Publicacion;
+use Illuminate\Support\Facades\Storage;
 
 class PublicacionController extends Controller
 {
@@ -34,7 +35,7 @@ class PublicacionController extends Controller
         $publicacion = new Publicacion();
         $publicacion->titulo = $request->titulo;
         $publicacion->descripcion = $request->descripcion;
-        $publicacion->archivo = $request->file('archivo')->store('archivos'); // Guardar el archivo en la carpeta 'archivos'
+        $publicacion->archivo = $request->file('archivo')->store('public/archivos');
         $publicacion->fecha_vencimiento = $request->fecha_vencimiento;
         $publicacion->tipo = $request->tipo;
         $publicacion->save();
@@ -42,12 +43,7 @@ class PublicacionController extends Controller
         // Redireccionar al usuario con un mensaje de éxito
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido creada exitosamente.');
     }
-    public function editar($id)
-    {
-        $publicacion = Publicacion::findOrFail($id);
-        return view('modalPublicacion', compact('publicacion'));
-    }
-
+    
     public function eliminarPublicacion($id) {
         // Encuentra y elimina la publicación con el ID proporcionado
         Publicacion::destroy($id);
@@ -56,7 +52,34 @@ class PublicacionController extends Controller
         return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada correctamente');
     }
     
-    
-    
+
+
+
+    /*public function editar($id)
+    {
+       $publicacion = Publicacion::findOrFail($id);
+        return view('modalPublicacion', compact('publicacion'));
+   }*/
+    public function obtenerDetalles($id)
+    {
+        // Encuentra la publicación por su ID
+        $publicacion = Publicacion::findOrFail($id);
+
+        // Devuelve los detalles de la publicación en formato JSON
+        return response()->json($publicacion);
+    }
+   
+
+    public function verArchivo($id)
+    {
+        // Encuentra la publicación por su ID
+        $publicacion = Publicacion::findOrFail($id);
+
+        // Obtén la ruta completa del archivo
+        $rutaArchivo = Storage::url($publicacion->archivo);
+
+        return view('verArchivo', compact('publicacion', 'rutaArchivo'));
+    }
+
     
 }
