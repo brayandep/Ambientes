@@ -24,12 +24,6 @@
     font-size: 24px;
   }
 
-  .Resultado-search {
-    margin-top: 12px;
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
-  
   .search-contenido {
     display: flex;
     justify-content: center;
@@ -77,17 +71,18 @@
     display: flex;
 }
 
-.Buscar-Reservar{
+
+.Buscar-Calendario{
     width: 15%;
     display: flex;
     justify-content: center;
 }
-.Buscar-Reservar button{
+.Buscar-Calendario button{
     margin-right: 10px;
     cursor: pointer;
 }
 
-.buscaReserva i{
+.buscaCalendario i{
     background-color: none;
     font-size: 20px;
 }
@@ -99,6 +94,22 @@
 .Buscar{
     background-color: #933864;
     color:#f5f6f7;
+}
+
+.titulo-boton {
+    display: flex; /* Usar flexbox para alinear los elementos en una fila */
+    align-items: center; 
+    margin-bottom: 10px;
+}
+
+.Buscar-Reservar {
+    background-color: #933864;
+    color: #f5f6f7;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 20px;
 }
 
 .button-fila-b{
@@ -118,6 +129,7 @@
     cursor: pointer;
     margin-right: 20px;
 }
+
 
 /*Buscador*/
 .form-fila-s {

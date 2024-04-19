@@ -23,7 +23,7 @@
                 <form>
                     <div class="form-fila-s">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="15" autocomplete="off" placeholder="Nombre del ambiente">
+                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="20" autocomplete="off" placeholder="Nombre del ambiente">
                         @error('nombre')
                         <span class="msgError">*{{$message}}</span>
                         @enderror
@@ -63,8 +63,9 @@
                 </form>
             </div>
 
-            <div>
+            <div class="titulo-boton">
                 <h2 class="Resultado-search"> Resultado de la búsqueda </h2>
+                <button class="Buscar-Reservar">Reservar</button>
             </div>
             <div class="pizarra-search">
                 <div class="fila-b">
@@ -74,20 +75,25 @@
                     <!--<button class="nomCol-b">Fecha</button>-->
                     <button class="nomCol-b">Hora inicio</button>
                     <button class="nomCol-b">Hora fin</button>
-                    <button class="nomCol-b">Reservar</button>
+                    <button class="nomCol-b">Ver calendario</button>
                 </div>
                 
                 @foreach ($ambientes as $ambiente)
                     @foreach ($horarios as $horario)
                         @if ($horario->ambiente_id === $ambiente->id)
                             <div class="fila-b">
+                                <div>
+                                    <input type="checkbox" class="checkbox-seleccion">
+                                </div>
                                 <p>{{ $ambiente->nombre }}</p>
                                 <p>{{ $ambiente->capacidad }}</p>
                                 <p>{{ $horario->dia }}</p>
                                 <p>{{ $horario->horaInicio }}</p>
                                 <p>{{ $horario->horaFin }}</p>
-                                <div class="Buscar-Reservar">
-                                    <button class="buscaReserva" onclick="location.href='';"><i class="fa-regular fa-calendar-plus"></i></button>
+                                <div class="Buscar-Calendario">
+                                    <button class="buscaCalendario" onclick="location.href='';">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                    </button>
                                 </div>
                             </div>
                         @endif
@@ -99,6 +105,7 @@
 @endsection
 
 @section('scripts')
+<!--
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form');
@@ -134,5 +141,5 @@
         });
     });
 </script>
-
+-->
 @endsection
