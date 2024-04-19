@@ -183,8 +183,6 @@
 }
 .contentcolumna{
   text-align: center;
-  
-
 }
 
 .botones-container {
@@ -194,10 +192,11 @@
   padding: 5px;
   justify-content: center;
   gap: 7px;
-  
+  width: 30%;
 }
 .botones-container i{
   font-size: 20px;
+  
 }
 
 .botones{
@@ -263,6 +262,7 @@
 }
 .modal-contenido p{
   margin-bottom: 10px;
+  display: flex;
 }
 
 /* Estilos para el botón de cancelar */
@@ -316,8 +316,62 @@
 .subtitulo{
   font-size: 20px;
   color: #f44336;
+  width: 100%;
 }
 .datos{
   font-size: 16px;
   text-align: left;
+  
+}
+/*css de la nueva tabla*/
+.contenidoTabla{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+.tabla{
+  background-color: #e2eaec;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  width: 70%;
+  margin-top: 7px;
+  
+}
+.contBotones{
+  min-width: 140px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  width: 100%;
+}
+.fila{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin-top: 7px;
+  width: 100%;
+  gap: 5px;
+  min-width: 822px;
+}
+.fila p{
+  
+  min-width: 140px;
+  width: 30%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 5px;
+  
 }
