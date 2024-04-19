@@ -37,7 +37,7 @@
     <thead>
         <tr class="colorcolumna">
             <th>Estado</th>
-            <th>Fecha</th>
+            <th><a href="#" onclick="ordenarPorFecha()">Fecha</a></th>
             <th>Horario</th>
             <th>Aula</th>
             <th>Motivo</th>
@@ -252,6 +252,20 @@ function cerrarModalMensaje() {
     modal.style.display = 'none';
 }
 
+    function ordenarPorFecha() {
+        const table = document.getElementById("tablaSolicitudes");
+        const rows = Array.from(table.rows).slice(1);
+
+        rows.sort((a, b) => {
+            const dateA = new Date(a.cells[1].textContent);
+            const dateB = new Date(b.cells[1].textContent);
+            return dateA - dateB;
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+   
 </script>
 
 
