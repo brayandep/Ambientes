@@ -72,7 +72,6 @@
                                             @method('put')
                                             <button title="Confirmar solicitud" onclick="botonCancelar2()" ><i class="fa-solid fa-circle-check"></i></button>
                                         </form>
-                                
                         </div>
                         <div>
                             <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
@@ -94,18 +93,7 @@
                             <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
                                 <i class="fa-solid fa-circle-info"></i>
                             </button>
-                            <div id="modal-mensaje" class="modal">
-                                <div class="modal-contenido">
-                                    <p>Información del solicitante</p>
-                                    <div class="datos">
-                                        <p id="nombre"></p>
-                                        <p id="materia"></p>
-                                        <p id="aula"></p>
-                                        <p id="horario"></p>
-                                    </div>
-                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     @elseif($solicitud->estado == 'confirmado')   
                         <div>
@@ -129,62 +117,41 @@
                             <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
                                 <i class="fa-solid fa-circle-info"></i>
                             </button>
-                            <div id="modal-mensaje" class="modal">
-                                <div class="modal-contenido">
-                                    <p>Información del solicitante</p>
-                                    <div class="datos">
-                                        <p id="nombre"></p>
-                                        <p id="materia"></p>
-                                        <p id="aula"></p>
-                                        <p id="horario"></p>
-                                    </div>
-                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                                </div>
-                            </div>
+                           
                         </div>
                     @elseif($solicitud->estado == 'denegado')
                         <div>
                             <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
                                 <i class="fa-solid fa-circle-info"></i>
                             </button>
-                            <div id="modal-mensaje" class="modal">
-                                <div class="modal-contenido">
-                                    <p>Información del solicitante</p>
-                                    <div class="datos">
-                                        <p id="nombre"></p>
-                                        <p id="materia"></p>
-                                        <p id="aula"></p>
-                                        <p id="horario"></p>
-                                    </div>
-                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                                </div>
-                            </div>
+                            
                         </div>  
                     @elseif($solicitud->estado == 'suspendido')
                         <div>
                             <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
                                 <i class="fa-solid fa-circle-info"></i>
                             </button>
-                            <div id="modal-mensaje" class="modal">
-                                <div class="modal-contenido">
-                                    <p>Información del solicitante</p>
-                                    <div class="datos">
-                                        <p id="nombre"></p>
-                                        <p id="materia"></p>
-                                        <p id="aula"></p>
-                                        <p id="horario"></p>
-                                    </div>
-                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     @endif
                 </div>
                 
             </div>
-        
+            <div id="modal-mensaje" class="modal">
+                <div class="modal-contenido">
+                    <p class="subtitulo">Información del solicitante</p>
+                    <div class="datos">
+                        <p id="nombre"></p>
+                        <p id="materia"></p>
+                        <p id="aula"></p>
+                        <p id="horario"></p>
+                    </div>
+                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                </div>
+            </div>
 
             @endforeach
+            
         </div>
     </div>
 </div>
