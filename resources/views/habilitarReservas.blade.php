@@ -18,14 +18,16 @@
 <div class="contenidoFyR">
     <div class="FiltroyReporte">
         <div>
-           
-            <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
-                <option value="">Estado de solicitud</option>
-                <option value="Sin confirmar">Sin confirmar</option>
-                <option value="confirmado">Confirmado</option>
-                <option value="denegado">Denegado</option>
-                <option value="suspendido">Suspendido</option>
-            </select>
+           <form action="{{route('solicitud.mostrar')}}" method="get" id="solicitudEstado">
+                @csrf
+                <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
+                    <option value="todos"{{ request('estado') == 'todos' ? 'selected' : '' }}>Todos</option>
+                    <option value="Sin confirmar" {{ request('estado') == 'Sin confirmar' ? 'selected' : '' }}>Sin confirmar</option>
+                    <option value="confirmado" {{ request('estado') == 'confirmado' ? 'selected' : '' }}>Confirmado</option>
+                    <option value="denegado" {{ request('estado') == 'denegado' ? 'selected' : '' }}>Denegado</option>
+                    <option value="suspendido" {{ request('estado') == 'suspendido' ? 'selected' : '' }}>Suspendido</option>
+                </select>
+           </form>
         </div>
         <div>
             <button class="botonReporte">Generar Reporte</button>
@@ -160,18 +162,8 @@
 @section('scripts')
 <script>
     function filtrarSolicitudes() {
-        var seleccionado = document.getElementById("estado").value;
-        var filas = document.querySelectorAll("#tablaSolicitudes tbody tr");
+        document.getElementById('solicitudEstado').submit();
         
-        filas.forEach(function(fila) {
-            var estadoSolicitud = fila.getAttribute("data-estado");
-            
-            if (seleccionado === "" || estadoSolicitud === seleccionado) {
-                fila.style.display = "table-row";
-            } else {
-                fila.style.display = "none";
-            }
-        });
     }
     function botonInfo() {
         var modal = document.getElementById("modal-confirmacion2");
@@ -201,27 +193,24 @@
 
 
     function mostrarModalMensaje(nombre, materia, aula, horario) {
-    // Llenar el modal con los datos recibidos
-    document.getElementById('nombre').innerText = 'Nombre: ' + nombre;
-    document.getElementById('materia').innerText = 'Materia: ' + materia;
-    document.getElementById('aula').innerText = 'Aula: ' + aula;
-    document.getElementById('horario').innerText = 'Horario: ' + horario;
+        // Llenar el modal con los datos recibidos
+        document.getElementById('nombre').innerText = 'Nombre: ' + nombre;
+        document.getElementById('materia').innerText = 'Materia: ' + materia;
+        document.getElementById('aula').innerText = 'Aula: ' + aula;
+        document.getElementById('horario').innerText = 'Horario: ' + horario;
 
-    // Mostrar el modal
-    var modal = document.getElementById('modal-mensaje');
-    modal.style.display = 'block';
-}
+        // Mostrar el modal
+        var modal = document.getElementById('modal-mensaje');
+        modal.style.display = 'block';
+    }
 
-function cerrarModalMensaje() {
-    var modal = document.getElementById('modal-mensaje');
-    modal.style.display = 'none';
-}
+    function cerrarModalMensaje() {
+        var modal = document.getElementById('modal-mensaje');
+        modal.style.display = 'none';
+    }
 
 </script>
 
-
-
-    
 @endsection
 
 
