@@ -347,12 +347,8 @@
   overflow: auto;
   width: 70%;
   margin-top: 7px;
-  
 }
-.datosSolicitud{
-  overflow: auto;
-  height: 500px;
-}
+
 .contBotones{
   min-width: 140px;
   width: 30%;

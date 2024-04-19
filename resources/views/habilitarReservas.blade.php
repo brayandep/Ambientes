@@ -57,7 +57,7 @@
             </div>
         
         </div>
-        <div id="tbody" class="datosSolicitud">
+        <div id="tbody" >
             @foreach($solicitudes as $solicitud)
                 <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
                     <!-- Contenido de la fila -->
