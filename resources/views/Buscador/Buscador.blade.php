@@ -15,7 +15,7 @@
 
     <div class="search-contenido">
 
-        <div class="visualizar-busqueda">
+        <div class="visualizar-busqueda"> 
             <div>
                 <h1 class="Titulo-search"><i class="fas fa-search"></i> Buscar Ambiente </h1>
             </div>
@@ -67,37 +67,55 @@
                 <h2 class="Resultado-search"> Resultado de la búsqueda </h2>
                 <button class="Buscar-Reservar">Reservar</button>
             </div>
-            <div class="pizarra-search">
+            <div class="tabla-search">
                 <div class="fila-b">
-                    <button class="nomCol-b">Nombre</button>
-                    <button class="nomCol-b">Capacidad</button>
-                    <button class="nomCol-b">Dia</button>
-                    <!--<button class="nomCol-b">Fecha</button>-->
-                    <button class="nomCol-b">Hora inicio</button>
-                    <button class="nomCol-b">Hora fin</button>
-                    <button class="nomCol-b">Ver calendario</button>
+                    <div class="contBotones">
+                        <button class="nomCol-b">Nombre</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol-b">Capacidad</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol-b">Dia</button>
+                    </div>
+                    <!--<div class="contBotones">
+                        <button class="nomCol-b">Fecha</button>
+                    </div>-->
+                    <div class="contBotones">
+                        <button class="nomCol-b">Hora de inicio</button>
+                    </div>
+                    <div class="contBotones">
+                        <button class="nomCol-b">Hora de fin</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol-b">Calendario</button>
+                    </div>             
                 </div>
                 
                 @foreach ($ambientes as $ambiente)
-                    @foreach ($horarios as $horario)
-                        @if ($horario->ambiente_id === $ambiente->id)
-                            <div class="fila-b">
-                                <div>
-                                    <input type="checkbox" class="checkbox-seleccion">
+                    @if ($ambiente->estadoAmbiente == 1)
+                        @foreach ($horarios as $horario)
+                            @if ($horario->ambiente_id === $ambiente->id )
+                                <div class="fila-b">
+                                    <div class="seleccionAmb">
+                                    <div class="seleccion">
+                                        <input type="checkbox" class="checkbox-seleccion">
+                                    </div>
+                                    <p>{{ $ambiente->nombre }}</p>
+                                    </div>
+                                    <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
+                                    <p id="columnaPeque">{{ $horario->dia }}</p>
+                                    <p>{{ $horario->horaInicio }}</p>
+                                    <p>{{ $horario->horaFin }}</p>
+                                    <div class="Buscar-Calendario" id="columnaPeque">
+                                        <button class="buscaCalendario" onclick="location.href='';">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <p>{{ $ambiente->nombre }}</p>
-                                <p>{{ $ambiente->capacidad }}</p>
-                                <p>{{ $horario->dia }}</p>
-                                <p>{{ $horario->horaInicio }}</p>
-                                <p>{{ $horario->horaFin }}</p>
-                                <div class="Buscar-Calendario">
-                                    <button class="buscaCalendario" onclick="location.href='';">
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
+                    @endif    
                 @endforeach
             </div>
         </div>
