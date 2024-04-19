@@ -23,11 +23,13 @@ class DatabaseSeeder extends Seeder
     {
         
         $this -> call(UnidadSeeder::class);
-        // Materia::factory(35)->create();
         $this -> call(EquipoSeeder::class);
         $this -> call(TipoAmbienteSeeder::class);
-        $this -> call(DocenteSeeder::class);
         $this -> call(UsuarioSeeder::class);
+
+        $this -> call(DocenteSeeder::class);
+        $this -> call(MateriaSeeder::class);
+        $this -> call(GrupoSeeder::class);
     }
     
 }

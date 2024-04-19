@@ -15,9 +15,18 @@ class CreateGruposTable extends Migration
     {
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
-            $table->integer('nombre');
-            $table->string('docente')->nullable();
-            $table->integer('materia');
+            $table->integer('numero');
+
+            $table->unsignedBigInteger('idDocente')->nullable();
+            $table->foreign('idDocente')
+                  ->references('id')->on('docentes')
+                  ->onDelete('set null');
+
+            $table->unsignedBigInteger('idMateria')->nullable();
+            $table->foreign('idMateria')
+                  ->references('id')->on('materia')
+                  ->onDelete('set null');
+
             $table->timestamps();
         });
     }
@@ -31,4 +40,5 @@ class CreateGruposTable extends Migration
     {
         Schema::dropIfExists('grupos');
     }
+
 }

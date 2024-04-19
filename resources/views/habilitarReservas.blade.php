@@ -18,195 +18,152 @@
 <div class="contenidoFyR">
     <div class="FiltroyReporte">
         <div>
-           
-            <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
-                <option value="">Estado de solicitud</option>
-                <option value="Sin confirmar">Sin confirmar</option>
-                <option value="confirmado">Confirmado</option>
-                <option value="denegado">Denegado</option>
-                <option value="suspendido">Suspendido</option>
-            </select>
+           <form action="{{route('solicitud.mostrar')}}" method="get" id="solicitudEstado">
+                @csrf
+                <select class="input2" id="estado" name="estado" onchange="filtrarSolicitudes()">
+                    <option value="todos"{{ request('estado') == 'todos' ? 'selected' : '' }}>Todos</option>
+                    <option value="Sin confirmar" {{ request('estado') == 'Sin confirmar' ? 'selected' : '' }}>Sin confirmar</option>
+                    <option value="confirmado" {{ request('estado') == 'confirmado' ? 'selected' : '' }}>Confirmado</option>
+                    <option value="denegado" {{ request('estado') == 'denegado' ? 'selected' : '' }}>Denegado</option>
+                    <option value="suspendido" {{ request('estado') == 'suspendido' ? 'selected' : '' }}>Suspendido</option>
+                </select>
+           </form>
         </div>
         <div>
             <button class="botonReporte">Generar Reporte</button>
         </div>
     </div>
 </div>
-
-<table  id="tablaSolicitudes" class="centro" border="1">
-    <thead>
-        <tr class="colorcolumna">
-            <th>Estado</th>
-            <th><a href="#" onclick="ordenarPorFecha()">Fecha</a></th>
-            <th>Horario</th>
-            <th>Aula</th>
-            <th><a href="#" onclick="ordenarPorMotivo()">Motivo</a></th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($solicitudes as $solicitud)
-        <tr class="contentcolumna" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
-            <!-- Contenido de la fila -->
-            <td>{{ $solicitud->estado }}</td>
-            <td>{{ $solicitud->fecha }}</td>
-            <td>{{ $solicitud->horario }}</td>
-            <td>{{ $solicitud->nro_aula }}</td>
-            <td>{{ $solicitud->motivo }}</td>
-            
-            <td>
-                <div class="botones-container">
-                    @if($solicitud->estado == 'Sin confirmar')
-
-                    <div>
-                                    <form action="{{ route('solicitud.habilitar', $solicitud->idsolicitud) }}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <button title="Confirmar solicitud" onclick="botonCancelar2()" ><i class="fa-solid fa-circle-check"></i></button>
-                                    </form>
-                               
-                    </div>
-
-                    <div>
-                    <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
-                    <div id="modal-confirmacion" class="modal">
-                
-                        <div class="modal-contenido">
-                            <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                            <div class="botonesCentro">
-                                <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                    @csrf
-                                    @method('put')
-                                    <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                </form>
+<div class="contenidoTabla">
+    <div class="tabla" id="tablaSolicitudes">
+        <div class="fila">
+            <div class="contBotones">
+                <button class="nomCol">Estado</button>
+            </div>
+            <div class="contBotones">
+                <button class="nomCol"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
+            </div>
+            <div class="contBotones">
+                <button class="nomCol">Horario</button>
+            </div>
+            <div class="contBotones" >
+                <button class="nomCol">Aula</button>
+            </div>
+            <div class="contBotones" >
+                <button class="nomCol"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
+            </div>
+            <div class="contBotones" >
+                <button class="nomCol">Acciones</button>
+            </div>
+        
+        </div>
+        <div id="tbody">
+            @foreach($solicitudes as $solicitud)
+                <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
+                    <!-- Contenido de la fila -->
+                    <p>{{ $solicitud->estado }}</p>
+                    <p>{{ $solicitud->fecha }}</p>
+                    <p>{{ $solicitud->horario }}</p>
+                    <p>{{ $solicitud->nro_aula }}</p>
+                    <p>{{ $solicitud->motivo }}</p>
+                    <div class="botones-container" id="botcontenedor">
+                        @if($solicitud->estado == 'Sin confirmar')
+                            <div>
+                                            <form action="{{ route('solicitud.habilitar', $solicitud->idsolicitud) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button title="Confirmar solicitud" onclick="botonCancelar2()" ><i class="fa-solid fa-circle-check"></i></button>
+                                            </form>
                             </div>
-                        </div>
-                    </div>
+                            <div>
+                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                <div id="modal-confirmacion" class="modal">
+                                    <div class="modal-contenido">
+                                        <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                                        <div class="botonesCentro">
+                                            <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                
+                            </div>
+                        @elseif($solicitud->estado == 'confirmado')   
+                            <div>
+                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                <div id="modal-confirmacion" class="modal">
+                            
+                                    <div class="modal-contenido">
+                                        <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
+                                        <div class="botonesCentro">
+                                            <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            
+                            </div>
+                        @elseif($solicitud->estado == 'denegado')
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                
+                            </div>  
+                        @elseif($solicitud->estado == 'suspendido')
+                            <div>
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                
+                            </div>
+                        @endif
                     </div>
                     
-                    <div>
-                        <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                            <i class="fa-solid fa-circle-info"></i>
-                        </button>
-                        <div id="modal-mensaje" class="modal">
-                            <div class="modal-contenido">
-                                <p class="subtitulo">Información del solicitante</p>
-                                <div class="datos">
-                                    <p id="nombre"></p>
-                                    <p id="materia"></p>
-                                    <p id="aula"></p>
-                                    <p id="horario"></p>
-                                </div>
-                                <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    @elseif($solicitud->estado == 'confirmado')   
-                    <div>
-                        <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark" ></i></button>
-                        <div id="modal-confirmacion" class="modal">
-                    
-                            <div class="modal-contenido">
-                                <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                <div class="botonesCentro">
-                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                    <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div>
-                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </button>
-                            <div id="modal-mensaje" class="modal">
-                                <div class="modal-contenido">
-                                    <p class="subtitulo">Información del solicitante</p>
-                                    <div class="datos">
-                                        <p id="nombre"></p>
-                                        <p id="materia"></p>
-                                        <p id="aula"></p>
-                                        <p id="horario"></p>
-                                    </div>
-                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    @elseif($solicitud->estado == 'denegado')
-                        <div>
-                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </button>
-                            <div id="modal-mensaje" class="modal">
-                                <div class="modal-contenido">
-                                    <p class="subtitulo">Información del solicitante</p>
-                                    <div class="datos">
-                                        <p id="nombre"></p>
-                                        <p id="materia"></p>
-                                        <p id="aula"></p>
-                                        <p id="horario"></p>
-                                    </div>
-                                    <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                         
-                    @elseif($solicitud->estado == 'suspendido')
-                    <div>
-                        <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                            <i class="fa-solid fa-circle-info"></i>
-                        </button>
-                        <div id="modal-mensaje" class="modal">
-                            <div class="modal-contenido">
-                                <p class="subtitulo">Información del solicitante</p>
-                                <div class="datos">
-                                    <p id="nombre"></p>
-                                    <p id="materia"></p>
-                                    <p id="aula"></p>
-                                    <p id="horario"></p>
-                                </div>
-                                <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                        
                 </div>
-            </td>
-        </tr>
-       
+                <div id="modal-mensaje" class="modal">
+                    <div class="modal-contenido">
+                        <p class="subtitulo">Información del solicitante</p>
+                        <div class="datos">
+                            <p id="nombre"></p>
+                            <p id="materia"></p>
+                            <p id="aula"></p>
+                            <p id="horario"></p>
+                        </div>
+                        <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
+                    </div>
+                </div>
 
-        @endforeach
-
-    </tbody>
-</table>
+            @endforeach
+            
+        </div>
+    </div>
+</div>
 
 @endsection
 @section('scripts')
 <script>
     function filtrarSolicitudes() {
-        var seleccionado = document.getElementById("estado").value;
-        var filas = document.querySelectorAll("#tablaSolicitudes tbody tr");
+        document.getElementById('solicitudEstado').submit();
         
-        filas.forEach(function(fila) {
-            var estadoSolicitud = fila.getAttribute("data-estado");
-            
-            if (seleccionado === "" || estadoSolicitud === seleccionado) {
-                fila.style.display = "table-row";
-            } else {
-                fila.style.display = "none";
-            }
-        });
     }
     function botonInfo() {
         var modal = document.getElementById("modal-confirmacion2");
@@ -236,59 +193,56 @@
 
 
     function mostrarModalMensaje(nombre, materia, aula, horario) {
-    // Llenar el modal con los datos recibidos
-    document.getElementById('nombre').innerText = 'Nombre: ' + nombre;
-    document.getElementById('materia').innerText = 'Materia: ' + materia;
-    document.getElementById('aula').innerText = 'Aula: ' + aula;
-    document.getElementById('horario').innerText = 'Horario: ' + horario;
+        // Llenar el modal con los datos recibidos
+        document.getElementById('nombre').innerText = 'Nombre: ' + nombre;
+        document.getElementById('materia').innerText = 'Materia: ' + materia;
+        document.getElementById('aula').innerText = 'Aula: ' + aula;
+        document.getElementById('horario').innerText = 'Horario: ' + horario;
 
-    // Mostrar el modal
-    var modal = document.getElementById('modal-mensaje');
-    modal.style.display = 'block';
-}
+        // Mostrar el modal
+        var modal = document.getElementById('modal-mensaje');
+        modal.style.display = 'block';
+    }
 
-function cerrarModalMensaje() {
-    var modal = document.getElementById('modal-mensaje');
-    modal.style.display = 'none';
-}
+    function cerrarModalMensaje() {
+        var modal = document.getElementById('modal-mensaje');
+        modal.style.display = 'none';
+    }
 
     function ordenarPorFecha() {
-        const table = document.getElementById("tablaSolicitudes");
-        const rows = Array.from(table.rows).slice(1);
+    const table = document.getElementById("tablaSolicitudes");
+    const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
 
-        rows.sort((a, b) => {
-            const dateA = new Date(a.cells[1].textContent);
-            const dateB = new Date(b.cells[1].textContent);
-            return dateA - dateB;
-        });
+    rows.sort((a, b) => {
+        const dateA = new Date(a.querySelector('p:nth-child(2)').textContent); // Selecciona el segundo párrafo de la fila (fecha)
+        const dateB = new Date(b.querySelector('p:nth-child(2)').textContent); // Selecciona el segundo párrafo de la fila (fecha)
+        return dateA - dateB;
+    });
 
-        rows.forEach(row => table.appendChild(row));
-    }
-    function ordenarPorMotivo() {
-        const table = document.getElementById("tablaSolicitudes");
-        const rows = Array.from(table.rows).slice(1);
+    rows.forEach(row => table.appendChild(row));
+}
+function ordenarPorMotivo() {
+    const table = document.getElementById("tablaSolicitudes");
+    const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
 
-        rows.sort((a, b) => {
-            const motivoA = a.cells[4].textContent.trim().toLowerCase();
-            const motivoB = b.cells[4].textContent.trim().toLowerCase();
+    rows.sort((a, b) => {
+        const motivoA = a.querySelector('p:nth-child(5)').textContent.trim().toLowerCase(); // Selecciona el quinto párrafo de la fila (motivo)
+        const motivoB = b.querySelector('p:nth-child(5)').textContent.trim().toLowerCase(); // Selecciona el quinto párrafo de la fila (motivo)
 
-            if (motivoA === "examen" && motivoB !== "examen") return -1;
-            if (motivoB === "examen" && motivoA !== "examen") return 1;
+        if (motivoA === "examen" && motivoB !== "examen") return -1;
+        if (motivoB === "examen" && motivoA !== "examen") return 1;
 
-            if (motivoA === "otro" && motivoB !== "otro") return 1;
-            if (motivoB === "otro" && motivoA !== "otro") return -1;
+        if (motivoA === "otro" && motivoB !== "otro") return 1;
+        if (motivoB === "otro" && motivoA !== "otro") return -1;
 
-            return motivoA.localeCompare(motivoB);
-        });
+        return motivoA.localeCompare(motivoB);
+    });
 
-        rows.forEach(row => table.appendChild(row));
-    }
+    rows.forEach(row => table.appendChild(row));
+}
    
 </script>
 
-
-
-    
 @endsection
 
 

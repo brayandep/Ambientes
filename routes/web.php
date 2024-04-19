@@ -118,3 +118,5 @@ Route::put('/habilitar/{id}', [SolicitudController::class, 'habilitar'])->name('
 //denegar
 Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('solicitud.denegar');
 Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');
+//mostrar solicitudes filtro
+Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');

@@ -86,10 +86,9 @@
                                 </div>
                             </div>
                         </div>
-                    @elseif($solicitud->estado == 'denegado')
-                        
+                    @elseif($solicitud->estado == 'denegado')                       
                     @elseif($solicitud->estado == 'suspendido')
-                        <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
+                        <a  class="botonedit" href="{{ route('solicitud.store') }}">Nueva solicitud</a>
                     @endif
                         
                 </div>
