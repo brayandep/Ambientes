@@ -64,7 +64,7 @@
                 <p>{{ $solicitud->horario }}</p>
                 <p>{{ $solicitud->nro_aula }}</p>
                 <p>{{ $solicitud->motivo }}</p>
-                <div class="botones-container">
+                <div class="botones-container" id="botcontenedor">
                     @if($solicitud->estado == 'Sin confirmar')
                         <div>
                                         <form action="{{ route('solicitud.habilitar', $solicitud->idsolicitud) }}" method="POST">
