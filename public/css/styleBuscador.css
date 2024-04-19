@@ -111,9 +111,14 @@
     background-color: #F35D5D;
     color:#f5f6f7;
 }
-.Buscar{
+
+/* Estilo para el input de tipo submit */
+.Buscar {
     background-color: #933864;
     color:#f5f6f7;
+    border-radius: 5px;
+    padding: 7px;
+    font-size: 14px;
 }
 
 .titulo-boton {

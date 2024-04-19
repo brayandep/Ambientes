@@ -20,10 +20,10 @@
                 <h1 class="Titulo-search"><i class="fas fa-search"></i> Buscar Ambiente </h1>
             </div>
             <div>
-                <form>
+                <form action="{{route('buscador')}}" method="GET">
                     <div class="form-fila-s">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="20" autocomplete="off" placeholder="Nombre del ambiente">
+                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="20" autocomplete="off" placeholder="Nombre del ambiente" value="{{$nombreSearch}}">
                         @error('nombre')
                         <span class="msgError">*{{$message}}</span>
                         @enderror
@@ -57,7 +57,8 @@
                     </div>
                 
                     <div class="button-fila-b">
-                        <button class="Buscar">Buscar</button>
+                        <input class="Buscar" type="submit" value="Buscar">
+                        <!--<button class="Buscar" type="submit" value="RealizarBusqueda">Buscar</button>-->
                         <button class="Limpiar">Limpiar Búsqueda</button>
                     </div>
                 </form>

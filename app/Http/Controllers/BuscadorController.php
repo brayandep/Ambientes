@@ -6,11 +6,17 @@ use App\Http\Requests\BuscadorR;
 use Illuminate\Http\Request;
 use App\Models\Ambiente;
 use App\Models\HorarioDisponible;
+use Illuminate\Support\Facades\DB;
 
 class BuscadorController extends Controller
 {
-    public function show(){
-        $ambientes = Ambiente::orderBy('nombre', 'asc')->get();
+    public function show(Request $request){
+        $nombreSearch = trim($request->get('nombreSearch'));
+        $ambientes = DB::table('ambientes')
+        ->select('*')
+        ->where('nombre', 'LIKE', '%'.$nombreSearch.'%')
+        ->orderBy('nombre', 'asc')
+        ->get();
 
         // Definir el orden personalizado de los días de la semana de lunes a sábado
         $ordenDias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -20,11 +26,6 @@ class BuscadorController extends Controller
         ->orderBy('horaInicio', 'asc') // Luego ordenar por hora de inicio
         ->get();
         
-        return view('Buscador.Buscador', compact('ambientes', 'horarios'));
+        return view('Buscador.Buscador', compact('ambientes', 'horarios', 'nombreSearch'));
     }
-
-    public function search(BuscadorR $request)
-    {
-    $validatedData = $request->validated();
-}
 }
