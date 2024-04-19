@@ -41,7 +41,7 @@
                 <button class="nomCol" id="noActivar">Estado</button>
             </div>
             <div class="contBotones">
-                <button class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
+                <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
             </div>
             <div class="contBotones">
                 <button class="nomCol" id="noActivar">Horario</button>
@@ -50,7 +50,7 @@
                 <button class="nomCol" id="noActivar">Aula</button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol" id="activar"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
+                <button title="Ordenar por motivo" class="nomCol" id="activar"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
             </div>
             <div class="contBotones" >
                 <button class="nomCol" id="noActivar">Acciones</button>
