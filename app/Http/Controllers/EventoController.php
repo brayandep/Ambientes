@@ -10,7 +10,7 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:30',
+            'title' => 'required|max:40',
             'descripcion' => 'max:200',
             'start' => 'required|date_format:Y-m-d H:i',
             'end' => 'date_format:Y-m-d H:i',
@@ -27,7 +27,7 @@ class EventoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|max:30',
+            'title' => 'required|max:40',
             'descripcion' => 'max:200',
             'start' => 'required|date_format:Y-m-d H:i',
             'end' => 'date_format:Y-m-d H:i',

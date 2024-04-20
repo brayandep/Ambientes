@@ -24,7 +24,7 @@
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del evento</h1>
+            <h1 class="modal-title fs-5" id="labelTitulo">Datos del evento</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -89,9 +89,12 @@
     <script>
         var misEventos = @json($eventos);
 
-        function limitarFecha(){
+        function limitarFecha1(){
             $('#fechaEnd').val($('#fechaStart').val());
             $('#fechaEnd').prop('min', $('#fechaStart').val());
+        }
+        function limitarFecha($fecha){
+            $('#fechaEnd').prop('min', $fecha);
         }
 
         $('#horaStart').on('change', function() {

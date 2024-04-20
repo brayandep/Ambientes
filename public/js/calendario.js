@@ -111,15 +111,25 @@ document.addEventListener('DOMContentLoaded', function() {
         dateClick: function(info) {
             limpiarFormulario();
             if (info.view.type === 'dayGridMonth') {
+                $('#btnAgregar').show();
+                $('#btnModificar').hide();
+                $('#btnEliminar').hide();
+                $('#labelTitulo').text('Agregar evento en: '+info.dateStr);
+
                 console.log(info);
                 $('#fechaStart').val(info.dateStr);
-                limitarFecha();
+                limitarFecha1();
                 $('#exampleModal').modal('toggle');
             }
             //calendar.addEvent({title:"Evento Jhosemar", date:info.dateStr})
         },
 
         eventClick:function(info){
+            $('#btnAgregar').hide();
+            $('#btnModificar').show();
+            $('#btnEliminar').show();
+            $('#labelTitulo').text('Editar evento '+"'"+info.event.title+"'");
+
             console.log(info);
             console.log(info.event.title);
             console.log(info.event.start);
@@ -158,10 +168,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 inputFin = anioFin+"-"+mesFin+"-"+diaFin
             }else{
                 horaFin = horaIni;
-                inputFin = anioIni+"-"+mesIni+"-"+diaIni;
+                inputFin = anioIni+"-"+mesIni+"-"+diaIni; 
             }
 
-
+            limitarFecha(anioIni+"-"+mesIni+"-"+diaIni);
             $('#idEvento').val(info.event.id);//id del evento
             $('#titulo').val(info.event.title);
             $('#fechaStart').val(anioIni+"-"+mesIni+"-"+diaIni);
