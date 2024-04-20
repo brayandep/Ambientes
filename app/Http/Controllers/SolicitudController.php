@@ -36,7 +36,11 @@ public function create()
     $horarios = HorarioDisponible::all();;
     // Obtén todas las solicitudes desde el modelo Solicitud
     //  $usuarios = Usuario::all();;
-    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios'));
+    $diasUnicos = HorarioDisponible::select('dia')->where('ambiente_id', 2)->distinct()->pluck('dia');
+    print_r($diasUnicos);
+
+
+    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios','diasUnicos'));
 
 }
 public function store(Request $request)

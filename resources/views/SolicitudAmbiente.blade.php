@@ -86,6 +86,29 @@
 
 
 <script>
+    //cambios de jhosemar (yo xd)
+    var fechaInput = document.getElementById("fecha");
+    fechaInput.addEventListener("change", function() {
+        // Obtener la fecha seleccionada
+        var fechaSeleccionada = new Date(fechaInput.value);
+        var diasPermitidos = @json($diasUnicos);
+
+        if (!diasPermitidos.includes(fechaSeleccionada.toLocaleDateString('es-ES', { weekday: 'long' }))) {
+            alert("Por favor, selecciona una fecha permitida.");
+            fechaInput.value = ""; // Restablecer el valor del input
+        }
+
+        // Verificar si la fecha seleccionada es lunes o miércoles
+        // if (fechaSeleccionada.getDay() !== 0 && fechaSeleccionada.getDay() !== 2) {
+        //     alert("Por favor, selecciona un lunes o miércoles.");
+        //     // Restablecer el valor del campo de entrada
+        //     fechaInput.value = "";
+        // }
+    });
+
+
+
+
     var fechaInput = document.getElementById('fecha');
     var hoy = new Date();
     var mañana = new Date(hoy);
