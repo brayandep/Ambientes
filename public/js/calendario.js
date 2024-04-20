@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         initialView: 'dayGridMonth',
-        slotMinTime: '06:45',
-        slotLabelInterval: '1:30:00',
-        slotDuration: '00:45',
-        slotMaxTime: '21:46',
+        slotMinTime: '06:00',
+        slotLabelInterval: '01:00:00',
+        slotDuration: '00:30',
+        slotMaxTime: '22:00',
         expandRows: true,
         validRange: {
             start: firstDayOfMonth, // Primer día del mes actual
@@ -132,8 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
             minuto1 = info.event.start.getMinutes();
             minuto1 = (minuto1<10)?"0"+minuto1:minuto1;
 
-            horaFin = ""
-            inputFin = "";
+            mesIni = (info.event.start.getMonth()+1); 
+            diaIni = (info.event.start.getDate()); 
+            anioIni = (info.event.start.getFullYear()); 
+            horaIni = (hora1+":"+minuto1); 
+            
+            mesIni = (mesIni<10)?"0"+mesIni:mesIni;
+            diaIni = (diaIni<10)?"0"+diaIni:diaIni;
+
             //hora minuto final
             if(info.event.end > info.event.start){
                 hora2 = info.event.end.getHours();
@@ -150,16 +156,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 diaFin = (diaFin<10)?"0"+diaFin:diaFin;
 
                 inputFin = anioFin+"-"+mesFin+"-"+diaFin
+            }else{
+                horaFin = horaIni;
+                inputFin = anioIni+"-"+mesIni+"-"+diaIni;
             }
 
-            mesIni = (info.event.start.getMonth()+1); 
-            diaIni = (info.event.start.getDate()); 
-            anioIni = (info.event.start.getFullYear()); 
-            horaIni = (hora1+":"+minuto1); 
-            
-
-            mesIni = (mesIni<10)?"0"+mesIni:mesIni;
-            diaIni = (diaIni<10)?"0"+diaIni:diaIni;
 
             $('#idEvento').val(info.event.id);//id del evento
             $('#titulo').val(info.event.title);
