@@ -28,20 +28,32 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label class="labEvento">Titulo</label>
+                <label class="labEvento" id="labTitulo">Titulo</label>
                 <input type="text" name="titulo" id="titulo" class="inputEvento">
+
                 <label class="labEvento">Descripcion</label>
                 <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+                {{-- <span id="msgError" class="text-danger"></span> --}}
+
                 <label class="labEvento">Fecha</label>
-                <input type="text" name="fechaStart" id="fechaStart" class="inputEvento">
+                <input type="date" name="fechaStart" id="fechaStart" class="inputEvento">
+
                 <label class="labEvento">Hora</label>
                 <input type="time" name="horaStart" id="horaStart" class="inputEvento">
+                {{-- <span id="msgError" class="text-danger"></span> --}}
+
                 <label class="labEvento">Fecha final</label>
-                <input type="date" name="fechaEnd" id="fechaEnd" class="inputEvento" min="{{ date('Y-m-d') }}">
+                <input type="date" name="fechaEnd" id="fechaEnd" class="inputEvento" >
+                {{-- <span id="msgError" class="text-danger"></span> --}}
+
                 <label class="labEvento">Hora Final</label>
                 <input type="time" name="horaEnd" id="horaEnd" class="inputEvento">
+                {{-- <span id="msgError" class="text-danger"></span> --}}
+
                 <label class="labEvento">Color</label>
-                <input type="color" name="color" id="color" class="inputEvento">
+                <input type="color" name="color" id="color" class="inputEvento" value="#CD9DC0" style="width: 50%;">
+
+                <span id="msgError" class="text-danger"></span>
             </div>
             <div class="modal-footer">
                 <button id="btnAgregar" class="btn btn-success">Agregar</button>
@@ -61,4 +73,8 @@
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.11/index.global.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('js/calendario.js')}}"></script>
+
+    <script>
+        var misEventos = @json($eventos);
+    </script>
 @endsection

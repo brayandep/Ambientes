@@ -16,10 +16,10 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('descripcion');
+            $table->text('descripcion')->nullable();
             $table->string('start');
             $table->string('end')->nullable();
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
 
 /*
@@ -114,6 +115,7 @@ Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEst
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
 Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])->name('calendario.individual');
+Route::post('/Calendario/evento', [EventoController::class, 'store'])->name('evento.store');
 //termina rutas calendario
 
 
