@@ -14,6 +14,7 @@ class CalendarioController extends Controller
 
         foreach($datos as $dato){
             $eventos[] = [
+                'id' => $dato->id,
                 'title' => $dato->title,
                 'descripcion' => $dato->descripcion,
                 'start' => $dato->start,

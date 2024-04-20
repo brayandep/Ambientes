@@ -116,6 +116,8 @@ Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEst
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
 Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])->name('calendario.individual');
 Route::post('/Calendario/evento', [EventoController::class, 'store'])->name('evento.store');
+Route::delete('/Calendario/evento/{id}', [EventoController::class, 'destroy'])->name('evento.delete');
+Route::put('/Calendario/evento/{id}', [EventoController::class, 'update'])->name('evento.update');
 //termina rutas calendario
 
 

@@ -50,7 +50,7 @@ body{
     box-sizing: border-box;
     font-family: inherit;
     box-shadow: 0 0 0 2px transparent;
-
+    width: 100%;
 }
 .inputEvento:focus, .inputEvento:hover {
     outline: none;
@@ -60,11 +60,11 @@ body{
 .modal-body{
     display: flex;
     flex-direction: column;
-}
+} 
 
 #fechaStart{
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 #descripcion{
@@ -79,9 +79,23 @@ body{
     height: 85px;
     margin-bottom: 15px;
     resize: none;
+    width: 100%;
 }
 
 #descripcion:focus, #descripcion:hover {
     outline: none;
     box-shadow: 0 0 0 2px #b7b8c3;
+}
+
+#idEvento{
+    pointer-events: none;
+}
+
+.caja{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.caja2{
+    width: 50%;
 }

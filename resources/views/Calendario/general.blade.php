@@ -28,38 +28,50 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <input type="text" name="idEvento" id="idEvento" class="d-none">
+
                 <label class="labEvento" id="labTitulo">Titulo</label>
                 <input type="text" name="titulo" id="titulo" class="inputEvento">
+                <span id="msgError1" class="text-danger"></span>
+
+
+                <div class="caja">
+                    <div class="caja2">
+                        <label class="labEvento">Fecha Inicial</label>
+                        <input type="date" name="fechaStart" id="fechaStart" class="inputEvento">       
+                    </div>
+                    <div class="caja2">
+                        <label class="labEvento">Hora Inicial</label>
+                        <input type="time" name="horaStart" id="horaStart" class="inputEvento" value="06:45">
+                    </div>
+                </div>
+                <span id="msgError3" class="text-danger"></span>
 
                 <label class="labEvento">Descripcion</label>
                 <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
-                {{-- <span id="msgError" class="text-danger"></span> --}}
+                <span id="msgError2" class="text-danger"></span>
 
-                <label class="labEvento">Fecha</label>
-                <input type="date" name="fechaStart" id="fechaStart" class="inputEvento">
-
-                <label class="labEvento">Hora</label>
-                <input type="time" name="horaStart" id="horaStart" class="inputEvento">
-                {{-- <span id="msgError" class="text-danger"></span> --}}
-
-                <label class="labEvento">Fecha final</label>
-                <input type="date" name="fechaEnd" id="fechaEnd" class="inputEvento" >
-                {{-- <span id="msgError" class="text-danger"></span> --}}
-
-                <label class="labEvento">Hora Final</label>
-                <input type="time" name="horaEnd" id="horaEnd" class="inputEvento">
-                {{-- <span id="msgError" class="text-danger"></span> --}}
+                <div class="caja">
+                    <div class="caja2">
+                        <label class="labEvento">Fecha final</label>
+                        <input type="date" name="fechaEnd" id="fechaEnd" class="inputEvento" >
+                    </div>
+                    <div class="caja2">
+                        <label class="labEvento">Hora Final</label>
+                        <input type="time" name="horaEnd" id="horaEnd" class="inputEvento">
+                    </div>
+                </div>
+                <span id="msgError4" class="text-danger"></span>
 
                 <label class="labEvento">Color</label>
                 <input type="color" name="color" id="color" class="inputEvento" value="#CD9DC0" style="width: 50%;">
 
-                <span id="msgError" class="text-danger"></span>
             </div>
             <div class="modal-footer">
                 <button id="btnAgregar" class="btn btn-success">Agregar</button>
                 <button id="btnModificar" class="btn btn-warning">Modificar</button>
                 <button id="btnEliminar" class="btn btn-danger">Eliminar</button>
-                <button id="btnCancelar" class="btn btn-default">Cancelar</button>
+                <button id="btnCancelar" data-bs-dismiss="modal" class="btn btn-default">Cancelar</button>
             </div>
         </div>
         </div>
@@ -76,5 +88,16 @@
 
     <script>
         var misEventos = @json($eventos);
+
+        function limitarFecha(){
+            $('#fechaEnd').val($('#fechaStart').val());
+            $('#fechaEnd').prop('min', $('#fechaStart').val());
+        }
+
+        $('#horaStart').on('change', function() {
+            var hora1 = $(this).val();
+            $('#horaEnd').val(hora1);
+            //document.getElementById('horaEnd').min = hora1; //no sirve esta linea
+        });
     </script>
 @endsection

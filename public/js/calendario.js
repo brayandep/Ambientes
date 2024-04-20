@@ -8,12 +8,7 @@ $.ajaxSetup({
 //calendario
 document.addEventListener('DOMContentLoaded', function() {
     //eventos manuales
-    misEventos.push({ 
-        title: 'Daily TIS', 
-        start: '2024-04-15 14:15', 
-        end: '2024-04-15 15:45',
-        descripcion:"Tenemos daily con la ingeniera." 
-    },
+    misEventos.push(
     { 
         title: 'Dia del niño', 
         start: '2024-04-12', 
@@ -64,12 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         descripcion:"No habra disponibilidad de aulas todo el dia."	
 
-    },
-    { 
-        title: 'Evento Universitario', 
-        start: '2024-04-25 06:10', 
-        end: '2024-04-25 14:30',
-        descripcion:"Descripcion del evento universitario." 
     });
 
     var today = new Date();
@@ -120,9 +109,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         dateClick: function(info) {
+            limpiarFormulario();
             if (info.view.type === 'dayGridMonth') {
                 console.log(info);
                 $('#fechaStart').val(info.dateStr);
+                limitarFecha();
                 $('#exampleModal').modal('toggle');
             }
             //calendar.addEvent({title:"Evento Jhosemar", date:info.dateStr})
@@ -135,28 +126,46 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(info.event.end);
             console.log(info.event.extendedProps.descripcion);
 
+            //hora minuto inicio
+            hora1 = info.event.start.getHours();
+            hora1 = (hora1<10)?"0"+hora1:hora1;
+            minuto1 = info.event.start.getMinutes();
+            minuto1 = (minuto1<10)?"0"+minuto1:minuto1;
+
+            horaFin = ""
+            inputFin = "";
+            //hora minuto final
+            if(info.event.end > info.event.start){
+                hora2 = info.event.end.getHours();
+                hora2 = (hora2<10)?"0"+hora2:hora2;
+                minuto2 = info.event.end.getMinutes();
+                minuto2 = (minuto2<10)?"0"+minuto2:minuto2;
+
+                mesFin = (info.event.end.getMonth()+1); 
+                diaFin = (info.event.end.getDate()); 
+                anioFin = (info.event.end.getFullYear()); 
+                horaFin = (hora2+":"+minuto2); 
+
+                mesFin = (mesFin<10)?"0"+mesFin:mesFin;
+                diaFin = (diaFin<10)?"0"+diaFin:diaFin;
+
+                inputFin = anioFin+"-"+mesFin+"-"+diaFin
+            }
+
             mesIni = (info.event.start.getMonth()+1); 
             diaIni = (info.event.start.getDate()); 
             anioIni = (info.event.start.getFullYear()); 
-            horaIni = (info.event.start.getHours()+":"+info.event.start.getMinutes()); 
+            horaIni = (hora1+":"+minuto1); 
             
-            mesFin = (info.event.end.getMonth()+1); 
-            diaFin = (info.event.end.getDate()); 
-            anioFin = (info.event.end.getFullYear()); 
-            horaFin = (info.event.end.getHours()+":"+info.event.end.getMinutes()); 
 
             mesIni = (mesIni<10)?"0"+mesIni:mesIni;
             diaIni = (diaIni<10)?"0"+diaIni:diaIni;
 
-            mesFin = (mesFin<10)?"0"+mesFin:mesFin;
-            diaFin = (diaFin<10)?"0"+diaFin:diaFin;
-
-            console.log(horaIni);
-
+            $('#idEvento').val(info.event.id);//id del evento
             $('#titulo').val(info.event.title);
             $('#fechaStart').val(anioIni+"-"+mesIni+"-"+diaIni);
             $('#horaStart').val(horaIni);
-            $('#fechaEnd').val(anioFin+"-"+mesFin+"-"+diaFin);
+            $('#fechaEnd').val(inputFin);
             $('#horaEnd').val(horaFin);
             $('#descripcion').val(info.event.extendedProps.descripcion);
             $('#color').val(info.event.backgroundColor);
@@ -178,6 +187,14 @@ document.addEventListener('DOMContentLoaded', function() {
         ojbEvento = recolectarDatos('POST');
         enviarDatos('',ojbEvento);
     });
+    $('#btnEliminar').click(function(){
+        ojbEvento = recolectarDatos('DELETE');
+        enviarDatos('/'+$('#idEvento').val(),ojbEvento);
+    });
+    $('#btnModificar').click(function(){
+        ojbEvento = recolectarDatos('PUT');
+        enviarDatos('/'+$('#idEvento').val(),ojbEvento);
+    });
 
     function recolectarDatos(method){
         nuevoEvento={
@@ -195,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $.ajax(
             {
                 type:"POST",
-                url:"/Calendario/evento",
+                url:"/Calendario/evento"+accion,
                 data:ojbEvento,
                 success:function(){
                     // console.log(calendar);
@@ -204,11 +221,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.reload();
                 },
                 error:function(error){
-                    var errores = error.responseJSON.errors; 
-                    $('#msgError').html(errores[0]);
+                    msg1 = error.responseJSON.errors.title || '';
+                    msg2 = error.responseJSON.errors.descripcion || '';
+                    msg3 = error.responseJSON.errors.start || '';
+                    msg4 = error.responseJSON.errors.end || '';
+
+                    $('#msgError1').html(msg1);
+                    $('#msgError2').html(msg2);
+                    $('#msgError3').html(msg3);
+                    $('#msgError4').html(msg4);
                 }
             }
         );
+    }
+
+    function limpiarFormulario(){
+        $('#idEvento').val("");//id del evento
+        $('#titulo').val("");
+        $('#fechaStart').val("");
+        $('#horaStart').val("06:00");
+        $('#fechaEnd').val("");
+        $('#horaEnd').val("");
+        $('#descripcion').val("");
+        $('#color').val("#CD9DC0");
+
+        $('#msgError1').html("");
+        $('#msgError2').html("");
+        $('#msgError3').html("");
+        $('#msgError4').html("");
     }
 
 });
