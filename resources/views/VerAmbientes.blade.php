@@ -18,7 +18,7 @@
                 <h1 class="Titulo-ver"><i class="fa-solid fa-rectangle-list"></i> Ver Ambientes Registrados </h1>
             </div>
 
-            <!-- Contenedor centrado y responsivo -->
+            <!-- tabla -->
             <div class="tabla-ver">
                 <div class="fila-v">
                     <div class="contBotones-v" id="columnaPeque">
@@ -73,7 +73,8 @@
                         </div>
                     </div>
                 @endforeach
-            </div>    
+            </div> 
+        {{$ambientes->links()}}   
         </div>
     </div>
 
