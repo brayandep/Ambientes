@@ -188,14 +188,24 @@
      <script>
       
       const diasSemana = {
-        'lunes': [],
-        'martes': [],
-        'miercoles': [],
-        'jueves': [],
-        'viernes': [],
-        'sabado': [],
-        'domingo': [],
+        '1': [],
+        '2': [],
+        '3': [],
+        '4': [],
+        '5': [],
+        '6': [],
+        '7': [],
     };
+    const nombresDias = {
+    'lunes': 1,
+    'martes': 2,
+    'miercoles': 3,
+    'jueves': 4,
+    'viernes': 5,
+    'sábado': 6,
+    'domingo': 7
+    };
+
     
     function agregarColumna() {
         var seleccion = document.getElementById("diasSemana").value;
@@ -230,13 +240,16 @@
     function agregarFila(seleccion) {
         var horaInicio = document.getElementById("modalHoraInicio").value;
         var horaFin = document.getElementById("modalHoraFin").value;
-    
+        console.log(seleccion.toLowerCase());
         // Crea la fila solo si se han proporcionado horas de inicio y fin
         if (horaInicio.trim() !== "" && horaFin.trim() !== "") {
             var nuevaFila = document.createElement("tr");
             nuevaFila.innerHTML = '<td>' + horaInicio + ' -</td><td>' + horaFin + '</td><td><button onclick="eliminarFila(this)" class="boton-eliminar">X</button></td>';
             document.getElementById(seleccion).querySelector("table").appendChild(nuevaFila);
-            diasSemana[seleccion.toLowerCase()].push({ inicio: horaInicio, fin: horaFin }); // Guardar los datos en el formato deseado
+
+            const seleccionNumero = nombresDias[seleccion.toLowerCase()];
+            console.log(seleccionNumero);
+            diasSemana[seleccionNumero].push({ inicio: horaInicio, fin: horaFin }); // Guardar los datos en el formato deseado
             cerrarOtroModal();
         } else {
             alert("Por favor, ingrese la hora de inicio y fin.");
