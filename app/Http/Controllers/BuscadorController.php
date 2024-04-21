@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\DB;
 class BuscadorController extends Controller
 {
     public function show(Request $request){
-        $nombreSearch = trim($request->get('nombreSearch'));
+        $nombreSearch = trim($request->input('nombreSearch'));
+        $capacidadSearch = trim($request->input('capacidadSearch'));
         $ambientes = DB::table('ambientes')
         ->select('*')
         ->where('nombre', 'LIKE', '%'.$nombreSearch.'%')
+        ->where('capacidad', 'LIKE', '%'.$capacidadSearch.'%')
         ->orderBy('nombre', 'asc')
         ->get(); 
 

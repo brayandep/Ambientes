@@ -23,20 +23,20 @@
                 <form action="{{route('buscador')}}" method="GET">
                     <div class="form-fila-s">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="20" autocomplete="off" placeholder="Nombre del ambiente" value="{{$nombreSearch}}">
+                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente" value="{{$nombreSearch}}">
                         @error('nombre')
                         <span class="msgError">*{{$message}}</span>
                         @enderror
 
                         <label for="capacidad">Capacidad:</label>
-                        <input type="text" id="capacidadSearch" name="capacidadSearch" maxlength="3" autocomplete="off" placeholder="Capacidad">
+                        <input type="text" id="capacidadSearch" name="capacidadSearch" maxlength="3" autocomplete="off" placeholder="Capacidad" value="{{$nombreSearch}}">
 
                         <label for="dia">Día:</label>
                         <!-- Utilizamos un select (combobox) para los días de la semana -->
                         <select class="input-dia" name="dia">
                             <option value="">Seleccionar</option>
                             <?php 
-                                $antiguo = old('nivel');
+                                $antiguo = old('dia');
                                 if($antiguo){echo"<option value='$antiguo' selected>$antiguo</option>";}
                             ?>
                             <option value="lunes">Lunes</option>
