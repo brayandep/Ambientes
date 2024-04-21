@@ -33,9 +33,12 @@
 
                         <label for="dia">Día:</label>
                         <!-- Utilizamos un select (combobox) para los días de la semana -->
-                        <select id="dia" name="dia">
-
-                            <option value="todos">Seleccionar</option>
+                        <select class="input-dia" name="dia">
+                            <option value="">Seleccionar</option>
+                            <?php 
+                                $antiguo = old('nivel');
+                                if($antiguo){echo"<option value='$antiguo' selected>$antiguo</option>";}
+                            ?>
                             <option value="lunes">Lunes</option>
                             <option value="martes">Martes</option>
                             <option value="miercoles">Miércoles</option>
@@ -57,16 +60,15 @@
                     </div>
                 
                     <div class="button-fila-b">
-                        <input class="Buscar" type="submit" value="Buscar">
-                        <!--<button class="Buscar" type="submit" value="RealizarBusqueda">Buscar</button>-->
-                        <button class="Limpiar">Limpiar Búsqueda</button>
+                        <button class="Buscar" type="submit" value="RealizarBusqueda">Buscar</button>
+                        <button class="Limpiar">Limpiar búsqueda</button>
                     </div>
                 </form>
             </div>
 
             <div class="titulo-boton">
                 <h2 class="Resultado-search"> Resultado de la búsqueda </h2>
-                <button class="Buscar-Reservar">Reservar</button>
+                <button type="submit" class="Buscar-Reservar">Reservar</button>
             </div>
             <div class="tabla-search">
                 <div class="fila-b">
@@ -141,7 +143,7 @@
         });
     });
 </script>
-
+-->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const limpiarBtn = document.querySelector('.Limpiar');
@@ -161,5 +163,4 @@
         });
     });
 </script>
--->
 @endsection

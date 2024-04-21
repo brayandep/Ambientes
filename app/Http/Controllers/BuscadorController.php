@@ -15,7 +15,7 @@ class BuscadorController extends Controller
         ->select('*')
         ->where('nombre', 'LIKE', '%'.$nombreSearch.'%')
         ->orderBy('nombre', 'asc')
-        ->get();
+        ->get(); 
 
         // Definir el orden personalizado de los días de la semana de lunes a sábado
         $ordenDias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
