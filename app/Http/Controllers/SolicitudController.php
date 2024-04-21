@@ -32,8 +32,8 @@ public function create()
         
         
     $docentes = Docente::all(); 
-    $ambientes = Ambiente::all();;
-    $horarios = HorarioDisponible::all();;
+    $ambientes = Ambiente::where('estadoAmbiente', 1)->get();
+    $horarios = HorarioDisponible::all();
     // Obtén todas las solicitudes desde el modelo Solicitud
     //  $usuarios = Usuario::all();;
 

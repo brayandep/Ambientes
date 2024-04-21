@@ -389,6 +389,7 @@
   cursor: default;
 }
 
+/* cambios de Jhosemar */
 #diasAmbiente{
   gap: 10px;
   display: flex;
@@ -403,3 +404,4 @@
     display: block;
   }
 }
+/* termina cambios de Jhosemar */
