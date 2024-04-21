@@ -25,8 +25,8 @@
                     <label class="texto" for="nro_aula">Solicitante:</label><br>
                     <select class="input" id="usuario" name="usuario">
                         <option>Selecciona un usuario </option>
-                        @foreach($usuarios as $usuario)
-                        <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+                        @foreach($docentes as $docente)
+                        <option value="{{ $docente->nombreDocente}}" {{ isset($nombreDocente) ? 'selected' : '' }}>{{ $docente->nombreDocente }}</option>
                         @endforeach
                         
                     </select>
@@ -45,18 +45,13 @@
                 <div>
                     <label class="texto" for="motivo">Motivo:</label><br>
                     <select class="input" id="motivo" name="motivo" required>
-                        <option value="Clase">Clase</option>
                         <option value="Examen">Examen</option>
+                        <option value="Reunion">Reunion</option>
                         <option value="Otro">Otro</option>
                     </select>
                 </div>    
             </div>
             <div class="der">
-                <div>
-                    <label class="texto" for="fecha">Fecha:</label><br>
-                    <input class="input" type="date" id="fecha" name="fecha" required>
-                </div>
-                <br>
                 <div>
                     <label class="texto" for="nro_aula">Ambiente:</label><br>
                     <select class="input" id="nro_aula" name="nro_aula">
@@ -67,6 +62,12 @@
                             </option>
                         @endforeach
                     </select>
+                    <div id="diasAmbiente"></div>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="fecha">Fecha:</label><br>
+                    <input class="input" type="date" id="fecha" name="fecha" required>
                 </div>
                 <br>
                 <div>
@@ -84,7 +85,6 @@
       
 </div>    
 
-
 <script>
     var fechaInput = document.getElementById('fecha');
     var hoy = new Date();
@@ -100,6 +100,7 @@
 </script>
 
 <script>
+    var diasPermitidos = [];
     document.getElementById('nro_aula').addEventListener('change', function() {
         var selectedAmbienteId = this.value;
         // Limpiar el select de horario
@@ -109,6 +110,33 @@
         var horariosFiltrados = horarios.filter(function(horario) {
             return horario.ambiente_id == selectedAmbienteId;
         });
+
+        //Cambios de Jhosemar: saca los dias del ambiente seleccionado y lo filtra a fecha
+        
+        var diasYaAgregados = {};
+        diasPermitidos = [];
+        horariosFiltrados.forEach(function(horario) {
+            if (!diasYaAgregados[horario.dia]) {
+            diasPermitidos.push(horario.dia);
+            diasYaAgregados[horario.dia] = true; // Marcar el día como agregado
+            }
+        });
+        console.log(diasPermitidos);
+
+        var diasDiv = document.getElementById('diasAmbiente');
+        diasDiv.innerHTML = '';
+        diasDiv.innerHTML = '<p>Dias habilitados:</p>';
+        var nombresDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+        diasPermitidos.forEach(function(numeroDia) {
+            var nombreDia = nombresDias[numeroDia - 1]; // Restar 1 porque los arrays en JavaScript comienzan desde el índice 0
+            var nuevoElemento = document.createElement('p');
+            nuevoElemento.textContent = nombreDia;
+            diasDiv.appendChild(nuevoElemento);
+        });
+        //termina cambios de Jhosemar :)
+
+
         // Agregar las opciones al select de horario
         var horarioSelect = document.getElementById('horario');
         horariosFiltrados.forEach(function(horario) {
@@ -120,6 +148,23 @@
             horarioSelect.appendChild(option);
         });
     });
+
+    /*cambios de jhosemar (yo xd)
+    esto hace que solo se permita elegir fechas que el ambiente permite*/
+    var fechaInput = document.getElementById("fecha");
+    fechaInput.addEventListener("change", function() {
+        // Obtener la fecha seleccionada
+        var fechaSeleccionada = new Date(fechaInput.value);
+        var diaSeleccionado = (fechaSeleccionada.getDay()+1);
+
+        console.log(diaSeleccionado);
+        //Verificar si la fecha es correcta
+        if (!diasPermitidos.includes(diaSeleccionado.toString())) {
+            alert("Por favor, selecciona una fecha permitida.");
+            fechaInput.value = ""; // Restablecer el valor del input
+        }
+    });
+    //termina cambios de Jhosemar
 </script>
 
 

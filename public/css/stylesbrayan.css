@@ -130,7 +130,7 @@
 }
 .boton{
   border-radius: 5px;
-  background-color: #538296;
+  background-color: #C384B2;
   width: 160px;
   color: #f5f6f7;
   font-size: 16px;
@@ -183,8 +183,8 @@
 }
 .contentcolumna{
   text-align: center;
-
 }
+
 .botones-container {
   align-items: center;
   text-align: center;
@@ -192,11 +192,20 @@
   padding: 5px;
   justify-content: center;
   gap: 7px;
+  
+}
+#botcontenedor{
+  width: 30%;
 }
 .botones-container i{
-  font-size: 20px;
+  font-size: 20px; 
 }
-
+.fa-circle-check {
+ color: #4caf50;
+}
+.fa-circle-xmark {
+ color: #f44336;
+}
 .botones{
   color: #EBEBEB;
   background-color: #F35D5D;
@@ -260,6 +269,7 @@
 }
 .modal-contenido p{
   margin-bottom: 10px;
+  display: flex;
 }
 
 /* Estilos para el botón de cancelar */
@@ -310,3 +320,88 @@
   padding: 5px;
   border-radius: 5px;
 }
+.subtitulo{
+  font-size: 20px;
+  color: #f44336;
+  width: 100%;
+}
+.datos{
+  font-size: 16px;
+  text-align: left;
+  
+}
+/*css de la nueva tabla*/
+.contenidoTabla{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+.tabla{
+  background-color: #e2eaec;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  width: 70%;
+  margin-top: 7px;
+}
+
+.contBotones{
+  min-width: 140px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+.fila{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin-top: 7px;
+  width: 100%;
+  gap: 5px;
+  min-width: 822px;
+}
+.fila p{
+  
+  min-width: 140px;
+  width: 30%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 5px;
+  
+}
+#activar:hover{
+  background-color: #933864;
+}
+#noActivar{
+  cursor: default;
+}
+
+/* cambios de Jhosemar */
+#diasAmbiente{
+  gap: 10px;
+  display: flex;
+  border-radius: 5px;
+  padding: 3px;
+  color: #933864;
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 840px) {
+  #diasAmbiente {
+    display: block;
+  }
+}
+/* termina cambios de Jhosemar */

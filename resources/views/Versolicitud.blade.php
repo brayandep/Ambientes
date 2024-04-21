@@ -32,6 +32,7 @@
         <tr class="colorcolumna">
             <th>Nro</th>
             <th>Usuario</th>
+            <th>Estado</th>
             <th>Número de Aula</th>
             <th>Motivo</th>
             <th>Fecha</th>
@@ -44,6 +45,7 @@
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
             <td>{{ $solicitud->idsolicitud }}</td>
             <td>{{ $solicitud->usuario }}</td>
+            <td>{{ $solicitud->estado }}</td>
             <td>{{ $solicitud->nro_aula }}</td>
             <td>{{ $solicitud->motivo }}</td>
             <td>{{ $solicitud->fecha }}</td>
@@ -51,25 +53,44 @@
             <td>
                 
                 <div class="botones-container">
-                    <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
-                  
-                    <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Cancelar</button>
-                         <div id="modal-confirmacion" class="modal">
+                    @if($solicitud->estado == 'Sin confirmar')
+                        <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
+                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
+                        <div id="modal-confirmacion" class="modal">
                 
-                    <div class="modal-contenido">
-                        <p>¿Está seguro de que desea eliminar?</p>
-                        <div class="botonesCentro">
-                        <button id="boton-salir"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-
-                        <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
-
-                            @csrf
-                            @method('DELETE')
-                        <button id="boton-confirmar"  class="botones" type="submit">Confirmar</button>
-                    </form>
+                            <div class="modal-contenido">
+                                <p>¿Está seguro de que desea suspender la reserva?</p>
+                                <div class="botonesCentro">
+                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+                    @elseif($solicitud->estado == 'confirmado')   
+                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
+                        <div id="modal-confirmacion" class="modal">
+                
+                            <div class="modal-contenido">
+                                <p>¿Está seguro de que desea suspender la reserva?</p>
+                                <div class="botonesCentro">
+                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif($solicitud->estado == 'denegado')                       
+                    @elseif($solicitud->estado == 'suspendido')
+                        <a  class="botonedit" href="{{ route('solicitud.store') }}">Nueva solicitud</a>
+                    @endif
+                        
                 </div>
                
             </td>
@@ -90,10 +111,7 @@
             }
         });
     }
-</script>
 
-
-<script>
     function botonCancelar() {
         var modal = document.getElementById("modal-confirmacion");
         modal.style.display = "block";
