@@ -388,3 +388,18 @@
 #noActivar{
   cursor: default;
 }
+
+#diasAmbiente{
+  gap: 10px;
+  display: flex;
+  border-radius: 5px;
+  padding: 3px;
+  color: #933864;
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 840px) {
+  #diasAmbiente {
+    display: block;
+  }
+}

@@ -62,6 +62,7 @@
                             </option>
                         @endforeach
                     </select>
+                    <div id="diasAmbiente"></div>
                 </div>
                 <br>
                 <div>
@@ -83,7 +84,6 @@
     </form>  
       
 </div>    
-
 
 <script>
     var fechaInput = document.getElementById('fecha');
@@ -121,8 +121,19 @@
             diasYaAgregados[horario.dia] = true; // Marcar el día como agregado
             }
         });
-
         console.log(diasPermitidos);
+
+        var diasDiv = document.getElementById('diasAmbiente');
+        diasDiv.innerHTML = '';
+        diasDiv.innerHTML = '<p>Dias habilitados:</p>';
+        var nombresDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+        diasPermitidos.forEach(function(numeroDia) {
+            var nombreDia = nombresDias[numeroDia - 1]; // Restar 1 porque los arrays en JavaScript comienzan desde el índice 0
+            var nuevoElemento = document.createElement('p');
+            nuevoElemento.textContent = nombreDia;
+            diasDiv.appendChild(nuevoElemento);
+        });
         //termina cambios de Jhosemar :)
 
 
