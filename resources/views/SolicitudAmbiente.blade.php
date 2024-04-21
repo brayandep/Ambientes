@@ -53,11 +53,6 @@
             </div>
             <div class="der">
                 <div>
-                    <label class="texto" for="fecha">Fecha:</label><br>
-                    <input class="input" type="date" id="fecha" name="fecha" required>
-                </div>
-                <br>
-                <div>
                     <label class="texto" for="nro_aula">Ambiente:</label><br>
                     <select class="input" id="nro_aula" name="nro_aula">
                         <option>Selecciona un ambiente</option>
@@ -67,6 +62,11 @@
                             </option>
                         @endforeach
                     </select>
+                </div>
+                <br>
+                <div>
+                    <label class="texto" for="fecha">Fecha:</label><br>
+                    <input class="input" type="date" id="fecha" name="fecha" required>
                 </div>
                 <br>
                 <div>
@@ -86,29 +86,6 @@
 
 
 <script>
-    //cambios de jhosemar (yo xd)
-    var fechaInput = document.getElementById("fecha");
-    fechaInput.addEventListener("change", function() {
-        // Obtener la fecha seleccionada
-        var fechaSeleccionada = new Date(fechaInput.value);
-        var diasPermitidos = @json($diasUnicos);
-
-        if (!diasPermitidos.includes(fechaSeleccionada.toLocaleDateString('es-ES', { weekday: 'long' }))) {
-            alert("Por favor, selecciona una fecha permitida.");
-            fechaInput.value = ""; // Restablecer el valor del input
-        }
-
-        // Verificar si la fecha seleccionada es lunes o miércoles
-        // if (fechaSeleccionada.getDay() !== 0 && fechaSeleccionada.getDay() !== 2) {
-        //     alert("Por favor, selecciona un lunes o miércoles.");
-        //     // Restablecer el valor del campo de entrada
-        //     fechaInput.value = "";
-        // }
-    });
-
-
-
-
     var fechaInput = document.getElementById('fecha');
     var hoy = new Date();
     var mañana = new Date(hoy);
@@ -123,6 +100,7 @@
 </script>
 
 <script>
+    var diasPermitidos = [];
     document.getElementById('nro_aula').addEventListener('change', function() {
         var selectedAmbienteId = this.value;
         // Limpiar el select de horario
@@ -132,6 +110,22 @@
         var horariosFiltrados = horarios.filter(function(horario) {
             return horario.ambiente_id == selectedAmbienteId;
         });
+
+        //Cambios de Jhosemar: saca los dias del ambiente seleccionado y lo filtra a fecha
+        
+        var diasYaAgregados = {};
+        diasPermitidos = [];
+        horariosFiltrados.forEach(function(horario) {
+            if (!diasYaAgregados[horario.dia]) {
+            diasPermitidos.push(horario.dia);
+            diasYaAgregados[horario.dia] = true; // Marcar el día como agregado
+            }
+        });
+
+        console.log(diasPermitidos);
+        //termina cambios de Jhosemar :)
+
+
         // Agregar las opciones al select de horario
         var horarioSelect = document.getElementById('horario');
         horariosFiltrados.forEach(function(horario) {
@@ -143,6 +137,23 @@
             horarioSelect.appendChild(option);
         });
     });
+
+    /*cambios de jhosemar (yo xd)
+    esto hace que solo se permita elegir fechas que el ambiente permite*/
+    var fechaInput = document.getElementById("fecha");
+    fechaInput.addEventListener("change", function() {
+        // Obtener la fecha seleccionada
+        var fechaSeleccionada = new Date(fechaInput.value);
+        var diaSeleccionado = (fechaSeleccionada.getDay()+1);
+
+        console.log(diaSeleccionado);
+        //Verificar si la fecha es correcta
+        if (!diasPermitidos.includes(diaSeleccionado.toString())) {
+            alert("Por favor, selecciona una fecha permitida.");
+            fechaInput.value = ""; // Restablecer el valor del input
+        }
+    });
+    //termina cambios de Jhosemar
 </script>
 
 
