@@ -303,7 +303,7 @@
     <!-- Horarios version 2-->
     <script>
       var horarioSeleccionado = {}; // Variable para almacenar los horarios seleccionados
-    var diasHorarios = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    var diasHorarios = [1, 2, 3, 4, 5, 6]; //Jhosemar: solo midifique esto Cami xd
     var intervalos = [
         ["6:45", "8:15"],
         ["8:15", "9:45"],
