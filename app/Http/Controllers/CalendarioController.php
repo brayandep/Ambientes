@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ambiente;
 use App\Models\Evento;
+use App\Models\HorarioDisponible;
+use App\Models\Models\Solicitud;
 use Illuminate\Http\Request;
 
 class CalendarioController extends Controller
@@ -26,8 +29,40 @@ class CalendarioController extends Controller
         return view('Calendario.general', compact('eventos'));
     }
 
-    public function individual()
+    public function individual($idAmbiente)
     {
-        return view('Calendario.individual');
+        $eventoSol[] = [];
+        $eventos = array();
+        $nombreAmbiente = Ambiente::select('nombre')->where('id',$idAmbiente)->first();
+        $horariosAmbiente = HorarioDisponible::where('ambiente_id',$idAmbiente)->get();
+        $solicitudes = Solicitud::where('estado', 'confirmado')->where('nro_aula',$idAmbiente)->get();
+        // print($solicitudes);
+        //print_r($diasAmbiente);
+        foreach($horariosAmbiente as $dato){
+            $eventos[] = [
+                'title' => 'Libre',
+                'startTime' => $dato->horaInicio,
+                'endTime' => $dato->horaFin,
+                'daysOfWeek' => $dato->dia,
+            ];
+        }
+        foreach($solicitudes as $dato){
+            $horariosSeparados = explode(" - ", $dato->horario);
+            $hora1 = $horariosSeparados[0];
+            $hora2 = $horariosSeparados[1];
+            $fechaHoraIni = $dato->fecha . ' ' . $hora1;
+            $fechaHoraFin = $dato->fecha . ' ' . $hora2;
+            // print($fechaHoraIni);
+            // print($fechaHoraFin);
+            
+            $eventoSol = [
+                'title' => 'Ocupado',
+                'backgroundColor' => '#F35D5D',
+                'start' => $fechaHoraIni,
+                'end' => $fechaHoraFin,
+            ];
+        }
+        // print_r($eventoSol);
+        return view('Calendario.individual', compact('nombreAmbiente','eventos','eventoSol'));
     }
 }

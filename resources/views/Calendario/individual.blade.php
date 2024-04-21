@@ -11,8 +11,8 @@
     <div class="cont1" id="cont1">
         <div class="cont2">
             <div class="navegacion">
-                <P>Inicio > Ambiente > Calendario</P>
-                <h1><i class='fas fa-calendar-days'></i> Calendario - Ambiente</h1>
+                <P>Inicio > {{$nombreAmbiente->nombre}} > Calendario</P>
+                <h1><i class='fas fa-calendar-days'></i> Horario Aula: {{$nombreAmbiente->nombre}}</h1>
             </div>
             <div id='calendar'></div>
         </div>
@@ -43,5 +43,13 @@
     <script src='https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.11/index.global.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="{{asset('js/calendarioIndividual.js')}}"></script>
+
+    <script>
+        var misEventos = @json($eventos);
+        var ocupados = @json($eventoSol);
+
+        var totalEventos = misEventos.concat(ocupados);
+    </script>
 @endsection

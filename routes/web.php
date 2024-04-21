@@ -98,7 +98,8 @@ Route::get('/Registro', function () {
 
 Route::get('/ambiente/create', [AmbienteController::class, 'create'])->name('ambiente.create');
 Route::post('/ambiente', [AmbienteController::class, 'store'])->name('ambiente.store');
-Route::get('/ambiente', [AmbienteController::class, 'update'])->name('ambiente.update');
+Route::get('/ambiente/{id}', [AmbienteController::class, 'edit'])->name('ambiente.edit');
+Route::put('/ambiente/{id}', [AmbienteController::class, 'update'])->name('ambiente.update');
 
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
 
@@ -106,7 +107,7 @@ Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEst
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
-Route::get('/Calendario/Ambiente', [CalendarioController::class, 'individual'])->name('calendario.individual');
+Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->name('calendario.individual');
 Route::post('/Calendario/evento', [EventoController::class, 'store'])->name('evento.store');
 Route::delete('/Calendario/evento/{id}', [EventoController::class, 'destroy'])->name('evento.delete');
 Route::put('/Calendario/evento/{id}', [EventoController::class, 'update'])->name('evento.update');

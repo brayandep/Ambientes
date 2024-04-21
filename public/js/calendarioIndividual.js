@@ -1,6 +1,26 @@
-var modEvento = new bootstrap.Modal(document.getElementById('exampleModal'));
-//calendario
+
 document.addEventListener('DOMContentLoaded', function() {
+    
+    totalEventos.forEach(function(evento1) {
+        totalEventos.forEach(function(evento2) {
+            // Comparar si las fechas y horas de inicio de ambos eventos son iguales
+            if(evento1.daysOfWeek){
+                console.log(moment(evento2.start).day()); 
+
+                if (evento1.daysOfWeek.includes(moment(evento2.start).day()) && evento1.startTime === moment(evento2.start).format('HH:mm')) {
+                    // Ambos eventos ocurren en el mismo día y hora de inicio
+                    console.log('Los eventos ocurren en el mismo día y hora de inicio');
+                } else {
+                    console.log('Los eventos no ocurren en el mismo día y hora de inicio');
+                }
+            }
+
+        });
+    });
+    // Convertir el objeto de eventos filtrados en un array
+    // var eventosFinales = Object.values(eventosFiltrados);
+    // console.log(eventosFinales);
+
     var today = new Date();
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -11,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
         slotDuration: '00:45',
         slotMaxTime: '21:46',
         expandRows: true,
+        eventBackgroundColor: '#CD9DC0',
+        selectable:true,
+
         hiddenDays: [ 0 ],
         validRange: {
             start: today, // El día actual será el primer día permitido
@@ -41,59 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         dateClick: function(info) {
-            modEvento.show();
             console.log(info);
         },
 
-        events:[
-            { 
-                title: 'Libre', 
-                start: '2024-04-15', 
-                backgroundColor: '#CD9DC0', 
-                startTime: '09:45',
-                endTime: '11:15',
-                daysOfWeek: [1,3,5]
-            },
-            { 
-                title: 'Libre', 
-                start: '2024-04-15 17:15', 
-                end: '2024-04-15 18:45',
-                backgroundColor: '#CD9DC0',
-                startTime: '17:15',
-                endTime: '18:45',
-                daysOfWeek: [1] 
-
-            },
-            { 
-                title: 'Libre', 
-                start: '2024-04-19 08:15', 
-                end: '2024-04-19 09:45',
-                backgroundColor: '#CD9DC0',
-                startTime: '08:15',
-                endTime: '09:45',
-                daysOfWeek: [5] 
-
-            },
-            { 
-                title: 'Ocupado', 
-                start: '2024-04-15 11:15', 
-                end: '2024-04-15 12:45',
-                backgroundColor: '#F35D5D',
-                startTime: '11:15',
-                endTime: '12:45',
-                daysOfWeek: [1] 
-            },
-            { 
-                title: 'Ocupado', 
-                start: '2024-04-17 17:15', 
-                end: '2024-04-17 18:45',
-                backgroundColor: '#F35D5D',
-                startTime: '17:15',
-                endTime: '18:45',
-                daysOfWeek: [3] 
-            }
-            
-        ]
+        events:totalEventos,
     });
     calendar.setOption('locale', 'es');
     calendar.render();

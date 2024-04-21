@@ -45,12 +45,12 @@
                                 <td>{{$ambiente->descripcion_ubicacion}}</td>
                                 <td>
                                     <div class="EditHab">
-                                        <button class="accion" onclick="location.href='{{ route('ambiente.update', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="EditHab">
-                                        <button class="accion" onclick="location.href='{{ route('calendario.individual') }}';"><i class="fa-solid fa-calendar-days"></i></button>
+                                        <button class="accion" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';"><i class="fa-solid fa-calendar-days"></i></button>
                                     </div>
                                 </td>
                                 <td>

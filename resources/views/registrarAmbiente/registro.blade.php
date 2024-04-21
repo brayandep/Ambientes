@@ -10,7 +10,7 @@
 <main class="content-wrapper">
             <div class="container">
             <h2 class="ambienteTitulo" style="padding-bottom:20px" ><i class='fas fa-book'></i> {{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
-                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('ambiente.store') }}">
+                <form method="POST" action="{{ isset($ambienteDatos) ? route('ambiente.update', $ambienteDatos->id) : route('ambiente.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
                       @method('PUT')
