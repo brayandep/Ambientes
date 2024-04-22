@@ -65,4 +65,26 @@
         </div>
     </div>
 
+    <!-- resources/views/tu_vista.blade.php -->
+
+<!-- Botón para descargar el PDF -->
+<form action="{{ route('descargar.pdf') }}" method="GET" target="_blank">
+    @csrf
+    <button type="submit" class="btn btn-primary">Descargar PDF</button>
+</form>
+
+<!-- Tu tabla de ambientes -->
+<div class="tabla-responsive">
+    <table class="tabla-ver">
+        <!-- ... (tu tabla aquí) ... -->
+    </table>
+</div>
+
+<button onclick="imprimirPantalla()">Imprimir Pantalla</button>
+    <script>
+        function imprimirPantalla() {
+            window.print();
+        }
+    </script>
+
 @endsection

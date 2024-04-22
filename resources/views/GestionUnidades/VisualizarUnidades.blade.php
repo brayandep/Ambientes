@@ -97,6 +97,19 @@
                     </div>
                 </div>
             </div>
+
+            <!-- resources/views/tu_vista.blade.php -->
+
+            <!-- Botón para descargar el PDF -->
+            <form action="{{ route('descargar.unidades.pdf') }}" method="GET" target="_blank">
+                @csrf
+                <button type="submit" class="btn btn-primary">Descargar Unidades en PDF</button>
+            </form>
+
+            <!-- Tu tabla de unidades -->
+            <!-- ... (código de la tabla aquí) ... -->
+
+
         </div>
 @endsection
 @section('scripts')

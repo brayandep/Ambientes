@@ -110,3 +110,7 @@ Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('Am
 
 Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
 
+//descargar pdf de reporte de ambientes registrados
+Route::get('/descargar-pdf', 'App\Http\Controllers\AmbienteController@descargarPDF')->name('descargar.pdf');
+
+Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');

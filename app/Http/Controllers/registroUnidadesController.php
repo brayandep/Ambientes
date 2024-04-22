@@ -7,6 +7,8 @@ use App\Models\Dependencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use PDF;
+
 class registroUnidadesController extends Controller
 {
     public function store(Request $request){
@@ -108,5 +110,21 @@ class registroUnidadesController extends Controller
         }
     }
     
+    public function descargarUnidadesPDF(){
+        $unidades = Unidad::all(); // Obtén todas las unidades
+
+        // Contar las páginas manualmente
+        $itemsPerPage = 20; // Número de ítems por página
+        $totalItems = $unidades->count();
+        $totalPages = ceil($totalItems / $itemsPerPage);
+
+        $pageNumber = 1; // Página actual
+        $pageCount = $totalPages; // Total de páginas
+
+        // Generar el PDF
+        $pdf = PDF::loadView('pdf.unidades', compact('unidades', 'pageNumber', 'pageCount'));
+
+        return $pdf->download('unidades.pdf');
+    }
     
 }

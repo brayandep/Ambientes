@@ -9,6 +9,8 @@ use App\Models\TipoAmbiente;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class AmbienteController extends Controller
 {
     /**
@@ -296,5 +298,14 @@ class AmbienteController extends Controller
             $horario->delete();
 }
         return redirect()->route('registro.index');
+    }
+
+    public function descargarPDF()
+    {
+        $ambientes = Ambiente::all();
+
+        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'));
+
+        return $pdf->download('ambientes.pdf');
     }
 }
