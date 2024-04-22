@@ -39,6 +39,7 @@ class PublicacionController extends Controller
         $publicacion->archivo = $request->file('archivo')->store('public/archivos');
         $publicacion->fecha_vencimiento = $request->fecha_vencimiento;
         $publicacion->tipo = $request->tipo;
+        $publicacion->visible = 1;
         $publicacion->save();
 
         // Redireccionar al usuario con un mensaje de éxito
