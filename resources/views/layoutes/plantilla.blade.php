@@ -20,7 +20,7 @@
                         
                     </li>
                     <li>
-                        <a href="#"><i class='fas fa-search'></i> Buscar</a>
+                        <a href="{{ route('buscador') }}"><i class='fas fa-search'></i> Buscar</a>
                     </li>
                     <li>
                         <a href="{{ route('calendario.index') }}"><i class='fas fa-calendar-days'></i> Calendario</a>

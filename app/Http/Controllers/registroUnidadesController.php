@@ -45,7 +45,7 @@ class registroUnidadesController extends Controller
     public function show(){
         $unidades = Unidad::orderBy('id', 'desc')->get();
 
-        //$unidades = Unidad::all();
+        //$unidades = Unidad::all(); 
 
         return view('GestionUnidades.VisualizarUnidades', compact('unidades'));
 
