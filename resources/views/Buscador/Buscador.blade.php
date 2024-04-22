@@ -59,8 +59,8 @@
                     </div>
                 
                     <div class="button-fila-b">
-                        <button class="Buscar" type="submit" value="RealizarBusqueda">Buscar</button>
-                        <button class="Limpiar">Limpiar búsqueda</button>
+                        <button class="Buscar" type="submit" value="RealizarBusqueda" id="btnBuscar">Buscar</button>
+                        <button class="Limpiar" id="btnLimpiar">Limpiar búsqueda</button>
                     </div>
                 </form>
             </div>
@@ -162,4 +162,24 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener referencia a los botones
+        const btnBuscar = document.getElementById('btnBuscar');
+        const btnLimpiar = document.getElementById('btnLimpiar');
+
+        // Agregar evento click al botón de Buscar
+        btnBuscar.addEventListener('click', function() {
+            console.log('Se realizó una búsqueda');
+            // Aquí puedes agregar más código para realizar la búsqueda
+        });
+
+        // Agregar evento click al botón de Limpiar
+        btnLimpiar.addEventListener('click', function() {
+            console.log('Se limpiaron los campos de búsqueda');
+            // Aquí puedes agregar más código para limpiar los campos
+        });
+    });
+</script>
+
 @endsection
