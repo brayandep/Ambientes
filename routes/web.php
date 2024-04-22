@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\registroUnidadesController;
+use App\Http\Controllers\InicioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,15 @@ Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'
 
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
 //prueba de encabezado
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('Inicio');
-})->name('inicio');
+})->name('inicio');*/
+
+
+
+// Ruta para mostrar la página de inicio
+Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+
 
 Route::get('/materia', materiaController::class);
 
