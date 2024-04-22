@@ -15,6 +15,11 @@
                 <div>
                     <h1 class="Titulo"><i class="fas fa-building"></i> Visualizar Unidad</h1>
                 </div>
+                <!-- Botón para descargar el PDF -->
+                <form class="btnReporte" action="{{ route('descargar.unidades.pdf') }}" method="GET" target="_blank">
+                    @csrf
+                    <button style="width:150px;" class="nomCol" type="submit" class="btn btn-primary">Generar Reporte</button>
+                </form>
                 <div class="pizarra">
                     <div class="fila">
                         <div class="columnaT">
@@ -111,6 +116,11 @@
                     </div>
                 </div>
             </div>
+
+
+            
+
+
         </div>
 @endsection
 @section('scripts')
