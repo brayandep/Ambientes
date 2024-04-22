@@ -10,39 +10,36 @@
 <main class="content-wrapper">
             <div class="container">
             <h2 class="ambienteTitulo" style="padding-bottom:20px" ><i class='fas fa-book'></i> {{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
-                <form method="POST" action="{{ isset($ambienteDatos) ? route('ambiente.update', $ambienteDatos->id) : route('ambiente.store') }}">
+                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
                       @method('PUT')
                   @endif
-                    
+  
                 <div class="form-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="5" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
+                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
                     @error('codigo')
-                        <span class=msgError>*{{$message}}</span>
+                        <span>*{{$message}}</span>
                     @enderror
                     <label for="unidad">Unidad:</label>
-                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;" required>
+                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;">
                         <option value="">Selecciona una unidad</option>
                         @foreach($unidades as $unidad)
                           <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
                         @endforeach
                         </select>
-                        @error('unidad')
-                        <span class=msgError>*{{$message}}</span>
-                        @enderror
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" style="width: 40%;"maxlength="25" required autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
+                    <input type="text" id="nombre" name="nombre" style="width: 40%;" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
                     @error('nombre')
-                        <span class=msgError>*{{$message}}</span>
+                        <span>*{{$message}}</span>
                     @enderror
                     <label for="capacidad">Capacidad:</label>
-                    <input type="text" id="capacidad" name="capacidad" style="width: 40%;" maxlength="3" required autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
+                    <input type="number" id="capacidad" name="capacidad" style="width: 40%;" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
                     @error('capacidad')
-                        <span class=msgError>*{{$message}}</span>
+                        <span>*{{$message}}</span>
                     @enderror
                   </div>
     
@@ -52,31 +49,24 @@
                     <label for="ubicacion">Ubicación:</label>
                     <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                     @error('ubicacion')
-                        <span class=msgError>*{{$message}}</span>
+                        <span>*{{$message}}</span>
                     @enderror
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" required onchange="verificarOtro(this)">
+                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
                     <option>Selecciona una unidad</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
                     @endforeach
                       <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
                   </select>
-                  @error('tipo-ambiente')
-                        <span class=msgError>*{{$message}}</span>
-                    @enderror
               </div>
     
   
-  
-    
-  
-  
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" maxlength="40" required autocomplete="off">{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
+                    <textarea id="descripcion" name="descripcion" required maxlength="150" autocomplete="off">{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
                     @error('descripcion')
-                        <span class=msgError>*{{$message}}</span>
+                        <span>*{{$message}}</span>
                     @enderror
                 </div>
                 
@@ -99,73 +89,125 @@
                     </div>
                 </div>
     
-                <div class="form-group">
-                    <label for="diasSemana" style="width: 120px;">Horas hábiles:</label>
-                    <select class="selectAmbiente" id="diasSemana" onchange="agregarColumna()" style="width: 20%;">
-    
-                    <option value="">Añade un dia</option>
-                    <option value="lunes">Lunes</option>
-                    <option value="martes">Martes</option>
-                    <option value="miercoles">Miércoles</option>
-                    <option value="jueves">Jueves</option>
-                    <option value="viernes">Viernes</option>
-                    <option value="sabado">Sábado</option>
-                  </select>
-    
-                </div>
-    
-                <div class="form-group">
-                  <div id="filaExistente" class="filaExistente">
-                      <!-- Aquí se añadirán las columnas -->
-                      @if($horariosExistente != null)
-                        @foreach($horariosExistente as $dia => $horarios)
-                            <div id="{{ strtolower($dia) }}" class="columna">
-                                {{ ucfirst($dia) }}
-                                <button type="button" onclick="abrirOtroModal('{{ strtolower($dia) }}')">Añadir</button>
-                                <table>
-                                    @foreach($horarios as $horario)
-                                    <tr data-horario-id="{{ $horario->id }}"> <!-- Agregar data-horario-id con el ID del horario -->
-                                        <td>{{ $horario->horaInicio }} -</td>
-                                        <td>{{ $horario->horaFin }}</td>
-                                        <td><button onclick="eliminarFila(this, {{ $horario->id }})" class="boton-eliminar">X</button></td>
-                                    </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                        @endforeach
-                      @endif
-                      
-                      
-                      <!-- Div para almacenar los IDs de los horarios a borrar -->
-                      <div name="borrar[]"></div>
-                      
+                <div class="form-grupo">
+                    <label style="width: 120px;">Horas hábiles:</label>
+                    <table class="pizarra">
+                    <thead class="fila">
+                        <tr>
+                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Lunes')">Lunes</button></th>
+                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Martes')">Martes</button></th>
+                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Miércoles')">Miércoles</button></th>
+                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Jueves')">Jueves</button></th>
+                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Viernes')">Viernes</button></th>
+                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Sábado')">Sábado</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Lunes"></td>
+                            <td id="Martes"></td>
+                            <td id="Miércoles"></td>
+                            <td id="Jueves"></td>
+                            <td id="Viernes"></td>
+                            <td id="Sábado"></td>
+                        </tr>
+                    </tbody>
+                    </table>
 
-                  </div>
+
+                    <!--Version larga de los horarios-->
+                    <table class="pizarra">
+                    <thead class="fila">
+                        <tr>
+                            <th><button type="button" class="nomColu">Lunes</button></th>
+                            <th><button type="button" class="nomColu">Martes</button></th>
+                            <th><button type="button" class="nomColu">Miércoles</button></th>
+                            <th><button type="button" class="nomColu">Jueves</button></th>
+                            <th><button type="button" class="nomColu">Viernes</button></th>
+                            <th><button type="button" class="nomColu">Sábado</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        <tr>
+        <td id="Lunes">
+    <!-- Checkbox para marcar todos los horarios del Lunes -->
+    <input type="checkbox" class="marcarTodos" onclick="marcarTodos('lunes')"><label>Marcar Todos</label>
+    <br>
+    
+    <!-- Horarios para el Lunes -->
+    <input type="checkbox" name="horarioLunes" value="06:45 - 08:15" id="horario1">
+    <label for="horario1">06:45 - 08:15</label>
+
+    <input type="checkbox" name="horarioLunes" value="08:15 - 09:45" id="horario2">
+    <label for="horario2">08:15 - 09:45</label>
+
+    <input type="checkbox" name="horarioLunes" value="09:45 - 11:15" id="horario3">
+    <label for="horario3">09:45 - 11:15</label>
+
+    <input type="checkbox" name="horarioLunes" value="11:15 - 12:45" id="horario4">
+    <label for="horario4">11:15 - 12:45</label>
+
+    <input type="checkbox" name="horarioLunes" value="12:45 - 14:15" id="horario5">
+    <label for="horario5">12:45 - 14:15</label>
+
+    <input type="checkbox" name="horarioLunes" value="14:15 - 15:45" id="horario6">
+    <label for="horario6">14:15 - 15:45</label>
+
+    <input type="checkbox" name="horarioLunes" value="15:45 - 17:15" id="horario7">
+    <label for="horario7">15:45 - 17:15</label>
+
+    <input type="checkbox" name="horarioLunes" value="17:15 - 18:45" id="horario8">
+    <label for="horario8">17:15 - 18:45</label>
+
+    <input type="checkbox" name="horarioLunes" value="18:45 - 20:15" id="horario9">
+    <label for="horario9">18:45 - 20:15</label>
+
+    <input type="checkbox" name="horarioLunes" value="20:15 - 21:45" id="horario10">
+    <label for="horario10">20:15 - 21:45</label>
+</td>
+
+            <td id="Martes">
+                <input type="checkbox" class="marcarTodos" onclick="marcarTodos('martes')"> Marcar Todos
+                <br>
+                <!-- Agrega los horarios de martes aquí -->
+            </td>
+            <td id="Miércoles">
+                <input type="checkbox" class="marcarTodos" onclick="marcarTodos('miércoles')"> Marcar Todos
+                <br>
+                <!-- Agrega los horarios de miércoles aquí -->
+            </td>
+            <td id="Jueves">
+                <input type="checkbox" class="marcarTodos" onclick="marcarTodos('jueves')"> Marcar Todos
+                <br>
+                <!-- Agrega los horarios de jueves aquí -->
+            </td>
+            <td id="Viernes">
+                <input type="checkbox" class="marcarTodos" onclick="marcarTodos('viernes')"> Marcar Todos
+                <br>
+                <!-- Agrega los horarios de viernes aquí -->
+            </td>
+            <td id="Sábado">
+                <input type="checkbox" class="marcarTodos" onclick="marcarTodos('sábado')"> Marcar Todos
+                <br>
+                <!-- Agrega los horarios de sábado aquí -->
+            </td>
+        </tr>
+    </tbody>
+                    </table>
                 </div>
-                <div id="camposHorarios"></div>
-                <div id="camposDiasSemana" name= "diaSemana[]"></div>
-  
                 
                 <div class="botones">
-                  <button type="button" class="btn-cancelar" onclick="CancelarReg()" style="text-decoration: none; color: f5f6f7;">Cancelar</button>
+                  <button type="button" class="btn-cancelar">
+                    <a href="{{ route('AmbientesRegistrados') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
                 </button>
   
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
                   <button type="submit" class="btn-registrar" onclick="obtenerDatos2()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
     
-                </div>
+              </div>
                 </form>
             </div>
-             <!-- Modal Cancelar -->
-        <div id="fondoGris"></div>
-        <div class="panel" id="panelCancelar">
-            <p>¿Esta seguro que desea cancelar el registro?</p>
-            <div class="btnPanel">
-                <button class= "no" onclick="noCancela()" >No</button>
-                <button class="si" onclick="location.href='{{ route('AmbientesRegistrados') }}';">Si</button>
-            </div>
-        </div>
-        </main>
+         </main>
 
          <!-- Modal Ambiente -->
          <div id="modalOtro" class="modal">
@@ -183,382 +225,78 @@
                 <div id="otroModal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="cerrarOtroModal()">&times;</span>
-            
                         <div class="horarios">
-                        <label for="modalHoraInicio">Hora inicio:</label>
-                        <input type="time" id="modalHoraInicio" name="modalHoraInicio" pattern="[0-9]{2}:[0-9]{2}">
-                        <label for="modalHoraFin" >Hora fin:</label>
-                        <input type="time" id="modalHoraFin" name="modalHoraFin"pattern="[0-9]{2}:[0-9]{2}">
+                            <label for="modalHoraInicio">Hora inicio:</label>
+                            <select id="modalHoraInicio">
+                                <option value="08:00">08:00</option>
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                            </select>
+                            <label style="padding-left: 30px;" for="modalHoraFin">Hora fin:</label>
+                            <select id="modalHoraFin">
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                            </select>
                         </div>
-                        
-                        <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->
-                        
+                        <button type="button" id="modalAceptar" onclick="guardarHorario()">Aceptar</button>
                     </div>
                 </div>
 @endsection
 
 @section('scripts')
-     <!-- JavaScript  agregar hora -->
-     <script>
-      
-      const diasSemana = {
-        '1': [],
-        '2': [],
-        '3': [],
-        '4': [],
-        '5': [],
-        '6': [],
-        '7': [],
-    };
-    const nombresDias = {
-    'lunes': 1,
-    'martes': 2,
-    'miercoles': 3,
-    'jueves': 4,
-    'viernes': 5,
-    'sábado': 6,
-    'domingo': 7
-    };
+<script>
+    function abrirModalHora(dia) {
+        // Mostrar el modal
+        document.getElementById('otroModal').style.display = 'block';
+        
+        // Configurar el título del modal
+        document.querySelector('.horarios').setAttribute('data-dia', dia);
+    }
 
-    
-    function agregarColumna() {
-        var seleccion = document.getElementById("diasSemana").value;
-        if (seleccion) {
-            // Verificar si la columna ya existe
-            if (!document.getElementById(seleccion)) {
-                // Crear un nuevo elemento div para la columna
-                var nuevaColumna = document.createElement("div");
-                nuevaColumna.id = seleccion;
-                nuevaColumna.className = "columna";
-                nuevaColumna.textContent = seleccion.charAt(0).toUpperCase() + seleccion.slice(1); // Capitalizar el día
-    
-                // Crear un botón "Añadir" para la columna
-                var botonAgregar = document.createElement("button");
-                botonAgregar.textContent = "Añadir";
-                botonAgregar.type = "button"; // Asegurarse de que el tipo de botón sea 'button' y no 'submit'
-                botonAgregar.onclick = function() {
-                    abrirOtroModal(seleccion);
-                };
-                nuevaColumna.appendChild(botonAgregar);
-    
-                // Crear una tabla para la columna
-                var tabla = document.createElement("table");
-                nuevaColumna.appendChild(tabla);
-    
-                // Añadir la nueva columna al final de la fila existente
-                document.getElementById("filaExistente").appendChild(nuevaColumna);
-            }
-        }
-    }
-    
-    function agregarFila(seleccion) {
-        var horaInicio = document.getElementById("modalHoraInicio").value;
-        var horaFin = document.getElementById("modalHoraFin").value;
-        console.log(seleccion.toLowerCase());
-        // Crea la fila solo si se han proporcionado horas de inicio y fin
-        if (horaInicio.trim() !== "" && horaFin.trim() !== "") {
-            var nuevaFila = document.createElement("tr");
-            nuevaFila.innerHTML = '<td>' + horaInicio + ' -</td><td>' + horaFin + '</td><td><button onclick="eliminarFila(this)" class="boton-eliminar">X</button></td>';
-            document.getElementById(seleccion).querySelector("table").appendChild(nuevaFila);
-
-            const seleccionNumero = nombresDias[seleccion.toLowerCase()];
-            console.log(seleccionNumero);
-            diasSemana[seleccionNumero].push({ inicio: horaInicio, fin: horaFin }); // Guardar los datos en el formato deseado
-            cerrarOtroModal();
-        } else {
-            alert("Por favor, ingrese la hora de inicio y fin.");
-        }
-    }
-    
-    function eliminarFila(boton, horarioId) {
-      var fila = boton.parentNode.parentNode;
-      var tabla = fila.parentNode;
-  
-      // Eliminar la fila de la tabla
-      tabla.removeChild(fila);
-  
-      // Agregar el ID del horario al array "borrar[]"
-      var borrarDiv = document.querySelector('[name="borrar[]"]');
-      var input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'borrar[]';
-      input.value = horarioId;
-      borrarDiv.appendChild(input);
-  }
-    
-    function abrirOtroModal(seleccion) {
-        document.getElementById("otroModal").style.display = "block";
-        document.getElementById("modalHoraInicio").value = ""; // Limpiar valores de hora
-        document.getElementById("modalHoraFin").value = "";
-        document.getElementById("modalAceptar").onclick = function() {
-            agregarFila(seleccion); // Pasar el día seleccionado al agregar la fila
-        };
-    }
-    
     function cerrarOtroModal() {
-        document.getElementById("otroModal").style.display = "none";
-    }
-    
-    // Función para obtener los datos en el formato requerido
-    /*function obtenerDatos() {
-        console.log(diasSemana);
-        convertirAFormatoHTML();
-         // Inserta los campos generados en el div correspondiente
-         document.getElementById("camposDiasSemana").innerHTML = convertirAFormatoHTML();
-    }*/
-    
-    function convertirAFormatoHTML() {
-                let formHTML = '';
-                for (const dia in diasSemana) {
-                    formHTML += `<input type="hidden" name="diaSemana[${dia}]" value='${JSON.stringify(diasSemana[dia])}'>\n`;
-                }
-                return formHTML;
-            }
-         
-    </script>
-    
-   
-    <!-- Horarios version 2-->
-    <script>
-      var horarioSeleccionado = {}; // Variable para almacenar los horarios seleccionados
-    var diasHorarios = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-    var intervalos = [
-        ["6:45", "8:15"],
-        ["8:15", "9:45"],
-        ["9:45", "11:15"],
-        ["11:15", "12:45"],
-        ["12:45", "14:15"],
-        ["14:15", "15:45"],
-        ["15:45", "17:15"],
-        ["17:15", "18:45"],
-        ["18:45", "20:15"],
-        ["20:15", "21:45"]
-    ];
-
-    function crearHorario() {
-        var horario = document.getElementById('horario');
-
-        for (var i = 0; i < intervalos.length; i++) {
-            var fila = document.createElement('tr');
-            for (var j = 0; j < 6; j++) {
-                var celda = document.createElement('td');
-                if (j === 5 && i >= 6) { // Para sábado, solo mostrar hasta la sexta fila
-                    break;
-                }
-                var checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.name = 'horario_checkbox';
-                checkbox.addEventListener('change', function (i, j) {
-                    return function () {
-                        handleCheckboxChange(i, j);
-                    };
-                }(i, j));
-                celda.appendChild(checkbox);
-                var horaInicio = intervalos[i][0];
-                var horaFin = intervalos[i][1];
-                celda.appendChild(document.createTextNode(' ' + horaInicio + ' - ' + horaFin));
-                fila.appendChild(celda);
-            }
-            horario.appendChild(fila);
-        }
-
-        // Agregar botones "Seleccionar todos" y "Deseleccionar todos" al final de cada columna
-        var columnas = horario.getElementsByTagName('th');
-        for (var k = 0; k < columnas.length; k++) {
-            var botonSeleccionarTodos = document.createElement('button');
-            botonSeleccionarTodos.textContent = 'Seleccionar todos';
-            botonSeleccionarTodos.type='button';
-            botonSeleccionarTodos.onclick = (function(k) {
-                return function() {
-                    marcarTodos(k, true);
-                };
-            })(k);
-            columnas[k].appendChild(botonSeleccionarTodos);
-            
-            var botonDeseleccionarTodos = document.createElement('button');
-            botonDeseleccionarTodos.textContent = 'Deseleccionar todos';
-            botonDeseleccionarTodos.type='button';
-            botonDeseleccionarTodos.onclick = (function(k) {
-                return function() {
-                    if (haySeleccionados(k)) {
-                        marcarTodos(k, false);
-                    }
-                };
-            })(k);
-            columnas[k].appendChild(botonDeseleccionarTodos);
-        }
+        // Reiniciar los valores de los campos de entrada del modal
+        document.getElementById('modalHoraInicio').value = '';
+        document.getElementById('modalHoraFin').value = '';
+        
+        // Cerrar el modal
+        document.getElementById('otroModal').style.display = 'none';
     }
 
-    function handleCheckboxChange(i, j) {
-        var dia = diasHorarios[j];
-        if (!horarioSeleccionado[dia]) {
-            horarioSeleccionado[dia] = [];
-        }
-        var horaInicio = intervalos[i][0];
-        var horaFin = intervalos[i][1];
-        var checkbox = document.getElementById('horario').getElementsByTagName('tr')[i + 1].getElementsByTagName('td')[j].getElementsByTagName('input')[0];
-        if (checkbox.checked) {
-            horarioSeleccionado[dia].push({ inicio: horaInicio, fin: horaFin });
-        } else {
-            var index = horarioSeleccionado[dia].findIndex(function (element) {
-                return element.inicio === horaInicio && element.fin === horaFin;
-            });
-            if (index !== -1) {
-                horarioSeleccionado[dia].splice(index, 1);
-            }
-        }
-        console.log(horarioSeleccionado);
+    function guardarHorario() {
+        // Obtener los valores de las horas
+        var horaInicio = document.getElementById('modalHoraInicio').value;
+        var horaFin = document.getElementById('modalHoraFin').value;
+        
+        // Obtener el día del modal
+        var dia = document.querySelector('.horarios').getAttribute('data-dia');
+        
+        // Actualizar la celda correspondiente con el intervalo de horas
+        document.getElementById(dia).innerText = horaInicio + ' - ' + horaFin;
+        
+        // Cerrar el modal
+        cerrarOtroModal();
     }
-
-    function marcarTodos(columna, estado) {
-        var checkboxes = document.querySelectorAll('#horario tr td:nth-child(' + (columna + 1) + ') input[type="checkbox"]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = estado;
-            handleCheckboxChange(checkbox.parentNode.parentNode.rowIndex - 1, columna);
-        });
-    }
-
-    function haySeleccionados(columna) {
-        var checkboxes = document.querySelectorAll('#horario tr td:nth-child(' + (columna + 1) + ') input[type="checkbox"]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /*function obtenerDatos2() {
-        convertirAFormatoHTML();
-         // Inserta los campos generados en el div correspondiente
-         document.getElementById("camposHorarios").innerHTML = convertirAFormatoHTML2();
-    }*/
-    function obtenerDatos2() {
-    const formHTML = convertirAFormatoHTML();
-    const formHTML2 = convertirAFormatoHTML2();
-    document.getElementById("camposDiasSemana").innerHTML = formHTML;
-    document.getElementById("camposHorarios").innerHTML = formHTML2;
-}
-
-
-    function convertirAFormatoHTML2() {
-        let formHTML2 = '';
-        for (const dia2 in horarioSeleccionado) {
-            formHTML2 += `<input type="hidden" name="horario[${dia2}]" value='${JSON.stringify(horarioSeleccionado[dia2])}'>\n`;
-        }
-        return formHTML2;
-    }
-
-    crearHorario();
-
-    // Recuperar los horarios existentes y marcar los checkbox correspondientes
-    function marcarCheckboxSegunDatos() {
-        const horariosExistente = @json($horariosExistente);
-        for (const dia in horariosExistente) {
-            const indiceDia = diasHorarios.indexOf(dia);
-            if (indiceDia !== -1) {
-                horariosExistente[dia].forEach(horario => {
-                    const indiceIntervalo = intervalos.findIndex(([inicio, fin]) => {
-                        return inicio === horario.horaInicio && fin === horario.horaFin;
-                    });
-                    if (indiceIntervalo !== -1) {
-                        const checkbox = document.getElementById('horario').getElementsByTagName('tr')[indiceIntervalo + 1].getElementsByTagName('td')[indiceDia].getElementsByTagName('input')[0];
-                        checkbox.checked = true;
-                        handleCheckboxChange(indiceIntervalo, indiceDia);
-                    }
-                });
-            }
-        }
-    }
-
-    // Llamar a la función para marcar los checkbox al cargar la página
-    marcarCheckboxSegunDatos();
-
-/*function crearHorario() {
-  var horario = document.getElementById('horario');
-
-  var diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-  var intervalos = [
-    ["6:45", "8:15"],
-    ["8:15", "9:45"],
-    ["9:45", "11:15"],
-    ["11:15", "12:45"],
-    ["12:45", "14:15"],
-    ["14:15", "15:45"],
-    ["15:45", "17:15"],
-    ["17:15", "18:45"],
-    ["18:45", "20:15"],
-    ["20:15", "21:45"]
-  ];
-
-  for (var i = 0; i < intervalos.length; i++) {
-    var fila = document.createElement('tr');
-    for (var j = 0; j < 6; j++) {
-      var celda = document.createElement('td');
-      if (j === 5 && i >= 6) { // Para sábado, solo mostrar hasta la sexta fila
-        break;
-      }
-      var checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.name = 'horario_checkbox';
-      celda.appendChild(checkbox);
-      var horaInicio = intervalos[i][0];
-      var horaFin = intervalos[i][1];
-      celda.appendChild(document.createTextNode(' '+ horaInicio + ' - ' + horaFin));
-      fila.appendChild(celda);
-    }
-    horario.appendChild(fila);
-  }
-  
-  // Agregar botones "Todos" al final de cada columna
-  var columnas = horario.getElementsByTagName('th');
-  for (var k = 0; k < columnas.length; k++) {
-    var botonTodos = document.createElement('button');
-    botonTodos.textContent = 'Todos';
-    botonTodos.type='button';
-    if (k === 5) { // Para sábado
-      botonTodos.onclick = marcarTodosSabado;
-    } else { // Para lunes a viernes
-      botonTodos.onclick = (function(k) {
-        return function() {
-          toggleMarcarTodosLunesAViernes(k);
-        };
-      })(k);
-    }
-    columnas[k].appendChild(botonTodos);
-  }
-}
-
-function toggleMarcarTodosLunesAViernes(columna) {
-  var checkboxes = document.querySelectorAll('#horario tr td:nth-child(' + (columna + 1) + ') input[type="checkbox"]');
-  var todosMarcados = true;
-  checkboxes.forEach(function(checkbox) {
-    if (!checkbox.checked) {
-      todosMarcados = false;
-    }
-  });
-  checkboxes.forEach(function(checkbox) {
-    checkbox.checked = !todosMarcados;
-  });
-}
-
-function marcarTodosSabado() {
-  var checkboxes = document.querySelectorAll('#horario tr td:nth-child(6) input[type="checkbox"]');
-  var todosMarcados = true;
-  checkboxes.forEach(function(checkbox) {
-    if (!checkbox.checked) {
-      todosMarcados = false;
-    }
-  });
-  checkboxes.forEach(function(checkbox) {
-    checkbox.checked = !todosMarcados;
-  });
-}
-
-crearHorario();*/
 </script>
-   
-   
+
    <!-- JavaScript  modal otro tipo ambiente -->
    <script>
       function abrirModal() {
@@ -613,21 +351,5 @@ crearHorario();*/
           alert("Por favor, ingrese un tipo de ambiente.");
       }
   }
-  </script>
-
-  <script>
-    function CancelarReg(){
-    panelCancelar.style.display = 'block';
-    fondoGris.style.display = 'flex';
-    }
-
-    function siCancela(){
-        panelCancelar.style.display  = 'none';
-        fondoGris.style.display = 'none';
-    }
-    function noCancela(){
-        panelCancelar.style.display  = 'none';
-        fondoGris.style.display = 'none';
-    }
   </script>
 @endsection
