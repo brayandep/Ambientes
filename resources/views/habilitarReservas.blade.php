@@ -59,12 +59,17 @@
         </div>
         <div id="tbody">
             @foreach($solicitudes as $solicitud)
+           
                 <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
                     <!-- Contenido de la fila -->
                     <p>{{ $solicitud->estado }}</p>
                     <p>{{ $solicitud->fecha }}</p>
                     <p>{{ $solicitud->horario }}</p>
-                    <p>{{ $solicitud->nro_aula }}</p>
+                    @foreach($ambientes as $ambiente)
+                    @if($solicitud->nro_aula == $ambiente->id)
+                        {{ $ambiente->nombre }}
+                    @endif
+                @endforeach
                     <p>{{ $solicitud->motivo }}</p>
                     <div class="botones-container" id="botcontenedor">
                         @if($solicitud->estado == 'Sin confirmar')
@@ -134,7 +139,7 @@
                         <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
                     </div>
                 </div>
-
+                
             @endforeach
             
         </div>

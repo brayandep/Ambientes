@@ -147,13 +147,14 @@ public function denegar(Solicitud $id){
 }*/
 
 public function solicitudMostrar(Request $request){
+    $ambientes = Ambiente::all();;
      $estado = $request->input('estado');
     if($estado == "todos"){
         $solicitudes = Solicitud::all();
     }else{
         $solicitudes = Solicitud::where("estado",$estado)->get();
     }
-    return view('habilitarReservas', compact('solicitudes'));
+    return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
 
 }

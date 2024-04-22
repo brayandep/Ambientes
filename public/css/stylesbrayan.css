@@ -347,6 +347,16 @@
   overflow: auto;
   width: 70%;
   margin-top: 7px;
+}.tabla2{
+  background-color: #e2eaec;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  width: 90%;
+  margin-top: 7px;
 }
 
 .contBotones{
@@ -371,6 +381,16 @@
   width: 100%;
   gap: 5px;
   min-width: 822px;
+}
+.fila p{
+  
+  min-width: 140px;
+  width: 30%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 5px;
+  
 }
 .fila p{
   
