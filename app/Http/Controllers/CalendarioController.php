@@ -6,6 +6,7 @@ use App\Models\Ambiente;
 use App\Models\Evento;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Solicitud;
+use DateTime;
 use Illuminate\Http\Request;
 
 class CalendarioController extends Controller
@@ -31,7 +32,7 @@ class CalendarioController extends Controller
 
     public function individual($idAmbiente)
     {
-        $eventoSol[] = [];
+        $eventoSol = [];
         $eventos = array();
         $nombreAmbiente = Ambiente::select('nombre')->where('id',$idAmbiente)->first();
         $horariosAmbiente = HorarioDisponible::where('ambiente_id',$idAmbiente)->get();
@@ -55,14 +56,15 @@ class CalendarioController extends Controller
             // print($fechaHoraIni);
             // print($fechaHoraFin);
             
-            $eventoSol = [
+            $eventoSol[] = [
                 'title' => 'Ocupado',
                 'backgroundColor' => '#F35D5D',
                 'start' => $fechaHoraIni,
                 'end' => $fechaHoraFin,
+                'overlap' => false
             ];
         }
-        // print_r($eventoSol);
+        //print_r($eventos);
         return view('Calendario.individual', compact('nombreAmbiente','eventos','eventoSol'));
     }
 }
