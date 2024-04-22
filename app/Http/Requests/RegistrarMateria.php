@@ -22,7 +22,7 @@ class RegistrarMateria extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    { 
         return [
             'departamento' => 'required',
             'carrera' => 'required',

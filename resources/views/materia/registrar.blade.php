@@ -28,10 +28,9 @@
                             $antiguo = old('departamento');
                             if($antiguo){echo"<option value='$antiguo' selected>$antiguo</option>";}
                         ?> 
-                        <option value="Depto de Sistemas">Depto de Sistemas</option> 
-                        <option value="Depto de Industrial">Depto de Industrial</option> 
-                        <option value="Depto de Informatica">Depto de Informatica</option>
-                        <option value="Depto de Matematica">Depto de Matematica</option>  
+                        @foreach($departamentos as $departamento)
+                        <option value="{{ $departamento->nombreUnidad }}">{{ $departamento->nombreUnidad }}</option>
+                        @endforeach  
                     </select>
 
                     @error('departamento')

@@ -4,6 +4,7 @@
 @endsection
 @section('titulo', 'Registrar unidad')
 @section('contenido')
+    <div class="Relleno">
         <div class="Navegacion-contenido">
             <div class="Navegacion">
             Inicio > Gestion de unidades > Registro de unidad
@@ -15,15 +16,21 @@
                     @csrf
                     <div class="div1Label">
                             <h1 class=Titulo><i class="fas fa-building"></i> Registro de Unidad</h1>
-                    
+                            <div class="seleccion">
+                                <label class="titulo" for="UnidadHabilitada">Habilitado:</label>
+                                <select class="imput" id="UnidadHabilitada" name="UnidadHabilitada">
+                                    <option value="1">Si</option> 
+                                    <option value="2">No</option> 
+                                </select>
+                            </div>
                             <label class="titulo"for="nombreUnidad">Nombre de la Unidad: </label>
-                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="40" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{old('nombreUnidad')}}">
+                            <input class="imput" type="text" id="nombreUnidad" name="nombreUnidad" required maxlength="50" autocomplete="off" placeholder="Ingrese nombre de la unidad" value="{{old('nombreUnidad')}}">
                             @error('nombreUnidad')
                                 <span>*{{$message}}</span>
                             @enderror
                             
                             <label class="titulo" for="codigoUnidad">Codigo: </label>
-                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="8" maxlength="8" autocomplete="off" value="{{old('codigoUnidad')}}">
+                            <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="6" maxlength="6" autocomplete="off" value="{{old('codigoUnidad')}}">
                             @error('codigoUnidad')
                                 <span>*{{$message}}</span>
                             @enderror
@@ -35,28 +42,28 @@
                             @enderror
                     </div>
                     <div class="div2Seleccion">
-                        <div class="seleccion">
-                            <label class="titulo" for="Nivel">Nivel:</label>
-                            <select class="imput" id="Nivel" name="Nivel">
-                                <!-- Opciones de nivel aqu� 
-                                <option selected>Seleccione un nivel</option>-->
-                                <option value="0">0  Facultad</option> 
-                                <option value="1">1  Decanato</option> 
-                                <option value="2">2  Departamento</option> 
-                                <option value="3">3  laboratorio</option> 
-                            </select>
-                        </div>
+                            <div class="seleccion">
+                                <label class="titulo" for="Nivel">Nivel:</label>
+                                <select class="imput" id="Nivel" name="Nivel" onchange="cargarDependencias(this.value)">
+                                    <!-- Opciones de nivel aqu� 
+                                    <option selected>Seleccione un nivel</option>-->
+                                    <option value="">seleccione el nivel</option> 
+                                    <!--<option value="1">Facultad</option>-->
+                                    <option value="2">Decanato</option> 
+                                    <option value="3">Departamento</option> 
+                                    <option value="4">laboratorio</option> 
+                                </select>
+                            </div>
+            
                         @error('Nivel')
                                 <span>*{{$message}}</span>
                         @enderror
                         <div class="seleccion">
                             <label class="titulo" for="Dependencia">Dependencia:</label>
-                            <select class="imput" id="Dependencia" name="Dependencia">
+                            <select class="imput" id="Dependencia" name="Dependencia" >
                                 <!-- Opciones de dependeia aqu� -->
-                                <option value="1">opcion 1</option> 
-                                <option value="2">opcion 2</option> 
-                                <option value="3">opcion 3</option> 
-                                <option value="4">opcion 4</option> 
+                                <option value="">Seleccione la dependencia</option>
+
                             </select>
                         </div>
                         @error('Dependencia')
@@ -88,6 +95,7 @@
                 <button class="registrar">Cerrar</button>
             </div>
         </div>
+    </div>
 @endsection
 @section('scripts')
     <script src="{{ asset('js/scriptUnidades.js') }}"></script>

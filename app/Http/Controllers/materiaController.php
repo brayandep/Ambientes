@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrarMateria;
+use App\Models\Grupo;
 use App\Models\Materia;
+use App\Models\Unidad;
 use Illuminate\Http\Request;
 
 class materiaController extends Controller
@@ -17,12 +19,22 @@ class materiaController extends Controller
 
     public function create()
     {
-        return view('materia.registrar');
+        $departamentos = Unidad::where('nivel', '3')->get();
+
+        return view('materia.registrar', compact('departamentos'));
     }
 
     public function store(RegistrarMateria $request)
     {
         $materia = Materia::create($request->all());
+
+        for ($i = 0; $i < $materia->cantGrupo; $i++) {
+            $grupo = new Grupo();
+            $grupo->numero = $i+1;
+            $grupo->idDocente = null;
+            $grupo->idMateria = $materia->id;
+            $grupo->save();
+        }
 
         return redirect()->route('materia.show');
     }
@@ -47,6 +59,17 @@ class materiaController extends Controller
         ]);
         
         $materia->update($request->all());
+
+        $grupoE = new Grupo();
+        $grupoE = Grupo::where('idMateria', $materia->id)->delete();
+        for ($i = 0; $i < $materia->cantGrupo; $i++) {
+            $grupo = new Grupo();
+            $grupo->numero = $i+1;
+            $grupo->idDocente = null;
+            $grupo->idMateria = $materia->id;
+            $grupo->save();
+        }
+
 
         return redirect()->route('materia.show');
     }

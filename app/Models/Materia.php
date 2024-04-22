@@ -35,5 +35,10 @@ class Materia extends Model
     public function setCarreraAttribute($value){
         $this->attributes['carrera'] = strtolower($value);
     }
+
+    //relacion uno a muchos
+    function grupos(){
+        return $this->hasMany('App\Models\Grupo', 'idMateria', 'id');
+    }
 }
 

@@ -19,13 +19,30 @@
             <!-- Tabla de Materias -->
             <div class="tabla">
                 <div class="fila">
-                    <button class="nomCol">Departamento</button>
-                    <button class="nomCol">Carrera</button>
-                    <button class="nomCol">Nombre</button>
-                    <button class="nomCol">Codigo</button>
-                    <button class="nomCol">Nivel</button>
-                    <button class="nomCol">Cantidad de Grupos</button>
-                    <button class="nomCol">Editar</button>
+                    <div class="contBotones">
+                        <button class="nomCol">Departamento</button>
+                    </div>
+                    <div class="contBotones">
+                        <button class="nomCol">Carrera</button>
+                    </div>
+                    <div class="contBotones">
+                        <button class="nomCol">Nombre</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol">Codigo</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol">Nivel</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol">Grupos</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol">Editar</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol">Grupos</button>
+                    </div>
                 </div>
                 <div>
                     @foreach ($materias as $Materia)
@@ -33,11 +50,15 @@
                             <p>{{$Materia->departamento}}</p>
                             <p>{{$Materia->carrera}}</p>
                             <p>{{$Materia->nombre}}</p>
-                            <p>{{$Materia->codigo}}</p>
-                            <p>{{$Materia->nivel}}</p>
-                            <p>{{$Materia->cantGrupo}}</p>
-                            <div class="EditHab">
+                            <p id="columnaPeque">{{$Materia->codigo}}</p>
+                            <p id="columnaPeque">{{$Materia->nivel}}</p>
+                            <p id="columnaPeque">{{$Materia->cantGrupo}}</p>
+                            <div class="EditHab" id="columnaPeque">
                                 <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                            </div>
+
+                            <div class="EditHab" id="columnaPeque">
+                                <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';"><i class="fa-solid fa-user-group"></i></button>
                             </div>
                         </div>
                     @endforeach

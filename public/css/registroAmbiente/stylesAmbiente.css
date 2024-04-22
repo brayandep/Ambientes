@@ -1,16 +1,19 @@
 
+.ambienteTitulo{
+  font-size: 24px;
+}
 h2{
   font-size: 30px;
 }
 
 .content-wrapper {
   
-  height: 100%;
+  height: auto;
   overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
 }
 
 .container {
-  max-width: 60%;
+  max-width: 70%;
   margin: 0px auto;
   padding: 20px;
 }
@@ -22,8 +25,6 @@ h2{
   align-items: center; /* Alinea los elementos verticalmente */
   gap: 10px; /* Espacio entre el label y el input */
 }
-
-
 
 .form-group input[type="text"],
 .form-group input[type="number"] {
@@ -48,9 +49,18 @@ h2{
   }
   #unidad{
     margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+    
   }
   #tipo-ambiente{
     margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
+  }
+
+  .selectAmbiente{
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #EBEBEB;
   }
 
   #lunes.columna,
@@ -124,8 +134,12 @@ h2{
     border-radius: 5px; /* Agrega bordes redondeados al botón */
   }
   
-  button:hover {
-    background-color: #904368;
+  .btn-cancelar:hover{
+    background-color: #b94848;
+  }
+  
+  .btn-registrar:hover{
+    background-color: #335969;
   }
 
     /* Estilos para el primer botón */
@@ -140,7 +154,7 @@ h2{
 
   /* Estilos para el segundo botón */
   .btn-registrar {
-    background-color: #C384B2; 
+    background-color: #538296;; 
     color: #fff; /* Texto en color blanco */
 
     padding: 10px 20px; /* Espaciado interno de los botones */
@@ -276,3 +290,67 @@ h2{
   align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
   margin-top: 10px; /* Agrega un margen superior */
 }
+
+/*boton añadir */
+.btnAnadir{
+  background-color: #C384B2;
+}
+
+.msgError{
+  color: #b94848;
+  padding: 2px 0 0 6px;
+}
+
+/* paneles emergaentes */
+#fondoGris{
+  background-color: #40505577;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+
+.panel{
+  position: absolute; 
+  z-index: 2; /* un valor alto para estar por encima de otros elementos */
+  background-color: #933864;
+  color: #f5f6f7;
+  padding: 25px;
+  width: 21%;
+  min-width: 197px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);  
+  border-radius: 5px;
+  display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.btnPanel{
+  margin-top: 10px;
+  justify-content: end;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.btnPanel button{
+  padding: 5px 15px 5px 15px;;
+  border-radius: 5px;
+}
+.no{
+  background-color: #F35D5D;
+}
+.si{
+  background-color: #538296;
+}
+.no:hover{
+  background-color: #b94848;
+}
+.si:hover{
+  background-color: #4e798c;
+}
+/*termina paneles emergaentes */
