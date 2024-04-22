@@ -311,12 +311,23 @@ class AmbienteController extends Controller
         return redirect()->route('registro.index');
     }
 
-    public function descargarPDF()
-    {
-        $ambientes = Ambiente::all();
-
-        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'));
-
+    public function descargarAmbientesPDF(){
+        $ambientes = Ambiente::all(); // Obtén todos los ambientes
+    
+        // Invertir el orden de los ambientes
+        $ambientes = $ambientes->reverse();
+    
+        // Contar las páginas manualmente
+        $itemsPerPage = 20; // Número de ítems por página
+        $totalItems = $ambientes->count();
+        $totalPages = ceil($totalItems / $itemsPerPage);
+    
+        $pageNumber = 1; // Página actual
+        $pageCount = $totalPages; // Total de páginas
+    
+        // Generar el PDF
+        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes', 'pageNumber', 'pageCount'));
+    
         return $pdf->download('ambientes.pdf');
     }
 }
