@@ -4,6 +4,7 @@
 @endsection
 @section('titulo', 'Registrar unidad')
 @section('contenido')
+    <div class="Relleno">
         <div class="Navegacion-contenido">
             <div class="Navegacion">
             Inicio > Gestion de unidades > Registro de unidad
@@ -94,6 +95,7 @@
                 <button class="registrar">Cerrar</button>
             </div>
         </div>
+    </div>
 @endsection
 @section('scripts')
     <script src="{{ asset('js/scriptUnidades.js') }}"></script>

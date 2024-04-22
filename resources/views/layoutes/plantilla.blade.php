@@ -22,6 +22,9 @@
                     <li>
                         <a href="#"><i class='fas fa-search'></i> Buscar</a>
                     </li>
+                    <li>
+                        <a href="{{ route('calendario.index') }}"><i class='fas fa-calendar-days'></i> Calendario</a>
+                    </li>
                     <li onclick="gesAmbiente()">
                         <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>
                         
@@ -63,7 +66,7 @@
                         </ul>
                     </nav>
                     <li onclick="gesReserva()">
-                        <p><i class='fas fa-clipboard'></i> Gestionar reserva</p>
+                        <p><i class='fas fa-clipboard'></i> Gestionar mis solicitudes</p>
 
                     
                     </li>
@@ -83,7 +86,10 @@
                             </li>-->
                         </ul>
                     </nav>
-
+                    <li >
+                        <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
+                        
+                    </li>
 
 
 

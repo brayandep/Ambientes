@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         $this -> call(EquipoSeeder::class);
         $this -> call(TipoAmbienteSeeder::class);
         $this -> call(UsuarioSeeder::class);
+
+        $this -> call(DocenteSeeder::class);
+        $this -> call(MateriaSeeder::class);
+        $this -> call(GrupoSeeder::class);
     }
     
 }
