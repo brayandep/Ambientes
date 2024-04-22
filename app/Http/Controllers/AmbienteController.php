@@ -46,19 +46,6 @@ class AmbienteController extends Controller
      */
     public function store(Request $request)
     {
-       /*  $request -> validate([
-            'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
-            'nombre' => 'required|max:25|regex:/^[a-zA-Z\s]+$/|unique:ambientes,nombre',
-            'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
-            'descripcion' => 'required|max:40|regex:/^[a-zA-Z]+$/',
-            'unidad'=> 'required',
-            'tipo-ambiente'=> 'required'
-            [
-            'tipo-ambiente.required' => 'El tipo de ambiente es requerido'
-            ]
-        ]); */
-
         //dd($request);
         $tipoID = 0;
         $ambiente = new Ambiente();
