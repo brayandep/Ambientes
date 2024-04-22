@@ -9,6 +9,8 @@ use App\Models\TipoAmbiente;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class AmbienteController extends Controller
 {
     /**
@@ -29,6 +31,7 @@ class AmbienteController extends Controller
      */
     public function create()
     {
+        $unidades = Unidad::where('UnidadHabilitada', 1)->get();
         $unidades = Unidad::where('UnidadHabilitada', 1)->get();
         $tipoAmbientes = TipoAmbiente::all();
         $equiposDisponibles = Equipo::distinct()->pluck('nombreEquipo')->toArray();
@@ -60,6 +63,8 @@ class AmbienteController extends Controller
         ]); */
 
         //dd($request);
+        $ambiente = new Ambiente();
+        
         $tipoID = 0;
         $ambiente = new Ambiente();
         $tipoAmb = TipoAmbiente::where('nombreTipo', $request->input('tipo-ambiente'))->first();
@@ -117,7 +122,32 @@ class AmbienteController extends Controller
                 }
             }  
         }
-        return redirect('ver-ambientes');
+
+        $datosDiaSem = $request->horario;
+        
+        foreach ($datosDiaSem as $dia => $dats) {
+
+            $datos = json_decode($dats, true);
+            
+            if ($datos !== null && is_array($datos)) {
+                foreach ($datos as $dato) {
+                    
+                    $inicio = $dato['inicio'];
+                    $fin = $dato['fin'];
+                    //dd($inicio, $fin);
+                    $horarioDisponible = new HorarioDisponible();
+                    $horarioDisponible->ambiente_id = $ambiente->id;
+                    $horarioDisponible->horaInicio = $inicio;
+                    $horarioDisponible->horaFin = $fin;
+                    $horarioDisponible->estadoHorario = 1;
+                    $horarioDisponible->dia = $dia;
+                    $horarioDisponible->save();
+                }
+            }  
+        }
+
+        
+        return redirect('registro');
     }
 
     /**
@@ -174,7 +204,7 @@ class AmbienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
+        dd($request);
         $ambiente = Ambiente::find($id);
 
         $tipoID = 0;
@@ -279,5 +309,14 @@ class AmbienteController extends Controller
             $horario->delete();
 }
         return redirect()->route('registro.index');
+    }
+
+    public function descargarPDF()
+    {
+        $ambientes = Ambiente::all();
+
+        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'));
+
+        return $pdf->download('ambientes.pdf');
     }
 }

@@ -158,3 +158,7 @@ Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'elimina
 
 
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
+//descargar pdf de reporte de ambientes registrados
+Route::get('/descargar-pdf', 'App\Http\Controllers\AmbienteController@descargarPDF')->name('descargar.pdf');
+
+Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
