@@ -1,0 +1,217 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+} 
+
+  .Navegacion-contenido-search {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Navegacion-search {
+    height: 4%;
+    margin-top: 5px;
+    width: 50%;
+    font-size: 14px;
+    color: #0b2c37; /* Color del texto */
+  }
+  
+  .Titulo-search {
+
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .search-contenido {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    width: 100%;
+    position: relative; 
+  }
+
+  /*visualizar unidades*/
+.visualizar-busqueda{
+    width: 70%;
+}
+.tabla-search{
+    background-color: #e2eaec;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+}
+
+.datos {
+    overflow: auto;
+    height: 500px;
+}
+
+.contBotones{
+    min-width: 140px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+  }
+
+#columnaPeque{
+    min-width: 90px;
+    max-width: 90px;
+}
+
+.nomCol-b{
+    background-color: #AE7791;
+    padding: 7px;
+    border-radius: 5px;
+    color: #EBEBEB;
+    width: 100%;
+}
+
+.fila-b{
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin-top: 7px;
+    width: 100%;
+    gap: 5px;
+    min-width: 822px;
+}
+
+.fila-b p{
+    min-width: 140px;
+    width: 30%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 5px;
+}
+
+
+.Buscar-Calendario{
+    display: flex;
+    justify-content: center;
+}
+.Buscar-Calendario button{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+    margin-left: 30px;
+}
+
+.Buscar-Calendario button:hover{
+    background-color: #AE7791;
+    color: #EBEBEB;
+  }
+
+.buscaCalendario i{
+    background-color: none;
+    font-size: 20px;
+}
+
+.Limpiar{
+    background-color: #F35D5D;
+    color:#f5f6f7;
+}
+ 
+/* Estilo para el input de tipo submit */
+.Buscar {
+    background-color: #933864;
+    color:#f5f6f7;
+    border-radius: 5px;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.titulo-boton {
+    display: flex; /* Usar flexbox para alinear los elementos en una fila */
+    align-items: center; 
+    margin-bottom: 10px;
+}
+
+.Buscar-Reservar {
+    background-color: #933864;
+    color: #f5f6f7;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.Buscar-Reservar:hover{
+    background-color: #AE7791;
+}
+
+.button-fila-b{
+    padding: 10px;
+    margin: 5px;
+    justify-content: end;
+    display: flex;
+    gap: 15px; 
+}
+
+.button-fila-b button{
+    padding: 7px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.Limpiar:hover{
+    background-color: #b94848;
+} 
+
+.Buscar:hover{
+    background-color: #AE7791;
+}
+
+.seleccionAmb {
+    display: flex; /* Usar flexbox para alinear los elementos en una fila */
+    align-items: center; 
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+/*Buscador*/
+.form-fila-s {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+/* Estilos para etiquetas */
+.form-fila-s label {
+    width: 120px; /* Ancho fijo para las etiquetas */
+    margin-right: 10px; 
+    text-align: right; 
+}
+
+/* Estilos para inputs y selects dentro de las filas del formulario */
+.form-fila-s input,
+.form-fila-s select {
+    flex: 1; /* El input/select ocupa todo el espacio restante */
+    border-radius: 5px;
+    background-color: #ebebeb;
+    color: #0b2c37;
+    padding: 6px;
+    box-sizing: border-box; 
+}
+
+.button-fila-b{
+    margin-top: 10px;
+    display: flex; 
+}
+
+.button-fila-b button {
+    margin-right: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}

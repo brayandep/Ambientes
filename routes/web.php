@@ -14,6 +14,8 @@ use App\Models\Dependencia;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BusacadorController;
+use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
@@ -101,9 +103,13 @@ Route::post('/ambiente', [AmbienteController::class, 'store'])->name('ambiente.s
 Route::get('/ambiente/{id}', [AmbienteController::class, 'edit'])->name('ambiente.edit');
 Route::put('/ambiente/{id}', [AmbienteController::class, 'update'])->name('ambiente.update');
 
+//rutas visualizacion ambientes
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->name('AmbientesRegistrados');
+Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+//termina rutas visualizacion ambientes
 
-Route::put('/cambiar-estado/{id}', [EstadoAmbienteController::class, 'cambiarEstado'])->name('cambiar.estado');
+//rutas buscador
+Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
