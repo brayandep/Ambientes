@@ -38,33 +38,38 @@
     <div class="tabla" id="tablaSolicitudes">
         <div class="fila">
             <div class="contBotones">
-                <button class="nomCol" id="noActivar">Estado</button>
+                <button class="nomCol">Estado</button>
             </div>
             <div class="contBotones">
-                <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
+                <button class="nomCol"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
             </div>
             <div class="contBotones">
-                <button class="nomCol" id="noActivar">Horario</button>
+                <button class="nomCol">Horario</button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol" id="noActivar">Aula</button>
+                <button class="nomCol">Aula</button>
             </div>
             <div class="contBotones" >
-                <button title="Ordenar por motivo" class="nomCol" id="activar"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
+                <button class="nomCol"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol" id="noActivar">Acciones</button>
+                <button class="nomCol">Acciones</button>
             </div>
         
         </div>
-        <div id="tbody" >
+        <div id="tbody">
             @foreach($solicitudes as $solicitud)
+           
                 <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
                     <!-- Contenido de la fila -->
                     <p>{{ $solicitud->estado }}</p>
                     <p>{{ $solicitud->fecha }}</p>
                     <p>{{ $solicitud->horario }}</p>
-                    <p>{{ $solicitud->nro_aula }}</p>
+                    @foreach($ambientes as $ambiente)
+                    @if($solicitud->nro_aula == $ambiente->id)
+                        {{ $ambiente->nombre }}
+                    @endif
+                @endforeach
                     <p>{{ $solicitud->motivo }}</p>
                     <div class="botones-container" id="botcontenedor">
                         @if($solicitud->estado == 'Sin confirmar')
@@ -76,20 +81,12 @@
                                             </form>
                             </div>
                             <div>
-                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark"></i></button>
-                                <div id="modal-confirmacion" class="modal">
-                                    <div class="modal-contenido">
-                                        <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                        <div class="botonesCentro">
-                                            <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                 <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                                 @csrf
                                                 @method('put')
-                                                <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                                <button id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                             </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                        
                             </div>
                             <div>
                                 <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
@@ -98,23 +95,14 @@
                                 
                             </div>
                         @elseif($solicitud->estado == 'confirmado')   
-                            <div>
-                                <button title="Rechazar Solicitud" onclick="botonCancelar()" ><i class="fa-solid fa-circle-xmark"></i></button>
-                                <div id="modal-confirmacion" class="modal">
-                            
-                                    <div class="modal-contenido">
-                                        <p>¿Está seguro de que desea denegar la solicitud de reserva?</p>
-                                        <div class="botonesCentro">
-                                            <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
-                                                @csrf
-                                                @method('put')
-                                                <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div>
+                            <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
+                                           @csrf
+                                           @method('put')
+                                           <button id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                       </form>
+                                   
+                       </div>
                             <div>
                                 <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
                                     <i class="fa-solid fa-circle-info"></i>
@@ -151,7 +139,7 @@
                         <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
                     </div>
                 </div>
-
+                
             @endforeach
             
         </div>
@@ -209,7 +197,7 @@
         modal.style.display = 'none';
     }
 
-function ordenarPorFecha() {
+    function ordenarPorFecha() {
     const table = document.getElementById("tablaSolicitudes");
     const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
 

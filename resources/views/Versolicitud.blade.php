@@ -31,14 +31,31 @@
 <table  id="tablaSolicitudes" class="centro" border="1">
     <thead>
         <tr class="colorcolumna">
-            <th>Nro</th>
-            <th>Usuario</th>
-            <th>Estado</th>
-            <th>Número de Aula</th>
-            <th>Motivo</th>
-            <th>Fecha</th>
-            <th>Horario</th>
-            <th>Acciones</th>
+           
+            <th ><div class="contBotones">
+                <button class="nomCol">Nro</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Usuario</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Estado</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Nro de Aula</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Motivo</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Fecha</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Horario</button>
+            </div></th>
+            <th><div class="contBotones">
+                <button class="nomCol">Acciones</button>
+            </div></th>
         </tr>
     </thead>
     <tbody>
@@ -47,7 +64,11 @@
             <td>{{ $solicitud->idsolicitud }}</td>
             <td>{{ $solicitud->usuario }}</td>
             <td>{{ $solicitud->estado }}</td>
-            <td>{{ $solicitud->nro_aula }}</td>
+            <td>@foreach($ambientes as $ambiente)
+                @if($solicitud->nro_aula == $ambiente->id)
+                    {{ $ambiente->nombre }}
+                @endif
+            @endforeach</td>
             <td>{{ $solicitud->motivo }}</td>
             <td>{{ $solicitud->fecha }}</td>
             <td>{{ $solicitud->horario }}</td>
@@ -87,7 +108,8 @@
                                 </div>
                             </div>
                         </div>
-                    @elseif($solicitud->estado == 'denegado')                       
+                    @elseif($solicitud->estado == 'denegado') 
+                    <p>Sin acciones</p>            
                     @elseif($solicitud->estado == 'suspendido')
                         <a  class="botonedit" href="{{ route('solicitud.store') }}">Nueva solicitud</a>
                     @endif
