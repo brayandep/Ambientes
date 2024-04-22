@@ -14,7 +14,6 @@ use App\Models\Dependencia;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BusacadorController;
 use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
