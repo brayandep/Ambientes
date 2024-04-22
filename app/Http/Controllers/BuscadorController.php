@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\BuscadorR;
 use App\Models\Ambiente;
 use Illuminate\Http\Request;
 use App\Models\HorarioDisponible;
@@ -10,6 +8,28 @@ use App\Models\HorarioDisponible;
 class BuscadorController extends Controller
 {
     public function show(Request $request){
+        $request->validate([
+            'nombre' => 'regex:/^[a-zA-Z\s]+$/',
+            'capacidad' => 'min:15|numeric',
+            'horaInicio' => 'nullable|date_format:H:i|after_or_equal:06:45|before_or_equal:20:15',
+            'horaFin' => [
+                'nullable',
+                'date_format:H:i',
+                'after_or_equal:08:15',
+                'before_or_equal:21:45',
+                function ($attribute, $value, $fail) use ($request) {
+                    // Validar que horaFin sea posterior a horaInicio si ambos están presentes
+                    $horaInicio = $request->input('horaInicio');
+                    if (!empty($horaInicio) && !empty($value)) {
+                        if ($value <= $horaInicio) {
+                            $fail('La hora de fin debe ser posterior a la hora de inicio.');
+                        }
+                    }
+                },
+            ],
+        ]
+        ) ;
+
         $nombreSearch = $request->input('nombreSearch', ''); // Valor predeterminado: cadena vacía si no se proporciona
         $capacidadSearch = $request->input('capacidadSearch', ''); // Valor predeterminado: cadena vacía si no se proporciona
         $dia = $request->input('dia',' ');
@@ -25,12 +45,8 @@ class BuscadorController extends Controller
         }
 
         if (!empty($capacidadSearch)) {
-            $query->where('capacidad', 'like', "%$capacidadSearch%");
+            $query->where('capacidad', '>=', "$capacidadSearch");
         }
-
-        // if (!empty($nombreSearch)) {
-        //     $query->where('dia', $dia);
-        // }
 
         $ambientes = $query->orderBy('nombre', 'asc')->get();
 

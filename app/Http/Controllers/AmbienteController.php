@@ -54,6 +54,9 @@ class AmbienteController extends Controller
             'descripcion' => 'required|max:40|regex:/^[a-zA-Z]+$/',
             'unidad'=> 'required',
             'tipo-ambiente'=> 'required'
+            [
+            'tipo-ambiente.required' => 'El tipo de ambiente es requerido'
+            ]
         ]); */
 
         //dd($request);
