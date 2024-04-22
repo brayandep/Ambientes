@@ -67,7 +67,7 @@
                     <p>{{ $solicitud->horario }}</p>
                     @foreach($ambientes as $ambiente)
                     @if($solicitud->nro_aula == $ambiente->id)
-                        {{ $ambiente->nombre }}
+                       <p> {{ $ambiente->nombre }}</p>
                     @endif
                 @endforeach
                     <p>{{ $solicitud->motivo }}</p>
