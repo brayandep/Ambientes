@@ -10,6 +10,9 @@ use App\Models\Models\Usuario;
 use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use App\Models\HorarioDisponible;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -20,7 +23,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {      
         
         $this -> call(UnidadSeeder::class);
         $this -> call(EquipoSeeder::class);

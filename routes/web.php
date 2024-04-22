@@ -130,3 +130,7 @@ Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('soli
 Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');
 //mostrar solicitudes filtro
 Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');
+//descargar pdf de reporte de ambientes registrados
+Route::get('/descargar-pdf', 'App\Http\Controllers\AmbienteController@descargarPDF')->name('descargar.pdf');
+
+Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
