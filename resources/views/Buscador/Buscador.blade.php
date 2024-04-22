@@ -94,6 +94,7 @@
                     </div>             
                 </div>
                 <div class="datos">
+                @if ($ambientes->isNotEmpty() && $horarios->isNotEmpty())
                 @foreach ($ambientes as $ambiente)
                     @if ($ambiente->estadoAmbiente == 1)
                         @foreach ($horarios as $horario)
@@ -119,6 +120,9 @@
                         @endforeach
                     @endif    
                 @endforeach
+                @else
+                <p>No se encontraron resultados.</p>
+                @endif
                 </div>
             </div>
         </div>
