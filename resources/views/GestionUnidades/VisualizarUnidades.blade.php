@@ -17,30 +17,44 @@
                 </div>
                 <div class="pizarra">
                     <div class="fila">
-                        <button class="nomCol">Nombre</button>
-                        <button class="nomCol">Codigo</button>
-                        <button class="nomCol">Responsable</button>
-                        <button class="nomCol">Nivel</button>
-                        <button class="nomCol">Dependencia</button>
-                        <button class="nomCol">Acciones</button>
-                        <button class="nomCol">Habilitado</button>
+                        <div class="columnaT">
+                           <button class="nomCol">Nombre</button>
+                        </div>
+                        <div class="columnaT">
+                            <button class="nomCol">Codigo</button>
+                        </div>
+                        <div class="columnaT">
+                            <button class="nomCol">Responsable</button>
+                        </div>
+                        <div class="columnaT">
+                            <button class="nomCol">Nivel</button>
+                        </div>
+                        <div class="columnaT">
+                            <button class="nomCol">Dependencia</button>
+                        </div>
+                        <div class="columnaT">
+                            <button class="nomCol">Acciones</button>
+                        </div>
+                        <div class="columnaT">
+                            <button class="nomCol">Habilitado</button>
+                        </div>
                     </div>
                     <div>
                         @foreach ($unidades as $unidad)
                             <div class="fila">
-                                <p>{{$unidad->nombreUnidad}}</p>
-                                <p>{{$unidad->codigoUnidad}}</p>
-                                <p>{{$unidad->Responsable}}</p>
+                                <p class="columnaT">{{$unidad->nombreUnidad}}</p>
+                                <p class="columnaT">{{$unidad->codigoUnidad}}</p>
+                                <p class="columnaT">{{$unidad->Responsable}}</p>
                                     @if ($unidad->Nivel == 1)
-                                        <p>Facultad</p>
+                                        <p class="columnaT">Facultad</p>
                                         @elseif ($unidad->Nivel == 2)
-                                        <p>Decanato</p>
+                                        <p class="columnaT">Decanato</p>
                                         @elseif ($unidad->Nivel == 3)
-                                        <p>Departamento</p>
+                                        <p class="columnaT">Departamento</p>
                                         @elseif ($unidad->Nivel == 4)
-                                        <p>Laboratorio</p>
+                                        <p class="columnaT">Laboratorio</p>
                                     @endif
-                                <p>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</p>
+                                <p class="columnaT">{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</p>
                                     
                                 <div class="EliEdi">
                                     <button class="accion" onclick="location.href='{{ route('unidad.edit', $unidad) }}';"><i class="fa-solid fa-pen-to-square"></i></button>

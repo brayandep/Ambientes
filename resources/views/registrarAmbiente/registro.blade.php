@@ -10,12 +10,12 @@
 <main class="content-wrapper">
             <div class="container">
             <h2 class="ambienteTitulo" style="padding-bottom:20px" ><i class='fas fa-book'></i> {{ isset($ambienteDatos) ? 'Editar Ambiente' : 'Registro de Ambiente' }}</h2>
-                <form method="POST" action="{{ isset($ambienteDatos) ? route('registro.update', $ambienteDatos->id) : route('registro.store') }}">
+                <form method="POST" action="{{ isset($ambienteDatos) ? route('ambiente.update', $ambienteDatos->id) : route('ambiente.store') }}">
                   @csrf
                   @if(isset($ambienteDatos))
                       @method('PUT')
                   @endif
-  
+                    
                 <div class="form-group">
                     <label for="codigo">Código:</label>
                     <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
@@ -148,7 +148,7 @@
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
                   <button type="submit" class="btn-registrar" onclick="obtenerDatos()">{{ isset($ambienteDatos) ? 'Actualizar' : 'Registrar' }}</button>
     
-              </div>
+                </div>
                 </form>
             </div>
          </main>
@@ -177,7 +177,7 @@
                         <input type="time" id="modalHoraFin" name="modalHoraFin"pattern="[0-9]{2}:[0-9]{2}">
                         </div>
                         
-                        <button type="button" id="modalAfceptar">Aceptar</button> <!-- Añade un id al botón -->
+                        <button type="button" id="modalAceptar">Aceptar</button> <!-- Añade un id al botón -->
                         
                     </div>
                 </div>
@@ -188,14 +188,24 @@
      <script>
       
       const diasSemana = {
-        'lunes': [],
-        'martes': [],
-        'miercoles': [],
-        'jueves': [],
-        'viernes': [],
-        'sabado': [],
-        'domingo': [],
+        '1': [],
+        '2': [],
+        '3': [],
+        '4': [],
+        '5': [],
+        '6': [],
+        '7': [],
     };
+    const nombresDias = {
+    'lunes': 1,
+    'martes': 2,
+    'miercoles': 3,
+    'jueves': 4,
+    'viernes': 5,
+    'sábado': 6,
+    'domingo': 7
+    };
+
     
     function agregarColumna() {
         var seleccion = document.getElementById("diasSemana").value;
@@ -230,13 +240,16 @@
     function agregarFila(seleccion) {
         var horaInicio = document.getElementById("modalHoraInicio").value;
         var horaFin = document.getElementById("modalHoraFin").value;
-    
+        console.log(seleccion.toLowerCase());
         // Crea la fila solo si se han proporcionado horas de inicio y fin
         if (horaInicio.trim() !== "" && horaFin.trim() !== "") {
             var nuevaFila = document.createElement("tr");
             nuevaFila.innerHTML = '<td>' + horaInicio + ' -</td><td>' + horaFin + '</td><td><button onclick="eliminarFila(this)" class="boton-eliminar">X</button></td>';
             document.getElementById(seleccion).querySelector("table").appendChild(nuevaFila);
-            diasSemana[seleccion.toLowerCase()].push({ inicio: horaInicio, fin: horaFin }); // Guardar los datos en el formato deseado
+
+            const seleccionNumero = nombresDias[seleccion.toLowerCase()];
+            console.log(seleccionNumero);
+            diasSemana[seleccionNumero].push({ inicio: horaInicio, fin: horaFin }); // Guardar los datos en el formato deseado
             cerrarOtroModal();
         } else {
             alert("Por favor, ingrese la hora de inicio y fin.");

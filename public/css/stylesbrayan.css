@@ -1,65 +1,66 @@
-body {
-  margin: 0; /* Elimina el margen predeterminado */
-  padding: 0;
-    font-family: Arial, sans-serif;
-    color: #89C2D9;
-    background: #E1DBE8;
-    
-  }
+.NavegacionContenido{
+  width: 100%;
+  justify-content: center;
+  display: flex;
   
-  .menu-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 1000;
-  }
+}
+.navegacion{
+  width: 70%;
   
-  .btn-line {
-    width: 30px;
-    height: 3px;
-    background: #E3E5F3;
-    margin: 5px 0;
-    transition: transform 0.3s, opacity 0.3s;
-    
-  }
+}
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.btn-line {
+  width: 30px;
+  height: 3px;
+  background: #E3E5F3;
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
   
-  .sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    height: 100vh;
-    width: 250px;
-    margin-top: 10%;
-    padding: 20px;
-    transition: left 0.3s;
-    color: #E3E5F3;
-  }
+}
+
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  margin-top: 10%;
+  padding: 20px;
+  transition: left 0.3s;
+  color: #E3E5F3;
+}
+
+.sidebar  {
+  display: block;
+  color:#090909;
+  text-decoration: none;
+  padding: 10px 0;
   
-  .sidebar  {
-    display: block;
-    color:#090909;
-    text-decoration: none;
-    padding: 10px 0;
-    
-    border-bottom: 1px solid #E3E5F3;
-  }
-  
-  .content {
-    margin-left: 0;
-    transition: margin-left 0.3s;
-  }
-  
-  .sidebar.active {
-    left: 0;
-  }
-  
-  .sidebar.active + .content {
-    margin-left: 250px;
-  }
-  .fondo{
-    background: #E3E5F3;
-  }
+  border-bottom: 1px solid #E3E5F3;
+}
+
+.content {
+  margin-left: 0;
+  transition: margin-left 0.3s;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar.active + .content {
+  margin-left: 250px;
+}
+.fondo{
+  background: #E3E5F3;
+}
 .contenido{
   margin-top: 30%;
   margin-left: 10%;
@@ -74,67 +75,71 @@ body {
 
 .botones{
   color: #E3E5F3;
- 
-
 }
+
+.izqDer{
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
 .izq{
-  width:calc(50%, 10px); 
-
- 
-  padding-top: 150px;
-  
-
+  width:35%; 
 }
 .input{
-  width: 170%;
-  height: 25px;
-  border-radius: 10px;
-  border-color: #141D2C;
-  border-style: calc();
-  font-size: 16px;
-
+  width: 100%; 
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
+  margin-top: 5px;
+  background-color: #E3E5F3;
 }
+
+.input:focus, .input:hover {
+  outline: none;
+  box-shadow: 0 0 0 2px #b7b8c3;
+}
+
 .der{
   display: block;
-  width:calc(50%, 20px); 
-  margin-right: 15%;
- margin-left: 30%;
-  padding-top: 150px;
-  margin-top: 19px;
+  width:40%; 
+  
 }
-.text{
-  color: #090909;
+.texto{
   margin-top: 10px;
+  font-weight: bold;
 }
 .container{
   display: flex;
   justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
-  justify-content: center;
+  width: 70%;
+  margin-left: 10%;
+}
+.contenedor1{
+  width: 100%;
+  display: flex;
   align-items: center;
-  margin-left: 8%;
+  flex-direction: column;
 }
 .container2{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
   width: 70%;
-  margin: 0 auto;
-  margin-left: 20%;
+  margin-top: 10px;
 }
 .boton{
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #C384B2;
-  width: 25%;
-  height: 23px;
-  color: #E1DBE8;
-  font-size: 18px;
-  margin-top: 200px;
+  width: 160px;
+  color: #f5f6f7;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
 }
 .titulo{
-  margin-left: 18%;
-  color: rgb(17, 17, 17);
-  font-size: 40px;
+  font-size: 24px;
+  font-weight: bold;
 }
 .botones2{
   background: #E3E5F3;
@@ -159,66 +164,83 @@ body {
 .centro{
   width: 70%; /* Ajusta el ancho de la tabla */
   border-collapse: collapse; /* Ajusta el ancho según sea necesario */
-  height: 100px; /* Ajusta la altura según sea necesario */
+ /* height: 100px; Ajusta la altura según sea necesario */
   margin: auto; /* Esto centra horizontalmente */
   /* Esto centra verticalmente  position: absolute;  */
-  top: 0; bottom: 0; left: 0; right: 0;
   font-size: 16px;
   background: #EBEBEB;
-  margin-top: 5%;
+  margin-top: 15px;
   
 }
 .colorcolumna{
-  color: #E1DBE8;
+  color: #EBEBEB;
   background-color: #C384B2 ;
-  font-size: 17px;
+  font-size: 16px;
   margin-left: 5px;
-  padding: 10px;
+  padding: 7px;
   text-align: center;
-  border: 1px solid black;
+  
 }
 .contentcolumna{
   text-align: center;
-  color: #090909;
-
 }
+
 .botones-container {
   align-items: center;
   text-align: center;
   display: flex; 
-  padding: 10px;
+  padding: 5px;
   justify-content: center;
+  gap: 7px;
+  
 }
-
+#botcontenedor{
+  width: 30%;
+}
+.botones-container i{
+  font-size: 20px; 
+}
+.fa-circle-check {
+ color: #4caf50;
+}
+.fa-circle-xmark {
+ color: #f44336;
+}
 .botones{
   color: #EBEBEB;
   background-color: #F35D5D;
   border-radius: 5px;
-  border: 0.5px solid black;
-  font-size: 15px;
-  margin-right: 10px;
-  margin-left: 10px;
-  padding: 10px 20px;
-  margin: 10px;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  
 }
 .botonedit{
   color: #EBEBEB;
   background-color: #C384B2;
   border-radius: 5px;
-  border: 0.5px solid black;
-  font-size: 15px;
-  margin-right: 10px;
-  margin-left: 10px;
-  padding: 10px 20px;
-  margin: 10px;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 5px 10px;
+}
+.contenidoF{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.F{
+  width: 70%;
+  margin-top: 20px;
+  
 }
 .input2{
-  border-radius: 15px;
+  border-radius: 5px;
   background: #E3E5F3;
-  width: 10%;
-  margin-left: 15%;
-  margin-top: 30px;
+  width: 200px;
   display: flex;
+  padding: 7px;
 
 }
 
@@ -231,19 +253,24 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.418);
 }
 
 .modal-contenido {
-  background-color: white;
-  margin: 25% auto;
+  background-color: #f5f6f7;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
   max-width: 400px;
   text-align: center;
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
+.modal-contenido p{
+  margin-bottom: 10px;
+  display: flex;
+}
 
 /* Estilos para el botón de cancelar */
 #boton-cancelar {
@@ -255,8 +282,126 @@ body {
 /* Estilos para el botón de salir */
 
 
+
 /* Estilos para el botón de confirmar */
 #boton-confirmar {
   background-color: #4caf50;
   color: white;
 }
+.botonesCentro{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.botonupdate{
+  border-radius: 5px;
+  background-color: #C384B2;
+  width: 200px;
+  color: #E1DBE8;
+  font-size: 18px;
+  margin-right: 10%;
+  margin-left: 70%;
+}
+.contenidoFyR{
+  width: 100%;
+ display: flex; 
+ justify-content: center;
+ margin-top: 20px;
+}
+.FiltroyReporte{
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+}
+.botonReporte{
+  background-color: #C384B2;
+  color: #efebf3;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.subtitulo{
+  font-size: 20px;
+  color: #f44336;
+  width: 100%;
+}
+.datos{
+  font-size: 16px;
+  text-align: left;
+  
+}
+/*css de la nueva tabla*/
+.contenidoTabla{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+.tabla{
+  background-color: #e2eaec;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  width: 70%;
+  margin-top: 7px;
+}
+
+.contBotones{
+  min-width: 140px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+.fila{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin-top: 7px;
+  width: 100%;
+  gap: 5px;
+  min-width: 822px;
+}
+.fila p{
+  
+  min-width: 140px;
+  width: 30%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 5px;
+  
+}
+#activar:hover{
+  background-color: #933864;
+}
+#noActivar{
+  cursor: default;
+}
+
+/* cambios de Jhosemar */
+#diasAmbiente{
+  gap: 10px;
+  display: flex;
+  border-radius: 5px;
+  padding: 3px;
+  color: #933864;
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 840px) {
+  #diasAmbiente {
+    display: block;
+  }
+}
+/* termina cambios de Jhosemar */

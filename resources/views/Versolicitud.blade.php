@@ -2,6 +2,7 @@
 
 @section('links')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}">
 @endsection
 
 
@@ -9,16 +10,22 @@
 
 
 @section('contenido')
-
-<h2 class="titulo">Lista de Solicitudes</h2>
-<div>
-    <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
-        <option>Selecciona un usuario </option>
-        @foreach($usuarios as $usuario)
-          <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
-        @endforeach
-         
-      </select>
+<div class="NavegacionContenido">
+    <div class="navegacion">
+    Inicio > Gestionar mis solicitudes > Ver mis solicitudes
+    <h2 class="titulo">Lista de Solicitudes</h2>
+    </div>
+</div>
+<div class="contenidoF">
+    <div class="F">
+        <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
+            <option>Selecciona un usuario </option>
+            @foreach($usuarios as $usuario)
+            <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
+            @endforeach
+            
+        </select>
+    </div>
 </div>
 
 <table  id="tablaSolicitudes" class="centro" border="1">
@@ -26,6 +33,7 @@
         <tr class="colorcolumna">
             <th>Nro</th>
             <th>Usuario</th>
+            <th>Estado</th>
             <th>Número de Aula</th>
             <th>Motivo</th>
             <th>Fecha</th>
@@ -38,6 +46,7 @@
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
             <td>{{ $solicitud->idsolicitud }}</td>
             <td>{{ $solicitud->usuario }}</td>
+            <td>{{ $solicitud->estado }}</td>
             <td>{{ $solicitud->nro_aula }}</td>
             <td>{{ $solicitud->motivo }}</td>
             <td>{{ $solicitud->fecha }}</td>
@@ -45,25 +54,44 @@
             <td>
                 
                 <div class="botones-container">
-                    <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
-                    
-                       
-                    <button  id="boton-cancelar" class="botones" type="submit">Cancelar</button>
-                    <form action="{{ route('solicitud.destroy', $solicitud->idsolicitud) }}" method="POST">
-                <div id="modal-confirmacion" class="modal">
-
-                    <div class="modal-contenido">
-
-                        <p>¿Está seguro de que desea eliminar?</p>
-                        <button id="boton-salir"  class="botones" type="button">Salir</button>
-
-                       
-                            @csrf
-                            @method('DELETE')
-                        <button id="boton-confirmar" class="botones" type="submit">Confirmar</button>
-                    </form>
+                    @if($solicitud->estado == 'Sin confirmar')
+                        <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
+                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
+                        <div id="modal-confirmacion" class="modal">
+                
+                            <div class="modal-contenido">
+                                <p>¿Está seguro de que desea suspender la reserva?</p>
+                                <div class="botonesCentro">
+                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    @elseif($solicitud->estado == 'confirmado')   
+                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
+                        <div id="modal-confirmacion" class="modal">
+                
+                            <div class="modal-contenido">
+                                <p>¿Está seguro de que desea suspender la reserva?</p>
+                                <div class="botonesCentro">
+                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
+                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif($solicitud->estado == 'denegado')                       
+                    @elseif($solicitud->estado == 'suspendido')
+                        <a  class="botonedit" href="{{ route('solicitud.store') }}">Nueva solicitud</a>
+                    @endif
+                        
                 </div>
                
             </td>
@@ -84,29 +112,23 @@
             }
         });
     }
-</script>
 
-<script>
-    // Obtener el botón de cancelar y el modal
-    var botonCancelar = document.getElementById("boton-cancelar");
-    var modal = document.getElementById("modal-confirmacion");
-    
-    // Cuando se hace clic en el botón de cancelar, mostrar el modal
-    botonCancelar.onclick = function() {
-      modal.style.display = "block";
+    function botonCancelar() {
+        var modal = document.getElementById("modal-confirmacion");
+        modal.style.display = "block";
     }
-    
+
     // Obtener el botón de salir del modal
     var botonSalir = document.getElementById("boton-salir");
     
     // Cuando se hace clic en el botón de salir, ocultar el modal
-    botonSalir.onclick = function() {
-      modal.style.display = "none";
+    function botonSalirClick() {
+        var modal = document.getElementById("modal-confirmacion");
+        modal.style.display = "none";
     }
-    </script>
+
+</script>
 @endsection
-
-
 
 
 

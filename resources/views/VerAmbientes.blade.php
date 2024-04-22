@@ -30,6 +30,7 @@
                             <th scope="col">Ubicación</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Editar</th>
+                            <th scope="col">Ver Calendario</th>
                             <th scope="col">Habilitar</th>
                         </tr>
                     </thead>
@@ -44,7 +45,12 @@
                                 <td>{{$ambiente->descripcion_ubicacion}}</td>
                                 <td>
                                     <div class="EditHab">
-                                        <button class="accion" onclick="location.href='{{ route('registro.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="EditHab">
+                                        <button class="accion" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';"><i class="fa-solid fa-calendar-days"></i></button>
                                     </div>
                                 </td>
                                 <td>

@@ -15,39 +15,31 @@ class MateriaSeeder extends Seeder
     public function run()
     {
         $mimateria = new Materia();
-        $mimateria->departamento = 'Departamento1';
-        $mimateria->carrera = 'Ingenieria Eelectrica';
+        $mimateria->departamento = 'Depto de Informatica';
+        $mimateria->carrera = 'licenciatura en ingenieria informatica';
         $mimateria->nombre = 'Calculo I';
         $mimateria->codigo = 142772;
         $mimateria->nivel = 'A';
-        $mimateria->cantGrupo = 3;
+        $mimateria->cantGrupo = 2;
         $mimateria->save();
 
         $mimateria2 = new Materia();
-        $mimateria2->departamento = 'Departamento4';
-        $mimateria2->carrera = 'Ingenieria de Sistemas';
-        $mimateria2->nombre = 'Algebra II';
+        $mimateria2->departamento = 'Depto de Sistemas';
+        $mimateria2->carrera = 'licenciatura en ingenieria de sistemaas';
+        $mimateria2->nombre = 'Base de datos I';
         $mimateria2->codigo = 215896;
-        $mimateria2->nivel = 'B';
-        $mimateria2->cantGrupo = 2;
+        $mimateria2->nivel = 'C';
+        $mimateria2->cantGrupo = 1;
         $mimateria2->save();
 
         $mimateria3 = new Materia();
-        $mimateria3->departamento = 'Departamento4';
-        $mimateria3->carrera = 'Ingenieria Civil';
-        $mimateria3->nombre = 'Calculo II';
+        $mimateria3->departamento = 'Depto de Matematica';
+        $mimateria3->carrera = 'licenciatura en ingenieria informatica';
+        $mimateria3->nombre = 'taller de ingenieria de software';
         $mimateria3->codigo = 657415;
-        $mimateria3->nivel = 'B';
-        $mimateria3->cantGrupo = 2;
+        $mimateria3->nivel = 'G';
+        $mimateria3->cantGrupo = 3;
         $mimateria3->save();
 
-        $mimateria4 = new Materia();
-        $mimateria4->departamento = 'Departamento4';
-        $mimateria4->carrera = 'Ingenieria Mecanica';
-        $mimateria4->nombre = 'Circuitos Electronicos';
-        $mimateria4->codigo = 135687;
-        $mimateria4->nivel = 'A';
-        $mimateria4->cantGrupo = 4;
-        $mimateria4->save();
     }
 }
