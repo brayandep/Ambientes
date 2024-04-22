@@ -241,7 +241,7 @@ class AmbienteController extends Controller
             HorarioDisponible::destroy($idsAEliminar);
         }
 
-        return redirect()->route('registro.index');
+        return redirect()->route('AmbientesRegistrados');
 
     }
 
