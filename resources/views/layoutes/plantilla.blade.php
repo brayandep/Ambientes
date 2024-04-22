@@ -57,6 +57,10 @@
                     <li>
                         <p><i class='fas fa-clipboard'></i> Solicitar Reserva</p>
                     </li>
+                    <li>
+                        <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
+                        
+                    </li>
                 </ul>
             </nav>
         </div>

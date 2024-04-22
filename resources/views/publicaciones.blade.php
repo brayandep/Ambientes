@@ -11,8 +11,8 @@
         <div class="publicaciones-list">
             @foreach($reglamentos as $publicacion)
                 <div class="publicacion">
-                    <!-- <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a> //nueva pestania-->
-                    <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a>
+                    <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a>
+                    <!-- <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a> //nueva pestania-->
 
                     <div class="acciones-publicacion">
                     <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
@@ -33,8 +33,8 @@
             @foreach($anuncios as $publicacion)
                 <div class="publicacion">
                
-                  <!--<a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a>-->
-                <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a>
+                  <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a>
+                <!--<a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a>-->
 
                     <div class="acciones-publicacion">
                     <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>

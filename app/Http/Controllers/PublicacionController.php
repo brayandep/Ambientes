@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Publicacion;
 use Illuminate\Support\Facades\Storage;
 
+
 class PublicacionController extends Controller
 {
     public function index()
@@ -77,6 +78,7 @@ class PublicacionController extends Controller
 
         // Obtén la ruta completa del archivo
         $rutaArchivo = Storage::url($publicacion->archivo);
+        //dd($rutaArchivo);
 
         return view('verArchivo', compact('publicacion', 'rutaArchivo'));
     }

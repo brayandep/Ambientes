@@ -55,5 +55,3 @@ Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'elimina
 
 
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
-
-
