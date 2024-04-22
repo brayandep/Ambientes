@@ -38,22 +38,22 @@
     <div class="tabla" id="tablaSolicitudes">
         <div class="fila">
             <div class="contBotones">
-                <button class="nomCol">Estado</button>
+                <button class="nomCol" id="noActivar">Estado</button>
             </div>
             <div class="contBotones">
-                <button class="nomCol"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
+                <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
             </div>
             <div class="contBotones">
-                <button class="nomCol">Horario</button>
+                <button class="nomCol" id="noActivar">Horario</button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol">Aula</button>
+                <button class="nomCol" id="noActivar">Aula</button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
+                <button title="Ordenar por motivo" class="nomCol" id="activar"><a href="#" onclick="ordenarPorMotivo()">Motivo</a></button>
             </div>
             <div class="contBotones" >
-                <button class="nomCol">Acciones</button>
+                <button class="nomCol" id="noActivar">Acciones</button>
             </div>
         
         </div>
