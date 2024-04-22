@@ -90,10 +90,10 @@
                         <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
                         
                     </li>
-
-
-
-                    
+                    <li>
+                        <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
+                        
+                    </li>
                 </ul>
             </nav>
         </div>
