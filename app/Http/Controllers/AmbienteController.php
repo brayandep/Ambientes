@@ -9,8 +9,6 @@ use App\Models\TipoAmbiente;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
 
-use PDF;
-
 class AmbienteController extends Controller
 {
     /**
@@ -32,7 +30,6 @@ class AmbienteController extends Controller
     public function create()
     {
         $unidades = Unidad::where('UnidadHabilitada', 1)->get();
-        $unidades = Unidad::where('UnidadHabilitada', 1)->get();
         $tipoAmbientes = TipoAmbiente::all();
         $equiposDisponibles = Equipo::distinct()->pluck('nombreEquipo')->toArray();
         $equiposSeleccionados = null;
@@ -49,22 +46,7 @@ class AmbienteController extends Controller
      */
     public function store(Request $request)
     {
-       /*  $request -> validate([
-            'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
-            'nombre' => 'required|max:25|regex:/^[a-zA-Z\s]+$/|unique:ambientes,nombre',
-            'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
-            'descripcion' => 'required|max:40|regex:/^[a-zA-Z]+$/',
-            'unidad'=> 'required',
-            'tipo-ambiente'=> 'required'
-            [
-            'tipo-ambiente.required' => 'El tipo de ambiente es requerido'
-            ]
-        ]); */
-
         //dd($request);
-        $ambiente = new Ambiente();
-        
         $tipoID = 0;
         $ambiente = new Ambiente();
         $tipoAmb = TipoAmbiente::where('nombreTipo', $request->input('tipo-ambiente'))->first();
@@ -122,32 +104,7 @@ class AmbienteController extends Controller
                 }
             }  
         }
-
-        $datosDiaSem = $request->horario;
-        
-        foreach ($datosDiaSem as $dia => $dats) {
-
-            $datos = json_decode($dats, true);
-            
-            if ($datos !== null && is_array($datos)) {
-                foreach ($datos as $dato) {
-                    
-                    $inicio = $dato['inicio'];
-                    $fin = $dato['fin'];
-                    //dd($inicio, $fin);
-                    $horarioDisponible = new HorarioDisponible();
-                    $horarioDisponible->ambiente_id = $ambiente->id;
-                    $horarioDisponible->horaInicio = $inicio;
-                    $horarioDisponible->horaFin = $fin;
-                    $horarioDisponible->estadoHorario = 1;
-                    $horarioDisponible->dia = $dia;
-                    $horarioDisponible->save();
-                }
-            }  
-        }
-
-        
-        return redirect('registro');
+        return redirect('ver-ambientes');
     }
 
     /**
@@ -204,7 +161,7 @@ class AmbienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
+        //dd($request);
         $ambiente = Ambiente::find($id);
 
         $tipoID = 0;
@@ -309,14 +266,5 @@ class AmbienteController extends Controller
             $horario->delete();
 }
         return redirect()->route('registro.index');
-    }
-
-    public function descargarPDF()
-    {
-        $ambientes = Ambiente::all();
-
-        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'));
-
-        return $pdf->download('ambientes.pdf');
     }
 }
