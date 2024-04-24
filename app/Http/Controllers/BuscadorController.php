@@ -9,8 +9,8 @@ class BuscadorController extends Controller
 {
     public function show(Request $request){
         $request->validate([
-            'nombreSearch' => 'nullable|string:25',
-            'capacidadSearch' => 'nullable|min:15|numeric',
+            'nombre' => 'nullable|string:25',
+            'capacidad' => 'nullable|min:15|numeric',
             'horaInicio' => 'nullable|date_format:H:i|after_or_equal:06:45|before_or_equal:20:15',
             'horaFin' => [
                 'nullable',
@@ -30,8 +30,8 @@ class BuscadorController extends Controller
         ]
         ) ;
 
-        $nombreSearch = $request->input('nombreSearch'); // Valor predeterminado: cadena vacía si no se proporciona
-        $capacidadSearch = $request->input('capacidadSearch'); // Valor predeterminado: cadena vacía si no se proporciona
+        $nombre = $request->input('nombre'); // Valor predeterminado: cadena vacía si no se proporciona
+        $capacidad = $request->input('capacidad'); // Valor predeterminado: cadena vacía si no se proporciona
         $dia = $request->input('dia');
         // $fecha = $request->input('fecha', date('Y-m-d'));
         $horaInicio = $request->input('horaInicio');
@@ -40,12 +40,12 @@ class BuscadorController extends Controller
         // Obtener ambientes filtrados por nombre y/o capacidad
         $query = Ambiente::query();
 
-        if (!empty($nombreSearch)) {
-            $query->where('nombre', 'like', "%$nombreSearch%");
+        if (!empty($nombre)) {
+            $query->where('nombre', 'like', "%$nombre%");
         }
 
-        if (!empty($capacidadSearch)) {
-            $query->where('capacidad', '>=', $capacidadSearch);
+        if (!empty($capacidad)) {
+            $query->where('capacidad', '>=', $capacidad);
         }
 
         $ambientes = $query->orderBy('nombre', 'asc')->get();
@@ -75,6 +75,6 @@ class BuscadorController extends Controller
         ->get();
         
         return view('Buscador.Buscador', 
-        compact('ambientes', 'horarios', 'nombreSearch', 'capacidadSearch', 'diaSemana', 'horaInicio', 'horaFin'));
+        compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin'));
     }
 }
