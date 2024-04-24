@@ -41,6 +41,9 @@
                 <button class="nomCol" id="noActivar">Estado</button>
             </div>
             <div class="contBotones">
+                <button class="nomCol" id="activar">Orden</button>
+            </div>
+            <div class="contBotones">
                 <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
             </div>
             <div class="contBotones">
@@ -63,6 +66,7 @@
                 <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
                     <!-- Contenido de la fila -->
                     <p>{{ $solicitud->estado }}</p>
+                    <p>{{$solicitud ->created_at }}</p>
                     <p>{{ $solicitud->fecha }}</p>
                     <p>{{ $solicitud->horario }}</p>
                     @foreach($ambientes as $ambiente)
@@ -202,8 +206,8 @@
     const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
 
     rows.sort((a, b) => {
-        const dateA = new Date(a.querySelector('p:nth-child(2)').textContent); // Selecciona el segundo párrafo de la fila (fecha)
-        const dateB = new Date(b.querySelector('p:nth-child(2)').textContent); // Selecciona el segundo párrafo de la fila (fecha)
+        const dateA = new Date(a.querySelector('p:nth-child(3)').textContent); // Selecciona el segundo párrafo de la fila (fecha)
+        const dateB = new Date(b.querySelector('p:nth-child(3)').textContent); // Selecciona el segundo párrafo de la fila (fecha)
         return dateA - dateB;
     });
 
@@ -214,8 +218,8 @@ function ordenarPorMotivo() {
     const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
 
     rows.sort((a, b) => {
-        const motivoA = a.querySelector('p:nth-child(5)').textContent.trim().toLowerCase(); // Selecciona el quinto párrafo de la fila (motivo)
-        const motivoB = b.querySelector('p:nth-child(5)').textContent.trim().toLowerCase(); // Selecciona el quinto párrafo de la fila (motivo)
+        const motivoA = a.querySelector('p:nth-child(6)').textContent.trim().toLowerCase(); // Selecciona el quinto párrafo de la fila (motivo)
+        const motivoB = b.querySelector('p:nth-child(6)').textContent.trim().toLowerCase(); // Selecciona el quinto párrafo de la fila (motivo)
 
         if (motivoA === "examen" && motivoB !== "examen") return -1;
         if (motivoB === "examen" && motivoA !== "examen") return 1;
