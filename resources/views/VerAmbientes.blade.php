@@ -43,6 +43,9 @@
                         <button class="nomCol-v">Editar</button>
                     </div>
                     <div class="contBotones-v" id="columnaPeque">
+                        <button class="nomCol-v">Horario</button>
+                    </div>
+                    <div class="contBotones-v" id="columnaPeque">
                         <button class="nomCol-v">Habilitar</button>
                     </div>   
                 </div>
@@ -56,11 +59,17 @@
                         <p>{{ $ambiente->ubicacion }}</p>
                         <p>{{ $ambiente->descripcion_ubicacion}}</p>
                         <div class="EditHab" id="columnaPeque">
-                            <button class="accion" onclick="location.href='{{ route('registro.edit', $ambiente) }}';">
+                            <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                         </div>
                         
+                        <div class="EditHab" id="columnaPeque">
+                            <button class="accion" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </button>
+                        </div>
+
                         <div class="EditHab" id="columnaPeque"> 
                             <form action="{{ route('cambiar.estado', $ambiente->id) }}" method="POST">
                                 @csrf
@@ -77,5 +86,27 @@
         {{$ambientes->links()}}   
         </div>
     </div>
+
+    <!-- resources/views/tu_vista.blade.php -->
+
+<!-- Botón para descargar el PDF -->
+<form action="{{ route('descargar.pdf') }}" method="GET" target="_blank">
+    @csrf
+    <button type="submit" class="btn btn-primary">Descargar PDF</button>
+</form>
+
+<!-- Tu tabla de ambientes -->
+<div class="tabla-responsive">
+    <table class="tabla-ver">
+        <!-- ... (tu tabla aquí) ... -->
+    </table>
+</div>
+
+<button onclick="imprimirPantalla()">Imprimir Pantalla</button>
+    <script>
+        function imprimirPantalla() {
+            window.print();
+        }
+    </script>
 
 @endsection

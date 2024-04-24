@@ -19,7 +19,7 @@ class materiaController extends Controller
 
     public function create()
     {
-        $departamentos = Unidad::where('nivel', '2')->get();
+        $departamentos = Unidad::where('nivel', '3')->get();
 
         return view('materia.registrar', compact('departamentos'));
     }
@@ -30,9 +30,9 @@ class materiaController extends Controller
 
         for ($i = 0; $i < $materia->cantGrupo; $i++) {
             $grupo = new Grupo();
-            $grupo->nombre = $i+1;
-            $grupo->docente = '';
-            $grupo->materia = $materia->id;
+            $grupo->numero = $i+1;
+            $grupo->idDocente = null;
+            $grupo->idMateria = $materia->id;
             $grupo->save();
         }
 
@@ -61,12 +61,12 @@ class materiaController extends Controller
         $materia->update($request->all());
 
         $grupoE = new Grupo();
-        $grupoE = Grupo::where('materia', $materia->id)->delete();
+        $grupoE = Grupo::where('idMateria', $materia->id)->delete();
         for ($i = 0; $i < $materia->cantGrupo; $i++) {
             $grupo = new Grupo();
-            $grupo->nombre = $i+1;
-            $grupo->docente = '';
-            $grupo->materia = $materia->id;
+            $grupo->numero = $i+1;
+            $grupo->idDocente = null;
+            $grupo->idMateria = $materia->id;
             $grupo->save();
         }
 

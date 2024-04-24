@@ -65,6 +65,9 @@ body{
 
 .menu ul li a{
     color: #ffffff;
+    width: 100%;
+    display: flex;
+    gap: 5px;
 }
 
 .subMenu{

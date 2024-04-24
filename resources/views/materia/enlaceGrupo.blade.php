@@ -17,7 +17,7 @@
             <div class="navegacion">
                 Inicio > Materia > Grupos
             </div>
-            <h1><i class='fas fa-book'></i> Grupos de {{$mimateria->nombre}}</h1>
+            <h1><i class='fas fa-book'></i> Grupos de {{$mimateria->numero}}</h1>
             
 
             <form action="{{route('grupo.update' ,$mimateria->cantGrupo)}}" method="POST" >
@@ -26,22 +26,22 @@
 
                 @foreach ($grupos as $grupo)
                     <div class="input-goup">
-                        <h2 class="grupo" id="labMateria">Grupo {{$grupo->nombre}}</h2>
+                        <h2 class="grupo" id="labMateria">Grupo {{$grupo->numero}}</h2>
                     </div>
 
                     <input type="hidden" name="grupo_id[]" value="{{ $grupo->id }}">
-                    <input class="invisible" name="nombre[]" value="{{$grupo->nombre}}">
+                    <input class="invisible" name="numero[]" value="{{$grupo->numero}}">
 
                     <div class="input-goup">
                         <label class="labMateria">Docente</label>
                         <select class="inputMateria" id="nivel" name="docente[]">
-                            <option value="">Seleccione el nivel</option> 
-                            <option value="{{$grupo->docente}}" selected>{{$grupo->docente}}</option>
-                            <option value="SORUCO MAITA JOSE ANTONIO">SORUCO MAITA JOSE ANTONIO</option> 
-                            <option value="OMONTE OJALVO JOSE ROBERTO">OMONTE OJALVO JOSE ROBERTO</option> 
-                            <option value="MOREIRA CALIZAYA RENE">MOREIRA CALIZAYA RENE</option>
-                            <option value="TERRAZAS VARGAS JUAN CARLOS">TERRAZAS VARGAS JUAN CARLOS</option> 
-                            <option value="LEON ROMERO GUALBERTO">LEON ROMERO GUALBERTO</option> 
+                            <option value="">Seleccione el docente</option> 
+                            @if ($grupo->idDocente)
+                            <option value="{{$grupo->idDocente}}" selected>{{$grupo->eldocente->nombreDocente}}</option>
+                            @endif
+                            @foreach ($docentes as $docente)
+                                <option value="{{ $docente->id }}">{{ $docente->nombreDocente }}</option>
+                            @endforeach
                         </select>
                         @error('docente')
                             <span class="msgError">*{{$message}}</span>
@@ -49,7 +49,7 @@
                         @enderror
                     </div>
 
-                    <input class="invisible" name="materia[]" value="{{$grupo->materia}}">
+                    <input class="invisible" name="materia[]" value="{{$grupo->idMateria}}">
                     <br>
                 @endforeach 
                 <div class="botones">

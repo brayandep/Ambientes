@@ -14,23 +14,24 @@ class UsuarioSeeder extends Seeder
     public function run()
     {
         //
-        $usuario = new User();
-        $usuario -> nombre = "Brayan";
-        $usuario -> contraseña = "123";
+        $usuario1 = new User();
+        $usuario1 -> nombre = "Brayan";
+        $usuario1 -> contraseña = "123";
+        $usuario1 -> tipoUsuario= "99";
      
-        $usuario -> save();
+        $usuario1 -> save();
 
-        $usuario = new User();
-        $usuario -> nombre = "Lucas";
-        $usuario -> contraseña = "123";
-     
-        $usuario -> save();
+        $usuario2 = new User();
+        $usuario2 -> nombre = "Lucas";
+        $usuario2 -> contraseña = "123";
+        $usuario2 -> tipoUsuario= "99";
+        $usuario2 -> save();
 
-        $usuario = new User();
-        $usuario -> nombre = "Marcos";
-        $usuario -> contraseña = "123";
-     
-        $usuario -> save();
+        $usuario3 = new User();
+        $usuario3 -> nombre = "Marcos";
+        $usuario3 -> contraseña = "123";
+        $usuario3 -> tipoUsuario= "99";
+        $usuario3 -> save();
 
     }
 }
