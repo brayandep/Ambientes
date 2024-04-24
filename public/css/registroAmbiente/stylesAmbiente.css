@@ -368,6 +368,6 @@ th, td {
   width: 100px;
 }
 
-#Sabado td {
+.estiloSab {
   vertical-align: top; /* Alinea los elementos hacia arriba */
 }

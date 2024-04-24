@@ -133,6 +133,7 @@ Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilit
 Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');
 
 //descargar pdf de reporte de ambientes registrados
-//Route::get('/descargar-pdf', 'App\Http\Controllers\AmbienteController@descargarPDF')->name('descargar.pdf');
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
+Route::get('/descargar-materias-pdf', 'App\Http\Controllers\materiaController@descargarMateriasPDF')->name('descargar.materias.pdf');
+Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@descargarReservasPDF')->name('descargar.reservas.pdf');

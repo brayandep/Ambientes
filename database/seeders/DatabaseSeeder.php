@@ -11,10 +11,6 @@ use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use App\Models\TipoAmbiente;
-use App\Models\Ambiente;
-use App\Models\Unidad;
-use App\Models\Equipo;
 use App\Models\HorarioDisponible;
 
 
@@ -28,6 +24,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this -> call(UnidadSeeder::class);
+        $this -> call(EquipoSeeder::class);
+        $this -> call(TipoAmbienteSeeder::class);
+        $this -> call(UsuarioSeeder::class);
+
+        $this -> call(DocenteSeeder::class);
+        $this -> call(MateriaSeeder::class);
+        $this -> call(GrupoSeeder::class);
         // \App\Models\User::factory(10)->create();
         
         $tiposAmbientes = ['Auditorio', 'Aula', 'Laboratorio', 'Sala de reuniones'];
@@ -113,17 +117,6 @@ class DatabaseSeeder extends Seeder
             'estadoHorario' => true,
             'dia' => 'Lunes',
         ]);
-    }
         
-        
-        $this -> call(UnidadSeeder::class);
-        $this -> call(EquipoSeeder::class);
-        $this -> call(TipoAmbienteSeeder::class);
-        $this -> call(UsuarioSeeder::class);
-
-        $this -> call(DocenteSeeder::class);
-        $this -> call(MateriaSeeder::class);
-        $this -> call(GrupoSeeder::class);
     }
-    
-}
+} 

@@ -8,6 +8,9 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
+
+use PDF;
+
 class SolicitudController extends Controller
 {
     public function index()
@@ -156,4 +159,23 @@ public function solicitudMostrar(Request $request){
     return view('habilitarReservas', compact('solicitudes'));
 }
 
+public function descargarReservasPDF(){
+    $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
+
+    // Invertir el orden de las solicitudes
+    $solicitudes = $solicitudes->reverse();
+
+    // Contar las páginas manualmente
+    $itemsPerPage = 20; // Número de ítems por página
+    $totalItems = $solicitudes->count();
+    $totalPages = ceil($totalItems / $itemsPerPage);
+
+    $pageNumber = 1; // Página actual
+    $pageCount = $totalPages; // Total de páginas
+
+    // Generar el PDF
+    $pdf = PDF::loadView('pdf.solicitudes', compact('solicitudes', 'pageNumber', 'pageCount'));
+
+    return $pdf->download('reservas.pdf');
+}
 }

@@ -313,13 +313,6 @@
   width: 70%;
   justify-content: space-between;
 }
-.botonReporte{
-  background-color: #C384B2;
-  color: #efebf3;
-  font-size: 14px;
-  padding: 5px;
-  border-radius: 5px;
-}
 .subtitulo{
   font-size: 20px;
   color: #f44336;

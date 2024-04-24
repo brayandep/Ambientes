@@ -29,9 +29,11 @@
                 </select>
            </form>
         </div>
-        <div>
-            <button class="botonReporte">Generar Reporte</button>
-        </div>
+        <!-- Botón para descargar el PDF -->
+            <form class="btnReporte" action="{{ route('descargar.reservas.pdf') }}" method="GET" target="_blank">
+                @csrf
+                <button style="width:150px;" class="nomCol" type="submit" class="btn btn-primary">Generar Reporte</button>
+            </form>
     </div>
 </div>
 <div class="contenidoTabla">

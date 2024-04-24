@@ -147,7 +147,7 @@ class AmbienteController extends Controller
         }
 
         
-        return redirect('registro');
+        return redirect('ambiente');
     }
 
     /**
