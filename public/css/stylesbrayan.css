@@ -392,16 +392,10 @@
   padding: 5px;
   
 }
-.fila p{
-  
-  min-width: 140px;
-  width: 30%;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  padding: 5px;
-  
-}
+/*.solDatos{
+  overflow: auto;
+  height: 300px;
+}*/
 #activar:hover{
   background-color: #933864;
 }

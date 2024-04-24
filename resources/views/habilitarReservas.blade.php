@@ -41,7 +41,7 @@
                 <button class="nomCol" id="noActivar">Estado</button>
             </div>
             <div class="contBotones">
-                <button class="nomCol" id="activar">Orden</button>
+                <button class="nomCol" id="activar" onclick="ordenarPorFechaCreacion()">Orden</button>
             </div>
             <div class="contBotones">
                 <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
@@ -60,7 +60,7 @@
             </div>
         
         </div>
-        <div id="tbody">
+        <div class="solDatos" id="tbody">
             @foreach($solicitudes as $solicitud)
            
                 <div class="fila" data-id="{{ $solicitud->id }}" data-estado="{{ $solicitud->estado }}">
@@ -200,6 +200,27 @@
         var modal = document.getElementById('modal-mensaje');
         modal.style.display = 'none';
     }
+
+    let ordenAscendente = true;
+    function ordenarPorFechaCreacion() {
+        const table = document.getElementById("tablaSolicitudes");
+    const rows = Array.from(table.querySelectorAll('.fila')).slice(1); // Selecciona todas las filas dentro de la tabla
+
+    rows.sort((a, b) => {
+        const dateA = new Date(a.querySelector('p:nth-child(2)').textContent.replace(/-/g, '/')); // Convertir la fecha a formato válido (reemplazar '-' por '/')
+        const dateB = new Date(b.querySelector('p:nth-child(2)').textContent.replace(/-/g, '/'));
+
+        // Orden ascendente o descendente dependiendo del valor de la variable ordenAscendente
+        return ordenAscendente ? dateA - dateB : dateB - dateA;
+    });
+
+    // Invertir la variable para el próximo ordenamiento
+    ordenAscendente = !ordenAscendente;
+
+    rows.forEach(row => table.appendChild(row));
+    }
+
+
 
     function ordenarPorFecha() {
     const table = document.getElementById("tablaSolicitudes");
