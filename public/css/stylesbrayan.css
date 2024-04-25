@@ -419,3 +419,11 @@
   }
 }
 /* termina cambios de Jhosemar */
+
+
+.alert{
+  background-color: #AE7791;
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 5px;
+}

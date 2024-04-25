@@ -131,3 +131,6 @@ Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('soli
 Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');
 //mostrar solicitudes filtro
 Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');
+
+
+

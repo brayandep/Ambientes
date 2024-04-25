@@ -16,7 +16,15 @@
         <h2 class="titulo">Formulario de Solicitud</h2>
         </div>
     </div>
-
+    @if ($errors->any())
+    <div class="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form class="container2" method="POST" action="{{ route('solicitud.store') }}">
         @csrf <!-- Incluye el campo csrf aquí -->
         <div class="izqDer">
@@ -81,6 +89,7 @@
         <div>
             <button class="boton" type="submit">Enviar Solicitud</button> 
        </div>
+      
     </form>  
       
 </div>    
@@ -166,6 +175,5 @@
     });
     //termina cambios de Jhosemar
 </script>
-
 
 @endsection
