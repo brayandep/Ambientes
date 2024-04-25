@@ -73,7 +73,6 @@ h2{
     font-size: 100%;
     font-weight: normal;
 
-    width: 150px;
   }
   
   input[type="text"],
@@ -207,6 +206,7 @@ h2{
   padding: 20px;
   border: 1px solid #888;
   width: 40%;
+  min-width: 550px; /* Establece un ancho mínimo de 550 píxeles */
 
 
     display: flex;
@@ -275,6 +275,7 @@ h2{
 }
 
 /* Estilos para el botón "Aceptar" */
+#aceptarModal,
 #modalAceptar {
   align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
   margin-top: 10px; /* Agrega un margen superior */
@@ -289,15 +290,7 @@ h2{
 #modalAceptar:hover {
   background-color: #904368;
 }
-#aceptarModal {
-  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
-  margin-top: 10px; /* Agrega un margen superior */
-}
 
-/*boton añadir */
-.btnAnadir{
-  background-color: #C384B2;
-}
 
 
 /*///////////////////////////////////*/
@@ -379,4 +372,13 @@ th, td {
 
 .estiloSab {
   vertical-align: top; /* Alinea los elementos hacia arriba */
+}
+
+.modal-content h2 {
+  font-size: 20px;       /* Tamaño de fuente */
+  margin-bottom: 20px;   /* Margen inferior */
+  color: #333;           /* Color del texto */
+  text-align: center;    /* Alineación centrada */
+  padding-bottom: 10px;  /* Espaciado inferior */
+  font-weight: bold;     /* Texto en negrita */
 }
