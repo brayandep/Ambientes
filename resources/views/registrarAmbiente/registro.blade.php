@@ -53,7 +53,7 @@
                     @enderror
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
                   <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
-                    <option>Selecciona una unidad</option>
+                    <option>Selecciona un tipo de ambiente</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
                     @endforeach
@@ -91,7 +91,7 @@
     
                 <div class="form-grupo">
                     <label style="width: 120px;">Horas hábiles:</label>
-                    <table class="pizarra">
+                    <table class="pizarra1">
                     <thead class="fila">
                         <tr>
                             <th><button type="button" class="nomCol" onclick="abrirModalHora('Lunes')">Lunes</button></th>
@@ -116,7 +116,7 @@
 
 
                     <!--Version larga de los horarios-->
-                    <table class="pizarra">
+                    <table class="pizarra2">
                     <thead class="fila">
                         <tr>
                             <th><button type="button" class="nomColu">Lunes</button></th>
@@ -128,343 +128,343 @@
                         </tr>
                     </thead>
                     <tbody>
-        <tr>
-        <td id="Lunes">
-            <!-- Checkbox para marcar todos los horarios del Lunes -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'lunes')">
-                <label>Marcar Todos</label>
-                <br>
-            </div>
-            
-            <!-- Horarios para el Lunes -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="06:45 - 08:15" id="horario1">
-                <label for="horario1">06:45 - 08:15</label>
-            </div>
+                        <tr>
+                        <td id="Lunes">
+                            <!-- Checkbox para marcar todos los horarios del Lunes -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'lunes')">
+                                <label>Marcar Todos</label>
+                                <br>
+                            </div>
+                            
+                            <!-- Horarios para el Lunes -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="06:45 - 08:15" id="horario1">
+                                <label for="horario1">06:45 - 08:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="08:15 - 09:45" id="horario2">
-                <label for="horario2">08:15 - 09:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="08:15 - 09:45" id="horario2">
+                                <label for="horario2">08:15 - 09:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="09:45 - 11:15" id="horario3">
-                <label for="horario3">09:45 - 11:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="09:45 - 11:15" id="horario3">
+                                <label for="horario3">09:45 - 11:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="11:15 - 12:45" id="horario4">
-                <label for="horario4">11:15 - 12:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="11:15 - 12:45" id="horario4">
+                                <label for="horario4">11:15 - 12:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="12:45 - 14:15" id="horario5">
-                <label for="horario5">12:45 - 14:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="12:45 - 14:15" id="horario5">
+                                <label for="horario5">12:45 - 14:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="14:15 - 15:45" id="horario6">
-                <label for="horario6">14:15 - 15:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="14:15 - 15:45" id="horario6">
+                                <label for="horario6">14:15 - 15:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="15:45 - 17:15" id="horario7">
-                <label for="horario7">15:45 - 17:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="15:45 - 17:15" id="horario7">
+                                <label for="horario7">15:45 - 17:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="17:15 - 18:45" id="horario8">
-                <label for="horario8">17:15 - 18:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="17:15 - 18:45" id="horario8">
+                                <label for="horario8">17:15 - 18:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="18:45 - 20:15" id="horario9">
-                <label for="horario9">18:45 - 20:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="18:45 - 20:15" id="horario9">
+                                <label for="horario9">18:45 - 20:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-lunes" value="20:15 - 21:45" id="horario10">
-                <label for="horario10">20:15 - 21:45</label>
-            </div>
-        </td>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-lunes" value="20:15 - 21:45" id="horario10">
+                                <label for="horario10">20:15 - 21:45</label>
+                            </div>
+                        </td>
 
-        <td id="Martes">
-            <!-- Checkbox para marcar todos los horarios del Martes -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'martes')">
-                <label>Marcar Todos</label>
-                <br>
-            </div>
-            
-            <!-- Horarios para el Martes -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="06:45 - 08:15" id="horario1">
-                <label for="horario1">06:45 - 08:15</label>
-            </div>
+                        <td id="Martes">
+                            <!-- Checkbox para marcar todos los horarios del Martes -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'martes')">
+                                <label>Marcar Todos</label>
+                                <br>
+                            </div>
+                            
+                            <!-- Horarios para el Martes -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="06:45 - 08:15" id="horario1">
+                                <label for="horario1">06:45 - 08:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="08:15 - 09:45" id="horario2">
-                <label for="horario2">08:15 - 09:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="08:15 - 09:45" id="horario2">
+                                <label for="horario2">08:15 - 09:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="09:45 - 11:15" id="horario3">
-                <label for="horario3">09:45 - 11:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="09:45 - 11:15" id="horario3">
+                                <label for="horario3">09:45 - 11:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="11:15 - 12:45" id="horario4">
-                <label for="horario4">11:15 - 12:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="11:15 - 12:45" id="horario4">
+                                <label for="horario4">11:15 - 12:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="12:45 - 14:15" id="horario5">
-                <label for="horario5">12:45 - 14:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="12:45 - 14:15" id="horario5">
+                                <label for="horario5">12:45 - 14:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="14:15 - 15:45" id="horario6">
-                <label for="horario6">14:15 - 15:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="14:15 - 15:45" id="horario6">
+                                <label for="horario6">14:15 - 15:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="15:45 - 17:15" id="horario7">
-                <label for="horario7">15:45 - 17:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="15:45 - 17:15" id="horario7">
+                                <label for="horario7">15:45 - 17:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="17:15 - 18:45" id="horario8">
-                <label for="horario8">17:15 - 18:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="17:15 - 18:45" id="horario8">
+                                <label for="horario8">17:15 - 18:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="18:45 - 20:15" id="horario9">
-                <label for="horario9">18:45 - 20:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="18:45 - 20:15" id="horario9">
+                                <label for="horario9">18:45 - 20:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-martes" value="20:15 - 21:45" id="horario10">
-                <label for="horario10">20:15 - 21:45</label>
-            </div>
-        </td>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-martes" value="20:15 - 21:45" id="horario10">
+                                <label for="horario10">20:15 - 21:45</label>
+                            </div>
+                        </td>
 
-        <td id="Miercoles">
-            <!-- Checkbox para marcar todos los horarios del Miércoles -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'miercoles')">
-                <label>Marcar Todos</label>
-                <br>
-            </div>
-            
-            <!-- Horarios para el Miércoles -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="06:45 - 08:15" id="horario1">
-                <label for="horario1">06:45 - 08:15</label>
-            </div>
+                        <td id="Miercoles">
+                            <!-- Checkbox para marcar todos los horarios del Miércoles -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'miercoles')">
+                                <label>Marcar Todos</label>
+                                <br>
+                            </div>
+                            
+                            <!-- Horarios para el Miércoles -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="06:45 - 08:15" id="horario1">
+                                <label for="horario1">06:45 - 08:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="08:15 - 09:45" id="horario2">
-                <label for="horario2">08:15 - 09:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="08:15 - 09:45" id="horario2">
+                                <label for="horario2">08:15 - 09:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="09:45 - 11:15" id="horario3">
-                <label for="horario3">09:45 - 11:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="09:45 - 11:15" id="horario3">
+                                <label for="horario3">09:45 - 11:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="11:15 - 12:45" id="horario4">
-                <label for="horario4">11:15 - 12:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="11:15 - 12:45" id="horario4">
+                                <label for="horario4">11:15 - 12:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="12:45 - 14:15" id="horario5">
-                <label for="horario5">12:45 - 14:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="12:45 - 14:15" id="horario5">
+                                <label for="horario5">12:45 - 14:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="14:15 - 15:45" id="horario6">
-                <label for="horario6">14:15 - 15:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="14:15 - 15:45" id="horario6">
+                                <label for="horario6">14:15 - 15:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="15:45 - 17:15" id="horario7">
-                <label for="horario7">15:45 - 17:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="15:45 - 17:15" id="horario7">
+                                <label for="horario7">15:45 - 17:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="17:15 - 18:45" id="horario8">
-                <label for="horario8">17:15 - 18:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="17:15 - 18:45" id="horario8">
+                                <label for="horario8">17:15 - 18:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="18:45 - 20:15" id="horario9">
-                <label for="horario9">18:45 - 20:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="18:45 - 20:15" id="horario9">
+                                <label for="horario9">18:45 - 20:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-miercoles" value="20:15 - 21:45" id="horario10">
-                <label for="horario10">20:15 - 21:45</label>
-            </div>
-        </td>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-miercoles" value="20:15 - 21:45" id="horario10">
+                                <label for="horario10">20:15 - 21:45</label>
+                            </div>
+                        </td>
 
-        <td id="Jueves">
-            <!-- Checkbox para marcar todos los horarios del Jueves -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'jueves')">
-                <label>Marcar Todos</label>
-                <br>
-            </div>
-            
-            <!-- Horarios para el Jueves -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="06:45 - 08:15" id="horario1">
-                <label for="horario1">06:45 - 08:15</label>
-            </div>
+                        <td id="Jueves">
+                            <!-- Checkbox para marcar todos los horarios del Jueves -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'jueves')">
+                                <label>Marcar Todos</label>
+                                <br>
+                            </div>
+                            
+                            <!-- Horarios para el Jueves -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="06:45 - 08:15" id="horario1">
+                                <label for="horario1">06:45 - 08:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="08:15 - 09:45" id="horario2">
-                <label for="horario2">08:15 - 09:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="08:15 - 09:45" id="horario2">
+                                <label for="horario2">08:15 - 09:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="09:45 - 11:15" id="horario3">
-                <label for="horario3">09:45 - 11:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="09:45 - 11:15" id="horario3">
+                                <label for="horario3">09:45 - 11:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="11:15 - 12:45" id="horario4">
-                <label for="horario4">11:15 - 12:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="11:15 - 12:45" id="horario4">
+                                <label for="horario4">11:15 - 12:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="12:45 - 14:15" id="horario5">
-                <label for="horario5">12:45 - 14:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="12:45 - 14:15" id="horario5">
+                                <label for="horario5">12:45 - 14:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="14:15 - 15:45" id="horario6">
-                <label for="horario6">14:15 - 15:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="14:15 - 15:45" id="horario6">
+                                <label for="horario6">14:15 - 15:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="15:45 - 17:15" id="horario7">
-                <label for="horario7">15:45 - 17:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="15:45 - 17:15" id="horario7">
+                                <label for="horario7">15:45 - 17:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="17:15 - 18:45" id="horario8">
-                <label for="horario8">17:15 - 18:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="17:15 - 18:45" id="horario8">
+                                <label for="horario8">17:15 - 18:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="18:45 - 20:15" id="horario9">
-                <label for="horario9">18:45 - 20:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="18:45 - 20:15" id="horario9">
+                                <label for="horario9">18:45 - 20:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-jueves" value="20:15 - 21:45" id="horario10">
-                <label for="horario10">20:15 - 21:45</label>
-            </div>
-        </td>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-jueves" value="20:15 - 21:45" id="horario10">
+                                <label for="horario10">20:15 - 21:45</label>
+                            </div>
+                        </td>
 
-        <td id="Viernes">
-            <!-- Checkbox para marcar todos los horarios del Viernes -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'viernes')">
-                <label>Marcar Todos</label>
-                <br>
-            </div>
-            
-            <!-- Horarios para el Viernes -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="06:45 - 08:15" id="horario1">
-                <label for="horario1">06:45 - 08:15</label>
-            </div>
+                        <td id="Viernes">
+                            <!-- Checkbox para marcar todos los horarios del Viernes -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'viernes')">
+                                <label>Marcar Todos</label>
+                                <br>
+                            </div>
+                            
+                            <!-- Horarios para el Viernes -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="06:45 - 08:15" id="horario1">
+                                <label for="horario1">06:45 - 08:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="08:15 - 09:45" id="horario2">
-                <label for="horario2">08:15 - 09:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="08:15 - 09:45" id="horario2">
+                                <label for="horario2">08:15 - 09:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="09:45 - 11:15" id="horario3">
-                <label for="horario3">09:45 - 11:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="09:45 - 11:15" id="horario3">
+                                <label for="horario3">09:45 - 11:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="11:15 - 12:45" id="horario4">
-                <label for="horario4">11:15 - 12:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="11:15 - 12:45" id="horario4">
+                                <label for="horario4">11:15 - 12:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="12:45 - 14:15" id="horario5">
-                <label for="horario5">12:45 - 14:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="12:45 - 14:15" id="horario5">
+                                <label for="horario5">12:45 - 14:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="14:15 - 15:45" id="horario6">
-                <label for="horario6">14:15 - 15:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="14:15 - 15:45" id="horario6">
+                                <label for="horario6">14:15 - 15:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="15:45 - 17:15" id="horario7">
-                <label for="horario7">15:45 - 17:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="15:45 - 17:15" id="horario7">
+                                <label for="horario7">15:45 - 17:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="17:15 - 18:45" id="horario8">
-                <label for="horario8">17:15 - 18:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="17:15 - 18:45" id="horario8">
+                                <label for="horario8">17:15 - 18:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="18:45 - 20:15" id="horario9">
-                <label for="horario9">18:45 - 20:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="18:45 - 20:15" id="horario9">
+                                <label for="horario9">18:45 - 20:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-viernes" value="20:15 - 21:45" id="horario10">
-                <label for="horario10">20:15 - 21:45</label>
-            </div>
-        </td>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-viernes" value="20:15 - 21:45" id="horario10">
+                                <label for="horario10">20:15 - 21:45</label>
+                            </div>
+                        </td>
 
-        <td class="estiloSab" id="Sabado">
-            <!-- Checkbox para marcar todos los horarios del Sábado -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'sabado')">
-                <label>Marcar Todos</label>
-                <br>
-            </div>
-            
-            <!-- Horarios para el Sábado -->
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-sabado" value="06:45 - 08:15" id="horario1">
-                <label for="horario1">06:45 - 08:15</label>
-            </div>
+                        <td class="estiloSab" id="Sabado">
+                            <!-- Checkbox para marcar todos los horarios del Sábado -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="marcarTodos" onclick="marcarTodos(this, 'sabado')">
+                                <label>Marcar Todos</label>
+                                <br>
+                            </div>
+                            
+                            <!-- Horarios para el Sábado -->
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-sabado" value="06:45 - 08:15" id="horario1">
+                                <label for="horario1">06:45 - 08:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-sabado" value="08:15 - 09:45" id="horario2">
-                <label for="horario2">08:15 - 09:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-sabado" value="08:15 - 09:45" id="horario2">
+                                <label for="horario2">08:15 - 09:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-sabado" value="09:45 - 11:15" id="horario3">
-                <label for="horario3">09:45 - 11:15</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-sabado" value="09:45 - 11:15" id="horario3">
+                                <label for="horario3">09:45 - 11:15</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-sabado" value="11:15 - 12:45" id="horario4">
-                <label for="horario4">11:15 - 12:45</label>
-            </div>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-sabado" value="11:15 - 12:45" id="horario4">
+                                <label for="horario4">11:15 - 12:45</label>
+                            </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" class="checkbox-sabado" value="12:45 - 14:15" id="horario5">
-                <label for="horario5">12:45 - 14:15</label>
-            </div>
-        </td>
-        </tr>
-    </tbody>
+                            <div class="checkbox-container">
+                                <input type="checkbox" class="checkbox-sabado" value="12:45 - 14:15" id="horario5">
+                                <label for="horario5">12:45 - 14:15</label>
+                            </div>
+                        </td>
+                        </tr>
+                    </tbody>
                     </table>
                 </div>
                 
@@ -634,6 +634,25 @@
         checkboxes.forEach(function(cb) {
             cb.checked = checkbox.checked;
         });
+    }
+</script>
+
+<script>
+    function verificarOtro(selectElement) {
+        var tipoAmbiente = selectElement.value;
+        var pizarra1 = document.querySelector('.pizarra1');
+        var pizarra2 = document.querySelector('.pizarra2');
+
+        // Ocultar ambas tablas inicialmente
+        pizarra1.style.display = 'none';
+        pizarra2.style.display = 'none';
+
+        // Mostrar la tabla correspondiente según el tipo de ambiente seleccionado
+        if (tipoAmbiente === 'Auditorio') {
+            pizarra1.style.display = 'block';
+        } else {
+            pizarra2.style.display = 'block';
+        }
     }
 </script>
 @endsection

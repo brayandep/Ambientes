@@ -304,7 +304,16 @@ h2{
 
 
 
-.pizarra{
+.pizarra1{
+  background-color: #e2eaec;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+}
+.pizarra2{
   background-color: #e2eaec;
   width: 100%;
   padding: 5px;

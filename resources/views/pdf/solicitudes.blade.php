@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reporte de Unidades</title>
+    <title>Reporte de Solicitudes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,6 +76,7 @@
         <tr>
             <td>
                 <img src="https://www.umss.edu.bo/wp-content/uploads/2022/08/Logo_umss.png" alt="Logo Universidad">
+                <!--<img src="{{asset('images\Logo_umss.png')}}" alt="Logo Universidad"> -->
             </td>
             <td class="membrete-texto">
                 <h1>Universidad Mayor de San Simón</h1>
@@ -85,7 +86,7 @@
     </table>
 </div>
 <div class="titulo"> 
-    <h1>Reporte de Reservas de Aulas</h1> 
+    <h1>Reporte de Solicitud de Aulas</h1> 
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
