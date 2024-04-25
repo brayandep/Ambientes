@@ -171,21 +171,4 @@ public function solicitudMostrar(Request $request){
     }
     return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
-public function verificarSolicitud(Request $request)
-{
-    // Obtener los datos del formulario
-    $fecha = $request->fecha;
-    $aula = $request->aula;
-    $horario = $request->horario;
-
-    // Verificar si ya existe una solicitud con los mismos datos
-    $solicitudExistente = Solicitud::where('fecha', $fecha)
-                                    ->where('nro_aula', $aula)
-                                    ->where('horario', $horario)
-                                    ->exists();
-
-    // Retornar la respuesta
-    return response()->json(['ocupado' => $solicitudExistente]);
-}
-
 }
