@@ -58,10 +58,11 @@
                     </div>
                     <div class="caja2">
                         <label class="labEvento">Hora Final</label>
-                        <input type="time" name="horaEnd" id="horaEnd" class="inputEvento">
+                        <input type="time" name="horaEnd" id="horaEnd" class="inputEvento" onchange="compararHoras()">
                     </div>
                 </div>
                 <span id="msgError4" class="text-danger"></span>
+                <span id="alertaHora" class="text-danger"></span>
 
                 <label class="labEvento">Color</label>
                 <input type="color" name="color" id="color" class="inputEvento" value="#CD9DC0" style="width: 50%;">
@@ -89,18 +90,24 @@
     <script>
         var misEventos = @json($eventos);
 
-        function limitarFecha1(){
+        function limitarFecha(){
             $('#fechaEnd').val($('#fechaStart').val());
             $('#fechaEnd').prop('min', $('#fechaStart').val());
         }
-        function limitarFecha($fecha){
-            $('#fechaEnd').prop('min', $fecha);
-        }
 
         $('#horaStart').on('change', function() {
-            var hora1 = $(this).val();
-            $('#horaEnd').val(hora1);
-            //document.getElementById('horaEnd').min = hora1; //no sirve esta linea
+            var horaStart = $('#horaStart').val();
+            var fHoraStart = new Date('2000-01-01T' + horaStart);
+
+            var horaLimite = new Date('2000-01-01T06:00:00');
+
+            console.log(horaLimite);
+            if (fHoraStart < horaLimite) {
+                $('#horaStart').val('06:00');
+            }else{
+                var hora1 = $(this).val();
+                $('#horaEnd').val(hora1);
+            }
         });
     </script>
 @endsection
