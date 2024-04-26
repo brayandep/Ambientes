@@ -424,6 +424,7 @@
 .alert{
   background-color: #AE7791;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 5px;
+  padding: 5px;
 }
