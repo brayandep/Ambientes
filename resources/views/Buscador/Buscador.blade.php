@@ -24,14 +24,14 @@
                     <div class="form-fila-s">
                         <div class="input-group">
                             <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente" value="{{ request('nombre') }}">
+                            <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente" value="{{ old('nombre', request('nombre')) }}">
                             @error('nombre')
                             <span class="msgError">*{{$message}}</span>
                             @enderror
                         </div>
                         <div class="input-group">
                             <label for="capacidad">Capacidad:</label>
-                            <input type="text" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Capacidad" value="{{ request('capacidad') }}">
+                            <input type="text" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Capacidad" value="{{ old('capacidad', request('capacidad')) }}">
                             @error('capacidad')
                                 <span class="msgError">*{{ $message }}</span>
                             @enderror
@@ -54,21 +54,21 @@
                     <div class="form-fila-s">
                         <div class="input-group">
                             <label for="fecha">Fecha:</label>
-                            <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" value="{{ request('fecha') }}">
+                            <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" value="{{ old('fecha', request('fecha')) }}">
                             @error('fecha')
                                 <span class="msgError">*{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="input-group">
                             <label for="horaIni">Hora de inicio:</label>
-                            <input type="time" id="horaInicio" name="horaInicio" value="{{ request('horaInicio') }}">
+                            <input type="time" id="horaInicio" name="horaInicio" value="{{ old('horaInicio', request('horaInicio')) }}">
                             @error('horaInicio')
                                 <span class="msgError">*{{ $message }}</span>
                             @enderror                        
                         </div>
                         <div class="input-group">
                             <label for="horaFin">Hora de fin:</label>
-                            <input type="time" id="horaFin" name="horaFin" value="{{ request('horaFin') }}">
+                            <input type="time" id="horaFin" name="horaFin" value="{{ old('horaFin', request('horaFin')) }}">
                             @error('horaFin')
                                 <span class="msgError">*{{ $message }}</span>
                             @enderror
@@ -119,7 +119,9 @@
                                 <div class="fila-b">
                                     <div class="seleccionAmb">
                                     <div class="seleccion">
-                                        <input type="checkbox" class="checkbox-seleccion">
+                                        <input type="checkbox" class="checkbox-seleccion" value="{{ $ambiente->nombre }}"
+                                data-nombre="{{ $ambiente->nombre }}" data-dia="{{ $diaSemana[$horario->dia] }}"
+                                onchange="limitarSeleccion(this)">
                                     </div>
                                     <p>{{ $ambiente->nombre }}</p>
                                     </div>
@@ -147,23 +149,6 @@
 @endsection
 
 @section('scripts')
-<!--
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('form');
-
-        form.addEventListener('submit', function(event) {
-            const horaIni = document.getElementById('horaIni').value;
-            const horaFin = document.getElementById('horaFin').value;
-
-            if (horaIni >= horaFin) {
-                alert('La hora de fin debe ser posterior a la hora de inicio.');
-                event.preventDefault(); // Evitar que se envíe el formulario
-            }
-        });
-    });
-</script>
--->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const limpiarBtn = document.querySelector('.Limpiar');
@@ -183,24 +168,20 @@
         });
     });
 </script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Obtener referencia a los botones
-        const btnBuscar = document.getElementById('btnBuscar');
-        const btnLimpiar = document.getElementById('btnLimpiar');
+    function limitarSeleccion(checkbox) {
+        // Obtener el nombre del ambiente y el día seleccionado del checkbox
+        var nombreAmbiente = checkbox.dataset.nombre;
+        var diaSeleccionado = checkbox.dataset.dia;
 
-        // Agregar evento click al botón de Buscar
-        btnBuscar.addEventListener('click', function() {
-            console.log('Se realizó una búsqueda');
-            // Aquí puedes agregar más código para realizar la búsqueda
+        // Deshabilitar los checkboxes con diferentes nombres de ambiente o días seleccionados
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(function(cb) {
+            if (cb.dataset.nombre !== nombreAmbiente || cb.dataset.dia !== diaSeleccionado) {
+                cb.disabled = checkbox.checked;
+            }
         });
-
-        // Agregar evento click al botón de Limpiar
-        btnLimpiar.addEventListener('click', function() {
-            console.log('Se limpiaron los campos de búsqueda');
-            // Aquí puedes agregar más código para limpiar los campos
-        });
-    });
+    }
 </script>
-
 @endsection
