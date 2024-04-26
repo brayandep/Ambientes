@@ -44,7 +44,7 @@
                 <button class="nomCol" id="activar" onclick="ordenarPorFechaCreacion()">Orden</button>
             </div>
             <div class="contBotones">
-                <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha</a></button>
+                <button title="Ordenar por fechas"class="nomCol" id="activar"><a href="#" onclick="ordenarPorFecha()">Fecha solicitud</a></button>
             </div>
             <div class="contBotones">
                 <button class="nomCol" id="noActivar">Horario</button>
