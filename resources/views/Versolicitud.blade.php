@@ -54,12 +54,20 @@
                 <button class="nomCol">Horario</button>
             </div></th>
             <th><div class="contBotones">
+                <button class="nomCol">Fecha de solicitud</button>
+            </div></th>
+            <th><div class="contBotones">
                 <button class="nomCol">Acciones</button>
             </div></th>
         </tr>
     </thead>
     <tbody>
         @foreach($solicitudes as $solicitud)
+        @php
+        $fechaCreacion = \Carbon\Carbon::parse($solicitud->created_at);
+        $fechaLimiteSuspension = $fechaCreacion->addDay(); // Calcula la fecha límite de suspensión
+        $fechaHoy = \Carbon\Carbon::now();
+    @endphp
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
             <td>{{ $solicitud->idsolicitud }}</td>
             <td>{{ $solicitud->usuario }}</td>
@@ -72,26 +80,28 @@
             <td>{{ $solicitud->motivo }}</td>
             <td>{{ $solicitud->fecha }}</td>
             <td>{{ $solicitud->horario }}</td>
+            <td>{{ $solicitud->created_at }}</td>
             <td>
                 
                 <div class="botones-container">
                     @if($solicitud->estado == 'Sin confirmar')
+
+                   
+                  
+                    @if($fechaHoy->lte($fechaLimiteSuspension))
+                      <!-- Muestra el botón de suspender solo si ha pasado menos de un día desde la creación de la solicitud -->
+                         <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
+                         @csrf
+                        @method('put')
+                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>     
+                         </form>
+                      @endif
+                    
                         <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
-                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
-                        <div id="modal-confirmacion" class="modal">
-                
-                            <div class="modal-contenido">
-                                <p>¿Está seguro de que desea suspender la reserva?</p>
-                                <div class="botonesCentro">
-                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        
+
+
+                        
                     @elseif($solicitud->estado == 'confirmado')   
                         <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
                         <div id="modal-confirmacion" class="modal">
