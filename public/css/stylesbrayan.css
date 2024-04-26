@@ -422,9 +422,9 @@
 
 
 .alert{
-  background-color: #AE7791;
-  color: #ffffff;
+ 
+  color: #f15b5b;
   font-size: 16px;
   border-radius: 5px;
-  padding: 5px;
+  
 }
