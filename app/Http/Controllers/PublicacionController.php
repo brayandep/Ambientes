@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Publicacion;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+
 
 
 class PublicacionController extends Controller
@@ -73,16 +75,22 @@ class PublicacionController extends Controller
    
 
     public function verArchivo($id)
-    {
-        // Encuentra la publicación por su ID
-        $publicacion = Publicacion::findOrFail($id);
+{
+    // Encuentra la publicación por su ID
+    $publicacion = Publicacion::findOrFail($id);
 
-        // Obtén la ruta completa del archivo
-        $rutaArchivo = Storage::url($publicacion->archivo);
-        //dd($rutaArchivo);
+    // Obtén la ruta completa del archivo
+    $rutaArchivo = storage_path('app/' . $publicacion->archivo);
 
-        return view('verArchivo', compact('publicacion', 'rutaArchivo'));
+    // Verifica si el archivo existe
+    if (file_exists($rutaArchivo)) {
+        // Retorna una respuesta de descarga del archivo
+        return Response::download($rutaArchivo, $publicacion->titulo);
+    } else {
+        // Si el archivo no existe, redirecciona con un mensaje de error
+        return redirect()->back()->with('error', 'El archivo no existe.');
     }
+}
 
     
 }

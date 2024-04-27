@@ -76,7 +76,8 @@
       <ul>
         @foreach($publicaciones as $publicacion)
         @if($publicacion->tipo == 'reglamento' && $publicacion->visible)
-            <li title="{{ $publicacion->titulo }}" class="truncate">{{ $publicacion->titulo }}</li>
+            <!--li title="{{ $publicacion->titulo }}" class="truncate">{{ $publicacion->titulo }}</li>-->
+            <a href="{{ route('publicacion.ver', $publicacion->id) }}">{{ $publicacion->titulo }}</a>
           @endif
         @endforeach
       </ul>
@@ -85,7 +86,8 @@
       <ul>
         @foreach($publicaciones as $publicacion)
         @if($publicacion->tipo == 'anuncio' && $publicacion->visible)
-            <li title="{{ $publicacion->titulo }}" class="truncate">{{ $publicacion->titulo }}</li>
+            <!--<li title="{{ $publicacion->titulo }}" class="truncate">{{ $publicacion->titulo }}</li>-->
+            <a href="{{ route('publicacion.ver', $publicacion->id) }}">{{ $publicacion->titulo }}</a>
           @endif
         @endforeach
       </ul>
