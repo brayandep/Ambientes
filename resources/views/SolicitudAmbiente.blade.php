@@ -187,7 +187,8 @@
         horarioSelect.innerHTML = '<option value="">Selecciona un horario:</option>';
         horariosFiltrados.forEach(function(horario) {
             var option = document.createElement('option');
-            option.value = horario.id; // Asigna el valor del ID del horario
+            // Asigna directamente el horario como un string (horaInicio - horaFin)
+            option.value = horario.horaInicio + ' - ' + horario.horaFin;
             option.textContent = horario.horaInicio + ' - ' + horario.horaFin; // Asigna el texto del horario
             horarioSelect.appendChild(option);
         });
