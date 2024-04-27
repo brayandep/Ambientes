@@ -11,11 +11,11 @@
         <div class="publicaciones-list">
             @foreach($reglamentos as $publicacion)
                 <div class="publicacion">
-                    <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a>
-                    <!-- <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a> //nueva pestania-->
+                    <a href="{{ route('publicacion.ver', $publicacion->id) }}" target="_blank">{{ $publicacion->titulo }}</a>
+                    <!-- <a href="{{ route('publicacion.ver', $publicacion->id) }}">{{ $publicacion->titulo }}</a> //nueva pestania-->
 
                     <div class="acciones-publicacion">
-                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
                     <a href="#" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
                         <i class="fa fa-edit"></i> <!-- Este es tu icono de editar -->
                     </a>
@@ -33,13 +33,13 @@
             @foreach($anuncios as $publicacion)
                 <div class="publicacion">
                
-                  <a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}" target="_blank">{{ $publicacion->titulo }}</a>
-                <!--<a href="{{ route('publicacion.ver', $publicacion->id_publicaciones) }}">{{ $publicacion->titulo }}</a>-->
+                  <a href="{{ route('publicacion.ver', $publicacion->id) }}" target="_blank">{{ $publicacion->titulo }}</a>
+                <!--<a href="{{ route('publicacion.ver', $publicacion->id) }}">{{ $publicacion->titulo }}</a>-->
 
                     <div class="acciones-publicacion">
-                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
                        
-                    <a href="{{ route('publicaciones.detalles', ['id' => $publicacion->id_publicaciones]) }}" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
+                    <a href="{{ route('publicaciones.detalles', ['id' => $publicacion->id]) }}" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
                         <i class="fa fa-edit"></i> <!-- Este es tu icono de editar -->
                     </a>
 
