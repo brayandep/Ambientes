@@ -177,8 +177,11 @@ public function solicitudMostrar(Request $request){
 public function descargarReservasPDF(){
     $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
 
+    // Obtener información de los ambientes
+    $ambientes = Ambiente::all();
+
     // Invertir el orden de las solicitudes
-    $solicitudes = $solicitudes->reverse();
+    //$solicitudes = $solicitudes->reverse();
 
     // Contar las páginas manualmente
     $itemsPerPage = 20; // Número de ítems por página
@@ -189,8 +192,9 @@ public function descargarReservasPDF(){
     $pageCount = $totalPages; // Total de páginas
 
     // Generar el PDF
-    $pdf = PDF::loadView('pdf.solicitudes', compact('solicitudes', 'pageNumber', 'pageCount'));
+    $pdf = PDF::loadView('pdf.solicitudes', compact('solicitudes', 'pageNumber', 'pageCount', 'ambientes'));
 
     return $pdf->download('reservas.pdf');
 }
+
 }
