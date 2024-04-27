@@ -107,3 +107,13 @@ body{
     font-size: 14px;
 }
 /* termina letra de eventos */
+
+.detectaOcupado {
+    display: none;
+}
+.ocupado{
+    
+}
+.fc-timegrid-event-harness{
+    inset: 192px 0% -240px 0%;
+}

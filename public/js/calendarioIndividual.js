@@ -1,25 +1,26 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    totalEventos.forEach(function(evento1) {
-        totalEventos.forEach(function(evento2) {
-            // Comparar si las fechas y horas de inicio de ambos eventos son iguales
-            if(evento1.daysOfWeek){
-                console.log(moment(evento2.start).day()); 
+    // totalEventos.forEach(function(evento1) {
+    //     if(evento1.title === 'Libre'){
+    //         //console.log(moment(evento1.start).day()); 
+    //         totalEventos.forEach(function(evento2) {
 
-                if (evento1.daysOfWeek.includes(moment(evento2.start).day()) && evento1.startTime === moment(evento2.start).format('HH:mm')) {
-                    // Ambos eventos ocurren en el mismo día y hora de inicio
-                    console.log('Los eventos ocurren en el mismo día y hora de inicio');
-                } else {
-                    console.log('Los eventos no ocurren en el mismo día y hora de inicio');
-                }
-            }
+    //             if(evento2.title === 'Ocupado'){
+    //                 //console.log(evento2.daysOfWeek); 
+    
+    //                 if (evento1.daysOfWeek.includes(moment(evento2.start).day()) && evento1.startTime === moment(evento2.start).format('HH:mm')) {
+    //                     console.log('evento '+ evento1.title+ ' de dias: ' + evento1.daysOfWeek +' hora: '+evento1.startTime+ ' coincide con evento: ');
+    //                     console.log('evento '+ evento2.title+ ' de dia y hora: ' + evento2.start);
+    //                 } else {
+    //                     console.log('...');
+    //                 }
+    //             }
+    
+    //         });
+    //     }
 
-        });
-    });
-    // Convertir el objeto de eventos filtrados en un array
-    // var eventosFinales = Object.values(eventosFiltrados);
-    // console.log(eventosFinales);
+    // });
 
     var today = new Date();
     var calendarEl = document.getElementById('calendar');
@@ -68,6 +69,41 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         events:totalEventos,
+
+        //control de vista
+        eventClassNames: function(arg) {
+            var hayOcupado = false;
+            if (arg.event.title === 'Libre') {
+                var fecha = arg.event.start;
+                var fechaFormateada = fecha.getFullYear() + '-' + ('0' + (fecha.getMonth() + 1)).slice(-2) + '-' + ('0' + fecha.getDate()).slice(-2) + ' ' + ('0' + fecha.getHours()).slice(-2) + ':' + ('0' + fecha.getMinutes()).slice(-2);
+
+                console.log(fecha);
+
+                totalEventos.forEach(function(evento2) {
+
+                    if(evento2.title === 'Ocupado'){
+                        //console.log(evento2.start);
+                        if (evento2.start === fechaFormateada) {
+                            console.log('evento '+ arg.event.title+ ' de dia y hora: ' + fechaFormateada + ' coincide con: ');
+                            console.log('evento '+ evento2.title+ ' de dia y hora: ' + evento2.start);
+
+                            hayOcupado = true;
+                        }
+                    }
+                    
+                });
+
+            }
+
+            if(hayOcupado === true){
+                return ['detectaOcupado']; 
+            }else if(arg.event.title === 'Ocupado'){
+                return ['ocupado']; 
+            }else{
+                return ''; 
+            }
+        },
+
     });
     calendar.setOption('locale', 'es');
     calendar.render();
