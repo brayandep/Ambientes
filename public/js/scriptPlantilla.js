@@ -10,31 +10,30 @@ function gesAmbiente(){
     if (sub1.style.display === 'none' || sub1.style.display === '') {
         subMateria.style.display = 'none';
         sub2.style.display = 'none'; 
+        sub3.style.display = 'none';
         sub1.style.display = 'flex';
-        //btnPanelUsr.classList.add('seleccionado');
     } else {
         sub1.style.display = 'none';
-        //btnPanelUsr.classList.remove('seleccionado');
     }
 }
 function gesUnidad(){
     if (sub2.style.display === 'none' || sub2.style.display === '') {
         sub1.style.display = 'none';
         subMateria.style.display = 'none';
+        sub3.style.display = 'none';
         sub2.style.display = 'flex';
-        //btnPanelUsr.classList.add('seleccionado');
     } else {
         sub2.style.display = 'none';
-        //btnPanelUsr.classList.remove('seleccionado');
     }
 }
 function gesReserva(){
     if (sub3.style.display === 'none' || sub3.style.display === '') {
+        sub1.style.display = 'none';
+        subMateria.style.display = 'none';
+        sub2.style.display = 'none'; 
         sub3.style.display = 'flex';
-        //btnPanelUsr.classList.add('seleccionado');
     } else {
         sub3.style.display = 'none';
-        //btnPanelUsr.classList.remove('seleccionado');
     }
 }
 
@@ -42,11 +41,10 @@ function gesMateria(){
     if (subMateria.style.display === 'none' || subMateria.style.display === '') {
         sub1.style.display = 'none';
         sub2.style.display = 'none';
+        sub3.style.display = 'none';
         subMateria.style.display = 'flex';
-        //btnPanelUsr.classList.add('seleccionado');
     } else {
         subMateria.style.display = 'none';
-        //btnPanelUsr.classList.remove('seleccionado');
     }
 }
 
@@ -54,10 +52,8 @@ function gesMateria(){
 function desMenu(){
     if (menu.style.display === 'none' || menu.style.display === '') {
         menu.style.display = 'flex';
-        //btnPanelUsr.classList.add('seleccionado');
     } else {
         menu.style.display = 'none';
-        //btnPanelUsr.classList.remove('seleccionado');
     }
 }
 

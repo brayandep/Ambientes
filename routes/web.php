@@ -7,7 +7,9 @@ use App\Http\Controllers\EstadoAmbienteController;
 
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\registroUnidadesController;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\DependenciaUnidadController;
 use App\Models\Dependencia;
 
@@ -131,7 +133,31 @@ Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('soli
 Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');
 //mostrar solicitudes filtro
 Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');
+//prueba de encabezado
+/*Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');*/
 
+
+
+// Ruta para mostrar la página de inicio
+Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+
+
+
+// Rutas para las publicaciones
+
+
+Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
+Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
+Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
+//Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
+Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->name('publicaciones.detalles');
+
+Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
+
+
+Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
