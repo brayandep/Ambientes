@@ -64,9 +64,10 @@ Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEst
 Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
 //termina rutas unidades
 
-Route::get('/registro', function () {
-    return view('registro');
-})->name('registro');
+// Route::get('/registro', function () {
+//     return view('registro');
+// })->name('registro');
+
 //registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
