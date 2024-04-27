@@ -145,17 +145,6 @@
         });
         //termina cambios de Jhosemar :)
 
-
-        // Agregar las opciones al select de horario
-        var horarioSelect = document.getElementById('horario');
-        horariosFiltrados.forEach(function(horario) {
-            var option = document.createElement('option');
-            // Modificar el valor del option para que sea el contenido deseado
-            var horarioText = horario.horaInicio + ' - ' + horario.horaFin;
-            option.value = horarioText;
-            option.text = horarioText;
-            horarioSelect.appendChild(option);
-        });
     });
 
     /*cambios de jhosemar (yo xd)
@@ -174,6 +163,40 @@
         }
     });
     //termina cambios de Jhosemar
+</script>
+<script>
+    // Función para filtrar dinámicamente los horarios disponibles
+    function filtrarHorarios() {
+        // Obtén el valor seleccionado del aula
+        var aulaSeleccionada = document.getElementById('nro_aula').value;
+        // Obtén la fecha seleccionada
+        var fechaSeleccionada = document.getElementById('fecha').value;
+        // Obtén el día de la semana de la fecha seleccionada (0: Domingo, 1: Lunes, ..., 6: Sábado)
+        var diaSeleccionado = new Date(fechaSeleccionada).getDay() + 1; // Ajusta el índice del día (0-6) a (1-7)
+
+        // Obtén todos los horarios disponibles
+        var horarios = {!! json_encode($horarios->toArray()) !!};
+
+        // Filtra los horarios según el aula y el día de la semana
+        var horariosFiltrados = horarios.filter(function(horario) {
+            return horario.ambiente_id == aulaSeleccionada && horario.dia == diaSeleccionado;
+        });
+
+        // Actualiza las opciones del campo de selección de horarios con los horarios filtrados
+        var horarioSelect = document.getElementById('horario');
+        horarioSelect.innerHTML = '<option value="">Selecciona un horario:</option>';
+        horariosFiltrados.forEach(function(horario) {
+            var option = document.createElement('option');
+            option.value = horario.id; // Asigna el valor del ID del horario
+            option.textContent = horario.horaInicio + ' - ' + horario.horaFin; // Asigna el texto del horario
+            horarioSelect.appendChild(option);
+        });
+    }
+
+    // Agrega un evento change al campo de selección del aula
+    document.getElementById('nro_aula').addEventListener('change', filtrarHorarios);
+    // Agrega un evento change al campo de selección de fecha
+    document.getElementById('fecha').addEventListener('change', filtrarHorarios);
 </script>
 
 @endsection
