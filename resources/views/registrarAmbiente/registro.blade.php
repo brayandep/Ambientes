@@ -16,49 +16,61 @@
                       @method('PUT')
                   @endif
   
-                <div class="form-group">
+                <div class="form-fila-s">
+                    <div class="input-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
+                    <input type="text" id="codigo" name="codigo" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
                     @error('codigo')
                         <span>*{{$message}}</span>
                     @enderror
+                    </div>
+                    <div class="input-group">
                     <label for="unidad">Unidad:</label>
-                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;">
+                        <select class="selectAmbiente" id="unidad" name="unidad">
                         <option value="">Selecciona una unidad</option>
                         @foreach($unidades as $unidad)
                           <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
                         @endforeach
                         </select>
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-fila-s">
+                    <div class="input-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" style="width: 40%;" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
+                    <input type="text" id="nombre" name="nombre" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
                     @error('nombre')
                         <span>*{{$message}}</span>
                     @enderror
+                    </div>
+                    <div class="input-group">
                     <label for="capacidad">Capacidad:</label>
-                    <input type="number" id="capacidad" name="capacidad" style="width: 40%;" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
+                    <input type="number" id="capacidad" name="capacidad" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
                     @error('capacidad')
                         <span>*{{$message}}</span>
                     @enderror
-                  </div>
+                    </div>
+                </div>
     
     
     
-                <div class="form-group">
+                <div class="form-fila-s">
+                    <div class="input-group">
                     <label for="ubicacion">Ubicación:</label>
-                    <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
+                    <input type="text" id="ubicacion" name="ubicacion" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                     @error('ubicacion')
                         <span>*{{$message}}</span>
                     @enderror
+                    </div>
+                    <div class="input-group">
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
+                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtro(this)">
                     <option>Selecciona un tipo de ambiente</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
                     @endforeach
                       <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
                   </select>
+                    </div>
               </div>
     
 
