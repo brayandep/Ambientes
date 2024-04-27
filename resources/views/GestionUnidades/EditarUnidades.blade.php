@@ -2,6 +2,7 @@
 @section('links')
     {{-- <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}"> --}}
     <link rel="stylesheet" href="../../css/styleUnidades.css">
+    
 @endsection
 @section('titulo', 'Editar unidad')
 @section('contenido')
