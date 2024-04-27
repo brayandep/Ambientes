@@ -20,7 +20,7 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        return view('VerSolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
+        return view('Versolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
     }
 
     public function index2()
