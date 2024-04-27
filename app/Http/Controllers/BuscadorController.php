@@ -61,8 +61,8 @@ class BuscadorController extends Controller
                 'horaFin.before_or_equal' => 'La hora de fin debe ser igual o anterior o igual a las 09:45 PM.',
             ]);
 
-        $nombre = $request->input('nombre'); // Valor predeterminado: cadena vacía si no se proporciona
-        $capacidad = $request->input('capacidad'); // Valor predeterminado: cadena vacía si no se proporciona
+        $nombre = $request->input('nombre'); 
+        $capacidad = $request->input('capacidad'); 
         $dia = $request->input('dia');
         $fecha = $request->input('fecha');
         $horaInicio = $request->input('horaInicio');
@@ -76,8 +76,13 @@ class BuscadorController extends Controller
         }
 
         if (!empty($capacidad)) {
-            $query->where('capacidad', '>=', $capacidad);
-        }
+            $query->where('capacidad', $capacidad);
+        
+            // Si no hay ambientes con la capacidad exacta, buscar el siguiente valor superior
+            if ($query->count() === 0) {
+                $query->orWhere('capacidad', '>=', $capacidad);
+            }
+        }        
 
         $ambientes = $query->orderBy('nombre', 'asc')->get();
 
@@ -106,11 +111,7 @@ class BuscadorController extends Controller
         //     ->get();
 
         $horarios = HorarioDisponible::query()
-        // ->where('dia', $fechaNumero)
-        ->when($solicitudesConfirmadas->isNotEmpty(), function ($query) use ($solicitudesConfirmadas) {
-            $query->whereNotIn('ambiente_id', $solicitudesConfirmadas);
-        })
-
+        ->whereNotIn('ambiente_id', $solicitudesConfirmadas)
         ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
         ->when(!empty($fecha), function ($query) use ($fechaNumero) {
             $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
