@@ -91,11 +91,4 @@
         </div>
     </div>
 
-<!-- Tu tabla de ambientes -->
-<div class="tabla-responsive">
-    <table class="tabla-ver">
-        <!-- ... (tu tabla aquí) ... -->
-    </table>
-</div>
-
 @endsection
