@@ -63,7 +63,7 @@
                     </div>
                     <div class="input-group">
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtro(this)">
+                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtroAmbiente(this);verificarOtro(this)">
                     <option>Selecciona un tipo de ambiente</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
@@ -517,6 +517,7 @@
                 <div id="otroModal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="cerrarOtroModal()">&times;</span>
+                        <h2>Seleccione el horario:</h2> <!-- Título del modal-->
                         <div class="horarios">
                             <label for="modalHoraInicio">Hora inicio:</label>
                             <select id="modalHoraInicio">
@@ -549,6 +550,7 @@
                                 <option value="20:00">20:00</option>
                             </select>
                         </div>
+                        <span id="errorMensaje" style="color: red;"></span> <!-- Mensaje de error -->
                         <button type="button" id="modalAceptar" onclick="guardarHorario()">Aceptar</button>
                     </div>
                 </div>
@@ -656,28 +658,56 @@
         cerrarOtroModal();
     }*/
     function guardarHorario() {
-        // Obtener los valores de las horas
-        var horaInicio = document.getElementById('modalHoraInicio').value;
-        var horaFin = document.getElementById('modalHoraFin').value;
-        
-        // Crear el intervalo de horas como string
-        var intervaloHoras = horaInicio + ' ' + horaFin;
-        var intervalo = horaInicio + ' - ' + horaFin;
-        
-        // Obtener el día del modal
-        var dia = document.querySelector('.horarios').getAttribute('data-dia');
-        
-        // Actualizar la celda correspondiente con el intervalo de horas
-        document.getElementById(dia).innerText = intervalo;
-        
-        // Añadir el nuevo horario al arreglo
-        horarios2.push(...horarios3);
-        horarios2.push({dia, intervaloHoras});
-        
-        // Cerrar el modal
-        cerrarOtroModal();
+    // Obtener los valores de las horas
+    var horaInicio = document.getElementById('modalHoraInicio').value;
+    var horaFin = document.getElementById('modalHoraFin').value;
+    
+    // Convertir las horas a números enteros para comparar
+    var inicio = parseInt(horaInicio.replace(":", ""));
+    var fin = parseInt(horaFin.replace(":", ""));
+    
+    // Obtener el elemento para el mensaje de error
+    var errorMensaje = document.getElementById('errorMensaje');
+    
+    // Validar que la hora de fin sea mayor que la hora de inicio
+    if (fin <= inicio) {
+        errorMensaje.innerText = "La hora de fin debe ser mayor que la hora de inicio.";
+        return; // Detener la ejecución de la función si la validación falla
+    } else {
+        errorMensaje.innerText = ""; // Limpiar el mensaje de error si la validación es exitosa
     }
+    
+    // Crear el intervalo de horas como string
+    var intervaloHoras = horaInicio + ' ' + horaFin;
+    var intervalo = horaInicio + ' - ' + horaFin;
+    
+    // Obtener el día del modal
+    var dia = document.querySelector('.horarios').getAttribute('data-dia');
+    
+    // Actualizar la celda correspondiente con el intervalo de horas
+    document.getElementById(dia).innerText = intervalo;
+    
+    // Añadir el nuevo horario al arreglo
+    horarios2.push(...horarios3);
+    horarios2.push({dia, intervaloHoras});
+    
+    // Cerrar el modal
+    cerrarOtroModal();
+}
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Agregar evento change a los select de hora
+    var horaInicioSelect = document.getElementById('modalHoraInicio');
+    var horaFinSelect = document.getElementById('modalHoraFin');
+    
+    horaInicioSelect.addEventListener('change', limpiarError);
+    horaFinSelect.addEventListener('change', limpiarError);
+});
+
+function limpiarError() {
+    var errorMensaje = document.getElementById('errorMensaje');
+    errorMensaje.innerText = ""; // Limpiar el mensaje de error
+}
 </script>
 
    <!-- JavaScript  modal otro tipo ambiente -->
@@ -695,8 +725,21 @@
         var select = document.getElementById('tipo-ambiente');
 
         // Llamar a la función verificarOtro con el valor seleccionado actualmente
+        verificarOtroAmbiente(select);
         verificarOtro(select);
     });
+      function verificarOtroAmbiente(select) {
+          var selectedOption = select.options[select.selectedIndex].value;
+          if (selectedOption === "Otro") {
+              abrirModal();
+          } else {
+              var optionOtro = select.querySelector('option[value="Otro"]');
+              if (optionOtro) {
+                  select.removeChild(optionOtro);
+                  select.appendChild(optionOtro);
+              }
+          }
+      }
       function verificarOtro(select) {
           var selectedOption = select.options[select.selectedIndex].value;
           if (selectedOption === "Otro") {
