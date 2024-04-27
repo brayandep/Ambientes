@@ -113,6 +113,9 @@ class registroUnidadesController extends Controller
     public function descargarUnidadesPDF(){
         $unidades = Unidad::all(); // Obtén todas las unidades
 
+        // Invertir el orden de las unidades
+        $unidades = $unidades->reverse();
+
         // Contar las páginas manualmente
         $itemsPerPage = 20; // Número de ítems por página
         $totalItems = $unidades->count();

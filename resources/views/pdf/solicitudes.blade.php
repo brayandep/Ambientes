@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reporte de Ambientes</title>
+    <title>Reporte de Solicitudes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,24 +15,24 @@
         }
         .membrete-table {
             width: 100%;
-            border: none; 
+            border: none; /* Eliminar bordes de la tabla */
             margin-bottom: 5px;
         }
         .membrete-table td {
             padding: 0;
             vertical-align: middle;
-            border: none; 
+            border: none; /* Eliminar bordes de la tabla */
         }
         .membrete img {
             max-width: 150px;
             vertical-align: middle;
         }
         .membrete-texto {
-            padding-left: 5px; 
+            padding-left: 5px; /* Espacio entre la imagen y el texto */
             vertical-align: middle;
         }
         .membrete-texto h1, .membrete-texto p {
-            margin: 0; 
+            margin: 0; /* Eliminar márgenes */
         }
         .titulo {
             text-align: center;
@@ -76,6 +76,7 @@
         <tr>
             <td>
                 <img src="http://www.drei.umss.edu.bo/img/umss-horizontal.png" alt="Logo Universidad">
+                <!--<img src="{{asset('images\Logo_umss.png')}}" alt="Logo Universidad"> -->
             </td>
             <td class="membrete-texto">
                 <h1>Universidad Mayor de San Simón</h1>
@@ -85,7 +86,7 @@
     </table>
 </div>
 <div class="titulo"> 
-    <h1>Reporte de Ambientes registrados</h1> 
+    <h1>Reporte de Solicitud de Aulas</h1> 
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
@@ -94,31 +95,21 @@
 <table>
     <thead>
         <tr>
-            <th>Código</th>
-            <th>Unidad</th>
-            <th>Nombre</th>
-            <th>Capacidad</th>
-            <th>Ubicación</th>
-            <th>Descripción</th>
             <th>Estado</th>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Aula</th>
+            <th>Motivo</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($ambientes as $ambiente)
+        @foreach ($solicitudes as $solicitud)
         <tr>
-            <td>{{ $ambiente->codigo }}</td>
-            <td>{{ $ambiente->unidad }}</td>
-            <td>{{ $ambiente->nombre }}</td>
-            <td>{{ $ambiente->capacidad }}</td>
-            <td>{{ $ambiente->ubicacion }}</td>
-            <td>{{ $ambiente->descripcion_ubicacion}}</td>
-            <td>
-                @if ($ambiente->estadoAmbiente == 1)
-                    Habilitado
-                @else
-                    Deshabilitado
-                @endif
-            </td>
+            <td>{{ $solicitud->estado }}</td>
+            <td>{{ $solicitud->fecha }}</td>
+            <td>{{ $solicitud->horario }}</td>
+            <td>{{ $solicitud->nro_aula }}</td>
+            <td>{{ $solicitud->motivo }}</td>
         </tr>
         @endforeach
     </tbody>

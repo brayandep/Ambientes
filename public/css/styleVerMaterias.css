@@ -95,3 +95,17 @@
   max-width: 90px;
 }
   
+/*Estilos para el boton reporte*/
+.btnReporte{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5px;
+}
+
+.nomCol{
+  background-color: #C384B2;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  width: 100%;
+}

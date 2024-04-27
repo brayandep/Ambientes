@@ -15,6 +15,11 @@
             <div>
                 <h1 class="titulo"><i class="fa-solid fa-rectangle-list"></i> Ver Materias Registradas </h1>
             </div>
+            <!-- Botón para descargar el PDF -->
+                <form class="btnReporte" action="{{ route('descargar.materias.pdf') }}" method="GET" target="_blank">
+                    @csrf
+                    <button style="width:150px;" class="nomCol" type="submit" class="btn btn-primary">Generar Reporte</button>
+                </form>
 
             <!-- Tabla de Materias -->
             <div class="tabla">

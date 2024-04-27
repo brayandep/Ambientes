@@ -8,6 +8,8 @@ use App\Models\Materia;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class materiaController extends Controller
 {
     public function show()
@@ -72,5 +74,25 @@ class materiaController extends Controller
 
 
         return redirect()->route('materia.show');
+    }
+
+    public function descargarMateriasPDF(){
+        $materias = Materia::all(); // Obtén todas las materias
+    
+        // Invertir el orden de las materias
+        $materias = $materias->reverse();
+    
+        // Contar las páginas manualmente
+        $itemsPerPage = 20; // Número de ítems por página
+        $totalItems = $materias->count();
+        $totalPages = ceil($totalItems / $itemsPerPage);
+    
+        $pageNumber = 1; // Página actual
+        $pageCount = $totalPages; // Total de páginas
+    
+        // Generar el PDF
+        $pdf = PDF::loadView('pdf.materias', compact('materias', 'pageNumber', 'pageCount'));
+    
+        return $pdf->download('materias.pdf');
     }
 }

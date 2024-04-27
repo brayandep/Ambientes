@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reporte de Ambientes</title>
+    <title>Reporte de Materias</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,24 +15,24 @@
         }
         .membrete-table {
             width: 100%;
-            border: none; 
+            border: none; /* Eliminar bordes de la tabla */
             margin-bottom: 5px;
         }
         .membrete-table td {
             padding: 0;
             vertical-align: middle;
-            border: none; 
+            border: none; /* Eliminar bordes de la tabla */
         }
         .membrete img {
             max-width: 150px;
             vertical-align: middle;
         }
         .membrete-texto {
-            padding-left: 5px; 
+            padding-left: 5px; /* Espacio entre la imagen y el texto */
             vertical-align: middle;
         }
         .membrete-texto h1, .membrete-texto p {
-            margin: 0; 
+            margin: 0; /* Eliminar márgenes */
         }
         .titulo {
             text-align: center;
@@ -85,7 +85,7 @@
     </table>
 </div>
 <div class="titulo"> 
-    <h1>Reporte de Ambientes registrados</h1> 
+    <h1>Reporte de Materias registradas</h1> 
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
@@ -94,31 +94,23 @@
 <table>
     <thead>
         <tr>
-            <th>Código</th>
-            <th>Unidad</th>
+            <th>Departamento</th>
+            <th>Carrera</th>
             <th>Nombre</th>
-            <th>Capacidad</th>
-            <th>Ubicación</th>
-            <th>Descripción</th>
-            <th>Estado</th>
+            <th>Código</th>
+            <th>Nivel</th>
+            <th>Grupos</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($ambientes as $ambiente)
+        @foreach ($materias as $materia)
         <tr>
-            <td>{{ $ambiente->codigo }}</td>
-            <td>{{ $ambiente->unidad }}</td>
-            <td>{{ $ambiente->nombre }}</td>
-            <td>{{ $ambiente->capacidad }}</td>
-            <td>{{ $ambiente->ubicacion }}</td>
-            <td>{{ $ambiente->descripcion_ubicacion}}</td>
-            <td>
-                @if ($ambiente->estadoAmbiente == 1)
-                    Habilitado
-                @else
-                    Deshabilitado
-                @endif
-            </td>
+            <td>{{ $materia->departamento }}</td>
+            <td>{{ $materia->carrera }}</td>
+            <td>{{ $materia->nombre }}</td>
+            <td>{{ $materia->codigo }}</td>
+            <td>{{ $materia->nivel }}</td>
+            <td>{{ $materia->cantGrupo }}</td>
         </tr>
         @endforeach
     </tbody>

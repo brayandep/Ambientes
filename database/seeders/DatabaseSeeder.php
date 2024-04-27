@@ -1,13 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Materia;
-use App\Models\Unidad;
-use App\Models\TipoAmbiente;
-use App\Models\Ambiente;
-use App\Models\Models\Usuario;
-use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +16,10 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {      
+    {
+        
+    
+        
         
         $this -> call(UnidadSeeder::class);
         $this -> call(EquipoSeeder::class);
