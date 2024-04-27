@@ -39,11 +39,6 @@ Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
 
-
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
-
 Route::get('/index', function () {
     return view('sliderBar');
 });
