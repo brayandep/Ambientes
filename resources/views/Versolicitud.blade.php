@@ -18,17 +18,17 @@
 </div>
 <div class="contenidoF">
     <div class="F">
-        <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
+        {{-- <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
             <option>Selecciona un usuario </option>
             @foreach($usuarios as $usuario)
             <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
             @endforeach
             
-        </select>
+        </select> --}}
     </div>
 </div>
 
-<table  id="tablaSolicitudes" class="centro" border="1">
+<table  id="tablaSolicitudes" class="centro">
     <thead>
         <tr class="colorcolumna">
            
@@ -56,18 +56,18 @@
             <th><div class="contBotones">
                 <button class="nomCol">Fecha de solicitud</button>
             </div></th>
-            <th><div class="contBotones">
+            <th id="accionCol"><div class="contBotones">
                 <button class="nomCol">Acciones</button>
             </div></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="cuerpo">
         @foreach($solicitudes as $solicitud)
         @php
         $fechaCreacion = \Carbon\Carbon::parse($solicitud->created_at);
         $fechaLimiteSuspension = $fechaCreacion->addDay(); // Calcula la fecha límite de suspensión
         $fechaHoy = \Carbon\Carbon::now();
-    @endphp
+        @endphp
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
             <td>{{ $solicitud->idsolicitud }}</td>
             <td>{{ $solicitud->usuario }}</td>
