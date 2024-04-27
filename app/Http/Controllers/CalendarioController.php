@@ -61,7 +61,6 @@ class CalendarioController extends Controller
                 'backgroundColor' => '#F35D5D',
                 'start' => $fechaHoraIni,
                 'end' => $fechaHoraFin,
-                'overlap' => false
             ];
         }
         //print_r($eventos);
