@@ -91,6 +91,36 @@ class PublicacionController extends Controller
         return redirect()->back()->with('error', 'El archivo no existe.');
     }
 }
+public function update(Request $request, $id)
+    {
+        // Encuentra la publicación por su ID
+        $publicacion = Publicacion::findOrFail($id);
 
+        // Valida los datos del formulario de edición
+        $request->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required',
+            'archivo' => 'nullable|file',
+            'fecha_vencimiento' => 'required|date|after_or_equal:today',
+            'tipo' => 'required|in:reglamento,anuncio',
+        ]);
+
+        // Actualiza los datos de la publicación con los valores del formulario
+        $publicacion->titulo = $request->titulo;
+        $publicacion->descripcion = $request->descripcion;
+        $publicacion->fecha_vencimiento = $request->fecha_vencimiento;
+        $publicacion->tipo = $request->tipo;
+
+        // Si se proporciona un nuevo archivo, actualiza el archivo de la publicación
+        if ($request->hasFile('archivo')) {
+            $publicacion->archivo = $request->file('archivo')->store('public/archivos');
+        }
+
+        // Guarda los cambios en la base de datos
+        $publicacion->save();
+
+        // Redirecciona a la página de publicaciones o a donde sea apropiado después de actualizar
+        return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido actualizada exitosamente.');
+    }
     
 }

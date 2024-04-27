@@ -35,12 +35,6 @@ Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->n
 Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->name('unidad.edit');
 
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->name('unidad.destroy');
-//prueba de encabezado
-/*Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');*/
-
-
 
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
@@ -55,10 +49,9 @@ Route::get('/materia', materiaController::class);
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
 Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
-//Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
-Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->name('publicaciones.detalles');
-
 Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
 
 
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
+
