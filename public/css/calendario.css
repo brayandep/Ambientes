@@ -108,6 +108,8 @@ body{
 }
 /* termina letra de eventos */
 
+
+/* cambios de propio calendario */
 .detectaOcupado {
     display: none;
 }
@@ -117,3 +119,57 @@ body{
 .fc-timegrid-event-harness{
     inset: 192px 0% -240px 0%;
 }
+
+/*titulo*/
+.fc .fc-toolbar-title{
+    color: #0B2C37;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.fc .fc-button{
+    color: #0B2C37;
+    background: none;
+    border: none;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+.fc .fc-button:hover{
+    color: #933864;
+    background-color: #dededf;
+}
+.fc .fc-button-group > .fc-button:active{
+    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 0px 0.2rem;
+    background-color: #dededf;
+    color: #933864;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus{
+    box-shadow: none;
+}
+
+.fc .fc-button-primary:disabled {
+    background-color: #dededf;
+    color: #0B2C37;
+}
+.fc .fc-button-primary:focus{
+    box-shadow: none;
+}
+
+.fc .fc-today-button{
+    background-color: #933864;
+    color: #f5f6f7;
+}
+.fc .fc-today-button:not(:disabled):hover{
+    background-color: rgb(163, 61, 110);
+    color: #f5f6f7;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active{
+    background-color: #933864;
+}
+
+/*dias*/
+.fc .fc-col-header-cell-cushion {
+    color: #933864;
+}
+
+/* termina cambios de propio calendario */

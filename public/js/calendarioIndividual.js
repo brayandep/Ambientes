@@ -1,26 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // totalEventos.forEach(function(evento1) {
-    //     if(evento1.title === 'Libre'){
-    //         //console.log(moment(evento1.start).day()); 
-    //         totalEventos.forEach(function(evento2) {
-
-    //             if(evento2.title === 'Ocupado'){
-    //                 //console.log(evento2.daysOfWeek); 
-    
-    //                 if (evento1.daysOfWeek.includes(moment(evento2.start).day()) && evento1.startTime === moment(evento2.start).format('HH:mm')) {
-    //                     console.log('evento '+ evento1.title+ ' de dias: ' + evento1.daysOfWeek +' hora: '+evento1.startTime+ ' coincide con evento: ');
-    //                     console.log('evento '+ evento2.title+ ' de dia y hora: ' + evento2.start);
-    //                 } else {
-    //                     console.log('...');
-    //                 }
-    //             }
-    
-    //         });
-    //     }
-
-    // });
 
     var today = new Date();
     var calendarEl = document.getElementById('calendar');
