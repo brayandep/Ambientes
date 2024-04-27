@@ -75,7 +75,7 @@
     <table class="membrete-table">
         <tr>
             <td>
-                <img src="https://www.umss.edu.bo/wp-content/uploads/2022/08/Logo_umss.png" alt="Logo Universidad">
+                <img src="http://www.drei.umss.edu.bo/img/umss-horizontal.png" alt="Logo Universidad">
             </td>
             <td class="membrete-texto">
                 <h1>Universidad Mayor de San Simón</h1>
@@ -131,6 +131,7 @@
         @endforeach
     </tbody>
 </table>
+<p>Administrador: Esteban Rodriguez Arce</p>
 <div class="pagina">
     <!-- Paginación -->
     <p>Página {{ $pageNumber }} de {{ $pageCount }}</p>
