@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Ambiente;
 use Illuminate\Http\Request;
 use App\Models\HorarioDisponible;
+use App\Models\Models\Solicitud;
+use Illuminate\Support\Str;
+
 
 class BuscadorController extends Controller
 {
@@ -11,6 +14,15 @@ class BuscadorController extends Controller
         $request->validate([
             'nombre' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/|max:25',
             'capacidad' => 'nullable|min:15|numeric',
+            'fecha' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    // Validar que la fecha seleccionada no sea domingo
+                    if (!empty($value) && date('N', strtotime($value)) == 7) {
+                        $fail('No se permite seleccionar el día domingo.');
+                    }
+                },
+            ],
             'horaInicio' => [
                 'nullable',
                 'date_format:H:i',
@@ -52,7 +64,7 @@ class BuscadorController extends Controller
         $nombre = $request->input('nombre'); // Valor predeterminado: cadena vacía si no se proporciona
         $capacidad = $request->input('capacidad'); // Valor predeterminado: cadena vacía si no se proporciona
         $dia = $request->input('dia');
-        // $fecha = $request->input('fecha', date('Y-m-d'));
+        $fecha = $request->input('fecha');
         $horaInicio = $request->input('horaInicio');
         $horaFin = $request->input('horaFin');
 
@@ -78,8 +90,31 @@ class BuscadorController extends Controller
             '6' => 'Sábado',
         ];
 
+        // Convertir la fecha en el número correspondiente al día de la semana
+        $fechaNumero = date('N', strtotime($fecha));
+
+        // Consultar las solicitudes confirmadas para la fecha seleccionada
+        $solicitudesConfirmadas = Solicitud::where('fecha', $fecha)
+            ->where('estado', 'confirmado')
+            ->pluck('nro_aula'); // Obtener los IDs de los ambientes
+
+        // // Consultar los horarios disponibles filtrados por la fecha y el día de la semana
+        // $horarios = HorarioDisponible::where('dia', $fechaNumero)
+        //     ->when($solicitudesConfirmadas->isNotEmpty(), function ($query) use ($solicitudesConfirmadas) {
+        //         $query->whereNotIn('ambiente_id', $solicitudesConfirmadas);
+        //     })
+        //     ->get();
+
         $horarios = HorarioDisponible::query()
+        // ->where('dia', $fechaNumero)
+        ->when($solicitudesConfirmadas->isNotEmpty(), function ($query) use ($solicitudesConfirmadas) {
+            $query->whereNotIn('ambiente_id', $solicitudesConfirmadas);
+        })
+
         ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
+        ->when(!empty($fecha), function ($query) use ($fechaNumero) {
+            $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
+        })
         ->when(!empty($dia), function ($query) use ($dia) {
             $query->where('dia', $dia); // Filtrar por día si se ha seleccionado
         })
@@ -90,8 +125,8 @@ class BuscadorController extends Controller
         ->orderBy('dia', 'asc')
         ->orderBy('horaInicio', 'asc')
         ->get();
-        
+
         return view('Buscador.Buscador', 
-        compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin'));
+        compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin', 'fecha'));
     }
 }
