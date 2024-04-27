@@ -1,7 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleBuscador.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styleBuscador.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="../../css/styleBuscador.css">
 @endsection
 
 @section('titulo', 'Buscar')

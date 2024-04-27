@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}"> --}}
-    <link rel="stylesheet" href="css/stylePlantilla.css">
+    <link rel="stylesheet" href="../../css/stylePlantilla.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     @yield('links')
@@ -121,7 +121,7 @@
     </footer>
 </body>
 {{-- <script src="{{asset('js/scriptPlantilla.js')}}"></script> --}}
-<script src="js/scriptPlantilla.js"></script>
+<script src="../../js/scriptPlantilla.js"></script>
 @yield('scripts')
 </html>
 

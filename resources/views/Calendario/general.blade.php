@@ -4,7 +4,8 @@
 
 @section('links')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/calendario.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/calendario.css')}}"> --}}
+    <link rel="stylesheet" href="css/calendario.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @show
 
@@ -85,7 +86,8 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.11/index.global.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{asset('js/calendario.js')}}"></script>
+    {{-- <script src="{{asset('js/calendario.js')}}"></script> --}}
+    <script src="js/calendario.js"></script>
 
     <script>
         var misEventos = @json($eventos);

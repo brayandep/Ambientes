@@ -1,7 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerMaterias.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerMaterias.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="../../css/styleVerMaterias.css">
 @endsection
 
 @section('titulo', 'Lista de Materias')
