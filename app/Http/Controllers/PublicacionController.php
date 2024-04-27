@@ -55,24 +55,7 @@ class PublicacionController extends Controller
         // Redirige a la página de publicaciones o a donde sea apropiado después de eliminar
         return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada correctamente');
     }
-    
-
-
-
-    /*public function editar($id)
-    {
-       $publicacion = Publicacion::findOrFail($id);
-        return view('modalPublicacion', compact('publicacion'));
-   }*/
-    public function obtenerDetalles($id)
-    {
-        // Encuentra la publicación por su ID
-        $publicacion = Publicacion::findOrFail($id);
-
-        // Devuelve los detalles de la publicación en formato JSON
-        return response()->json($publicacion);
-    }
-   
+      
 
     public function verArchivo($id)
 {

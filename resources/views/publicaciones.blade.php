@@ -17,7 +17,6 @@
                     <button class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}">
                         <i class="fa fa-edit"></i>
                     </button>
-
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span>
                     </div>
 
@@ -34,10 +33,10 @@
                 
                     <div class="acciones-publicacion">
                     <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
-                   
                     <button class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}">
                         <i class="fa fa-edit"></i>
                     </button>
+
 
 
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
@@ -100,37 +99,28 @@
                 <h2>Editar Publicación</h2>
                 <form id="formulario-edicion" method="POST" action="{{ route('actualizar.publicacion', $publicacion->id) }}" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT') <!-- Método PUT para enviar el formulario como una actualización -->
+                    @method('PUT')
 
-                    <input type="hidden" name="id" id="id-publicacion">
-
+                    <!-- Campos de edición de la publicación -->
                     <div class="form-group">
-                        <label for="tipo">Tipo:</label>
-                        <select id="tipo" class="form-control" name="tipo" required>
+                        <label for="editar-tipo">Tipo:</label>
+                        <select id="editar-tipo" class="form-control" name="tipo" required>
                             <option value="reglamento">Reglamento</option>
                             <option value="anuncio">Anuncio</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="titulo">Título:</label>
-                        <input id="titulo" type="text" class="form-control" name="titulo" required>
+                        <label for="editar-titulo">Título:</label>
+                        <input id="editar-titulo" type="text" class="form-control" name="titulo" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="descripcion">Descripción:</label>
-                        <textarea id="descripcion" class="form-control" name="descripcion" required></textarea>
+                        <label for="editar-descripcion">Descripción:</label>
+                        <textarea id="editar-descripcion" class="form-control" name="descripcion" required></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="archivo">Archivo:</label>
-                        <input id="archivo" type="file" class="form-control-file" name="archivo">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
-                        <input id="fecha_vencimiento" type="date" class="form-control" name="fecha_vencimiento" min="{{ now()->format('Y-m-d') }}" required>
-                    </div>
+                    <!-- Botones para cancelar y guardar cambios -->
                     <div class="botones">
                         <button type="button" class="btn btn-secondary" onclick="cerrarModalEdicion()">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -139,15 +129,11 @@
             </div>
         </div>
 
-
-
     </div>
 @endsection
 
 @section('scripts')
 <script>
-// para el modal
-// Espera a que el documento esté listo
 document.addEventListener('DOMContentLoaded', function() {
     // Obtiene el botón de crear publicación
     var btnCrearPublicacion = document.getElementById('btn-crear-publicacion');
@@ -168,15 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
             abrirModalEdicion(publicacionId);
         });
     });
-
-    // Event listener para cerrar el modal de edición
-    var btnCerrarModalEdicion = document.getElementById('btn-cerrar-modal-edicion');
-    btnCerrarModalEdicion.addEventListener('click', function() {
-        // Cierra el modal de edición de publicación
-        cerrarModalEdicion();
-    });
-
-    // Otro código y event listeners...
 });
 
 function cerrarFormulario() {
@@ -187,6 +164,25 @@ function cerrarFormulario() {
 function cerrarModalEdicion() {
     // Cierra el modal de edición de publicación
     document.getElementById("modal-edicion").style.display = "none";
+}
+
+// Función para abrir el modal de edición y cargar los datos de la publicación
+function abrirModalEdicion(id) {
+    // Llamada AJAX para obtener los detalles de la publicación
+    fetch(`/publicaciones/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // Llenar el formulario del modal con los datos de la publicación
+            document.getElementById('id-publicacion').value = data.id;
+            document.getElementById('tipo').value = data.tipo;
+            document.getElementById('titulo').value = data.titulo;
+            document.getElementById('descripcion').value = data.descripcion;
+            document.getElementById('fecha_vencimiento').value = data.fecha_vencimiento;
+
+            // Mostrar el modal de edición
+            document.getElementById("modal-edicion").style.display = "block";
+        })
+        .catch(error => console.error('Error al obtener los datos de la publicación:', error));
 }
 </script>
 
