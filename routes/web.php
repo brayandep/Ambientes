@@ -133,12 +133,8 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('
     return view('Inicio');
 })->name('inicio');*/
 
-
-
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
-
-
 
 // Rutas para las publicaciones
 
