@@ -227,3 +227,6 @@ display: none;
     justify-content: end;
     margin-bottom: 5px;
   }
+#noActivar{
+    cursor: default;
+  }
