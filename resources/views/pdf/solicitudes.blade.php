@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reporte de Solicitudes</title>
+    <title>Reporte de Solicitud de Aulas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -95,6 +95,7 @@
 <table>
     <thead>
         <tr>
+            <th>Orden de llegada</th>
             <th>Estado</th>
             <th>Fecha</th>
             <th>Horario</th>
@@ -105,20 +106,27 @@
     <tbody>
         @foreach ($solicitudes as $solicitud)
         <tr>
+            <td>{{ \Carbon\Carbon::parse($solicitud->created_at)->format('d/m/Y H:i') }}</td>
             <td>{{ $solicitud->estado }}</td>
             <td>{{ $solicitud->fecha }}</td>
             <td>{{ $solicitud->horario }}</td>
-            <td>{{ $solicitud->nro_aula }}</td>
+            <td>
+                @foreach($ambientes as $ambiente)
+                    @if($solicitud->nro_aula == $ambiente->id)
+                        {{ $ambiente->nombre }}
+                    @endif
+                @endforeach
+            </td>
             <td>{{ $solicitud->motivo }}</td>
         </tr>
         @endforeach
     </tbody>
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
-<div class="pagina">
-    <!-- Paginación -->
-    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p>
-</div>
+<!-- <div class="pagina">
+    
+    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p> 
+</div> -->
 
 </body>
 </html>

@@ -16,49 +16,61 @@
                       @method('PUT')
                   @endif
   
-                <div class="form-group">
+                <div class="form-fila-s">
+                    <div class="input-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
+                    <input type="text" id="codigo" name="codigo" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
                     @error('codigo')
                         <span>*{{$message}}</span>
                     @enderror
+                    </div>
+                    <div class="input-group">
                     <label for="unidad">Unidad:</label>
-                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;">
+                        <select class="selectAmbiente" id="unidad" name="unidad">
                         <option value="">Selecciona una unidad</option>
                         @foreach($unidades as $unidad)
                           <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
                         @endforeach
                         </select>
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-fila-s">
+                    <div class="input-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" style="width: 40%;" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
+                    <input type="text" id="nombre" name="nombre" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
                     @error('nombre')
                         <span>*{{$message}}</span>
                     @enderror
+                    </div>
+                    <div class="input-group">
                     <label for="capacidad">Capacidad:</label>
-                    <input type="number" id="capacidad" name="capacidad" style="width: 40%;" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
+                    <input type="number" id="capacidad" name="capacidad" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
                     @error('capacidad')
                         <span>*{{$message}}</span>
                     @enderror
-                  </div>
+                    </div>
+                </div>
     
     
     
-                <div class="form-group">
+                <div class="form-fila-s">
+                    <div class="input-group">
                     <label for="ubicacion">Ubicación:</label>
-                    <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
+                    <input type="text" id="ubicacion" name="ubicacion" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                     @error('ubicacion')
                         <span>*{{$message}}</span>
                     @enderror
+                    </div>
+                    <div class="input-group">
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
+                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtroAmbiente(this);verificarOtro(this)">
                     <option>Selecciona un tipo de ambiente</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
                     @endforeach
                       <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
                   </select>
+                    </div>
               </div>
     
 
@@ -505,6 +517,7 @@
                 <div id="otroModal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="cerrarOtroModal()">&times;</span>
+                        <h2>Seleccione el horario:</h2> <!-- Título del modal-->
                         <div class="horarios">
                             <label for="modalHoraInicio">Hora inicio:</label>
                             <select id="modalHoraInicio">
@@ -537,6 +550,7 @@
                                 <option value="20:00">20:00</option>
                             </select>
                         </div>
+                        <span id="errorMensaje" style="color: red;"></span> <!-- Mensaje de error -->
                         <button type="button" id="modalAceptar" onclick="guardarHorario()">Aceptar</button>
                     </div>
                 </div>
@@ -644,28 +658,56 @@
         cerrarOtroModal();
     }*/
     function guardarHorario() {
-        // Obtener los valores de las horas
-        var horaInicio = document.getElementById('modalHoraInicio').value;
-        var horaFin = document.getElementById('modalHoraFin').value;
-        
-        // Crear el intervalo de horas como string
-        var intervaloHoras = horaInicio + ' ' + horaFin;
-        var intervalo = horaInicio + ' - ' + horaFin;
-        
-        // Obtener el día del modal
-        var dia = document.querySelector('.horarios').getAttribute('data-dia');
-        
-        // Actualizar la celda correspondiente con el intervalo de horas
-        document.getElementById(dia).innerText = intervalo;
-        
-        // Añadir el nuevo horario al arreglo
-        horarios2.push(...horarios3);
-        horarios2.push({dia, intervaloHoras});
-        
-        // Cerrar el modal
-        cerrarOtroModal();
+    // Obtener los valores de las horas
+    var horaInicio = document.getElementById('modalHoraInicio').value;
+    var horaFin = document.getElementById('modalHoraFin').value;
+    
+    // Convertir las horas a números enteros para comparar
+    var inicio = parseInt(horaInicio.replace(":", ""));
+    var fin = parseInt(horaFin.replace(":", ""));
+    
+    // Obtener el elemento para el mensaje de error
+    var errorMensaje = document.getElementById('errorMensaje');
+    
+    // Validar que la hora de fin sea mayor que la hora de inicio
+    if (fin <= inicio) {
+        errorMensaje.innerText = "La hora de fin debe ser mayor que la hora de inicio.";
+        return; // Detener la ejecución de la función si la validación falla
+    } else {
+        errorMensaje.innerText = ""; // Limpiar el mensaje de error si la validación es exitosa
     }
+    
+    // Crear el intervalo de horas como string
+    var intervaloHoras = horaInicio + ' ' + horaFin;
+    var intervalo = horaInicio + ' - ' + horaFin;
+    
+    // Obtener el día del modal
+    var dia = document.querySelector('.horarios').getAttribute('data-dia');
+    
+    // Actualizar la celda correspondiente con el intervalo de horas
+    document.getElementById(dia).innerText = intervalo;
+    
+    // Añadir el nuevo horario al arreglo
+    horarios2.push(...horarios3);
+    horarios2.push({dia, intervaloHoras});
+    
+    // Cerrar el modal
+    cerrarOtroModal();
+}
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Agregar evento change a los select de hora
+    var horaInicioSelect = document.getElementById('modalHoraInicio');
+    var horaFinSelect = document.getElementById('modalHoraFin');
+    
+    horaInicioSelect.addEventListener('change', limpiarError);
+    horaFinSelect.addEventListener('change', limpiarError);
+});
+
+function limpiarError() {
+    var errorMensaje = document.getElementById('errorMensaje');
+    errorMensaje.innerText = ""; // Limpiar el mensaje de error
+}
 </script>
 
    <!-- JavaScript  modal otro tipo ambiente -->
@@ -683,8 +725,21 @@
         var select = document.getElementById('tipo-ambiente');
 
         // Llamar a la función verificarOtro con el valor seleccionado actualmente
+        verificarOtroAmbiente(select);
         verificarOtro(select);
     });
+      function verificarOtroAmbiente(select) {
+          var selectedOption = select.options[select.selectedIndex].value;
+          if (selectedOption === "Otro") {
+              abrirModal();
+          } else {
+              var optionOtro = select.querySelector('option[value="Otro"]');
+              if (optionOtro) {
+                  select.removeChild(optionOtro);
+                  select.appendChild(optionOtro);
+              }
+          }
+      }
       function verificarOtro(select) {
           var selectedOption = select.options[select.selectedIndex].value;
           if (selectedOption === "Otro") {

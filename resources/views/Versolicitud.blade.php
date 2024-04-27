@@ -103,21 +103,7 @@
 
                         
                     @elseif($solicitud->estado == 'confirmado')   
-                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
-                        <div id="modal-confirmacion" class="modal">
-                
-                            <div class="modal-contenido">
-                                <p>¿Está seguro de que desea suspender la reserva?</p>
-                                <div class="botonesCentro">
-                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                    <a  >Sin acciones </a>
                     @elseif($solicitud->estado == 'denegado') 
                     <p>Sin acciones</p>            
                     @elseif($solicitud->estado == 'suspendido')
