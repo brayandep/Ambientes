@@ -1,7 +1,7 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
+<link rel="stylesheet" type="text/css" href="../../css/stylesbrayan.css">
 @endsection
 
 
@@ -12,7 +12,7 @@
 <div class="NavegacionContenido">
     <div class="navegacion">
     Inicio > Gestionar reservas > Ver solicitudes
-    <h2 class="titulo">Visualizar solicitudes de reservas</h2>
+    <h2 class="titulo">Visualizar reservas</h2>
     </div>
 </div>
 <div class="contenidoFyR">

@@ -1,8 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}">
+<link rel="stylesheet" type="text/css" href="../../css/stylesbrayan.css">
+<link rel="stylesheet" type="text/css" href="../../css/styleVerAmbientes.css">
 @endsection
 
 
