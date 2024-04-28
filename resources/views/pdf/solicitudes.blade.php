@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reporte de Unidades</title>
+    <title>Reporte de Solicitud de Aulas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,6 +76,7 @@
         <tr>
             <td>
                 <img src="http://www.drei.umss.edu.bo/img/umss-horizontal.png" alt="Logo Universidad">
+                <!--<img src="{{asset('images\Logo_umss.png')}}" alt="Logo Universidad"> -->
             </td>
             <td class="membrete-texto">
                 <h1>Universidad Mayor de San Simón</h1>
@@ -85,7 +86,7 @@
     </table>
 </div>
 <div class="titulo"> 
-    <h1>Reporte de Unidades Registradas</h1> 
+    <h1>Reporte de Solicitud de Aulas</h1> 
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
@@ -94,48 +95,37 @@
 <table>
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Código</th>
-            <th>Responsable</th>
-            <th>Nivel</th>
-            <th>Dependencia</th>
-            <th>Estado</th> <!-- Nuevo encabezado para el estado -->
+            <th>Orden de llegada</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Aula</th>
+            <th>Motivo</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($unidades as $unidad)
+        @foreach ($solicitudes as $solicitud)
         <tr>
-            <td>{{ $unidad->nombreUnidad }}</td>
-            <td>{{ $unidad->codigoUnidad }}</td>
-            <td>{{ $unidad->Responsable }}</td>
+            <td>{{ \Carbon\Carbon::parse($solicitud->created_at)->format('d/m/Y H:i') }}</td>
+            <td>{{ $solicitud->estado }}</td>
+            <td>{{ $solicitud->fecha }}</td>
+            <td>{{ $solicitud->horario }}</td>
             <td>
-                @if ($unidad->Nivel == 1)
-                    Facultad
-                @elseif ($unidad->Nivel == 2)
-                    Decanato
-                @elseif ($unidad->Nivel == 3)
-                    Departamento
-                @elseif ($unidad->Nivel == 4)
-                    Laboratorio
-                @endif
+                @foreach($ambientes as $ambiente)
+                    @if($solicitud->nro_aula == $ambiente->id)
+                        {{ $ambiente->nombre }}
+                    @endif
+                @endforeach
             </td>
-            <td>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</td>
-            <td>
-                @if ($unidad->UnidadHabilitada == 1)
-                    Habilitado
-                @else
-                    Deshabilitado
-                @endif
-            </td>
+            <td>{{ $solicitud->motivo }}</td>
         </tr>
         @endforeach
     </tbody>
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
-<!-- Paginación
-<div class="pagina">
-     
-    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p>
+<!-- <div class="pagina">
+    
+    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p> 
 </div> -->
 
 </body>

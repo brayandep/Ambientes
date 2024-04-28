@@ -36,9 +36,9 @@ class AmbienteController extends Controller
         $tipoAmbientes = TipoAmbiente::all();
         $equiposDisponibles = Equipo::distinct()->pluck('nombreEquipo')->toArray();
         $equiposSeleccionados = null;
-        $horariosExistente = null;
-        //dd($equiposDisponibles);
-        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','equiposDisponibles','equiposSeleccionados','horariosExistente'));
+        $horariosDisponibles = [];
+        $horariosDisponibles2 = [];
+        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','equiposDisponibles','equiposSeleccionados','horariosDisponibles','horariosDisponibles2'));
     }
 
     /**
@@ -49,18 +49,17 @@ class AmbienteController extends Controller
      */
     public function store(Request $request)
     {
-       /*  $request -> validate([
-            'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
+
+       $request -> validate([
+            'codigo' => 'required|unique:ambientes,codigo',
+            /*'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
             'nombre' => 'required|max:25|regex:/^[a-zA-Z\s]+$/|unique:ambientes,nombre',
             'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
-            'descripcion' => 'required|max:40|regex:/^[a-zA-Z]+$/',
+            'ubicacion' => 'nullable|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
+            'descripcion' => 'nullable|max:40|regex:/^[a-zA-Z]+$/',
             'unidad'=> 'required',
-            'tipo-ambiente'=> 'required'
-            [
-            'tipo-ambiente.required' => 'El tipo de ambiente es requerido'
-            ]
-        ]); */
+            'tipo-ambiente'=> 'required'*/
+        ]);
 
         //dd($request);
         $ambiente = new Ambiente();
@@ -101,53 +100,83 @@ class AmbienteController extends Controller
             }
         }
 
-        $datosDiaSemana = $request->diaSemana;
-        
-        foreach ($datosDiaSemana as $dia => $dats) {
+        $diasConv = [
+            "Lunes" => 1,
+            "Martes" => 2,
+            "Miércoles" => 3,
+            "Jueves" => 4,
+            "Viernes" => 5,
+            "Sábado" => 6,
+        ];
 
-            $datos = json_decode($dats, true);
-            
-            if ($datos !== null && is_array($datos)) {
-                foreach ($datos as $dato) {
-                    
-                    $inicio = $dato['inicio'];
-                    $fin = $dato['fin'];
-                    $horarioDisponible = new HorarioDisponible();
-                    $horarioDisponible->ambiente_id = $ambiente->id;
-                    $horarioDisponible->horaInicio = $inicio;
-                    $horarioDisponible->horaFin = $fin;
-                    $horarioDisponible->estadoHorario = 1;
-                    $horarioDisponible->dia = $dia;
-                    $horarioDisponible->save();
+        if($request->input('tipo-ambiente') === 'Auditorio'){
+
+            $horarios = $request->input('horarios2', []);
+            $horariosPorDia = [];
+            foreach ($horarios as $horario) {
+                if($horario !== "undefined undefined"){
+                    $partes = explode(' ', $horario,2);
+                    if(count($partes) === 2){
+                        $dia = $partes[0];
+                        $tiempo = $partes[1];
+                        $horariosPorDia[$dia][] = $tiempo;  // Agrupar por día
+                    }
                 }
-            }  
-        }
-
-        $datosDiaSem = $request->horario;
-        
-        foreach ($datosDiaSem as $dia => $dats) {
-
-            $datos = json_decode($dats, true);
-            
-            if ($datos !== null && is_array($datos)) {
-                foreach ($datos as $dato) {
+            }
+            $ultimoHorarioPorDia = [];
+            foreach ($horariosPorDia as $dia => $horarios) {
+                $ultimoHorarioPorDia[$dia] = end($horarios);  
+            }
+            $horariosFormateados = [];
+            foreach ($ultimoHorarioPorDia as $dia => $horario) {
+                $horariosFormateados[] = "$dia $horario";
+            }
+            //dd($horariosFormateados);
+            foreach ($horariosFormateados as $horario) {
+                if($horario !== "undefined undefined"){
+                    $partes = explode(' ', $horario);
                     
-                    $inicio = $dato['inicio'];
-                    $fin = $dato['fin'];
-                    //dd($inicio, $fin);
-                    $horarioDisponible = new HorarioDisponible();
-                    $horarioDisponible->ambiente_id = $ambiente->id;
-                    $horarioDisponible->horaInicio = $inicio;
-                    $horarioDisponible->horaFin = $fin;
-                    $horarioDisponible->estadoHorario = 1;
-                    $horarioDisponible->dia = $dia;
-                    $horarioDisponible->save();
-                }
-            }  
+                        $dia = $partes[0];
+                        $horaInicio = $partes[1];
+                        $horaFin = $partes[2];
+                
+                        $horarioDisponible = new HorarioDisponible();
+                        $horarioDisponible->ambiente_id = $ambiente->id;
+                        $horarioDisponible->horaInicio = $horaInicio;
+                        $horarioDisponible->horaFin = $horaFin;
+                        $horarioDisponible->estadoHorario = 1; 
+                        if (array_key_exists($dia, $diasConv)) {
+                            $numeroDelDia = $diasConv[$dia];
+                            $horarioDisponible->dia = $numeroDelDia;
+                        }
+                        
+                        $horarioDisponible->save();
+                } 
+            }
+        }else{
+            $horarios = $request->input('horarios', []);
+            foreach ($horarios as $horario) {
+                $partes = explode(' ', $horario);
+                    if(count($partes) === 3){
+                        $dia = $partes[0];
+                        $horaInicio = $partes[1];
+                        $horaFin = $partes[2];
+                
+                        $horarioDisponible = new HorarioDisponible();
+                        $horarioDisponible->ambiente_id = $ambiente->id;
+                        $horarioDisponible->horaInicio = $horaInicio;
+                        $horarioDisponible->horaFin = $horaFin;
+                        $horarioDisponible->estadoHorario = 1; 
+                        if (array_key_exists($dia, $diasConv)) {
+                            $numeroDelDia = $diasConv[$dia];
+                            $horarioDisponible->dia = $numeroDelDia;
+                        }
+                        $horarioDisponible->save();
+                    }
+            }
         }
-
         
-        return redirect('registro');
+        return redirect('ver-ambientes');
     }
 
     /**
@@ -188,11 +217,45 @@ class AmbienteController extends Controller
 
         //$equipos = Equipo::find($id);
 
-        $horariosExistente = HorarioDisponible::where('ambiente_id', $ambienteDatos->id)->get()->groupBy('dia');;
-    
-        
+        //$horariosExistente = HorarioDisponible::where('ambiente_id', $ambienteDatos->id)->get()->groupBy('dia');;
+        $horario = HorarioDisponible::where('ambiente_id', $ambienteDatos->id)->get();
 
-        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','ambienteDatos','equiposDisponibles','equiposSeleccionados','horariosExistente'));
+        
+        
+        $horariosDisponibles = $horario->map(function($horario) {
+            $nombreDia = '';
+            $dias = [
+                1 => "Lunes",
+                2 => "Martes",
+                3 => "Miércoles",
+                4 => "Jueves",
+                5 => "Viernes",
+                6 => "Sábado"
+            ];
+            
+            if (array_key_exists($horario->dia, $dias)) {
+                $nombreDia = $dias[$horario->dia];
+            }
+            return $nombreDia . ' ' . $horario->horaInicio . ' ' . $horario->horaFin;
+        })->toArray();
+        
+        $horariosDisponibles2 = $horario->map(function($horario) {
+            $nombreDia2 = '';
+            $dias = [
+                1 => "Lunes",
+                2 => "Martes",
+                3 => "Miércoles",
+                4 => "Jueves",
+                5 => "Viernes",
+                6 => "Sábado"
+            ];
+            if (array_key_exists($horario->dia, $dias)) {
+                $nombreDia2 = $dias[$horario->dia];
+            }
+            return $nombreDia2 . ' ' . $horario->horaInicio . ' ' . $horario->horaFin;
+        })->toArray();;
+        //dd($horariosDisponibles);
+        return view('registrarAmbiente.registro', compact('unidades', 'tipoAmbientes','ambienteDatos','equiposDisponibles','equiposSeleccionados','horariosDisponibles', 'horariosDisponibles2'));
     }
 
     /**
@@ -204,9 +267,8 @@ class AmbienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
+        //dd($request);
         $ambiente = Ambiente::find($id);
-
         $tipoID = 0;
         $tipoAmb = TipoAmbiente::where('nombreTipo', $request->input('tipo-ambiente'))->first();
         if ($tipoAmb === null) {
@@ -257,31 +319,85 @@ class AmbienteController extends Controller
             }
         }
 
-        $datosDiaSemana = $request->diaSemana;
-        
-        foreach ($datosDiaSemana as $dia => $dats) {
+        $diasConv = [
+            "Lunes" => 1,
+            "Martes" => 2,
+            "Miércoles" => 3,
+            "Jueves" => 4,
+            "Viernes" => 5,
+            "Sábado" => 6,
+        ];
 
-            $datos = json_decode($dats, true);
-            
-            if ($datos !== null && is_array($datos)) {
-                foreach ($datos as $dato) {
+        if($request->input('tipo-ambiente') === 'Auditorio'){
+
+            $horarios = $request->input('horarios2', []);
+            $horariosPorDia = [];
+            foreach ($horarios as $horario) {
+                if($horario !== "undefined undefined"){
                     
-                    $inicio = $dato['inicio'];
-                    $fin = $dato['fin'];
+                    $partes = explode(' ', $horario,2);
+                    if(count($partes) === 2){
+                        $dia = $partes[0];
+                        $tiempo = $partes[1];
+                        $horariosPorDia[$dia][] = $tiempo;  // Agrupar por día
+                    }
+                }
+            }
+            $ultimoHorarioPorDia = [];
+            foreach ($horariosPorDia as $dia => $horarios) {
+                if (array_key_exists($dia, $diasConv)) {
+                    $numeroDia = $diasConv[$dia];
+                    HorarioDisponible::where('ambiente_id', $ambiente->id)->where('dia','=',$numeroDia)->delete();
+                }
+                $ultimoHorarioPorDia[$dia] = end($horarios);  
+            }
+            $horariosFormateados = [];
+            foreach ($ultimoHorarioPorDia as $dia => $horario) {
+                $horariosFormateados[] = "$dia $horario";
+            }
+            //dd($horariosFormateados);
+            foreach ($horariosFormateados as $horario) {
+                if($horario !== "undefined undefined"){
+                    $partes = explode(' ', $horario);
+                    $dia = $partes[0];
+                    $horaInicio = $partes[1];
+                    $horaFin = $partes[2];
+            
                     $horarioDisponible = new HorarioDisponible();
                     $horarioDisponible->ambiente_id = $ambiente->id;
-                    $horarioDisponible->horaInicio = $inicio;
-                    $horarioDisponible->horaFin = $fin;
-                    $horarioDisponible->estadoHorario = 1;
-                    $horarioDisponible->dia = $dia;
+                    $horarioDisponible->horaInicio = $horaInicio;
+                    $horarioDisponible->horaFin = $horaFin;
+                    $horarioDisponible->estadoHorario = 1; 
+                    if (array_key_exists($dia, $diasConv)) {
+                        $numeroDelDia = $diasConv[$dia];
+                        $horarioDisponible->dia = $numeroDelDia;
+                    }
+                    $horarioDisponible->save();
+                } 
+            }
+        }else{
+            HorarioDisponible::where('ambiente_id', $ambiente->id)->delete();
+            $horarios = $request->input('horarios', []);
+            foreach ($horarios as $horario) {
+                if($horario !== "undefined undefined"){
+                    $partes = explode(' ', $horario);
+                    $dia = $partes[0];
+                    $horaInicio = $partes[1];
+                    $horaFin = $partes[2];
+            
+                    $horarioDisponible = new HorarioDisponible();
+                    $horarioDisponible->ambiente_id = $ambiente->id;
+                    $horarioDisponible->horaInicio = $horaInicio;
+                    $horarioDisponible->horaFin = $horaFin;
+                    $horarioDisponible->estadoHorario = 1; 
+                    if (array_key_exists($dia, $diasConv)) {
+                        $numeroDelDia = $diasConv[$dia];
+                        $horarioDisponible->dia = $numeroDelDia;
+                    }
+                    
                     $horarioDisponible->save();
                 }
-            }  
-        }
-
-        if ($request->has('borrar')) {
-            $idsAEliminar = $request->borrar;
-            HorarioDisponible::destroy($idsAEliminar);
+            }
         }
 
         return redirect()->route('AmbientesRegistrados');
@@ -311,12 +427,23 @@ class AmbienteController extends Controller
         return redirect()->route('registro.index');
     }
 
-    public function descargarPDF()
-    {
-        $ambientes = Ambiente::all();
-
-        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'));
-
+    public function descargarAmbientesPDF(){
+        $ambientes = Ambiente::all(); // Obtén todos los ambientes
+    
+        // Invertir el orden de los ambientes
+        $ambientes = $ambientes->reverse();
+    
+        // Contar las páginas manualmente
+        $itemsPerPage = 20; // Número de ítems por página
+        $totalItems = $ambientes->count();
+        $totalPages = ceil($totalItems / $itemsPerPage);
+    
+        $pageNumber = 1; // Página actual
+        $pageCount = $totalPages; // Total de páginas
+    
+        // Generar el PDF
+        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes', 'pageNumber', 'pageCount'));
+    
         return $pdf->download('ambientes.pdf');
     }
 }

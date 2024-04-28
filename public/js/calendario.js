@@ -5,6 +5,24 @@ $.ajaxSetup({
     }
 });
 
+//revision de hora final
+function compararHoras() {
+    var horaStart = $('#horaStart').val();
+    var horaEnd = $('#horaEnd').val();
+
+    // Crear objetos Date con las horas
+    var fHoraStart = new Date('2000-01-01T' + horaStart);
+    var fHoraEnd = new Date('2000-01-01T' + horaEnd);
+
+    if (fHoraEnd >= fHoraStart) {
+        $('#alertaHora').text('');
+    } else {
+        $('#alertaHora').text('La hora final debe ser despues de la hora inicial.');
+        $('#horaEnd').val('');
+    }
+}
+
+
 //calendario
 document.addEventListener('DOMContentLoaded', function() {
     //eventos manuales
@@ -118,13 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 console.log(info);
                 $('#fechaStart').val(info.dateStr);
-                limitarFecha1();
+                limitarFecha();
                 $('#exampleModal').modal('toggle');
             }
             //calendar.addEvent({title:"Evento Jhosemar", date:info.dateStr})
         },
 
         eventClick:function(info){
+            limpiarFormulario();
             $('#btnAgregar').hide();
             $('#btnModificar').show();
             $('#btnEliminar').show();
@@ -260,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#msgError2').html("");
         $('#msgError3').html("");
         $('#msgError4').html("");
+        $('#alertaHora').html("");
     }
 
 });

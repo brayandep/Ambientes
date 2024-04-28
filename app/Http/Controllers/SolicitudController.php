@@ -8,6 +8,10 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
+
+use PDF;
+
+use Illuminate\Support\Facades\Redirect;
 class SolicitudController extends Controller
 {
     public function index()
@@ -16,7 +20,7 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        return view('VerSolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
+        return view('Versolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
     }
 
     public function index2()
@@ -25,7 +29,7 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-         return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes'));
+         return view('habilitarReservas', compact('solicitudes','usuarios','horarios','ambientes'));
     }
 public function create()
 {
@@ -52,18 +56,32 @@ public function store(Request $request)
             'fecha' => 'required|date',
             'horario' => 'required',
         ]);
-        $Solicitud = new Solicitud();
-        
-        $Solicitud->usuario = $request['usuario'];
-        $Solicitud->fecha = $request['fecha'];
-        $Solicitud->motivo = $request['motivo'];
-        $Solicitud->materia = $request['materia'];
-        $Solicitud->grupo = $request['grupo'];
-        $Solicitud->nro_aula = $request['nro_aula'];
-        $Solicitud->horario = $request['horario'];
-        $Solicitud->estado = 'Sin confirmar';;
-        $Solicitud->save();
-        return redirect()->route('VerSolicitud');
+       // Verifica si ya existe una solicitud con los mismos datos
+    $solicitudExistente = Solicitud::where('fecha', $request->fecha)
+    ->where('nro_aula', $request->nro_aula)
+    ->where('horario', $request->horario)
+    ->where('estado', 'confirmado')
+    ->exists();
+
+// Si existe una solicitud con los mismos datos y estado confirmado, muestra un mensaje de error
+if ($solicitudExistente) {
+    return Redirect::back()->withErrors(['error' => 'El ambiente está ocupado en el horario seleccionado.']);
+}
+
+// Si no existe una solicitud con los mismos datos o si existe pero no está confirmada, procede a guardar la solicitud
+$solicitud = new Solicitud();
+$solicitud->usuario = $request->usuario;
+$solicitud->fecha = $request->fecha;
+$solicitud->motivo = $request->motivo;
+$solicitud->materia = $request->materia;
+$solicitud->grupo = $request->grupo;
+$solicitud->nro_aula = $request->nro_aula;
+$solicitud->horario = $request->horario;
+$solicitud->estado = 'Sin confirmar';
+$solicitud->save();
+
+// Redirige a la vista de solicitud con un mensaje de éxito
+return redirect()->route('VerSolicitud')->with('success', 'Solicitud registrada exitosamente.');
 
 }       
 public function edit($id ){
@@ -147,13 +165,36 @@ public function denegar(Solicitud $id){
 }*/
 
 public function solicitudMostrar(Request $request){
+    $ambientes = Ambiente::all();;
      $estado = $request->input('estado');
     if($estado == "todos"){
         $solicitudes = Solicitud::all();
     }else{
         $solicitudes = Solicitud::where("estado",$estado)->get();
     }
-    return view('habilitarReservas', compact('solicitudes'));
+    return view('habilitarReservas', compact('solicitudes','ambientes'));
+}
+public function descargarReservasPDF(){
+    $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
+
+    // Obtener información de los ambientes
+    $ambientes = Ambiente::all();
+
+    // Invertir el orden de las solicitudes
+    //$solicitudes = $solicitudes->reverse();
+
+    // Contar las páginas manualmente
+    $itemsPerPage = 20; // Número de ítems por página
+    $totalItems = $solicitudes->count();
+    $totalPages = ceil($totalItems / $itemsPerPage);
+
+    $pageNumber = 1; // Página actual
+    $pageCount = $totalPages; // Total de páginas
+
+    // Generar el PDF
+    $pdf = PDF::loadView('pdf.solicitudes', compact('solicitudes', 'pageNumber', 'pageCount', 'ambientes'));
+
+    return $pdf->download('reservas.pdf');
 }
 
 }

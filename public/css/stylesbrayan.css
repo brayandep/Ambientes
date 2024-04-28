@@ -162,7 +162,7 @@
 
 }
 .centro{
-  width: 70%; /* Ajusta el ancho de la tabla */
+  width: 50%; /* Ajusta el ancho de la tabla */
   border-collapse: collapse; /* Ajusta el ancho según sea necesario */
  /* height: 100px; Ajusta la altura según sea necesario */
   margin: auto; /* Esto centra horizontalmente */
@@ -170,22 +170,30 @@
   font-size: 16px;
   background: #EBEBEB;
   margin-top: 15px;
+  border-radius: 5px;
   
 }
 .colorcolumna{
   color: #EBEBEB;
-  background-color: #C384B2 ;
-  font-size: 16px;
+  font-size: 14px;
   margin-left: 5px;
   padding: 7px;
   text-align: center;
-  
+  display: flex;
+  gap: 10px;
 }
 .contentcolumna{
+  font-size: 14px;
   text-align: center;
+  display: flex;
+  padding: 7px;
+}
+.contentcolumna td{
+  width: 100%;
 }
 
 .botones-container {
+  min-width: 200px;
   align-items: center;
   text-align: center;
   display: flex; 
@@ -200,6 +208,13 @@
 .botones-container i{
   font-size: 20px; 
 }
+
+#accionCol{
+  min-width: 200px;
+  display:flex;
+  justify-content: center;
+}
+
 .fa-circle-check {
  color: #4caf50;
 }
@@ -313,13 +328,6 @@
   width: 70%;
   justify-content: space-between;
 }
-.botonReporte{
-  background-color: #C384B2;
-  color: #efebf3;
-  font-size: 14px;
-  padding: 5px;
-  border-radius: 5px;
-}
 .subtitulo{
   font-size: 20px;
   color: #f44336;
@@ -345,7 +353,17 @@
   flex-direction: column;
   display: flex;
   overflow: auto;
-  width: 70%;
+  width: 80%;
+  margin-top: 7px;
+}.tabla2{
+  background-color: #e2eaec;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  width: 90%;
   margin-top: 7px;
 }
 
@@ -382,6 +400,10 @@
   padding: 5px;
   
 }
+/*.solDatos{
+  overflow: auto;
+  height: 300px;
+}*/
 #activar:hover{
   background-color: #933864;
 }
@@ -405,3 +427,12 @@
   }
 }
 /* termina cambios de Jhosemar */
+
+
+.alert{
+ 
+  color: #f15b5b;
+  font-size: 16px;
+  border-radius: 5px;
+  
+}

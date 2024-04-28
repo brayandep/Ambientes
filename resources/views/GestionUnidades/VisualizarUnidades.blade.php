@@ -1,6 +1,7 @@
 @extends('layoutes.plantilla')
 @section('links')
-    <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}">
+    <link rel="stylesheet" href="../../css/styleUnidades.css">
+    {{-- <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}"> --}}
 @endsection
 @section('titulo', 'Visualizar unidades')
   
@@ -23,25 +24,25 @@
                 <div class="pizarra">
                     <div class="fila">
                         <div class="columnaT">
-                           <button class="nomCol">Nombre</button>
+                           <button class="nomCol" id="noActivar">Nombre</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol">Codigo</button>
+                            <button class="nomCol" id="noActivar">Codigo</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol">Responsable</button>
+                            <button class="nomCol" id="noActivar">Responsable</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol">Nivel</button>
+                            <button class="nomCol" id="noActivar">Nivel</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol">Dependencia</button>
+                            <button class="nomCol" id="noActivar">Dependencia</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol">Acciones</button>
+                            <button class="nomCol" id="noActivar">Acciones</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol">Habilitado</button>
+                            <button class="nomCol" id="noActivar">Habilitado</button>
                         </div>
                     </div>
                     <div>
@@ -124,5 +125,6 @@
         </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/scriptUnidades.js') }}"></script>
+    {{-- <script src="{{ asset('js/scriptUnidades.js') }}"></script> --}}
+    <script src="../../js/scriptUnidades.js"></script>
 @endsection

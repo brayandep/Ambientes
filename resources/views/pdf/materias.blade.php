@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reporte de Unidades</title>
+    <title>Reporte de Materias</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,7 +85,7 @@
     </table>
 </div>
 <div class="titulo"> 
-    <h1>Reporte de Unidades Registradas</h1> 
+    <h1>Reporte de Materias Registradas</h1> 
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
@@ -94,39 +94,23 @@
 <table>
     <thead>
         <tr>
+            <th>Departamento</th>
+            <th>Carrera</th>
             <th>Nombre</th>
             <th>Código</th>
-            <th>Responsable</th>
             <th>Nivel</th>
-            <th>Dependencia</th>
-            <th>Estado</th> <!-- Nuevo encabezado para el estado -->
+            <th>Grupos</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($unidades as $unidad)
+        @foreach ($materias as $materia)
         <tr>
-            <td>{{ $unidad->nombreUnidad }}</td>
-            <td>{{ $unidad->codigoUnidad }}</td>
-            <td>{{ $unidad->Responsable }}</td>
-            <td>
-                @if ($unidad->Nivel == 1)
-                    Facultad
-                @elseif ($unidad->Nivel == 2)
-                    Decanato
-                @elseif ($unidad->Nivel == 3)
-                    Departamento
-                @elseif ($unidad->Nivel == 4)
-                    Laboratorio
-                @endif
-            </td>
-            <td>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</td>
-            <td>
-                @if ($unidad->UnidadHabilitada == 1)
-                    Habilitado
-                @else
-                    Deshabilitado
-                @endif
-            </td>
+            <td>{{ $materia->departamento }}</td>
+            <td>{{ $materia->carrera }}</td>
+            <td>{{ $materia->nombre }}</td>
+            <td>{{ $materia->codigo }}</td>
+            <td>{{ $materia->nivel }}</td>
+            <td>{{ $materia->cantGrupo }}</td>
         </tr>
         @endforeach
     </tbody>
