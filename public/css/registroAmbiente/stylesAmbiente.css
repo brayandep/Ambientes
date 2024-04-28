@@ -116,8 +116,11 @@ h2{
     border-radius: 5px; /* Agrega bordes redondeados al botón */
   }
   
-  button:hover {
-    background-color: #904368;
+  .btn-cancelar:hover{
+    background-color: #b94848;
+  }
+  .btn-registrar:hover{
+      background-color: #2f6074;
   }
 
   button.nomColu:hover { /*Para los horarios en version larga*/
@@ -136,7 +139,7 @@ h2{
 
   /* Estilos para el segundo botón */
   .btn-registrar {
-    background-color: #C384B2; 
+    background-color: #538296;; 
     color: #fff; /* Texto en color blanco */
 
     padding: 10px 20px; /* Espaciado interno de los botones */
@@ -391,3 +394,62 @@ th, td {
 .input-group label {
   margin-bottom: 5px;
 }
+
+.msgError{
+  color: #b94848;
+  padding: 2px 0 0 6px;
+}
+
+/* paneles emergaentes */
+#fondoGris{
+  background-color: #40505577;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+
+.panel{
+  position: absolute; 
+  z-index: 2; /* un valor alto para estar por encima de otros elementos */
+  background-color: #933864;
+  color: #f5f6f7;
+  padding: 25px;
+  width: 21%;
+  min-width: 197px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);  
+  border-radius: 5px;
+  display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.btnPanel{
+  margin-top: 10px;
+  justify-content: end;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.btnPanel button{
+  padding: 5px 15px 5px 15px;;
+  border-radius: 5px;
+}
+.no{
+  background-color: #F35D5D;
+}
+.si{
+  background-color: #538296;
+}
+.no:hover{
+  background-color: #b94848;
+}
+.si:hover{
+  background-color: #2f6074;
+}
+/*termina paneles emergaentes */

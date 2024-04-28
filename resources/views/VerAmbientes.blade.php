@@ -60,7 +60,7 @@
                         <p>{{ $ambiente->unidad }}</p>
                         <p>{{ $ambiente->nombre }}</p>
                         <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
-                        <p id="ubi">{{ $ambiente->ubicacion }}</p>
+                        <p id="ubi" class="texto-limitado">{{ $ambiente->ubicacion }}</p> 
                         <p>{{ $ambiente->descripcion_ubicacion}}</p>
                         <div class="EditHab" id="columnaPeque">
                             <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">
