@@ -96,40 +96,48 @@ class BuscadorController extends Controller
         ];
 
         // Convertir la fecha en el número correspondiente al día de la semana
-        $fechaNumero = date('N', strtotime($fecha));
+    $fechaNumero = date('N', strtotime($fecha));
 
-        // Filtrar los horarios disponibles
-        $horarios = HorarioDisponible::query()
-            ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
-            ->when(!empty($fecha), function ($query) use ($fechaNumero) {
-                $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
-            })
-            ->when(!empty($dia), function ($query) use ($dia) {
-                $query->where('dia', $dia); // Filtrar por día si se ha seleccionado
-            })
-            ->when(!empty($horaInicio) && !empty($horaFin), function ($query) use ($horaInicio, $horaFin) {
+    // Filtrar los horarios disponibles
+    $horarios = HorarioDisponible::query()
+        ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
+        ->when(!empty($fecha), function ($query) use ($fechaNumero) {
+            $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
+        })
+        ->when(!empty($dia), function ($query) use ($dia) {
+            $query->where('dia', $dia); // Filtrar por día si se ha seleccionado
+        })
+        ->when(!empty($horaInicio) && !empty($horaFin), function ($query) use ($horaInicio, $horaFin) {
+            $query->where(function ($query) use ($horaInicio, $horaFin) {
                 $query->where('horaInicio', '>=', $horaInicio)
                       ->where('horaFin', '<=', $horaFin);
-            })
-            ->orderBy('dia', 'asc')
-            ->orderBy('horaInicio', 'asc')
-            ->get();
+            })->orWhere(function ($query) use ($horaInicio, $horaFin) {
+                $query->where('horaInicio', '<=', $horaInicio)
+                      ->where('horaFin', '>=', $horaInicio);
+            })->orWhere(function ($query) use ($horaInicio, $horaFin) {
+                $query->where('horaInicio', '<=', $horaFin)
+                      ->where('horaFin', '>=', $horaFin);
+            });
+        })
+        ->orderBy('dia', 'asc')
+        ->orderBy('horaInicio', 'asc')
+        ->get();
 
-        // Obtener todas las solicitudes confirmadas para la fecha seleccionada
-        $solicitudesConfirmadas = Solicitud::where('fecha', $fecha)
-            ->where('estado', 'confirmado')
-            ->get();
+    // Obtener todas las solicitudes confirmadas para la fecha seleccionada
+    $solicitudesConfirmadas = Solicitud::where('fecha', $fecha)
+        ->where('estado', 'confirmado')
+        ->get();
 
-        // Filtrar los horarios para eliminar los ocupados por solicitudes confirmadas
-        foreach ($horarios as $key => $horario) {
-            foreach ($solicitudesConfirmadas as $solicitud) {
-                list($horaInicioSolicitud, $horaFinSolicitud) = explode(' - ', $solicitud->horario);
-                if ($horario->ambiente_id == $solicitud->nro_aula && $horario->horaInicio == $horaInicioSolicitud && $horario->horaFin == $horaFinSolicitud) {
-                    unset($horarios[$key]);
-                    break; // Salir del bucle interno
-                }
+    // Filtrar los horarios para eliminar los ocupados por solicitudes confirmadas
+    foreach ($horarios as $key => $horario) {
+        foreach ($solicitudesConfirmadas as $solicitud) {
+            list($horaInicioSolicitud, $horaFinSolicitud) = explode(' - ', $solicitud->horario);
+            if ($horario->horaInicio >= $horaInicioSolicitud && $horario->horaFin <= $horaFinSolicitud) {
+                unset($horarios[$key]);
+                break;
             }
         }
+    }
 
         return view('Buscador.Buscador', 
         compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin', 'fecha'));
