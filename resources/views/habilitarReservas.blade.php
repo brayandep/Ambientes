@@ -12,7 +12,7 @@
 <div class="NavegacionContenido">
     <div class="navegacion">
     Inicio > Gestionar reservas > Ver solicitudes
-    <h2 class="titulo">Visualizar reservas</h2>
+    <h2 class="titulo">Visualizar solicitudes de reservas</h2>
     </div>
 </div>
 <div class="contenidoFyR">

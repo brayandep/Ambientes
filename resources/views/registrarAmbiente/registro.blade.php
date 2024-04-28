@@ -1,7 +1,7 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="/css/registroAmbiente/stylesAmbiente.css">
+    <link rel="stylesheet" type="text/css" href="../../css/registroAmbiente/stylesAmbiente.css">
 @endsection
 
 @section('titulo', 'Registro de Ambiente')
