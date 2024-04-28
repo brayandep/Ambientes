@@ -155,7 +155,13 @@
   justify-content: end;
   margin-bottom: 5px;
 }
-
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  width: 100%;
+}
 
 #ubi{
   width: 500px;
