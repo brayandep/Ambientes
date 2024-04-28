@@ -98,34 +98,38 @@ class BuscadorController extends Controller
         // Convertir la fecha en el número correspondiente al día de la semana
         $fechaNumero = date('N', strtotime($fecha));
 
-        // Consultar las solicitudes confirmadas para la fecha seleccionada
+        // Filtrar los horarios disponibles
+        $horarios = HorarioDisponible::query()
+            ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
+            ->when(!empty($fecha), function ($query) use ($fechaNumero) {
+                $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
+            })
+            ->when(!empty($dia), function ($query) use ($dia) {
+                $query->where('dia', $dia); // Filtrar por día si se ha seleccionado
+            })
+            ->when(!empty($horaInicio) && !empty($horaFin), function ($query) use ($horaInicio, $horaFin) {
+                $query->where('horaInicio', '>=', $horaInicio)
+                      ->where('horaFin', '<=', $horaFin);
+            })
+            ->orderBy('dia', 'asc')
+            ->orderBy('horaInicio', 'asc')
+            ->get();
+
+        // Obtener todas las solicitudes confirmadas para la fecha seleccionada
         $solicitudesConfirmadas = Solicitud::where('fecha', $fecha)
             ->where('estado', 'confirmado')
-            ->pluck('nro_aula'); // Obtener los IDs de los ambientes
+            ->get();
 
-        // // Consultar los horarios disponibles filtrados por la fecha y el día de la semana
-        // $horarios = HorarioDisponible::where('dia', $fechaNumero)
-        //     ->when($solicitudesConfirmadas->isNotEmpty(), function ($query) use ($solicitudesConfirmadas) {
-        //         $query->whereNotIn('ambiente_id', $solicitudesConfirmadas);
-        //     })
-        //     ->get();
-
-        $horarios = HorarioDisponible::query()
-        ->whereNotIn('ambiente_id', $solicitudesConfirmadas)
-        ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
-        ->when(!empty($fecha), function ($query) use ($fechaNumero) {
-            $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
-        })
-        ->when(!empty($dia), function ($query) use ($dia) {
-            $query->where('dia', $dia); // Filtrar por día si se ha seleccionado
-        })
-        ->when(!empty($horaInicio) && !empty($horaFin), function ($query) use ($horaInicio, $horaFin) {
-            $query->where('horaInicio', '>=', $horaInicio)
-                  ->where('horaFin', '<=', $horaFin);
-        })
-        ->orderBy('dia', 'asc')
-        ->orderBy('horaInicio', 'asc')
-        ->get();
+        // Filtrar los horarios para eliminar los ocupados por solicitudes confirmadas
+        foreach ($horarios as $key => $horario) {
+            foreach ($solicitudesConfirmadas as $solicitud) {
+                list($horaInicioSolicitud, $horaFinSolicitud) = explode(' - ', $solicitud->horario);
+                if ($horario->ambiente_id == $solicitud->nro_aula && $horario->horaInicio == $horaInicioSolicitud && $horario->horaFin == $horaFinSolicitud) {
+                    unset($horarios[$key]);
+                    break; // Salir del bucle interno
+                }
+            }
+        }
 
         return view('Buscador.Buscador', 
         compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin', 'fecha'));
