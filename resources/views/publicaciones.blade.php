@@ -101,33 +101,37 @@
                 <span class="close" onclick="cerrarModalEdicion()">&times;</span>
                 <h2>Editar Publicación</h2>
                 <form id="formulario-edicion" method="POST" action="{{ route('actualizar.publicacion', $publicacion->id) }}" enctype="multipart/form-data">
+                    
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label for="editar-tipo">Tipo:</label>
                         <select id="editar-tipo" class="form-control" name="tipo" required>
-                            <option value="reglamento">Reglamento</option>
-                            <option value="anuncio">Anuncio</option>
+                        <option value="reglamento" {{$publicacion->tipo == 'reglamento' ? 'selected' : ''}}>Reglamento</option>
+                          <option value="anuncio" {{$publicacion->tipo == 'anuncio' ? 'selected' : ''}}>Anuncio</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="editar-titulo">Título:</label>
-                        <input id="editar-titulo" type="text" class="form-control" name="titulo" required>
+                        <input id="editar-titulo" type="text" class="form-control" name="titulo" required value="{{$publicacion->titulo}}">
                     </div>
 
                     <div class="form-group">
                         <label for="editar-descripcion">Descripción:</label>
-                        <textarea id="editar-descripcion" class="form-control" name="descripcion" required></textarea>
+                        <textarea id="editar-descripcion" class="form-control" name="descripcion" required>{{$publicacion->descripcion}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="archivo">Archivo:</label>
-                        <input id="archivo" type="file" class="form-control-file" name="archivo" required>
+                        <input id="archivo" type="file" class="form-control-file" name="archivo" required value="{{$publicacion->archivo}}">
                     </div>
 
                     <div class="form-group">
                         <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
-                        <input id="fecha_vencimiento" type="date" class="form-control" name="fecha_vencimiento" min="{{ now()->format('Y-m-d') }}" required>
+                        <br/>
+                        {{$publicacion->fecha_vencimiento}}
+                        <br/>
+                        <input id="fecha_vencimiento" type="date" class="form-control" name="fecha_vencimiento" min="{{ now()->format('Y-m-d') }}" required value="{{$publicacion->fecha_vencimiento}}">
                     </div>
                     <div class="botones">
                         <button type="button" class="btn btn-secondary" onclick="cerrarModalEdicion()">Cancelar</button>
@@ -199,7 +203,6 @@ function abrirModalEdicion(id) {
     // Actualizar la acción del formulario con el ID específico
     formularioEdicion.action = "{{ url('/publicaciones') }}/" + id;
 }
-
 
 
 document.getElementById('formulario-edicion').addEventListener('submit', function(event) {
