@@ -46,17 +46,6 @@ h2{
     /* Ajusta otras propiedades según sea necesario */
   }
 
-  #capacidad{
-      margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
-  }
-  #unidad{
-    margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
-    
-  }
-  #tipo-ambiente{
-    margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
-  }
-
   .selectAmbiente{
     padding: 8px;
     font-size: 16px;
@@ -66,7 +55,7 @@ h2{
   }
 
   label {
-    display: block;
+    /*display: block;*/
     margin-bottom: 5px;
 
     font-family: "Fjalla One", sans-serif;
@@ -381,4 +370,24 @@ th, td {
   text-align: center;    /* Alineación centrada */
   padding-bottom: 10px;  /* Espaciado inferior */
   font-weight: bold;     /* Texto en negrita */
+}
+
+
+
+
+/*Buscador*/
+.form-fila-s {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
 }

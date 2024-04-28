@@ -1,6 +1,7 @@
 @extends('layoutes.plantilla')
 @section('links')
-    <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}">
+    <link rel="stylesheet" href="../../css/styleUnidades.css">
+    {{-- <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}"> --}}
 @endsection
 @section('titulo', 'Visualizar unidades')
   
@@ -124,5 +125,6 @@
         </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/scriptUnidades.js') }}"></script>
+    {{-- <script src="{{ asset('js/scriptUnidades.js') }}"></script> --}}
+    <script src="../../js/scriptUnidades.js"></script>
 @endsection

@@ -39,11 +39,6 @@ Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
 
-
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
-
 Route::get('/index', function () {
     return view('sliderBar');
 });
@@ -64,9 +59,10 @@ Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEst
 Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
 //termina rutas unidades
 
-Route::get('/registro', function () {
-    return view('registro');
-})->name('registro');
+// Route::get('/registro', function () {
+//     return view('registro');
+// })->name('registro');
+
 //registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
@@ -137,12 +133,8 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('
     return view('Inicio');
 })->name('inicio');*/
 
-
-
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
-
-
 
 // Rutas para las publicaciones
 

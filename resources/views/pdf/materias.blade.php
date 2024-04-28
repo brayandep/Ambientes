@@ -85,7 +85,7 @@
     </table>
 </div>
 <div class="titulo"> 
-    <h1>Reporte de Materias registradas</h1> 
+    <h1>Reporte de Materias Registradas</h1> 
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
@@ -116,10 +116,11 @@
     </tbody>
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
+<!-- Paginación
 <div class="pagina">
-    <!-- Paginación -->
+     
     <p>Página {{ $pageNumber }} de {{ $pageCount }}</p>
-</div>
+</div> -->
 
 </body>
 </html>
