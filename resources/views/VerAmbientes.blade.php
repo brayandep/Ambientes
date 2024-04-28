@@ -1,7 +1,7 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="/css/styleVerAmbientes.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}">
 @endsection
 
 @section('titulo', 'Ver Ambiente')
@@ -20,7 +20,7 @@
             <!-- Botón para descargar el PDF -->
                 <form class="btnReporte" action="{{ route('descargar.ambientes.pdf') }}" method="GET" target="_blank">
                     @csrf
-                    <button style="width:150px;" class="nomCol" type="submit" class="btn btn-primary">Generar Reporte</button>
+                    <button style="width:150px;" class="nomCol-v" type="submit" class="btn btn-primary">Generar Reporte</button>
                 </form>
             <!-- tabla -->
             <div class="tabla-ver">
