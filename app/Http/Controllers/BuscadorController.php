@@ -111,12 +111,6 @@ class BuscadorController extends Controller
             $query->where(function ($query) use ($horaInicio, $horaFin) {
                 $query->where('horaInicio', '>=', $horaInicio)
                       ->where('horaFin', '<=', $horaFin);
-            })->orWhere(function ($query) use ($horaInicio, $horaFin) {
-                $query->where('horaInicio', '<=', $horaInicio)
-                      ->where('horaFin', '>=', $horaInicio);
-            })->orWhere(function ($query) use ($horaInicio, $horaFin) {
-                $query->where('horaInicio', '<=', $horaFin)
-                      ->where('horaFin', '>=', $horaFin);
             });
         })
         ->orderBy('dia', 'asc')
