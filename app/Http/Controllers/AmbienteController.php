@@ -55,7 +55,7 @@ class AmbienteController extends Controller
             /*'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
             'nombre' => 'required|max:25|regex:/^[a-zA-Z\s]+$/|unique:ambientes,nombre',
             'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
+            'ubicacion' => 'nullable|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
             'descripcion' => 'nullable|max:40|regex:/^[a-zA-Z]+$/',
             'unidad'=> 'required',
             'tipo-ambiente'=> 'required'*/

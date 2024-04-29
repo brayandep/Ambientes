@@ -37,7 +37,7 @@
                     <div class="contBotones-v" id="columnaPeque">
                         <button class="nomCol-v">Capacidad</button>
                     </div>
-                    <div class="contBotones-v">
+                    <div class="contBotones-v" id="ubi">
                         <button class="nomCol-v">Ubicación</button>
                     </div>
                     <div class="contBotones-v">
@@ -60,7 +60,7 @@
                         <p>{{ $ambiente->unidad }}</p>
                         <p>{{ $ambiente->nombre }}</p>
                         <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
-                        <p>{{ $ambiente->ubicacion }}</p>
+                        <p id="ubi">{{ $ambiente->ubicacion }}</p>
                         <p>{{ $ambiente->descripcion_ubicacion}}</p>
                         <div class="EditHab" id="columnaPeque">
                             <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">
