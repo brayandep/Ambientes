@@ -5,6 +5,7 @@ use App\Models\Ambiente;
 use Illuminate\Http\Request;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Solicitud;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -71,8 +72,8 @@ class BuscadorController extends Controller
         // Obtener ambientes filtrados por nombre y/o capacidad
         $query = Ambiente::query();
 
-        if (!empty($nombre)) {
-            $query->where('nombre', 'like', "%$nombre%");
+        if (!is_null($nombre)) {
+            $query->where('nombre', 'like', DB::raw("'%$nombre%'"));
         }
 
         if (!empty($capacidad)) {
