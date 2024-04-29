@@ -2,7 +2,8 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('links')
-    <link rel="stylesheet" href="{{ asset('css/stylePublicacion.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/stylePublicacion.css') }}"> -->
+    <link rel="stylesheet" href="../../css/stylePublicacion.css">
 @endsection
 
 @section('contenido')
