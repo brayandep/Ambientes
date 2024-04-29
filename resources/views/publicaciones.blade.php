@@ -18,7 +18,7 @@
                 <a href="{{ route('publicacion.ver', $publicacion->id) }}" style="color: blue;">{{ $publicacion->titulo }}</a>
                     <div class="acciones-publicacion">
                         <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
-                        <span style="color: #904368;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
+                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
 
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span>
                     </div>
@@ -34,7 +34,7 @@
                 <a href="{{ route('publicacion.ver', $publicacion->id) }}" style="color: blue;">{{ $publicacion->titulo }}</a>
                     <div class="acciones-publicacion">
                         <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
-                        <span style="color: #904368;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
+                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> 
                     </div>
                 </div>
