@@ -52,10 +52,10 @@ class AmbienteController extends Controller
 
         $request -> validate([
             'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
-            'nombre' => 'required|max:25|regex:/^[a-zA-Z0-9\s]+$/|unique:ambientes,nombre',
+            'nombre' => 'required|max:25|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜ,. -]+$/|unique:ambientes,nombre',
             'capacidad' => 'required|numeric|min:15',
             'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
-            'descripcion' => 'nullable|max:40|regex:/^[a-zA-Z]+$/',
+            'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
             'unidad'=> 'required',
             'tipo-ambiente'=> 'required'
        ],
