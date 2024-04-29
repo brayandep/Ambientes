@@ -47,8 +47,15 @@
     margin-left: 80px;
     border-radius: 20px; 
   }
-  .header h1, .header p {
+  .header h1 {
     margin: 10px; /* Eliminamos el margen por defecto de los elementos */
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .header p {
+    margin: 10px; /* Eliminamos el margen por defecto de los elementos */
+    font-size: 20px;
+    font-weight: bold;
   }
   .header-text {
     display: flex;
@@ -60,7 +67,8 @@
     padding: 10px; /* Añadir relleno para dar más prominencia */
     border-radius: 5px; /* Añadir bordes redondeados */
     margin-bottom: 20px;
-
+    font-size: 24px;
+    font-weight: bold;
   }
   .link-publicacion {
     color: blue;
@@ -70,23 +78,6 @@
     overflow: hidden; /* Oculta cualquier contenido que desborde del contenedor */
     text-overflow: ellipsis;
 }
-h1 {
-    font-size: 24px; /* Tamaño de fuente */
-    font-weight: bold; /* Negrita */
-  }
-
-  /* Estilos para el p */
-  p {
-    font-size: 20px; /* Tamaño de fuente */
-    font-weight: bold; /* Negrita */
-  }
-
-  /* Estilos para el h2 */
-  h2 {
-    font-size: 24px; /* Tamaño de fuente */
-    font-weight: bold; /* Negrita */
-    color: white; /* Color blanco */
-  }
 </style>
 @section('contenido')
 <div class="container">
