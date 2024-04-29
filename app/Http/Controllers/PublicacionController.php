@@ -105,7 +105,7 @@ public function update(Request $request, $id)
         // Redirecciona a la página de publicaciones o a donde sea apropiado después de actualizar
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido actualizada exitosamente.');
     }
-    public function editar($id)
+    public function edit($id)
 {
     // Encuentra la publicación por su ID
     $publicacion = Publicacion::findOrFail($id);

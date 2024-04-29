@@ -54,5 +54,6 @@ Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'elimina
 
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
 Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
-Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'update'])->name('editar.publicacion');
+
+Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
 

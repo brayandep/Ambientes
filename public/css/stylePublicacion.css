@@ -15,10 +15,18 @@
     justify-content: space-between; /* Distribuye los elementos horizontalmente */
     align-items: center; /* Alinea verticalmente los elementos */
     margin-bottom: 10px; /* Agrega espacio entre las publicaciones */
-    color: cornflowerblue;
+    color: #0B2C37;
     margin-left: 40px;
 }
-
+h1 {
+    font-size: 24px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+  }
+  h2 {
+    font-size: 24px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    
+  }
 /* Estilos para los botones de eliminar y editar */
 .publicacion .btn-danger,
 .publicacion .btn-primary {
