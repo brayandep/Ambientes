@@ -19,6 +19,7 @@ use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,5 +133,8 @@ Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilit
 //mostrar solicitudes filtro
 Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');
 
+
+//Registrar roles nuevos
+Route::get('Registrar_rol', [RolController::class, 'index'])->name('Formulario.Rol');
 
 

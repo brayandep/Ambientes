@@ -90,7 +90,19 @@
                         <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
                         
                     </li>
-
+                    <li onclick="GesRol()">
+                        <p><i class='fas fa-clipboard'></i> Rol</p>
+                    </li>
+                    <nav class="subMenu" id="subRol">
+                        <ul>
+                            <li>
+                                <a href='{{ route('Formulario.Rol') }}'><i class="fas fa-book"></i> Registrar nuevo rol</a>
+                            </li>
+                            <li>
+                                <a href=''><i class='fas fa-rectangle-list'></i>Visualizar roles</a>
+                            </li>
+                        </ul>
+                    </nav>
 
 
                     

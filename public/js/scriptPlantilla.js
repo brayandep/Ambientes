@@ -4,6 +4,7 @@ const subMateria = document.getElementById("subMateria");
 const sub3 = document.getElementById("sub3");
 const btnMenu = document.getElementById("btnMenu");
 const menu = document.getElementById("menu");
+const subRol = document.getElementById("subRol");
 
 
 function gesAmbiente(){
@@ -46,6 +47,16 @@ function gesMateria(){
         //btnPanelUsr.classList.add('seleccionado');
     } else {
         subMateria.style.display = 'none';
+        //btnPanelUsr.classList.remove('seleccionado');
+    }
+}
+
+function GesRol(){
+    if (subRol.style.display === 'none' || subRol.style.display === '') {
+        subRol.style.display = 'flex';
+        //btnPanelUsr.classList.add('seleccionado');
+    } else {
+        subRol.style.display = 'none';
         //btnPanelUsr.classList.remove('seleccionado');
     }
 }
