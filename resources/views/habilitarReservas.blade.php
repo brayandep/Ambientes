@@ -88,7 +88,7 @@
                                  <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                                 @csrf
                                                 @method('put')
-                                                <button tittle="Denegar solicitud" id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                                <button title="Denegar solicitud" id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                             </form>
                                         
                             </div>
@@ -103,7 +103,7 @@
                             <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                            @csrf
                                            @method('put')
-                                           <button tittle="Denegar solicitud" id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                           <button title="Denegar solicitud" id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                        </form>
                                    
                        </div>
