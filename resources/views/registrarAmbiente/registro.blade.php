@@ -18,28 +18,31 @@
                     
                 <div class="form-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="10" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
+                    <input type="text" id="codigo" name="codigo" style="width: 40%;" required maxlength="5" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
                     @error('codigo')
-                        <span>*{{$message}}</span>
+                        <span class=msgError>*{{$message}}</span>
                     @enderror
                     <label for="unidad">Unidad:</label>
-                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;">
+                        <select class="selectAmbiente" id="unidad" name="unidad" style="width: 40%;" required>
                         <option value="">Selecciona una unidad</option>
                         @foreach($unidades as $unidad)
                           <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
                         @endforeach
                         </select>
+                        @error('unidad')
+                        <span class=msgError>*{{$message}}</span>
+                        @enderror
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" style="width: 40%;" required maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
+                    <input type="text" id="nombre" name="nombre" style="width: 40%;"maxlength="25" required autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
                     @error('nombre')
-                        <span>*{{$message}}</span>
+                        <span class=msgError>*{{$message}}</span>
                     @enderror
                     <label for="capacidad">Capacidad:</label>
-                    <input type="number" id="capacidad" name="capacidad" style="width: 40%;" required maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
+                    <input type="text" id="capacidad" name="capacidad" style="width: 40%;" maxlength="3" required autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
                     @error('capacidad')
-                        <span>*{{$message}}</span>
+                        <span class=msgError>*{{$message}}</span>
                     @enderror
                   </div>
     
@@ -49,16 +52,19 @@
                     <label for="ubicacion">Ubicación:</label>
                     <input type="text" id="ubicacion" name="ubicacion" style="width: 40%;" required maxlength="80" autocomplete="off" placeholder="Ingrese ubicacion URL del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
                     @error('ubicacion')
-                        <span>*{{$message}}</span>
+                        <span class=msgError>*{{$message}}</span>
                     @enderror
                   <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" onchange="verificarOtro(this)">
+                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" style="width: 40%;" required onchange="verificarOtro(this)">
                     <option>Selecciona una unidad</option>
                     @foreach($tipoAmbientes as $tipoAmbiente)
                       <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
                     @endforeach
                       <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
                   </select>
+                  @error('tipo-ambiente')
+                        <span class=msgError>*{{$message}}</span>
+                    @enderror
               </div>
     
   
@@ -68,9 +74,9 @@
   
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" required maxlength="150" autocomplete="off">{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
+                    <textarea id="descripcion" name="descripcion" maxlength="40" required autocomplete="off">{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
                     @error('descripcion')
-                        <span>*{{$message}}</span>
+                        <span class=msgError>*{{$message}}</span>
                     @enderror
                 </div>
                 
@@ -141,8 +147,7 @@
   
                 
                 <div class="botones">
-                  <button type="button" class="btn-cancelar">
-                    <a href="{{ route('AmbientesRegistrados') }}" style="text-decoration: none; color: inherit;">Cancelar</a>
+                  <button type="button" class="btn-cancelar" onclick="CancelarReg()" style="text-decoration: none; color: f5f6f7;">Cancelar</button>
                 </button>
   
                   <input type="hidden" name="id" value="{{ isset($ambienteDatos) ? $ambienteDatos->id : '' }}">
@@ -151,7 +156,16 @@
                 </div>
                 </form>
             </div>
-         </main>
+             <!-- Modal Cancelar -->
+        <div id="fondoGris"></div>
+        <div class="panel" id="panelCancelar">
+            <p>¿Esta seguro que desea cancelar el registro?</p>
+            <div class="btnPanel">
+                <button class= "no" onclick="noCancela()" >No</button>
+                <button class="si" onclick="location.href='{{ route('AmbientesRegistrados') }}';">Si</button>
+            </div>
+        </div>
+        </main>
 
          <!-- Modal Ambiente -->
          <div id="modalOtro" class="modal">
@@ -353,5 +367,21 @@
           alert("Por favor, ingrese un tipo de ambiente.");
       }
   }
+  </script>
+
+  <script>
+    function CancelarReg(){
+    panelCancelar.style.display = 'block';
+    fondoGris.style.display = 'flex';
+    }
+
+    function siCancela(){
+        panelCancelar.style.display  = 'none';
+        fondoGris.style.display = 'none';
+    }
+    function noCancela(){
+        panelCancelar.style.display  = 'none';
+        fondoGris.style.display = 'none';
+    }
   </script>
 @endsection

@@ -16,7 +16,7 @@ class EstadoAmbienteController extends Controller
     public function show()
     {
         // Obtener todos los ambientes
-        $ambientes = Ambiente::all();
+        $ambientes = Ambiente::orderBy('id', 'desc')->paginate(10);
         
         // Retornar la vista con los ambientes
         return view('VerAmbientes', compact('ambientes'));

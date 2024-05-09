@@ -162,7 +162,7 @@
 
 }
 .centro{
-  width: 70%; /* Ajusta el ancho de la tabla */
+  width: 50%; /* Ajusta el ancho de la tabla */
   border-collapse: collapse; /* Ajusta el ancho según sea necesario */
  /* height: 100px; Ajusta la altura según sea necesario */
   margin: auto; /* Esto centra horizontalmente */
@@ -174,7 +174,7 @@
 }
 .colorcolumna{
   color: #EBEBEB;
-  background-color: #C384B2 ;
+  background-color: #AE7791 ;
   font-size: 16px;
   margin-left: 5px;
   padding: 7px;
@@ -345,7 +345,17 @@
   flex-direction: column;
   display: flex;
   overflow: auto;
-  width: 70%;
+  width: 80%;
+  margin-top: 7px;
+}.tabla2{
+  background-color: #e2eaec;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  width: 90%;
   margin-top: 7px;
 }
 
@@ -382,6 +392,10 @@
   padding: 5px;
   
 }
+/*.solDatos{
+  overflow: auto;
+  height: 300px;
+}*/
 #activar:hover{
   background-color: #933864;
 }
@@ -405,3 +419,12 @@
   }
 }
 /* termina cambios de Jhosemar */
+
+
+.alert{
+ 
+  color: #f15b5b;
+  font-size: 16px;
+  border-radius: 5px;
+  
+}

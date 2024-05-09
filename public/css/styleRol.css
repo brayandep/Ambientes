@@ -1,0 +1,26 @@
+
+.cuerpo{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.cuerpo2{
+  width: 70%;
+}
+
+.titulo{
+  font-size: 24px;
+  font-weight: bold;
+}
+.contForm{
+  
+}
+
+.perm{
+  background-color: #f5f6f7;
+}
+
+#rangoFechas{
+  display: none;
+}
+

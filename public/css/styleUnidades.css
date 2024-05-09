@@ -221,3 +221,6 @@ left: 28px;
 .boton input {
 display: none;
 }
+#noActivar{
+    cursor: default;
+  }
