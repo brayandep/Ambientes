@@ -30,12 +30,12 @@
         <div>
             <label>Vigencia del rol</label>
             <select id="vigencia" name="vigencia" onchange="mostrarFechas(this.value)"> 
-                <option value="1">Permanente</option>
-                <option value="2" >Temporal</option>
+                <option value="permanente">Permanente</option>
+                <option value="temporal" >Temporal</option>
             </select>
         </div>
         <div id="rangoFechas">
-            <label>Fecha de inicio:</label>
+            {{-- <label>Fecha de inicio:</label> --}}
             <input type="date" id="fechaInicio" name="fechaInicio">
             <label>Fecha de fin:</label>
             <input type="date" id="fechaFin" name="fechaFin">
@@ -58,4 +58,5 @@
 @endsection
 @section('scripts')
 <script src="{{ asset('js/scriptRol.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
