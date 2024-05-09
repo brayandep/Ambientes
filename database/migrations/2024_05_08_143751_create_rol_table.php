@@ -15,6 +15,12 @@ class CreateRolsTable extends Migration
     {
         Schema::create('rol', function (Blueprint $table) {
             $table->id();
+            $table->boolean('Estado');
+            $table->string('nombreRol');
+            $table->string('descripcionRol');
+            $table->string('tipoVigencia');
+            $table->date('fechaInicioRol'); //es la fecha actual
+            $table->date('fechaFinRol')->nullable();
             $table->timestamps();
         });
     }
