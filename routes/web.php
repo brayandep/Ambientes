@@ -107,6 +107,7 @@ Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEsta
 
 //rutas buscador
 Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
+//termina rutas buscador
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
@@ -155,3 +156,9 @@ Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->nam
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
 
+//rutas backup
+// Route::get('/backups',[BackupController::class, 'show'])->name('ver.backup');
+Route::get('/backups', function () {
+    return view('backup.backup');
+});
+//termina rutas backup
