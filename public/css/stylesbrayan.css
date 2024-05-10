@@ -137,6 +137,15 @@
   font-weight: bold;
   padding: 5px;
 }
+.boton2{
+  border-radius: 5px;
+  background-color: #F35D5D;
+  width: 160px;
+  color: #f5f6f7;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+}
 .titulo{
   font-size: 24px;
   font-weight: bold;
@@ -420,4 +429,67 @@
   font-size: 16px;
   border-radius: 5px;
   
+}
+
+
+body {
+  background-image: url('{{ asset("images/umss.jpg") }}'); /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta de tu imagen */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  
+}
+.section{
+  background-color: #933864bc;
+  text-align: center;
+  height: 50%;
+  width: 30%;
+  margin-top: 10%;
+  margin-left: 35%;
+  border-radius: 15px;
+  font: 25px;
+  color: #e2eaec;
+}
+
+.inicio {
+  margin-top: 10%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  
+  text-align: center;
+}
+.text2{
+  
+  text-align: left;
+  margin-left: 15%;
+}
+.input3 {
+  width: 70%;
+  padding: 8px;
+  box-sizing: border-box;
+  
+}
+.boton4{
+  font-size: 15px;
+  background-color: #C384B2;
+  color: #e2eaec;
+  border-radius: 5px;
+  border: none;
+  width: 30%;
+  height: 5%;
+  
+}
+
+.boton3{
+  margin: 10px;
+  font-size: 15px;
+  width: 30%;
+  height: 5%;
+  background-color: #e2eaec;
+  color: #C384B2;
+  border-radius: 5px;
+  border: none;
 }

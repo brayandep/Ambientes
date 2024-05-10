@@ -10,7 +10,7 @@
 
 <body>
     <h1>Iniciar sesión</h1>
-    <form method="POST" action="{{ route('Login') }}">
+   
         @csrf
     
         <div>
@@ -26,7 +26,7 @@
         <div>
             <button type="submit">Iniciar sesión</button>
         </div>
-    </form>
+    
   
 </body>
 </html>

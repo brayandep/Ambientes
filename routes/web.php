@@ -17,6 +17,7 @@ use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BuscadorController;
+use App\Http\Controllers\usuariocontroller;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
@@ -162,3 +163,8 @@ Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
 Route::get('/descargar-materias-pdf', 'App\Http\Controllers\materiaController@descargarMateriasPDF')->name('descargar.materias.pdf');
 Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@descargarReservasPDF')->name('descargar.reservas.pdf');
+
+
+Route::get('/usuario', [usuariocontroller::class, 'index'])->name('Usuario.index');
+
+Route::get('/inicio', [usuariocontroller::class, 'index2']);
