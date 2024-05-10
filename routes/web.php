@@ -36,21 +36,10 @@ use App\Http\Controllers\grupoController;
 Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
 
 
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
 
-Route::get('/index', function () {
-    return view('sliderBar');
-});
-
-
-//rutas unidades
+//rutas unidade
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->name('unidad.registrar');
@@ -112,9 +101,11 @@ Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEsta
 
 //rutas buscador
 Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
+Route::get('/busqueda-ambiente2',[BuscadorController::class, 'show2'])->name('buscador2');
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
+Route::get('/Calendario2', [CalendarioController::class, 'index2'])->name('calendario2.index');
 Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->name('calendario.individual');
 Route::post('/Calendario/evento', [EventoController::class, 'store'])->name('evento.store');
 Route::delete('/Calendario/evento/{id}', [EventoController::class, 'destroy'])->name('evento.delete');
@@ -141,9 +132,8 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('
 
 
 // Ruta para mostrar la página de inicio
-Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
-
-
+Route::get('/', [InicioController::class, 'mostrarInicio2'])->name('invitado');
+Route::get('/invitado', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 // Rutas para las publicaciones
 
@@ -167,4 +157,5 @@ Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@
 
 Route::get('/usuario', [usuariocontroller::class, 'index'])->name('Usuario.index');
 
-Route::get('/inicio', [usuariocontroller::class, 'index2']);
+Route::get('/inicio', [usuariocontroller::class, 'index2'])->name('sesion.index');
+;
