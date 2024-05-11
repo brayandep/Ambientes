@@ -1,0 +1,98 @@
+
+.cuerpo{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.cuerpo2{
+  width: 70%;
+}
+
+.titulo{
+  font-size: 24px;
+  font-weight: bold;
+}
+.contForm{
+  
+}
+
+.input-group{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.labRol{
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.inputRol{
+  padding: 5px;
+  font-size: 16px;
+  background-color: #E3E5F3;
+  color: #0B2C37;
+  border-radius: 5px;
+  border: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.inputRol:focus, .inputRol:hover {
+  outline: none;
+  box-shadow: 0 0 0 2px #b7b8c3;
+}
+
+.perm{
+  max-width: 650px;
+  background-color: #f5f6f7;
+  padding: 10px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+  grid-gap: 10px; /* Espacio entre las columnas */
+  overflow: auto;
+  font-size: 14px;
+}
+.labPerm{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#rangoFechas{
+  display: none;
+}
+
+.botones{
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.botones button{
+  padding: 5px 15px 5px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #f5f6f7;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.btnCancelar{
+  background-color: #F35D5D;
+}
+.btnRegistrar{
+  background-color: #538296;
+}
+
+.btnCancelar:hover{
+  background-color: #b94848;
+}
+.btnRegistrar:hover{
+  background-color: #4e798c;
+}
+

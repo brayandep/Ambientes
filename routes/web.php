@@ -20,6 +20,7 @@ use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,4 +155,7 @@ Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@
 Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
+//Registrar roles nuevos
+Route::get('Registrar_rol', [RolController::class, 'index'])->name('Formulario.Rol');
+
 
