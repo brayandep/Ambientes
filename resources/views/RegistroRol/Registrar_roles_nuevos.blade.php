@@ -12,6 +12,7 @@
             <h2 class="titulo">Registrar rol</h2>
         </div>
         <form action="" method="POST" class="contForm">
+            @csrf
             <div class="input-group">
                 <label class="labRol" >Estado</label>
                 <select class="inputRol"> 
