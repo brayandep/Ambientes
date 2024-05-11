@@ -1,0 +1,175 @@
+body{
+    background-color: #DED4EB;
+    font-family: sans-serif;
+    color: #0B2C37;
+}
+
+.cont1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cont2{
+    width: 70%;
+}
+
+#calendar{
+    margin-top: 10px;
+    background-color: #f5f6f7;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.navegacion h1{
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.izquierda{
+    z-index: 3;
+    top: 69px;
+}
+
+.labEvento{
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#labTitulo{
+    margin-top: 0;
+}
+
+.inputEvento{
+    padding: 3px;
+    background-color: #E3E5F3;
+    color: #0B2C37;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    box-shadow: 0 0 0 2px transparent;
+    width: 100%;
+}
+.inputEvento:focus, .inputEvento:hover {
+    outline: none;
+    box-shadow: 0 0 0 2px #b7b8c3;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+} 
+
+#fechaStart{
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+#descripcion{
+    padding: 3px;
+    background-color: #E3E5F3;
+    color: #0B2C37;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    box-shadow: 0 0 0 2px transparent;
+    height: 85px;
+    resize: none;
+    width: 100%;
+}
+
+#descripcion:focus, #descripcion:hover {
+    outline: none;
+    box-shadow: 0 0 0 2px #b7b8c3;
+}
+
+#idEvento{
+    pointer-events: none;
+}
+
+.caja{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.caja2{
+    width: 50%;
+}
+
+/* letra de eventos */
+.fc-event-title{
+    font-size: 16px;
+}
+.fc-event-time{
+    font-size: 14px;
+}
+/* termina letra de eventos */
+
+
+/* cambios de propio calendario */
+.detectaOcupado {
+    display: none;
+}
+.ocupado{
+    
+}
+.fc-timegrid-event-harness{
+    inset: 192px 0% -240px 0%;
+}
+
+/*titulo*/
+.fc .fc-toolbar-title{
+    color: #0B2C37;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.fc .fc-button{
+    color: #0B2C37;
+    background: none;
+    border: none;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+.fc .fc-button:hover{
+    color: #933864;
+    background-color: #dededf;
+}
+.fc .fc-button-group > .fc-button:active{
+    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 0px 0.2rem;
+    background-color: #dededf;
+    color: #933864;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus{
+    box-shadow: none;
+}
+
+.fc .fc-button-primary:disabled {
+    background-color: #dededf;
+    color: #0B2C37;
+}
+.fc .fc-button-primary:focus{
+    box-shadow: none;
+}
+
+.fc .fc-today-button{
+    background-color: #933864;
+    color: #f5f6f7;
+}
+.fc .fc-today-button:not(:disabled):hover{
+    background-color: rgb(163, 61, 110);
+    color: #f5f6f7;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active{
+    background-color: #933864;
+}
+
+/*dias*/
+.fc .fc-col-header-cell-cushion {
+    color: #933864;
+}
+
+/* termina cambios de propio calendario */

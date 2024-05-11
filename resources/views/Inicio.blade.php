@@ -43,9 +43,14 @@
     margin-left: 80px;
     border-radius: 20px; 
   }
-  .header h1, .header p {
+  .header h1 {
     margin: 10px; /* Eliminamos el margen por defecto de los elementos */
     font-size: 24px;
+    font-weight: bold;
+  }
+  .header p {
+    margin: 10px; /* Eliminamos el margen por defecto de los elementos */
+    font-size: 20px;
     font-weight: bold;
   }
   .header-text {
@@ -58,9 +63,8 @@
     padding: 10px; /* Añadir relleno para dar más prominencia */
     border-radius: 5px; /* Añadir bordes redondeados */
     margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    
   }
   .link-publicacion {
     color: blue;
@@ -69,6 +73,7 @@
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
     overflow: hidden; /* Oculta cualquier contenido que desborde del contenedor */
     text-overflow: ellipsis;
+}
 }
 </style>
 @section('contenido')

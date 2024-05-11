@@ -1,0 +1,455 @@
+
+.ambienteTitulo{
+  font-size: 24px;
+}
+h2{
+  font-size: 30px;
+}
+
+.content-wrapper {
+  
+  height: auto;
+  overflow-y: auto; /* Agrega un scrollbar vertical solo cuando sea necesario */
+}
+
+.container {
+  max-width: 70%;
+  margin: 0px auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+
+  align-items: center; /* Alinea los elementos verticalmente */
+  gap: 10px; /* Espacio entre el label y el input */
+}
+
+
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  flex: 1; /* El input ocupa todo el espacio restante */
+}
+  .form-grupo {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    width: 80px; /* Ancho fijo para los labels */
+  }
+
+  #descripcion{
+    max-height: calc(3 * 1.2em); /* Establece la altura máxima a 5 líneas (asumiendo 1.2em de altura de línea) */
+    overflow: hidden; /* Oculta el contenido que se desborda */
+    /* Ajusta otras propiedades según sea necesario */
+  }
+
+  .selectAmbiente{
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #EBEBEB;
+  }
+
+  label {
+    /*display: block;*/
+    margin-bottom: 5px;
+
+    font-family: "Fjalla One", sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #EBEBEB;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  .checkbox-group {
+    margin-top: 5px;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .botones {
+    display: flex; /* Utiliza flexbox para alinear los botones */
+    justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio por encima de los botones */
+  }
+
+  button{
+    background-color: #C384B2;
+    color: #fff;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  } 
+
+  .boton-eliminar {
+    background-color: #F35D5D; /* Cambia el color de fondo aquí */
+
+    color: white; /* Cambia el color del texto del botón */
+    border: none; /* Elimina el borde del botón */
+    padding: 5px 10px; /* Ajusta el relleno del botón */
+    border-radius: 5px; /* Agrega bordes redondeados al botón */
+  }
+  
+  .btn-cancelar:hover{
+    background-color: #b94848;
+  }
+  .btn-registrar:hover{
+      background-color: #2f6074;
+  }
+
+  button.nomColu:hover { /*Para los horarios en version larga*/
+    background-color: #AE7791;
+  }
+
+    /* Estilos para el primer botón */
+  .btn-cancelar {
+    background-color: #F35D5D;
+    color: #fff; /* Texto en color blanco */
+
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Borde redondeado */
+  }
+
+  /* Estilos para el segundo botón */
+  .btn-registrar {
+    background-color: #538296;; 
+    color: #fff; /* Texto en color blanco */
+
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Borde redondeado */
+  }
+
+  .checkbox-columns {
+    display: flex;
+
+    border: 1px solid #858585; /* Debes separar las propiedades con dos puntos (:) */
+    padding-bottom: 0px;
+    padding-top: 15px;
+  }
+  
+  .column {
+    flex: 1;
+  }
+
+
+  #tipo-ambiente option[value=""] {
+    color: #757575; /* Color de letra más claro (gris en este caso) */
+  }
+  #unidad option[value=""] {
+    color: #757575; /* Color de letra más claro (gris en este caso) */
+  }
+  option{
+    padding-left: 20px;
+  }
+
+/* Estilos opcionales para mejorar la apariencia de la tabla de dias //////////////////////////////////////*/
+  .columna {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    float: left;
+    margin-right: 10px;
+  }
+
+/* Estilos para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  min-width: 550px; /* Establece un ancho mínimo de 550 píxeles */
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+}
+
+.modal-contenido {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+}
+
+.nuevo-tipo {
+  flex-grow: 1; /* Permite que el contenedor del label y el input ocupe todo el espacio disponible */
+  margin-right: 10px; /* Espacio entre el input y el botón */
+}
+
+.modal-contenido label,
+.modal-contenido input {
+  display: inline-block;
+  vertical-align: middle; /* Alinea verticalmente los elementos */
+  margin-bottom: 10px;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  align-self: flex-end; /* Alinea el botón "x" a la derecha */
+  margin-bottom: 10px; /* Agrega un margen inferior */
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para los inputs */
+.horarios {
+  display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Añade margen inferior */
+}
+
+.horarios label {
+  margin-right: 10px; /* Espacio entre las etiquetas y los inputs */
+  padding: 5px; /* Agrega espacio entre los inputs */
+}
+
+.horarios input{
+  padding: 5px; /* Agrega espacio entre los inputs */
+}
+
+/* Estilos para el botón "Aceptar" */
+#aceptarModal,
+#modalAceptar {
+  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
+  margin-top: 10px; /* Agrega un margen superior */
+  
+  background-color: #C384B2;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#modalAceptar:hover {
+  background-color: #904368;
+}
+
+
+
+/*///////////////////////////////////*/
+
+
+
+.pizarra1{
+  background-color: #e2eaec;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+}
+.pizarra2{
+  background-color: #e2eaec;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+}
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  margin: 5px;
+  width: 100%;
+}
+.nomColu{/*Para los horarios en version larga*/
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  margin: 5px;
+  width: 100%;
+}
+
+.fila{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin-top: 7px;
+  width: 100%;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  width: 800px;
+}
+
+.horarios select {
+  width: 150px;
+  padding-left: 30px;
+}
+
+/* Estilos para alinear checkboxes y etiquetas */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar horizontalmente */
+}
+
+.checkbox-container label {
+  margin-left: 10px;
+  width: 100px;
+}
+
+.estiloSab {
+  vertical-align: top; /* Alinea los elementos hacia arriba */
+}
+
+.modal-content h2 {
+  font-size: 20px;       /* Tamaño de fuente */
+  margin-bottom: 20px;   /* Margen inferior */
+  color: #333;           /* Color del texto */
+  text-align: center;    /* Alineación centrada */
+  padding-bottom: 10px;  /* Espaciado inferior */
+  font-weight: bold;     /* Texto en negrita */
+}
+
+
+
+
+/*Buscador*/
+.form-fila-s {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+}
+
+.msgError{
+  color: #b94848;
+  padding: 2px 0 0 6px;
+}
+
+/* paneles emergaentes */
+#fondoGris{
+  background-color: #40505577;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+
+.panel{
+  position: absolute; 
+  z-index: 2; /* un valor alto para estar por encima de otros elementos */
+  background-color: #933864;
+  color: #f5f6f7;
+  padding: 25px;
+  width: 21%;
+  min-width: 197px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);  
+  border-radius: 5px;
+  display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.btnPanel{
+  margin-top: 10px;
+  justify-content: end;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.btnPanel button{
+  padding: 5px 15px 5px 15px;;
+  border-radius: 5px;
+}
+.no{
+  background-color: #F35D5D;
+}
+.si{
+  background-color: #538296;
+}
+.no:hover{
+  background-color: #b94848;
+}
+.si:hover{
+  background-color: #2f6074;
+}
+/*termina paneles emergaentes */
