@@ -15,32 +15,33 @@
             @csrf
             <div class="input-group">
                 <label class="labRol" >Estado</label>
-                <select class="inputRol"> 
+                <select class="inputRol" name='Estado'> 
                     <option value="True">Habilitado</option>
                     <option value="False">Deshabilitado</option>
                 </select>
             </div>
             <div class="input-group">
                 <label class="labRol" >Nombre</label>
-                <input class="inputRol" placeholder="Ingrese el nombre del rol">
+                <input class="inputRol" name='nombreRol' placeholder="Ingrese el nombre del rol">
             </div>
             <div class="input-group">
                 <label class="labRol">Descripcion</label>
-                <input class="inputRol" placeholder="Ingrese una breve descripcion">
+                <input class="inputRol" name='descripcionRol' placeholder="Ingrese una breve descripcion">
             </div>
             <div class="input-group">
                 <label class="labRol">Vigencia del rol</label>
-                <select class="inputRol" id="vigencia" name="vigencia" onchange="mostrarFechas(this.value)"> 
+                <select class="inputRol" id="vigencia" name="tipoVigencia" onchange="mostrarFechas(this.value)"> 
                     <option value="permanente">Permanente</option>
                     <option value="temporal" >Temporal</option>
                 </select>
             </div>
             <div class="input-group" id="rangoFechas">
                 {{-- <label>Fecha de inicio:</label> --}}
-                <input type="date" id="fechaInicio" name="fechaInicio">
+                <input type="date" name='fechaInicioRol' id="fechaInicio" name="fechaInicio">
                 <label class="labRol">Fecha de fin:</label>
-                <input class="inputRol" type="date" id="fechaFin" name="fechaFin">
+                <input class="inputRol" name='fechaFinRol' type="date" id="fechaFin">
             </div>
+            {{-- name="fechaFin" --}}
             <div class="input-group" >
                 <label class="labRol">Permisos</label>
                 <section class="perm">
