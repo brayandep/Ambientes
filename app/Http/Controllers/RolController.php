@@ -2,30 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rol;
 use Illuminate\Http\Request;
+//agregamos spatie
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RolController extends Controller
 {
-    public function index(){
-        return view ('RegistroRol.Registrar_roles_nuevos');
+    function __construct(){
+        $this->middleware('permission: ver-rol | crear-rol | editar-rol' , ['only' => ['index']]);
+        $this->middleware('permission: crear-rol', ['only'=> ['create','store']]); 
+        $this->middleware('permission: editar-rol', ['only'=> ['edit','update']]); 
+
     }
-    public function store(Request $request){
-        $request -> validate([
-            'nombreRol' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
-            'descripcionRol' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
-            'tipoVigencia' => 'required',
-            'fechaInicioRol' => 'required'
-        ]);
-        $rol = new Rol();
-        $rol -> Estado = $request -> Estado;
-        $rol -> nombreRol = $request -> nommbreRol;
-        $rol -> descripcionRol = $request -> descripcionRol;
-        $rol -> tipoVigencia = $request -> tipoVigencia;
-        $rol -> fechaInicioRol = $request ->fechaInicioRol;
-        $rol -> fechaFinRol = $request -> fechaFinRol;
-        $rol -> save();
-        
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $roles = Role :: all();
+        return view('roles.index' , compact('roles'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $permission = Permission::get();
+        return view ('roles.crear', compact('permission'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this -> validate($request, ['name' =])
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }
