@@ -21,6 +21,8 @@ use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
 
+use App\Http\Controllers\CorreoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,12 +148,16 @@ Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'elimina
 
 
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
-//descargar pdf de reporte de ambientes registrados
+//inicia descargar pdf de reportes
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
 Route::get('/descargar-materias-pdf', 'App\Http\Controllers\materiaController@descargarMateriasPDF')->name('descargar.materias.pdf');
 Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@descargarReservasPDF')->name('descargar.reservas.pdf');
+//finaliza descargar pdf de reportes
 Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
 
+//inicia enviar norificaciones
+Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviar.correo');
+//finaliza enviar norificaciones

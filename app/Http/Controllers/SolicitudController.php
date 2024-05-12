@@ -8,8 +8,11 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
-
 use PDF;
+
+use App\Models\UsuarioPrueba;
+use App\Http\Controllers\CorreoController; // Importa el controlador de correo
+
 
 use Illuminate\Support\Facades\Redirect;
 class SolicitudController extends Controller
@@ -135,19 +138,50 @@ public function suspender(Solicitud $id){
 public function habilitar(Solicitud $id){
     $id->estado = "confirmado";
     $id->save();
-     // Busca todas las solicitudes con la misma fecha, horario y aula
-     $solicitudes = Solicitud::where('fecha', $id->fecha)
-     ->where('horario', $id->horario)
-     ->where('nro_aula', $id->nro_aula)
-     ->where($id->getKeyName(), '!=', $id->getKey()) // Utilizar el nombre de la columna de la clave primaria
-     ->get();
+    
+    // Obtener el nombre del usuario de la solicitud
+    $nombre_usuario = $id->usuario;
 
-    // Actualiza el estado de las solicitudes encontradas a "denegado"
-    foreach ($solicitudes as $solicitud) {
-    $solicitud->estado = "denegado";
-    $solicitud->save();
+    // Buscar el ID del docente usando el nombre de usuario
+    $docente = Docente::where('nombreDocente', $nombre_usuario)->first();
+
+    // Si se encuentra el docente, buscar su correo electrónico
+    if ($docente) {
+        $docente_id = $docente->id;
+
+        // Buscar el correo electrónico en la tabla de usuarios de prueba
+        $usuario_prueba = UsuarioPrueba::where('docentes_id', $docente_id)->first();
+
+        // Si se encuentra el usuario en la tabla de usuarios de prueba, enviar el correo electrónico
+        if ($usuario_prueba) {
+            $correo_destino = $usuario_prueba->correo;
+
+            // Obtener el horario de la solicitud
+            $horario = $id->horario;
+            // Llamar a la función para enviar correo electrónico
+            $correoController = new CorreoController();
+            //$correoController->enviarCorreo($correo_destino);
+            $correoController->enviarCorreo($correo_destino, $horario);
+
+            // Actualizar el estado de otras solicitudes
+            $solicitudes = Solicitud::where('fecha', $id->fecha)
+                ->where('horario', $id->horario)
+                ->where('nro_aula', $id->nro_aula)
+                ->where($id->getKeyName(), '!=', $id->getKey())
+                ->get();
+
+            foreach ($solicitudes as $solicitud) {
+                $solicitud->estado = "denegado";
+                $solicitud->save();
+            }
+
+            return redirect()->route('habilitarReservas')->with('success', 'Solicitud confirmada y correo electrónico enviado.');
+        } else {
+            return redirect()->route('habilitarReservas')->with('error', 'No se encontró el correo electrónico del usuario.');
+        }
+    } else {
+        return redirect()->route('habilitarReservas')->with('error', 'No se encontró el docente asociado a la solicitud.');
     }
-    return redirect()->route('habilitarReservas');
 }
 public function denegar(Solicitud $id){
     $id->estado = "denegado";

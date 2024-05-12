@@ -98,11 +98,20 @@
                 </ul>
             </nav>
         </div>
-        <div class="derecha">
-            <header>
-                <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu</h1>
-                <i class='fas fa-user'></i>
-            </header>
+        <div class="derecha notificaciones-container">
+        <header>
+            <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu</h1>
+            <button class="fixed-button" onclick="toggleNotificaciones()">
+                <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+            </button>
+            <i class='fas fa-user'></i>
+        </header>
+        <div class="notificaciones" id="notificaciones">
+            <div class="notificaciones-title">Notificaciones</div>
+            <div class="notificacion">Notificación 1</div>
+            <div class="notificacion">Notificación 2</div>
+            <!-- Puedes agregar más notificaciones según necesites ----------------------------------------------------------------------------->
+        </div>
             <br>
             @yield('contenido')
         </div>
@@ -112,7 +121,7 @@
         <div class="footer-content">
             <img src="{{asset('images\logo.png')}}" alt="Logo" class="logo">
             
-            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.srl</p>
+            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.SRL</p>
             <div class="contact-info">
                 <p>Contactenos: Gmail: SmartByte@gmail.com</p>
                 <p>Celular: 6954890</p>
@@ -122,6 +131,17 @@
 </body>
 {{-- <script src="{{asset('js/scriptPlantilla.js')}}"></script> --}}
 <script src="../../js/scriptPlantilla.js"></script>
+
+<script>
+    function toggleNotificaciones() {
+        var notificaciones = document.getElementById("notificaciones");
+        if (notificaciones.style.display === "none") {
+            notificaciones.style.display = "block";
+        } else {
+            notificaciones.style.display = "none";
+        }
+    }
+</script>
 @yield('scripts')
 </html>
 

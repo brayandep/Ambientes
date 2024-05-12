@@ -127,3 +127,39 @@ footer {
         line-height: 1; 
     }
 }
+
+.fixed-button {
+    position: fixed;
+    top: 20px; /* Puedes ajustar la posición vertical según tus necesidades */
+    right: 60px; /* Ajusta la posición horizontal según tus necesidades */
+    z-index: 9999; /* Asegura que el botón esté por encima de otros elementos */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.notificaciones-container {
+    position: relative;
+}
+.notificaciones {
+    display: none;
+    position: absolute;
+    top: 50px; /* Ajusta la posición vertical de la bandeja de notificaciones */
+    right: 50px; /* Ajusta la posición horizontal de la bandeja de notificaciones */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 9999; /* Asegura que la bandeja esté por encima de otros elementos */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para la bandeja de notificaciones */
+    border-radius: 5px; /* Bordes redondeados */
+    max-width: 300px; /* Ancho máximo de la bandeja */
+}
+.notificaciones-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px; /* Espacio entre el título y las notificaciones */
+}
+.notificacion {
+    padding: 5px 0; /* Espacio interno de cada notificación */
+    border-bottom: 1px solid #ccc; /* Línea separadora entre notificaciones */
+}
