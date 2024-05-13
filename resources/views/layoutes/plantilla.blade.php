@@ -95,6 +95,10 @@
                         <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
                         
                     </li>
+                    <li>
+                        <a href='{{ route('Log.index') }}'><i class='fas fa-clipboard'></i> Bitacora</a>
+                        
+                    </li>
                 </ul>
             </nav>
         </div>

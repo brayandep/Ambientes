@@ -16,8 +16,13 @@ class CreateLogsTable extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->string('event_type');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            //$table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            
+            $table->text('old_data')->nullable();
+            
+            $table->text('new_data')->nullable();
+            $table->string('operation'); // Crear, Editar o Eliminar
             $table->timestamps();
         });
     }

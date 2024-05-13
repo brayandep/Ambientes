@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Publicacion;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use App\Models\Log;
 
 
 
@@ -43,19 +44,31 @@ class PublicacionController extends Controller
         $publicacion->tipo = $request->tipo;
         $publicacion->visible = 1;
         $publicacion->save();
-
+        // Registro de creación en la bitácora
+        Log::create([
+            'event_type' => 'Publicación creada',
+            //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
+            'new_data' => json_encode($publicacion->toArray()),
+            'operation' => 'Crear',
+        ]);
         // Redireccionar al usuario con un mensaje de éxito
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido creada exitosamente.');
     }
     
     public function eliminarPublicacion($id) {
         // Encuentra y elimina la publicación con el ID proporcionado
+        
+        $publicacion = Publicacion::find($id);
+        Log::create([
+            'event_type' => 'Publicación eliminada',
+            //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
+            'old_data' => json_encode($publicacion->toArray()),
+            'operation' => 'Eliminar',
+        ]);
         Publicacion::destroy($id);
-    
         // Redirige a la página de publicaciones o a donde sea apropiado después de eliminar
         return redirect()->route('publicaciones.index')->with('success', 'Publicación eliminada correctamente');
     }
-      
 
     public function verArchivo($id)
 {

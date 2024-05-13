@@ -9,5 +9,17 @@ class Log extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['event_type', 'user_id'];
+    protected $fillable = [
+        'event_type',
+        'user_id',
+        'old_data',
+        'new_data',
+        'operation',
+    ];
+
+    // Relación con el modelo de usuario si es necesario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -20,7 +20,7 @@ use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
-
+use App\Http\Controllers\LogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -155,3 +155,8 @@ Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->nam
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
 
+//ruta para logs
+
+Route::get('/logs', [LogController::class, 'index'])->name('Log.index');
+
+//termina ruta para logs

@@ -74,7 +74,7 @@
     overflow: hidden; /* Oculta cualquier contenido que desborde del contenedor */
     text-overflow: ellipsis;
 }
-}
+
 </style>
 @section('contenido')
 <div class="container">
