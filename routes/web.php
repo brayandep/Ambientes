@@ -23,6 +23,8 @@ use App\Http\Controllers\grupoController;
 
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\RolController;
+use Spatie\Permission\Models\Permission;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -169,6 +171,7 @@ Route::get('/backup/{backupName}', [BackupController::class, 'show'])->name('bac
 
 
 //Registrar roles nuevos
-Route::get('Registrar_rol', [RolController::class, 'index'])->name('Formulario.Rol');
+Route::get('/Registrar_rol', [RolController::class, 'verForm'])->name('Formulario.Rol');
+Route::post('/Registrar_rol',[RolController::class, 'store'])->name('Rol.store');
 
 
