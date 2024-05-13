@@ -82,20 +82,4 @@ class BackupController extends Controller
         Storage::delete($backupName);
         return redirect()->back()->with('success', 'Copia de seguridad eliminada con éxito');
     }
-
-    public function show($backupName)
-    {
-        // Verificar si el archivo de backup existe
-        if (Storage::exists('backup/' . $backupName)) {
-            // Obtener el contenido del archivo de backup
-            $backupContent = Storage::get('backup/' . $backupName);
-            
-            // Devolver una vista con el contenido del backup
-            return view('backup.show')->with('backupContent', $backupContent);
-        } else {
-            // Si el archivo no existe, redireccionar con un mensaje de error
-            return redirect()->back()->withErrors(['error' => 'El archivo de backup no existe']);
-        }
-    }
-
 }
