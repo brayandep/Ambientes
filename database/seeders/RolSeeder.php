@@ -15,9 +15,9 @@ class RolSeeder extends Seeder
      */
     public function run()
     {
-        $rol1 = Role::create(['name' => 'Admin']);
-        $rol2 = Role::create(['name' => 'Docente']);
-        $rol3 = Role::create(['name' => 'Jefe de carrera']);
+        $rol1 = Role::create(['name' => 'Admin', 'Estado' => 1, 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
+        $rol2 = Role::create(['name' => 'Docente', 'Estado' => 1, 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
+        $rol3 = Role::create(['name' => 'Jefe de carrera', 'Estado' => 1, 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
 
         Permission::create(['name' => 'ambiente.ver'])->syncRoles([$rol1]);
         Permission::create(['name' => 'ambiente.registrar'])->syncRoles([$rol1]);
