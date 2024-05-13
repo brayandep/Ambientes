@@ -21,6 +21,18 @@ class SeederTablaPermisos extends Seeder
             'ver-rol',
             'crear-rol',
             'editar-rol',
+            // //tabla unidades
+            // 'ver-unidades',
+            // 'crear-unidades',
+            // 'editar-unidades',
+            // //tabla materia
+            // 'ver-materia',
+            // 'crear-materia',
+            // 'editar-materia',
+            // //tabla ambientes
+            // 'ver-ambiente',
+            // 'crear-ambiente',
+            // 'editar-ambiente',
             
 
         ];

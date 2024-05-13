@@ -6,15 +6,21 @@ use Illuminate\Http\Request;
 //agregamos spatie
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\BD;
 
 class RolController extends Controller
 {
+    public function verForm()
+    {
+        $permissions = Permission::all(); // Obtiene todos los permisos
+        return view('RegistroRol.Registrar_roles_nuevos', compact('permissions'));
+    }
     function __construct(){
-        $this->middleware('permission: ver-rol | crear-rol | editar-rol' , ['only' => ['index']]);
-        $this->middleware('permission: crear-rol', ['only'=> ['create','store']]); 
-        $this->middleware('permission: editar-rol', ['only'=> ['edit','update']]); 
-
+        // $this->middleware('permission: ver-rol | crear-rol | editar-rol' , ['only' => ['index']]);
+        // $this->middleware('permission: crear-rol', ['only'=> ['create','store']]); 
+        // $this->middleware('permission: editar-rol', ['only'=> ['edit','update']]); 
     }
     /**
      * Display a listing of the resource.
@@ -45,27 +51,34 @@ class RolController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request -> validate([
-            'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
-            // 'descripcionRol' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
-            // 'tipoVigencia' => 'required',
-            // 'fechaInicioRol' => 'required',
-            'permission'=> 'required'
-        ]);
-        // $rol = new Role();
-        // $rol -> Estado = $request -> Estado;
-        // $rol -> nombreRol = $request -> nommbreRol;
-        // $rol -> descripcionRol = $request -> descripcionRol;
-        // $rol -> tipoVigencia = $request -> tipoVigencia;
-        // $rol -> fechaInicioRol = $request ->fechaInicioRol;
-        // $rol -> fechaFinRol = $request -> fechaFinRol;
-        // $rol -> save();
-        $role = Role::create(['name'=> $request->input('name')]);
-        $role->syncPermissions($request->imput('permission'));
+    {   
+        $fechaFormateada = Carbon::now()->format('Y-m-d'); // Ejemplo para el formato "año-mes-día"
 
-        return redirect()->route('roles.index');
+        $request->validate([
+            'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
+            'descripcionRol' => 'max:255', // Modificado para permitir mayor longitud y caracteres
+            'tipoVigencia' => 'required',
+            // 'fechaInicioRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
+            // 'fechaFinRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
+            'permissions' => 'required|array', // Asegura que se envíe al menos un permiso
+            'permissions.*' => 'exists:permissions,id' // Cada permiso debe existir
+        ]);
+
+        $rol = Role::create([
+            'name' => $request->input('name'),
+            'guard_name' => 'web', // asumiendo que estás usando el guard por defecto
+            'Estado' => $request->input('Estado'),
+            'descripcionRol' => $request->input('descripcionRol'),
+            'tipoVigencia' => $request->input('tipoVigencia'),
+            'fechaInicioRol' =>$fechaFormateada,
+            'fechaFinRol' => $request->input('fechaFinRol')
+        ]);
+
+        $rol->syncPermissions($request->input('permissions'));
+
+        return redirect()->route('buscador'); // Asegúrate de que esta ruta está bien definida
     }
+
 
     /**
      * Display the specified resource.
@@ -75,7 +88,7 @@ class RolController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -86,11 +99,11 @@ class RolController extends Controller
      */
     public function edit(Role $role)
     {
-        $permission = Permission::get();
-        $rolePermissions = BD::table('role_has_permissions')->where('role_has_permissions.role_id', $role)
-                ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-                ->all();
-        return view('roles.editar', compact('role', 'permission','rolePermissions'));
+        // $permission = Permission::get();
+        // $rolePermissions = BD::table('role_has_permissions')->where('role_has_permissions.role_id', $role)
+        //         ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        //         ->all();
+        // return view('roles.editar', compact('role', 'permission','rolePermissions'));
     }       
 
     /**
