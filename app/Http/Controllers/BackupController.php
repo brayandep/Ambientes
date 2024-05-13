@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 class BackupController extends Controller
 {
     public function index()
     {
         $backups = Storage::files('backup');
-        return view('backup.backup')->with('backups', $backups);
+        $backupNames = [];
+        foreach ($backups as $backup) {
+            $backupNames[] = basename($backup);
+        }
+        return view('backup.backup')->with('backups', $backupNames);
     }
 
     public function store()
@@ -24,7 +27,7 @@ class BackupController extends Controller
         }
 
         // Obtener el nombre del archivo de backup
-        $backupName = date('d_m_Y_H-i-s') . '.sql';
+        $backupName = date('d_m_Y_H-i-s') . '_backup.sql';
 
         // Iniciar la construcción del archivo SQL
         $sql = "-- Respaldo de la base de datos $databaseName\n\n";
@@ -57,29 +60,47 @@ class BackupController extends Controller
     public function restore(Request $request)
     {
         $restorePoint = $request->input('restorePoint');
-        $sql = explode(";", Storage::get($restorePoint));
-        $totalErrors = 0;
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        foreach ($sql as $query) {
-            if (!empty(trim($query))) {
-                try {
-                    DB::statement($query);
-                } catch (\Exception $e) {
-                    $totalErrors++;
+
+        // Concatena la ruta del directorio de backup al nombre del archivo
+        $filePath = 'backup/' . $restorePoint;
+
+        // Verifica si el archivo de backup existe
+        if (Storage::exists($filePath)) {
+            $sql = explode(";", Storage::get($filePath));
+            $totalErrors = 0;
+            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+            foreach ($sql as $query) {
+                if (!empty(trim($query))) {
+                    try {
+                        DB::statement($query);
+                    } catch (\Exception $e) {
+                        $totalErrors++;
+                    }
                 }
             }
-        }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
-        if ($totalErrors <= 0) {
-            return redirect()->back()->with('success', 'Restauración completada con éxito');
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+            if ($totalErrors <= 0) {
+                return redirect()->back()->with('success', 'Restauración completada con éxito');
+            } else {
+                return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado, no se pudo hacer la restauración completamente']);
+            }
         } else {
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error inesperado, no se pudo hacer la restauración completamente']);
+            return redirect()->back()->withErrors(['error' => 'El archivo de backup no existe']);
         }
     }
 
+
     public function destroy($backupName)
     {
-        Storage::delete($backupName);
-        return redirect()->back()->with('success', 'Copia de seguridad eliminada con éxito');
+        // Concatena el nombre del archivo al directorio de backups
+        $filePath = 'backup/' . $backupName;
+
+        // Verifica si el archivo existe antes de intentar eliminarlo
+        if (Storage::exists($filePath)) {
+            Storage::delete($filePath);
+            return redirect()->back()->with('success', 'Copia de seguridad eliminada con éxito');
+        } else {
+            return redirect()->back()->withErrors(['error' => 'El archivo de backup no existe']);
+        }
     }
 }
