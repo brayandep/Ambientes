@@ -29,8 +29,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = Role :: all();
-        return view('roles.index' , compact('roles'));
+        $roles = Role :: orderBy('id', 'desc')->paginate();
+        return view('RegistroRol.Visualizar_roles' , compact('roles'));
     }
 
     /**
@@ -86,9 +86,16 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function habilitar(Request $request, $id)
     {
-       
+        $rol = Role::find($id);
+        //print_r($request -> Estado);
+    
+        // Cambiar el estado de 1 a 0 y viceversa
+        $rol->Estado = $rol->Estado == 1 ? 0 : 1;
+    
+        $rol->save();
+        return redirect()->route('Rol.index');
     }
 
     /**

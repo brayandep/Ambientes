@@ -104,7 +104,7 @@
                                 <a href='{{ route('Formulario.Rol') }}'><i class="fas fa-book"></i> Registrar nuevo rol</a>
                             </li>
                             <li>
-                                <a href=''><i class='fas fa-rectangle-list'></i>Visualizar roles</a>
+                                <a href='{{ route('Rol.index') }}'><i class='fas fa-rectangle-list'></i>Visualizar roles</a>
                             </li>
                         </ul>
                     </nav>

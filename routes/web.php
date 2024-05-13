@@ -173,5 +173,7 @@ Route::get('/backup/{backupName}', [BackupController::class, 'show'])->name('bac
 //Registrar roles nuevos
 Route::get('/Registrar_rol', [RolController::class, 'verForm'])->name('Formulario.Rol');
 Route::post('/Registrar_rol',[RolController::class, 'store'])->name('Rol.store');
+Route::get('/Rol/lista',[RolController::class, 'index'])->name('Rol.index');
+Route::put('/Rol/habilitar/{id}',[RolController::class, 'habilitar'])->name('Rol.habilitar');
 
 
