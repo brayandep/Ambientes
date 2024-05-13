@@ -1,7 +1,7 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
+<link rel="stylesheet" type="text/css" href="../../css/stylesbrayan.css">
 @endsection
 
 
@@ -29,9 +29,11 @@
                 </select>
            </form>
         </div>
-        <div>
-            <button class="botonReporte">Generar Reporte</button>
-        </div>
+        <!-- Botón para descargar el PDF -->
+            <form class="btnReporte" action="{{ route('descargar.reservas.pdf') }}" method="GET" target="_blank">
+                @csrf
+                <button style="width:150px;" class="nomCol" type="submit" class="btn btn-primary">Generar Reporte</button>
+            </form>
     </div>
 </div>
 <div class="contenidoTabla">
@@ -88,7 +90,7 @@
                                  <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                                 @csrf
                                                 @method('put')
-                                                <button title="Denegar solicitud" id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                                <button id="boton-salir" title="Denegar solicitud"  onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                             </form>
                                         
                             </div>
@@ -103,7 +105,7 @@
                             <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                            @csrf
                                            @method('put')
-                                           <button title="Denegar solicitud" id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                           <button id="boton-salir" title="Denegar solicitud"  onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                        </form>
                                    
                        </div>

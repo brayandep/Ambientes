@@ -7,18 +7,21 @@ use App\Http\Controllers\EstadoAmbienteController;
 
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\registroUnidadesController;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\DependenciaUnidadController;
 use App\Models\Dependencia;
 
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BusacadorController;
 use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
+
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\RolController;
 
 /*
@@ -35,11 +38,6 @@ use App\Http\Controllers\RolController;
 Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', function () {
-    return view('Inicio');
-})->name('inicio');
-
-
 Route::get('/', function () {
     return view('Inicio');
 })->name('inicio');
@@ -64,9 +62,10 @@ Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEst
 Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->name('unidad.toggle');
 //termina rutas unidades
 
-Route::get('/registro', function () {
-    return view('registro');
-})->name('registro');
+// Route::get('/registro', function () {
+//     return view('registro');
+// })->name('registro');
+
 //registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
@@ -111,6 +110,7 @@ Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEsta
 
 //rutas buscador
 Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
+//termina rutas buscador
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
@@ -132,6 +132,40 @@ Route::put('/denegar/{id}', [SolicitudController::class, 'denegar'])->name('soli
 Route::get('/denegar/{id}', [SolicitudController::class, 'edit'])->name('habilitar.ver');
 //mostrar solicitudes filtro
 Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('solicitud.mostrar');
+//prueba de encabezado
+/*Route::get('/', function () {
+    return view('Inicio');
+})->name('inicio');*/
+
+// Ruta para mostrar la página de inicio
+Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+
+// Rutas para las publicaciones
+
+
+Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
+Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
+Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
+Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
+
+
+Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
+//descargar pdf de reporte de ambientes registrados
+Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->name('descargar.ambientes.pdf');
+Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
+Route::get('/descargar-materias-pdf', 'App\Http\Controllers\materiaController@descargarMateriasPDF')->name('descargar.materias.pdf');
+Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@descargarReservasPDF')->name('descargar.reservas.pdf');
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
+
+Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
+
+//rutas backup
+Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+Route::post('/backup', [BackupController::class, 'store'])->name('backup.store');
+Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
+Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
+Route::get('/backup/{backupName}', [BackupController::class, 'show'])->name('backup.show');
+//termina rutas backup
 
 
 //Registrar roles nuevos

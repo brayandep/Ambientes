@@ -139,7 +139,7 @@
     overflow: auto;
 }
 .nomCol{
-    background-color: #C384B2;
+    background-color: #AE7791;
     padding: 7px;
     border-radius: 5px;
     color: #EBEBEB;
@@ -221,6 +221,12 @@ left: 28px;
 .boton input {
 display: none;
 }
+/*Estilos para el boton reporte*/
+  .btnReporte{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 5px;
+  }
 #noActivar{
     cursor: default;
   }

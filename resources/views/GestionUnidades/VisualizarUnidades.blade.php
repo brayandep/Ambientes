@@ -1,6 +1,7 @@
 @extends('layoutes.plantilla')
 @section('links')
-    <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}">
+    <link rel="stylesheet" href="../../css/styleUnidades.css">
+    {{-- <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}"> --}}
 @endsection
 @section('titulo', 'Visualizar unidades')
   
@@ -15,6 +16,11 @@
                 <div>
                     <h1 class="Titulo"><i class="fas fa-building"></i> Visualizar Unidad</h1>
                 </div>
+                <!-- Botón para descargar el PDF -->
+                <form class="btnReporte" action="{{ route('descargar.unidades.pdf') }}" method="GET" target="_blank">
+                    @csrf
+                    <button style="width:150px;" class="nomCol" type="submit" class="btn btn-primary">Generar Reporte</button>
+                </form>
                 <div class="pizarra">
                     <div class="fila">
                         <div class="columnaT">
@@ -111,8 +117,14 @@
                     </div>
                 </div>
             </div>
+
+
+            
+
+
         </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/scriptUnidades.js') }}"></script>
+    {{-- <script src="{{ asset('js/scriptUnidades.js') }}"></script> --}}
+    <script src="../../js/scriptUnidades.js"></script>
 @endsection

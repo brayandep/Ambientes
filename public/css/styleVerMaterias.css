@@ -1,5 +1,7 @@
 .titulo{
   margin: 20px 0 10px 0;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .ver-contenido{
@@ -95,3 +97,10 @@
   max-width: 90px;
 }
   
+/*Estilos para el boton reporte*/
+.btnReporte{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5px;
+}
+

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}"> --}}
+    <link rel="stylesheet" href="../../css/stylePlantilla.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     @yield('links')
@@ -90,6 +91,10 @@
                         <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
                         
                     </li>
+                    <li>
+                        <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
+                        
+                    </li>
                     <li onclick="GesRol()">
                         <p><i class='fas fa-clipboard'></i> Rol</p>
                     </li>
@@ -131,7 +136,8 @@
         </div>          
     </footer>
 </body>
-<script src="{{asset('js/scriptPlantilla.js')}}"></script>
+{{-- <script src="{{asset('js/scriptPlantilla.js')}}"></script> --}}
+<script src="../../js/scriptPlantilla.js"></script>
 @yield('scripts')
 </html>
 

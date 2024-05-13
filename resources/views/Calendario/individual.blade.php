@@ -4,7 +4,8 @@
 
 @section('links')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/calendario.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/calendario.css')}}"> --}}
+    <link rel="stylesheet" href="../../css/calendario.css">
 @show
 
 @section('contenido')
@@ -44,7 +45,8 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@6.1.11/index.global.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="{{asset('js/calendarioIndividual.js')}}"></script>
+    {{-- <script src="{{asset('js/calendarioIndividual.js')}}"></script> --}}
+    <script src="../../js/calendarioIndividual.js"></script>
 
     <script>
         var misEventos = @json($eventos);
