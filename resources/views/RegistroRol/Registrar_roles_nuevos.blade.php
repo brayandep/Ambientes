@@ -61,12 +61,23 @@
                 </section>
             </div>
             <div class="botones">
-                <button type="button" class="btnCancelar">Cancelar</button>
+                <button type="button" class="btnCancelar" onclick="CancelarRegR()">Cancelar</button>
                 <button type="submit" class="btnRegistrar">Registrar</button>
             </div>
+           
         </form>
     </div>
 </div>
+<div id="fondoGris"></div>
+        <div class="mensaje_emergente" id="PanelCancelarRegistroR">
+            <div class="info">
+                ¿Esta seguro que desea cancelar el registro?
+            </div>
+            <div class="div3Botones">
+                <button class= "btnRegistrar" onclick="VolverRegRol()" >No</button>
+                <button class="btnCancelar" onclick="">Si</button>
+            </div>
+        </div>
 @endsection
 @section('scripts')
 <script src="{{ asset('js/scriptRol.js') }}"></script>

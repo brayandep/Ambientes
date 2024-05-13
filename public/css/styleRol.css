@@ -96,3 +96,50 @@
   background-color: #4e798c;
 }
 
+#fondoGris{
+  background-color: #40505577;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.mensaje_emergente{
+  position: absolute; 
+  z-index: 2; /* un valor alto para estar por encima de otros elementos */
+  background-color: #AE7791;
+  padding: 5px;
+  width: 20%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.384);  
+  display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+.info{
+  font-size: 16px;
+ padding-left: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
+
+}
+.div3Botones{
+  padding: 10px;
+  margin: 5px;
+  justify-content: end;
+  display: flex;
+  gap: 15px;
+  
+}
+.div3Botones button{
+  padding: 7px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}

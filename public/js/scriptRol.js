@@ -12,3 +12,11 @@ function mostrarFechas(vigencia){
         rangoFechas.style.display = 'none';
     }
 }
+function CancelarRegR(){
+    PanelCancelarRegistroR.style.display = 'block';
+    fondoGris.style.display = 'flex';
+}
+function VolverRegRol(){
+    PanelCancelarRegistroR.style.display = 'none';
+    fondoGris.style.display = 'none';
+}
