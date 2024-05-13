@@ -1,6 +1,6 @@
 @extends('layoutes.plantilla')
 @section('links')
-<link rel="stylesheet" href="{{ asset('css/styleRol.css') }}">
+<link rel="stylesheet" href="../../css/styleRol.css">
 
 @endsection
 @section('titulo', 'Registro de rol')
