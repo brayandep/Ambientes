@@ -12,28 +12,27 @@ class LoginController extends Controller
 {
     //
     
-    public function index()
-    {
-        return view('Login');
-    }
+    
     public function login(Request $request)
     {
-        // Buscar al usuario por su nombre
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            // Autenticación exitosa
-            $request->session()->regenerate();
-            return redirect()->intended(route('inicio'));
-        } else {
-            // Autenticación fallida
-            return back()->withErrors([
-                'nombre' => 'Las credenciales proporcionadas no son válidas.',
-            ]);
+
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            return redirect()->intended('/invitado');
         }
+
+        return redirect()->back()->withErrors([
+            'email' => 'Las credenciales proporcionadas no son válidas.',
+        ]);
     }
     public function register(Request $request){
       // Validar los datos
-        $user = new User();
+      $request->validate([
+        'nombre' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
+    ]);  
+      $user = new User();
 
         $user->nombre = $request->nombre;
         $user->email = $request->email;

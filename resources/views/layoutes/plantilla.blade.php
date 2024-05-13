@@ -114,8 +114,10 @@
             <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.srl</p>
             <div class="contact-info">
                 <p>Contactenos: Gmail: SmartByte@gmail.com</p>
-                <p>Celular: 6954890</p>
+                <p>Celular: 6954890 </p>
+              
             </div>
+           
         </div>          
     </footer>
 </body>

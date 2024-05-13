@@ -136,7 +136,7 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
 
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio2'])->name('invitado');
-Route::get('/invitado', [InicioController::class, 'mostrarInicio'])->name('inicio');
+Route::get('/invitado', [InicioController::class, 'mostrarInicio'])->middleware('auth')->name('inicio');
 
 // Rutas para las publicaciones
 
@@ -146,10 +146,7 @@ Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->mid
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->middleware('auth')->name('guardar.publicacion');
 //Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
 Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->middleware('auth')->name('publicaciones.detalles');
-
 Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->middleware('auth')->name('eliminar.publicacion');
-
-
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->middleware('auth')->name('publicacion.ver');
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->middleware('auth')->name('descargar.ambientes.pdf');

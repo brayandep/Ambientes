@@ -8,7 +8,8 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 use Illuminate\Support\Facades\Redirect;
@@ -20,7 +21,8 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        return view('VerSolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
+        $usuario = Auth::user();
+        return view('VerSolicitud', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
     }
 
     public function index2()
@@ -29,19 +31,21 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-         return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes'));
+        $usuario = Auth::user();
+         return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
     }
 public function create()
 {
         
-        
+     
     $docentes = Docente::all(); 
     $ambientes = Ambiente::where('estadoAmbiente', 1)->get();
     $horarios = HorarioDisponible::all();
+    $usuario = Auth::user();
     // Obtén todas las solicitudes desde el modelo Solicitud
     //  $usuarios = Usuario::all();;
 
-    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios'));
+    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios', 'usuario'));
 
 }
 public function store(Request $request)
