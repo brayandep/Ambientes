@@ -26,9 +26,12 @@ class ReservaConfirmada extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from('smartbyte626@gmail.com', 'Sistema de reservas UMSS')
+                    ->subject('Reserva Confirmada')
                     ->line('Su reserva de ambiente ha sido aceptada exitosamente')
                     ->line('El horario solicitado es: ' . $this->horario)
                     ->action('Ver Detalles', url('/Versolicitudes'))
-                    ->line('Gracias por usar nuestra aplicación!');
+                    ->line('Gracias por usar nuestra aplicación!')
+                    ->salutation('Saludos');
     }
 }
