@@ -46,7 +46,25 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        $this -> validate($request, ['name' =])
+        $request -> validate([
+            'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
+            // 'descripcionRol' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
+            // 'tipoVigencia' => 'required',
+            // 'fechaInicioRol' => 'required',
+            'permission'=> 'required'
+        ]);
+        // $rol = new Role();
+        // $rol -> Estado = $request -> Estado;
+        // $rol -> nombreRol = $request -> nommbreRol;
+        // $rol -> descripcionRol = $request -> descripcionRol;
+        // $rol -> tipoVigencia = $request -> tipoVigencia;
+        // $rol -> fechaInicioRol = $request ->fechaInicioRol;
+        // $rol -> fechaFinRol = $request -> fechaFinRol;
+        // $rol -> save();
+        $role = Role::create(['name'=> $request->input('name')]);
+        $role->syncPermissions($request->imput('permission'));
+
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -66,10 +84,14 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
-    }
+        $permission = Permission::get();
+        $rolePermissions = BD::table('role_has_permissions')->where('role_has_permissions.role_id', $role)
+                ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+                ->all();
+        return view('roles.editar', compact('role', 'permission','rolePermissions'));
+    }       
 
     /**
      * Update the specified resource in storage.
@@ -78,9 +100,19 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $request -> validate([
+            'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
+            // 'descripcionRol' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
+            // 'tipoVigencia' => 'required',
+            // 'fechaInicioRol' => 'required',
+            'permission'=> 'required'
+        ]);
+        $role ->name= $request->name;
+        $role->save();
+        $role->syncPermissions($request->input('permission'));
+        return redirect()->route('roles.index');
     }
 
     /**
