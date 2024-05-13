@@ -10,11 +10,11 @@
 
 
 <body>
-    <h2>Registro de Usuario</h2>
+    
     @if(session('registro_exitoso'))
         <p>¡Registro exitoso! Por favor, inicia sesión.</p>
     @endif
-    <form method="POST" action="{{ route('registro.store') }}">
+    <form method="POST" action="{{ route('iniciar-sesion') }}">
         @csrf
         <div class="registro-container">
             <div class="section">
@@ -22,13 +22,13 @@
                 <h2 >Login</h2>
                 <div class="inicio">
                     <div class="text2">
-                        <label for="nombre" class="texto2">Nombre de usuario:</label><br>
+                        <label for="nombre" class="texto2">Correo Electronico:</label><br>
                     </div>
                        <br>
                         <div class="form-group">
-                        <input class="input3" type="text" id="nombre" name="nombre" required autofocus placeholder="Ingresa el nombre de usuario">
+                        <input class="input3" type="text" id="email" name="email" required autofocus placeholder="Ingresa el correo del usuario">
                         
-                        @error('nombre')
+                        @error('email')
                             <p>{{ $message }}</p>
                         @enderror
                     </div>
@@ -38,16 +38,21 @@
                     </div>
                     <br>
                            <div class="form-group">
-                        <input class="input3" type="password" id="contraseña" name="contraseña" required placeholder="Ingrese su contraseña">
+                        <input class="input3" type="password" id="password" name="password" required placeholder="Ingrese su contraseña">
                         @error('password')
                             <p>{{ $message }}</p>
                         @enderror
                     </div>
                   
                 </div>
-                <button class="boton4" type="submit">Registrarse</button>
+                <div>
+                    <input type = "checkbox" class="form-check-input" id="rememberCheck" name="remenber">
+                    <label class="form-check-label" for="remenberCheck">
+                        Mantener sesión iniciada</label>
+                </div>
+                <button class="boton4" type="submit">Iniciar</button>
                 <br>
-                <button class="boton3" >Entrar como Invitado</button>
+               
             </div>
         </div>
     </form>

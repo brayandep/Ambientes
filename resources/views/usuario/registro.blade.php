@@ -26,7 +26,7 @@
         @endif    
         </div>
     </div>
-    <form class="container2" method="POST" action="{{ route('registro.store') }}">
+    <form class="container2" method="POST" action="{{ route('validar-registro') }}">
         @csrf
     <div class="izqDer">  
         <div class="izq">
@@ -84,7 +84,7 @@
 
             <div>
                 <label class="texto" for="password">Contraseña:</label><br>
-                <input class="input" type="password" id="contraseña" name="contraseña" required placeholder="Ingresar contraseña ">
+                <input class="input" type="password" id="password" name="password" required placeholder="Ingresar contraseña ">
                 @error('password')
                     <p>{{ $message }}</p>
                 @enderror

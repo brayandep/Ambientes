@@ -100,7 +100,7 @@
         <div class="derecha">
             <header>
                 <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu</h1>
-                <i class='fas fa-user'></i>
+                <a href='{{ route('logout') }}'>  <i class='fas fa-user'></i> Salir </a>
             </header>
             <br>
             @yield('contenido')

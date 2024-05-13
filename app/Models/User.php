@@ -17,13 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $table = 'usuarios';
+    protected $table = 'users';
 
     use HasFactory, Notifiable;
 
     protected $fillable = [
         'nombre',
-        'contraseña', // Nombre del campo de contraseña personalizado
+        'contraseña',
+        'email', // Nombre del campo de contraseña personalizado
     ];
 
     protected $hidden = [
