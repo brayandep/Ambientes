@@ -21,6 +21,8 @@ use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
 use App\Http\Controllers\RolController;
+use Spatie\Permission\Models\Permission;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -156,6 +158,7 @@ Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->nam
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
 //Registrar roles nuevos
-Route::get('Registrar_rol', [RolController::class, 'index'])->name('Formulario.Rol');
+Route::get('/Registrar_rol', [RolController::class, 'verForm'])->name('Formulario.Rol');
+Route::post('/Registrar_rol',[RolController::class, 'store'])->name('Rol.store');
 
 
