@@ -56,7 +56,7 @@ class RolController extends Controller
 
         $request->validate([
             'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
-            'descripcionRol' => 'max:100', // Modificado para permitir mayor longitud y caracteres
+            'descripcionRol' => 'max:100|regex:/^[a-zA-Z\s]+$/', // Modificado para permitir mayor longitud y caracteres
             'tipoVigencia' => 'required',
             // 'fechaInicioRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             // 'fechaFinRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal

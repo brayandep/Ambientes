@@ -11,7 +11,7 @@
             Inicio > Roles > Registrar nuevo rol
             <h2 class="titulo">Registrar rol</h2>
         </div>
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -19,8 +19,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
-
+        @endif --}}
         <form action="{{route('Rol.store')}}" method="POST" class="contForm">
             @csrf
             <div class="input-group">
@@ -34,10 +33,16 @@
                 <label class="labRol" >Nombre</label>
                 <input class="inputRol" name='name' placeholder="Ingrese el nombre del rol">
             </div>
+            @error('name')
+                <span>*{{$message}}</span>
+            @enderror
             <div class="input-group">
                 <label class="labRol">Descripcion</label>
                 <input class="inputRol" name='descripcionRol' placeholder="Ingrese una breve descripcion">
             </div>
+            @error('descripcionRol')
+                <span>*{{$message}}</span>
+            @enderror
             <div class="input-group">
                 <label class="labRol">Vigencia del rol</label>
                 <select class="inputRol" id="vigencia" name="tipoVigencia" onchange="mostrarFechas(this.value)"> 
@@ -60,6 +65,9 @@
                     @endforeach
                 </section>
             </div>
+            @error('permissions')
+                <span>*{{$message}}</span>
+            @enderror
             <div class="botones">
                 <button type="button" class="btnCancelar" onclick="CancelarRegR()">Cancelar</button>
                 <button type="submit" class="btnRegistrar">Registrar</button>
