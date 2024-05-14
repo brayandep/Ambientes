@@ -18,38 +18,52 @@
             <div>
                 <h1 class="Titulo-backup"><i class="fa-solid fa-database"></i> Backups del Sistema </h1>
             </div>
-            <div>
+
+            <div class="boton-backup">
                 <form action="{{ route('backup.store') }}" method="POST">
                     @csrf
-                    <button type="submit">Generar Backup</button>
+                    <button type="submit" class="generar-backup">Generar Backup</button>
                 </form>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre del archivo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            </div>
+            <div class="centrado-tabla">
+                <div class="tabla-backup">
+                    <div class="fila-backup">
+                        <div class="contBotones">
+                            <button class="nomCol-backup">Nombre del archivo</button>
+                        </div>
+                        <div class="contBotones" id="columnaPeque">
+                            <button class="nomCol-backup">Restaurar</button>
+                        </div>
+                        <div class="contBotones" id="columnaPeque">
+                            <button class="nomCol-backup">Eliminar</button>
+                        </div>
+                    </div>
+                    <div class="datos-backup">
                         @foreach($backups as $backup)
-                        <tr>
-                            <td>{{ $backup }}</td>
-                            <td>
-                                <form action="{{ route('backup.restore') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="restorePoint" value="{{ $backup }}">
-                                    <button type="submit">Restaurar</button>
-                                </form>
-                                <form action="{{ route('backup.destroy', $backup) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
+                            <div class="fila-backup">
+                                <p>{{ $backup }}</p>
+                                <div id="columnaPeque" class="accion-backup">
+                                    <form action="{{ route('backup.restore') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="restorePoint" value="{{ $backup }}">
+                                        <button type="submit" class="accion">
+                                            <i class="fa-solid fa-clock-rotate-left"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div id="columnaPeque" class="accion-backup">
+                                    <form action="{{ route('backup.destroy', $backup) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="accion">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         @endforeach
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

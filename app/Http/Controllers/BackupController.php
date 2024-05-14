@@ -32,24 +32,49 @@ class BackupController extends Controller
         // Iniciar la construcción del archivo SQL
         $sql = "-- Respaldo de la base de datos $databaseName\n\n";
 
+        // Agregar comando para deshabilitar las verificaciones de clave externa
+        $sql .= "SET FOREIGN_KEY_CHECKS=0;\n\n";
+
+        // Agregar comando para crear la base de datos si no existe y seleccionarla
+        $sql .= "CREATE DATABASE IF NOT EXISTS $databaseName;\n";
+        $sql .= "USE $databaseName;\n\n";
+
         // Obtener el listado de tablas en la base de datos
         $tables = DB::select('SHOW TABLES');
 
         foreach ($tables as $table) {
             $tableName = reset($table);
+
+            // Agregar comando para eliminar la tabla si existe
+            $sql .= "DROP TABLE IF EXISTS $tableName;\n\n";
+
             $tableInfo = DB::select("SHOW CREATE TABLE $tableName");
 
-            // Agregar la estructura de la tabla al archivo SQL
+            // Agregar comando para crear la tabla de nuevo
             $sql .= $tableInfo[0]->{'Create Table'} . ";\n\n";
 
             // Agregar los datos de la tabla al archivo SQL
             $tableData = DB::table($tableName)->get()->toArray();
             foreach ($tableData as $row) {
-                $row = (array) $row;
-                $sql .= "INSERT INTO $tableName VALUES ('" . implode("', '", array_map('addslashes', $row)) . "');\n";
+                $sql .= "INSERT INTO $tableName VALUES (";
+
+                // Formatear manualmente cada fila de datos
+                foreach ($row as $key => $value) {
+                    // Si el valor es una cadena, escapar comillas
+                    if (is_string($value)) {
+                        $value = addslashes($value);
+                    }
+                    $sql .= "'$value', ";
+                }
+                // Eliminar la última coma y espacio
+                $sql = rtrim($sql, ', ');
+                $sql .= ");\n";
             }
-            $sql .= "\n";
+            $sql .= "\n\n\n";
         }
+
+        // Agregar comando para habilitar las verificaciones de clave externa
+        $sql .= "SET FOREIGN_KEY_CHECKS=1;\n\n";
 
         // Guardar el archivo de backup
         Storage::put('backup/' . $backupName, $sql);
