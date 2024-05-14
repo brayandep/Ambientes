@@ -49,7 +49,7 @@
                             <p>{{$rol->name}}</p>
                             <p>{{$rol->tipoVigencia}}</p>
                             <div class="EditHab" id="columnaPeque">
-                                <button class="accion" onclick=""><i class="fa-solid fa-circle-info"></i></button>
+                                <button class="accion" onclick="mostrarInfoRol('{{ $rol->id }}')"><i class="fa-solid fa-circle-info"></i></button>
                             </div>
 
                             <div class="EditHab" id="columnaPeque">
@@ -64,8 +64,19 @@
                             </div>
                         </div>
 
-                        <div class="panel">
-                            
+                        <div class="panel" id="panelVerRol-{{ $rol->id }}">
+                            <div class="info">
+                                <p>Informacion:</p>
+                                <p>Descripcion: {{$rol->descripcionRol}}</p>
+                                @if (!empty($rol->fechaFinRol))
+                                <p>Vigente desde: {{$rol->fechaInicioRol}} hasta {{$rol->fechaFinRol}}</p>
+                                @else
+                                <p>Vigencia: Permanente</p>
+                                @endif
+                                <p>los permisos son:</p>
+                                
+                                <div id="permissionsList"></div>
+                            </div>
                         </div>
                     @endforeach
                 </div>

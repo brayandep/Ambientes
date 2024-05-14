@@ -175,5 +175,6 @@ Route::get('/Registrar_rol', [RolController::class, 'verForm'])->name('Formulari
 Route::post('/Registrar_rol',[RolController::class, 'store'])->name('Rol.store');
 Route::get('/Rol/lista',[RolController::class, 'index'])->name('Rol.index');
 Route::put('/Rol/habilitar/{id}',[RolController::class, 'habilitar'])->name('Rol.habilitar');
+Route::get('/Rol/Permisos/{id}', [RolController::class, 'show']);
 
 
