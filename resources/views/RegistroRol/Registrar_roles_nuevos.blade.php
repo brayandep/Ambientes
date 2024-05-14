@@ -75,7 +75,7 @@
             </div>
             <div class="div3Botones">
                 <button class= "btnRegistrar" onclick="VolverRegRol()" >No</button>
-                <button class="btnCancelar" onclick="">Si</button>
+                <button class="btnCancelar" onclick="location.href='{{ route('Rol.index') }}';">Si</button>
             </div>
         </div>
 @endsection
