@@ -1,15 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Materia;
-use App\Models\Unidad;
-use App\Models\TipoAmbiente;
-use App\Models\Ambiente;
-use App\Models\Models\Usuario;
-use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use App\Models\HorarioDisponible;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +18,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         
+    
+        
+        
         $this -> call(UnidadSeeder::class);
         $this -> call(EquipoSeeder::class);
         $this -> call(TipoAmbienteSeeder::class);
@@ -30,7 +29,9 @@ class DatabaseSeeder extends Seeder
         $this -> call(DocenteSeeder::class);
         $this -> call(MateriaSeeder::class);
         $this -> call(GrupoSeeder::class);
-        $this -> call(SeederTablaPermisos::class);
+
+        //seed del rol
+        $this -> call(RolSeeder::class);
     }
     
 }

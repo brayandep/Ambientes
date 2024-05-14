@@ -26,6 +26,8 @@ h2{
   gap: 10px; /* Espacio entre el label y el input */
 }
 
+
+
 .form-group input[type="text"],
 .form-group input[type="number"] {
   flex: 1; /* El input ocupa todo el espacio restante */
@@ -44,17 +46,6 @@ h2{
     /* Ajusta otras propiedades según sea necesario */
   }
 
-  #capacidad{
-      margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
-  }
-  #unidad{
-    margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
-    
-  }
-  #tipo-ambiente{
-    margin-left: 20px; /* Establece la distancia del lado izquierdo del contenedor */
-  }
-
   .selectAmbiente{
     padding: 8px;
     font-size: 16px;
@@ -63,23 +54,14 @@ h2{
     background-color: #EBEBEB;
   }
 
-  #lunes.columna,
-  #martes.columna,
-  #miercoles.columna,
-  #jueves.columna,
-  #viernes.columna,
-  #sabado.columna{
-    margin-right: 0px; 
-    margin-left: 0px;
-  }
-
   label {
-    display: block;
+    /*display: block;*/
     margin-bottom: 5px;
 
     font-family: "Fjalla One", sans-serif;
     font-size: 100%;
     font-weight: normal;
+
   }
   
   input[type="text"],
@@ -137,9 +119,12 @@ h2{
   .btn-cancelar:hover{
     background-color: #b94848;
   }
-  
   .btn-registrar:hover{
-    background-color: #335969;
+      background-color: #2f6074;
+  }
+
+  button.nomColu:hover { /*Para los horarios en version larga*/
+    background-color: #AE7791;
   }
 
     /* Estilos para el primer botón */
@@ -174,14 +159,15 @@ h2{
     flex: 1;
   }
 
-  #diasSemana option[value=""] {
-    color: #757575; /* Color de letra más claro (gris en este caso) */
-  }
+
   #tipo-ambiente option[value=""] {
     color: #757575; /* Color de letra más claro (gris en este caso) */
   }
   #unidad option[value=""] {
     color: #757575; /* Color de letra más claro (gris en este caso) */
+  }
+  option{
+    padding-left: 20px;
   }
 
 /* Estilos opcionales para mejorar la apariencia de la tabla de dias //////////////////////////////////////*/
@@ -192,8 +178,6 @@ h2{
     float: left;
     margin-right: 10px;
   }
-
-
 
 /* Estilos para el modal */
 .modal {
@@ -213,7 +197,8 @@ h2{
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 30%;
+  width: 40%;
+  min-width: 550px; /* Establece un ancho mínimo de 550 píxeles */
 
 
     display: flex;
@@ -282,18 +267,132 @@ h2{
 }
 
 /* Estilos para el botón "Aceptar" */
+#aceptarModal,
 #modalAceptar {
   align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
   margin-top: 10px; /* Agrega un margen superior */
+  
+  background-color: #C384B2;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
 }
-#aceptarModal {
-  align-self: flex-end; /* Alinea el botón "Aceptar" a la derecha */
-  margin-top: 10px; /* Agrega un margen superior */
+#modalAceptar:hover {
+  background-color: #904368;
 }
 
-/*boton añadir */
-.btnAnadir{
-  background-color: #C384B2;
+
+
+/*///////////////////////////////////*/
+
+
+
+.pizarra1{
+  background-color: #e2eaec;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+}
+.pizarra2{
+  background-color: #e2eaec;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+}
+.nomCol{
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  margin: 5px;
+  width: 100%;
+}
+.nomColu{/*Para los horarios en version larga*/
+  background-color: #AE7791;
+  padding: 7px;
+  border-radius: 5px;
+  color: #EBEBEB;
+  margin: 5px;
+  width: 100%;
+}
+
+.fila{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin-top: 7px;
+  width: 100%;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  width: 800px;
+}
+
+.horarios select {
+  width: 150px;
+  padding-left: 30px;
+}
+
+/* Estilos para alinear checkboxes y etiquetas */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar horizontalmente */
+}
+
+.checkbox-container label {
+  margin-left: 10px;
+  width: 100px;
+}
+
+.estiloSab {
+  vertical-align: top; /* Alinea los elementos hacia arriba */
+}
+
+.modal-content h2 {
+  font-size: 20px;       /* Tamaño de fuente */
+  margin-bottom: 20px;   /* Margen inferior */
+  color: #333;           /* Color del texto */
+  text-align: center;    /* Alineación centrada */
+  padding-bottom: 10px;  /* Espaciado inferior */
+  font-weight: bold;     /* Texto en negrita */
+}
+
+
+
+
+/*Buscador*/
+.form-fila-s {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
 }
 
 .msgError{
@@ -351,6 +450,6 @@ h2{
   background-color: #b94848;
 }
 .si:hover{
-  background-color: #4e798c;
+  background-color: #2f6074;
 }
 /*termina paneles emergaentes */

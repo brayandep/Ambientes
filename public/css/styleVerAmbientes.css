@@ -14,7 +14,7 @@
   height: 4%;
   margin-top: 5px;
   width: 50%;
-  font-size: 14px;
+  font-size: 16px;
   color: #0b2c37; /* Color del texto */
 }
 
@@ -148,3 +148,18 @@
 .boton-sw input {
   display: none;
 }
+
+/*Estilos para el boton reporte*/
+.btnReporte{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5px;
+}
+
+.texto-limitado {
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: 20ch;
+}
+

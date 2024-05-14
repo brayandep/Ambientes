@@ -1,7 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleBuscador.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styleBuscador.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="../../css/styleBuscador.css">
 @endsection
 
 @section('titulo', 'Buscar')
@@ -22,51 +23,68 @@
             <div>
                 <form action="{{route('buscador')}}" method="GET">
                     <div class="form-fila-s">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombreSearch" name="nombreSearch" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente" value="{{ request('nombreSearch') }}">
-                        @error('nombre')
-                        <span class="msgError">*{{$message}}</span>
-                        @enderror
-
-                        <label for="capacidad">Capacidad:</label>
-                        <input type="text" id="capacidadSearch" name="capacidadSearch" maxlength="3" autocomplete="off" placeholder="Capacidad" value="{{ request('capacidadSearch') }}">
-                        @error('capacidadSearch')
-                            <span class="msgError">*{{ $message }}</span>
-                        @enderror
-
-                        <label for="dia">Día:</label>
-                        <!-- Utilizamos un select (combobox) para los días de la semana -->
-                        <select class="input-dia" name="dia">
-                        <option value="">Seleccionar</option>
-                        <option value="1" {{ request('dia') == '1' ? 'selected' : '' }}>Lunes</option>
-                        <option value="2" {{ request('dia') == '2' ? 'selected' : '' }}>Martes</option>
-                        <option value="3" {{ request('dia') == '3' ? 'selected' : '' }}>Miércoles</option>
-                        <option value="4" {{ request('dia') == '4' ? 'selected' : '' }}>Jueves</option>
-                        <option value="5" {{ request('dia') == '5' ? 'selected' : '' }}>Viernes</option>
-                        <option value="6" {{ request('dia') == '6' ? 'selected' : '' }}>Sábado</option>
-                    </select>
+                        <div class="input-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente" value="{{ old('nombre', request('nombre')) }}">
+                            @error('nombre')
+                            <span class="msgError">*{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="input-group">
+                            <label for="capacidad">Capacidad:</label>
+                            <input type="text" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Capacidad" value="{{ old('capacidad', request('capacidad')) }}">
+                            @error('capacidad')
+                                <span class="msgError">*{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="input-group">
+                            <label for="dia">Día:</label>
+                            <!-- Utilizamos un select (combobox) para los días de la semana -->
+                            <select class="input-dia" name="dia">
+                            <option value="">Seleccionar</option>
+                            <option value="1" {{ request('dia') == '1' ? 'selected' : '' }}>Lunes</option>
+                            <option value="2" {{ request('dia') == '2' ? 'selected' : '' }}>Martes</option>
+                            <option value="3" {{ request('dia') == '3' ? 'selected' : '' }}>Miércoles</option>
+                            <option value="4" {{ request('dia') == '4' ? 'selected' : '' }}>Jueves</option>
+                            <option value="5" {{ request('dia') == '5' ? 'selected' : '' }}>Viernes</option>
+                            <option value="6" {{ request('dia') == '6' ? 'selected' : '' }}>Sábado</option>
+                            </select>
+                        </div>
                     </div>
                 
                     <div class="form-fila-s">
-                        <label for="fecha">Fecha:</label>
-                        <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" value="{{ request('fecha') }}">
-                        
-                        <label for="horaIni">Hora de inicio:</label>
-                        <input type="time" id="horaInicio" name="horaInicio" value="{{ request('horaInicio') }}">
-                        
-                        <label for="horaFin">Hora de fin:</label>
-                        <input type="time" id="horaFin" name="horaFin" value="{{ request('horaFin') }}">
+                        <div class="input-group">
+                            <label for="fecha">Fecha:</label>
+                            <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" value="{{ old('fecha', request('fecha')) }}">
+                            @error('fecha')
+                                <span class="msgError">*{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="input-group">
+                            <label for="horaIni">Hora de inicio:</label>
+                            <input type="time" id="horaInicio" name="horaInicio" value="{{ old('horaInicio', request('horaInicio')) }}">
+                            @error('horaInicio')
+                                <span class="msgError">*{{ $message }}</span>
+                            @enderror                        
+                        </div>
+                        <div class="input-group">
+                            <label for="horaFin">Hora de fin:</label>
+                            <input type="time" id="horaFin" name="horaFin" value="{{ old('horaFin', request('horaFin')) }}">
+                            @error('horaFin')
+                                <span class="msgError">*{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                 
                     <div class="button-fila-b">
-                        <button class="Buscar" type="submit" value="RealizarBusqueda">Buscar</button>
-                        <button class="Limpiar">Limpiar búsqueda</button>
+                        <button class="Buscar" type="submit" value="RealizarBusqueda" id="btnBuscar">Buscar</button>
+                        <button class="Limpiar" id="btnLimpiar">Limpiar búsqueda</button>
                     </div>
                 </form>
             </div>
 
             <div class="titulo-boton">
-                <h2 class="Resultado-search"> Resultado de la búsqueda </h2>
+                <h2 class="Resultado-search"> Resultado de la búsqueda: </h2>
                 <button type="submit" class="Buscar-Reservar">Reservar</button>
             </div>
             <div class="tabla-search">
@@ -94,6 +112,7 @@
                     </div>             
                 </div>
                 <div class="datos">
+                @if ($ambientes->isNotEmpty() && $horarios->isNotEmpty())
                 @foreach ($ambientes as $ambiente)
                     @if ($ambiente->estadoAmbiente == 1)
                         @foreach ($horarios as $horario)
@@ -101,7 +120,9 @@
                                 <div class="fila-b">
                                     <div class="seleccionAmb">
                                     <div class="seleccion">
-                                        <input type="checkbox" class="checkbox-seleccion">
+                                        <input type="checkbox" class="checkbox-seleccion" value="{{ $ambiente->nombre }}"
+                                data-nombre="{{ $ambiente->nombre }}" data-dia="{{ $diaSemana[$horario->dia] }}"
+                                onchange="limitarSeleccion(this)">
                                     </div>
                                     <p>{{ $ambiente->nombre }}</p>
                                     </div>
@@ -110,7 +131,7 @@
                                     <p>{{ $horario->horaInicio }}</p>
                                     <p>{{ $horario->horaFin }}</p>
                                     <div class="Buscar-Calendario" id="columnaPeque">
-                                        <button class="buscaCalendario" onclick="location.href='';">
+                                        <button class="buscaCalendario" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </button>
                                     </div>
@@ -119,6 +140,9 @@
                         @endforeach
                     @endif    
                 @endforeach
+                @else
+                <p>No se encontraron resultados.</p>
+                @endif
                 </div>
             </div>
         </div>
@@ -126,23 +150,6 @@
 @endsection
 
 @section('scripts')
-<!--
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('form');
-
-        form.addEventListener('submit', function(event) {
-            const horaIni = document.getElementById('horaIni').value;
-            const horaFin = document.getElementById('horaFin').value;
-
-            if (horaIni >= horaFin) {
-                alert('La hora de fin debe ser posterior a la hora de inicio.');
-                event.preventDefault(); // Evitar que se envíe el formulario
-            }
-        });
-    });
-</script>
--->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const limpiarBtn = document.querySelector('.Limpiar');
@@ -161,5 +168,21 @@
             });
         });
     });
+</script>
+
+<script>
+    function limitarSeleccion(checkbox) {
+        // Obtener el nombre del ambiente y el día seleccionado del checkbox
+        var nombreAmbiente = checkbox.dataset.nombre;
+        var diaSeleccionado = checkbox.dataset.dia;
+
+        // Deshabilitar los checkboxes con diferentes nombres de ambiente o días seleccionados
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(function(cb) {
+            if (cb.dataset.nombre !== nombreAmbiente || cb.dataset.dia !== diaSeleccionado) {
+                cb.disabled = checkbox.checked;
+            }
+        });
+    }
 </script>
 @endsection

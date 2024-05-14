@@ -14,12 +14,11 @@
     height: 4%;
     margin-top: 5px;
     width: 50%;
-    font-size: 14px;
-    color: #0b2c37; /* Color del texto */
+    font-size: 16px;
+    color: #0b2337; /* Color del texto */
   }
   
   .Titulo-search {
-
     margin-bottom: 10px;
     font-size: 24px;
   }
@@ -32,7 +31,7 @@
     position: relative; 
   }
 
-  /*visualizar unidades*/
+  /*visualizar horarios*/
 .visualizar-busqueda{
     width: 70%;
 }
@@ -182,27 +181,8 @@
 /*Buscador*/
 .form-fila-s {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
-    margin-top: 15px;
-}
-
-/* Estilos para etiquetas */
-.form-fila-s label {
-    width: 120px; /* Ancho fijo para las etiquetas */
-    margin-right: 10px; 
-    text-align: right; 
-}
-
-/* Estilos para inputs y selects dentro de las filas del formulario */
-.form-fila-s input,
-.form-fila-s select {
-    flex: 1; /* El input/select ocupa todo el espacio restante */
-    border-radius: 5px;
-    background-color: #ebebeb;
-    color: #0b2c37;
-    padding: 6px;
-    box-sizing: border-box; 
 }
 
 .button-fila-b{
@@ -215,3 +195,29 @@
     margin-bottom: 20px;
     cursor: pointer;
 }
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    border-radius: 5px;
+    background-color: #ebebeb;
+    color: #0b2c37;
+    padding: 6px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+
+.msgError{
+    color: #b94848;
+    padding: 2px 0 0 6px;
+  }

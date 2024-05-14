@@ -1,8 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}">
+<link rel="stylesheet" type="text/css" href="../../css/stylesbrayan.css">
+<link rel="stylesheet" type="text/css" href="../../css/styleVerAmbientes.css">
 @endsection
 
 
@@ -18,17 +18,17 @@
 </div>
 <div class="contenidoF">
     <div class="F">
-        <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
+        {{-- <select class="input2" id="usuario" name="usuario"  onchange="filtrarSolicitudes()">
             <option>Selecciona un usuario </option>
             @foreach($usuarios as $usuario)
             <option value="{{ $usuario->nombre}}" {{ isset($nombre) ? 'selected' : '' }}>{{ $usuario->nombre }}</option>
             @endforeach
             
-        </select>
+        </select> --}}
     </div>
 </div>
 
-<table  id="tablaSolicitudes" class="centro" border="1">
+<table  id="tablaSolicitudes" class="centro">
     <thead>
         <tr class="colorcolumna">
            
@@ -56,18 +56,18 @@
             <th><div class="contBotones">
                 <button class="nomCol">Fecha de solicitud</button>
             </div></th>
-            <th><div class="contBotones">
+            <th id="accionCol"><div class="contBotones">
                 <button class="nomCol">Acciones</button>
             </div></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="cuerpo">
         @foreach($solicitudes as $solicitud)
         @php
         $fechaCreacion = \Carbon\Carbon::parse($solicitud->created_at);
         $fechaLimiteSuspension = $fechaCreacion->addDay(); // Calcula la fecha límite de suspensión
         $fechaHoy = \Carbon\Carbon::now();
-    @endphp
+        @endphp
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
             <td>{{ $solicitud->idsolicitud }}</td>
             <td>{{ $solicitud->usuario }}</td>
@@ -103,21 +103,7 @@
 
                         
                     @elseif($solicitud->estado == 'confirmado')   
-                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>
-                        <div id="modal-confirmacion" class="modal">
-                
-                            <div class="modal-contenido">
-                                <p>¿Está seguro de que desea suspender la reserva?</p>
-                                <div class="botonesCentro">
-                                    <button id="boton-confirmar"  class="botones" type="button" onclick="botonSalirClick()" >Salir</button>
-                                    <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <button id="boton-salir"  class="botones" type="submit">Confirmar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                    <a  >Sin acciones </a>
                     @elseif($solicitud->estado == 'denegado') 
                     <p>Sin acciones</p>            
                     @elseif($solicitud->estado == 'suspendido')

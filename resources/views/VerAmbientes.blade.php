@@ -1,7 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerAmbientes.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="../../css/styleVerAmbientes.css">
 @endsection
 
 @section('titulo', 'Ver Ambiente')
@@ -17,7 +18,11 @@
             <div>
                 <h1 class="Titulo-ver"><i class="fa-solid fa-rectangle-list"></i> Ver Ambientes Registrados </h1>
             </div>
-
+            <!-- Botón para descargar el PDF -->
+                <form class="btnReporte" action="{{ route('descargar.ambientes.pdf') }}" method="GET" target="_blank">
+                    @csrf
+                    <button style="width:150px;" class="nomCol-v" type="submit" class="btn btn-primary">Generar Reporte</button>
+                </form>
             <!-- tabla -->
             <div class="tabla-ver">
                 <div class="fila-v">
@@ -33,7 +38,7 @@
                     <div class="contBotones-v" id="columnaPeque">
                         <button class="nomCol-v">Capacidad</button>
                     </div>
-                    <div class="contBotones-v">
+                    <div class="contBotones-v" id="ubi">
                         <button class="nomCol-v">Ubicación</button>
                     </div>
                     <div class="contBotones-v">
@@ -56,7 +61,7 @@
                         <p>{{ $ambiente->unidad }}</p>
                         <p>{{ $ambiente->nombre }}</p>
                         <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
-                        <p>{{ $ambiente->ubicacion }}</p>
+                        <p id="ubi" class="texto-limitado">{{ $ambiente->ubicacion }}</p> 
                         <p>{{ $ambiente->descripcion_ubicacion}}</p>
                         <div class="EditHab" id="columnaPeque">
                             <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">

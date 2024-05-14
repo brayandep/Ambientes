@@ -3,7 +3,8 @@
 @section('titulo', 'Registrar Materia')
 
 @section('links')
-    <link rel="stylesheet" href="{{asset('css/styleMateria.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/styleMateria.css')}}"> --}}
+    <link rel="stylesheet" href="../../css/styleMateria.css">
 @endsection
 
 @section('estilos')
@@ -149,5 +150,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset('js/scriptMateria.js')}}"></script>
+    <script src="../../js/scriptMateria.js"></script>
 @endsection
