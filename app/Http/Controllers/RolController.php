@@ -76,7 +76,7 @@ class RolController extends Controller
 
         $rol->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('buscador'); // Asegúrate de que esta ruta está bien definida
+        return redirect()->route('Rol.index'); // Asegúrate de que esta ruta está bien definida
     }
 
 
