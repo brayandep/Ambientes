@@ -104,7 +104,7 @@
             <button class="fixed-button" onclick="toggleNotificaciones()">
                 <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             </button>
-            <i class='fas fa-user'></i>
+            <a href='{{ route('logout') }}'>  <i class='fas fa-user'></i> Salir </a>
         </header>
         <div class="notificaciones" id="notificaciones">
             <div class="notificaciones-title">Notificaciones</div>
@@ -124,8 +124,10 @@
             <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.SRL</p>
             <div class="contact-info">
                 <p>Contactenos: Gmail: SmartByte@gmail.com</p>
-                <p>Celular: 6954890</p>
+                <p>Celular: 6954890 </p>
+              
             </div>
+           
         </div>          
     </footer>
 </body>

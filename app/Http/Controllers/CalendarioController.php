@@ -29,6 +29,24 @@ class CalendarioController extends Controller
 
         return view('Calendario.general', compact('eventos'));
     }
+    public function index2()
+    {
+        $eventos = array();
+        $datos = Evento::all();
+
+        foreach($datos as $dato){
+            $eventos[] = [
+                'id' => $dato->id,
+                'title' => $dato->title,
+                'descripcion' => $dato->descripcion,
+                'start' => $dato->start,
+                'end' => $dato->end,
+                'backgroundColor' => $dato->color
+            ];
+        }
+
+        return view('Calendario.general2', compact('eventos'));
+    }
 
     public function individual($idAmbiente)
     {
