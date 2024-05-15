@@ -32,7 +32,9 @@
             <div class="izq">
                 <div>
                     <label class="texto" for="nro_aula">Solicitante:</label><br>
-                    <input class="input" type="text" id="solicitante" name="usuario" value="{{ $usuario->nombre }}">
+                    <input type="text" class="input" id="solicitanteNombre" value="{{ $usuario->nombre }}" readonly>
+                    <input type="hidden" name="usuario" value="{{ $usuario->id }}">
+                    
                 </div>
                 <br>
                 <div>

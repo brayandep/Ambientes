@@ -34,15 +34,13 @@
 
                     <div class="input-goup">
                         <label class="labMateria">Docente</label>
-                        <select class="inputMateria" id="nivel" name="docente[]">
+                        <select class="inputMateria" id="usuario" >
                             <option value="">Seleccione el docente</option> 
-                            @if ($grupo->idDocente)
-                            <option value="{{$grupo->idDocente}}" selected>{{$grupo->eldocente->nombreDocente}}</option>
-                            @endif
-                            @foreach ($docentes as $docente)
-                                <option value="{{ $docente->id }}">{{ $docente->nombreDocente }}</option>
+                            @foreach ($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">{{ $usuario->nombre }}</option>
                             @endforeach
                         </select>
+                        
                         @error('docente')
                             <span class="msgError">*{{$message}}</span>
                             <br>
