@@ -25,44 +25,42 @@
                     <button type="submit" class="generar-backup">Generar Backup</button>
                 </form>
             </div>
-            <div class="centrado-tabla">
-                <div class="tabla-backup">
-                    <div class="fila-backup">
-                        <div class="contBotones">
-                            <button class="nomCol-backup">Nombre del archivo</button>
-                        </div>
-                        <div class="contBotones" id="columnaPeque">
-                            <button class="nomCol-backup">Restaurar</button>
-                        </div>
-                        <div class="contBotones" id="columnaPeque">
-                            <button class="nomCol-backup">Eliminar</button>
-                        </div>
+            <div class="tabla-backup">
+                <div class="fila-backup">
+                    <div class="contBotones" id="columnaGrande">
+                        <button class="nomCol-backup">Nombre del archivo</button>
                     </div>
-                    <div class="datos-backup">
-                        @foreach($backups as $backup)
-                            <div class="fila-backup">
-                                <p>{{ $backup }}</p>
-                                <div id="columnaPeque" class="accion-backup">
-                                    <form action="{{ route('backup.restore') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="restorePoint" value="{{ $backup }}">
-                                        <button type="submit" class="accion">
-                                            <i class="fa-solid fa-clock-rotate-left"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div id="columnaPeque" class="accion-backup">
-                                    <form action="{{ route('backup.destroy', $backup) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="accion">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol-backup">Restaurar</button>
+                    </div>
+                    <div class="contBotones" id="columnaPeque">
+                        <button class="nomCol-backup">Eliminar</button>
+                    </div>
+                </div>
+                <div class="datos-backup">
+                    @foreach($backups as $backup)
+                        <div class="fila-backup">
+                            <p>{{ $backup }}</p>
+                            <div id="columnaPeque" class="accion-backup">
+                                <form action="{{ route('backup.restore') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="restorePoint" value="{{ $backup }}">
+                                    <button type="submit" class="accion">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                    </button>
+                                </form>
                             </div>
-                        @endforeach
-                    </div>
+                            <div id="columnaPeque" class="accion-backup">
+                                <form action="{{ route('backup.destroy', $backup) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="accion">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
