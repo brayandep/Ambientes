@@ -14,7 +14,7 @@
     <div class="NavegacionContenido">
         <div class="navegacion">
         Inicio > Gestión de usuario > Formulario de registro de usuario
-        <h2 class="titulo">Formulario de Solicitud</h2>
+        <h2 class="titulo">Formulario de registro de usuario</h2>
         @if ($errors->any())
         <div class="alert">
             <ul>
