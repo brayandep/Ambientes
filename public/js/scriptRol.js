@@ -30,19 +30,5 @@ function mostrarInfoRol(id){
    
     fondoGris.style.display = 'flex';
 
-    fetch(`/Rol/Permisos/${id}`)
-            
-            .then(response => response.json())
-            .then(data => {
-                const permissionsList = document.getElementById('permissionsList');
-                permissionsList.innerHTML = '';  // Limpiar lista anterior
-                data.permissions.forEach(permission => {
-                    const li = document.createElement('li');
-                    li.textContent = `${permission.id} - ${permission.name}`;
-                    permissionsList.appendChild(li);
-                });
-                document.getElementById('permissionsPanel').style.display = 'block';
-            })
-            .catch(error => console.error('Error:', error));
 }
 
