@@ -25,8 +25,8 @@
             <div class="input-group">
                 <label class="labRol" >Estado</label>
                 <select class="inputRol" name='Estado'> 
-                    <option value="1">Habilitado</option>
-                    <option value="0">Deshabilitado</option>
+                    <option value="1" {{ old('Estado') == '1' ? 'selected' : '' }}>Habilitado</option>
+                    <option value="0" {{ old('Estado') == '0' ? 'selected' : '' }}>Deshabilitado</option>
                 </select>
             </div>
             <div class="input-group">
