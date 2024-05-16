@@ -116,6 +116,7 @@ Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEsta
 
 //rutas buscador
 Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
+Route::get('/busqueda-ambiente2',[BuscadorController::class, 'show2'])->name('buscador2');
 //termina rutas buscador
 
 //rutas calendario

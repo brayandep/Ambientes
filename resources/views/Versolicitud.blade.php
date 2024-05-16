@@ -29,9 +29,9 @@
             <th ><div class="contBotones">
                 <button class="nomCol">Nro</button>
             </div></th>
-            <th><div class="contBotones">
+            {{-- <th><div class="contBotones">
                 <button class="nomCol">Usuario</button>
-            </div></th>
+            </div></th> --}}
             <th><div class="contBotones">
                 <button class="nomCol">Estado</button>
             </div></th>
@@ -64,13 +64,13 @@
         @endphp
         <tr class="contentcolumna" data-usuario="{{ $solicitud->usuario }}">
             <td>{{ $solicitud->idsolicitud }}</td>
-            <td>
+            {{-- <td>
                 @foreach($usuarios as $usuario2)
                     @if($solicitud->usuario == $usuario2->id)
                         {{ $usuario2->nombre }}
                     @endif
                 @endforeach
-            </td>
+            </td> --}}
             <td>{{ $solicitud->estado }}</td>
             <td>@foreach($ambientes as $ambiente)
                 @if($solicitud->nro_aula == $ambiente->id)
