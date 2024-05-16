@@ -75,7 +75,11 @@
                                 @endif
                                 <p>los permisos son:</p>
                                 
-                                <div id="permissionsList"></div>
+                                @foreach($rol->permissions as $permiso)
+                                    <div id="permissionsList">
+                                        <p>{{$permiso->name}}</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endforeach

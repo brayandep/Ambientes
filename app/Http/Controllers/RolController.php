@@ -79,12 +79,6 @@ class RolController extends Controller
         return redirect()->route('Rol.index'); // Asegúrate de que esta ruta está bien definida
     }
 
-    public function show(Role $role){
-        $permissions = $role->permissions;  // Obtiene todos los permisos asociados a ese rol
-        return response()->json(['permissions' => $permissions]);
-
-    }
-
     /**
      * Display the specified resource.
      *
