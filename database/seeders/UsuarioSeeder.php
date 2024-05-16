@@ -13,7 +13,7 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        //
+      /*  //
         $usuario1 = new User();
         $usuario1 -> nombre = "Brayan";
         $usuario1 -> contraseña = "123";
@@ -29,6 +29,6 @@ class UsuarioSeeder extends Seeder
         $usuario3 -> nombre = "Marcos";
         $usuario3 -> contraseña = "123";
         $usuario3 -> save();
-
+*/
     }
 }

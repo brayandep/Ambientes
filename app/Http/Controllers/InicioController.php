@@ -15,4 +15,12 @@ class InicioController extends Controller
         // Pasar las publicaciones a la vista de inicio
         return view('Inicio', ['publicaciones' => $publicaciones]);
     }
+    public function mostrarInicio2()
+    {
+        // Obtener las publicaciones necesarias
+        $publicaciones = Publicacion::all(); // Esto es solo un ejemplo, podrías necesitar una consulta más específica
+
+        // Pasar las publicaciones a la vista de inicio
+        return view('invitado', ['publicaciones' => $publicaciones]);
+    }
 }
