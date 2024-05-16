@@ -21,7 +21,7 @@ function VolverRegRol(){
     fondoGris.style.display = 'none';
 }
 
- 
+//script para lista de rol 
 function mostrarInfoRol(id){
     panelId = 'panelVerRol-' + id;
     panelVerRol = document.getElementById(panelId);
@@ -29,6 +29,12 @@ function mostrarInfoRol(id){
     panelVerRol.style.display = 'block';
    
     fondoGris.style.display = 'flex';
+
+}
+function exitInfo(id){
+    panelId = '#panelVerRol-' + id;
+    $(panelId).hide();
+    $('#fondoGris').hide();
 
 }
 

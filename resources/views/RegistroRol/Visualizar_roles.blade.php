@@ -66,20 +66,25 @@
 
                         <div class="panel" id="panelVerRol-{{ $rol->id }}">
                             <div class="info">
-                                <p>Informacion:</p>
+                                <div class="informacion">
+                                    <p>Informacion</p>
+                                    <i class="fas fa-xmark" onclick="exitInfo('{{ $rol->id }}')"></i>
+                                </div>
                                 <p>Descripcion: {{$rol->descripcionRol}}</p>
                                 @if (!empty($rol->fechaFinRol))
-                                <p>Vigente desde: {{$rol->fechaInicioRol}} hasta {{$rol->fechaFinRol}}</p>
+                                    <p>Vigencia: {{$rol->fechaInicioRol}} - {{$rol->fechaFinRol}}</p>
                                 @else
-                                <p>Vigencia: Permanente</p>
+                                    <p>Vigencia: Permanente</p>
                                 @endif
-                                <p>los permisos son:</p>
+                                <p>Los permisos son:</p>
                                 
-                                @foreach($rol->permissions as $permiso)
-                                    <div id="permissionsList">
-                                        <p>{{$permiso->name}}</p>
-                                    </div>
-                                @endforeach
+                                <div class="permissionsList">
+                                    @foreach($rol->permissions as $permiso)
+                                        <ul class="punto">
+                                            <li>{{$permiso->name}}</li>
+                                        </ul>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -88,9 +93,10 @@
             {{$roles->links()}}
         </div>
     </div>
+    <div id="fondoGris"></div>
 
 @endsection
 @section('scripts')
-<script src="{{ asset('js/scriptRol.js') }}"></script>
+<script src="../../js/scriptRol.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection

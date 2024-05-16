@@ -16,7 +16,7 @@ class materiaController extends Controller
     {
         $materias = Materia::orderBy('id', 'desc')->paginate();
         
-        return view('RegistroRol.Visualizar_roles', compact('materias'));
+        return view('materia.lista', compact('materias'));
     }
 
     public function create()
