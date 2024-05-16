@@ -31,37 +31,43 @@
             </div>
             <div class="input-group">
                 <label class="labRol" >Nombre</label>
-                <input class="inputRol" name='name' placeholder="Ingrese el nombre del rol">
+                <input class="inputRol" name='name' placeholder="Ingrese el nombre del rol" value="{{old('name')}}">
             </div>
             @error('name')
                 <span>*{{$message}}</span>
             @enderror
             <div class="input-group">
                 <label class="labRol">Descripcion</label>
-                <input class="inputRol" name='descripcionRol' placeholder="Ingrese una breve descripcion">
+                <input class="inputRol" name='descripcionRol' placeholder="Ingrese una breve descripcion" value="{{old('descripcionRol')}}">
             </div>
             @error('descripcionRol')
                 <span>*{{$message}}</span>
             @enderror
-            <div class="input-group">
-                <label class="labRol">Vigencia del rol</label>
-                <select class="inputRol" id="vigencia" name="tipoVigencia" onchange="mostrarFechas(this.value)"> 
-                    <option value="permanente">Permanente</option>
-                    <option value="temporal" >Temporal</option>
-                </select>
+            <div class="vigRol">
+                <div class="input-group">
+                    <label class="labRol">Vigencia del rol</label>
+                    <select class="inputRol" id="vigencia" name="tipoVigencia" onchange="mostrarFechas(this.value)"> 
+                        <option value="permanente">Permanente</option>
+                        <option value="temporal">Temporal</option>
+                    </select>
+                </div>
+                <div class="input-group" id="rangoFechas">
+                    {{-- <label>Fecha de inicio:</label> --}}
+                    <input type="date" name='fechaInicioRol' id="fechaInicio">
+                    <label class="labRol">Fecha de fin:</label>
+                    <input class="inputRol" name='fechaFinRol' type="date" id="fechaFin">
+                </div>
             </div>
-            <div class="input-group" id="rangoFechas">
-                {{-- <label>Fecha de inicio:</label> --}}
-                <input type="date" name='fechaInicioRol' id="fechaInicio">
-                <label class="labRol">Fecha de fin:</label>
-                <input class="inputRol" name='fechaFinRol' type="date" id="fechaFin">
-            </div>
+            
             {{-- name="fechaFin" --}}
             <div class="input-group" >
                 <label class="labRol" for="permissions">Permisos:</label>
                 <section class="perm">
                     @foreach ($permissions as $permission)
-                        <label class="labPerm" for="perm{{ $permission->id }}"><input type="checkbox" id="perm{{ $permission->id }}" name="permissions[]" value="{{ $permission->id }}">{{ $permission->name }}</label>
+                    <label class="labPerm" for="perm{{ $permission->id }}">
+                        <input type="checkbox" id="perm{{ $permission->id }}" name="permissions[]" value="{{ $permission->id }}" {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}>
+                        {{ $permission->name }}
+                    </label>
                     @endforeach
                 </section>
             </div>
