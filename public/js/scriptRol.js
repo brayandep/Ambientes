@@ -1,6 +1,6 @@
 
 const rangoFechas = document.getElementById("rangoFechas");
-// Escuchar cambios en el selector
+
 function mostrarFechas(vigencia){
     
     // Si se selecciona la opción "Temporal" (value=2), mostrar los campos de fecha
@@ -12,3 +12,29 @@ function mostrarFechas(vigencia){
         rangoFechas.style.display = 'none';
     }
 }
+function CancelarRegR(){
+    PanelCancelarRegistroR.style.display = 'block';
+    fondoGris.style.display = 'flex';
+}
+function VolverRegRol(){
+    PanelCancelarRegistroR.style.display = 'none';
+    fondoGris.style.display = 'none';
+}
+
+//script para lista de rol 
+function mostrarInfoRol(id){
+    panelId = 'panelVerRol-' + id;
+    panelVerRol = document.getElementById(panelId);
+    
+    panelVerRol.style.display = 'block';
+   
+    fondoGris.style.display = 'flex';
+
+}
+function exitInfo(id){
+    panelId = '#panelVerRol-' + id;
+    $(panelId).hide();
+    $('#fondoGris').hide();
+
+}
+

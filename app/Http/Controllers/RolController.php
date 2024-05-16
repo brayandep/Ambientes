@@ -29,8 +29,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = Role :: all();
-        return view('roles.index' , compact('roles'));
+        $roles = Role :: orderBy('id', 'desc')->paginate();
+        return view('RegistroRol.Visualizar_roles' , compact('roles'));
     }
 
     /**
@@ -55,8 +55,8 @@ class RolController extends Controller
         $fechaFormateada = Carbon::now()->format('Y-m-d'); // Ejemplo para el formato "año-mes-día"
 
         $request->validate([
-            'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/',
-            'descripcionRol' => 'max:255', // Modificado para permitir mayor longitud y caracteres
+            'name' => 'required|max:50|regex:/^[a-zA-Z\s]+$/|unique:roles,name',
+            'descripcionRol' => 'max:100', // Modificado para permitir mayor longitud y caracteres
             'tipoVigencia' => 'required',
             // 'fechaInicioRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             // 'fechaFinRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
@@ -76,9 +76,8 @@ class RolController extends Controller
 
         $rol->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('buscador'); // Asegúrate de que esta ruta está bien definida
+        return redirect()->route('Rol.index'); // Asegúrate de que esta ruta está bien definida
     }
-
 
     /**
      * Display the specified resource.
@@ -86,9 +85,16 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function habilitar(Request $request, $id)
     {
-       
+        $rol = Role::find($id);
+        //print_r($request -> Estado);
+    
+        // Cambiar el estado de 1 a 0 y viceversa
+        $rol->Estado = $rol->Estado == 1 ? 0 : 1;
+    
+        $rol->save();
+        return redirect()->route('Rol.index');
     }
 
     /**

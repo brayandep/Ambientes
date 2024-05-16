@@ -85,11 +85,11 @@
 }
 .cancelar{
     background-color: #F35D5D;
-    
+    color: #e2eaec;
 }
 .registrar{
-    background-color: #933864;
-
+    background-color: #4e798c;
+    color: #e2eaec;
 }
 
 #fondoGris{

@@ -1,0 +1,104 @@
+/* Switch de rol */
+.boton-sw {
+    margin: 3px;
+    margin-left: 20px;
+  }
+  
+  .lbl-switch {
+    display: inline-block;
+    width: 48px;
+    height: 22px;
+    background: #aaa;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .boton-sw input:checked + .lbl-switch {
+    background: #AE7791;
+  }
+  
+  .lbl-switch:after {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: #f5f6f7;
+    border-radius: 100px;
+    top: 3px;
+    left: 3px;
+    transition: 0.2s;
+  }
+  
+  .boton-sw input:checked + .lbl-switch:after {
+    left: 28px;
+  }
+  
+  .boton-sw input {
+    display: none;
+  }
+  /* Termina switch de rol */
+
+  /* paneles emergaentes */
+#fondoGris{
+    background-color: #40505577;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+
+.panel{
+    position: absolute; 
+    z-index: 2; /* un valor alto para estar por encima de otros elementos */
+    background-color: #f5f6f7;
+    color: #0B2C37;
+    padding: 25px;
+    /* width: 21%; */
+    min-width: 197px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.288);  
+    border-radius: 5px;
+    display: none;
+}
+
+.informacion{
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #933864;
+}
+.informacion i{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+.informacion i:hover{
+  background-color: #e3e5e5;
+}
+
+.permissionsList{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+  grid-gap: 10px; /* Espacio entre las columnas */
+}
+
+.punto{
+  list-style-type: circle;
+  padding-left: 19px;
+}

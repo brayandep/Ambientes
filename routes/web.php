@@ -20,6 +20,8 @@ use App\Http\Controllers\BuscadorController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
+
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\RolController;
 use Spatie\Permission\Models\Permission;
 
@@ -110,6 +112,7 @@ Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEsta
 
 //rutas buscador
 Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
+//termina rutas buscador
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
@@ -157,8 +160,21 @@ Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@
 Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
+
+//rutas backup
+Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+Route::post('/backup', [BackupController::class, 'store'])->name('backup.store');
+Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
+Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
+Route::get('/backup/{backupName}', [BackupController::class, 'show'])->name('backup.show');
+//termina rutas backup
+
+
 //Registrar roles nuevos
 Route::get('/Registrar_rol', [RolController::class, 'verForm'])->name('Formulario.Rol');
 Route::post('/Registrar_rol',[RolController::class, 'store'])->name('Rol.store');
+Route::get('/Rol/lista',[RolController::class, 'index'])->name('Rol.index');
+Route::put('/Rol/habilitar/{id}',[RolController::class, 'habilitar'])->name('Rol.habilitar');
+Route::get('/Rol/Permisos/{id}', [RolController::class, 'show']);
 
 

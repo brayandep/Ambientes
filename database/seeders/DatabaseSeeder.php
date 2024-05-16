@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder
         $this -> call(DocenteSeeder::class);
         $this -> call(MateriaSeeder::class);
         $this -> call(GrupoSeeder::class);
-        $this -> call(SeederTablaPermisos::class);
+
+        //seed del rol
+        $this -> call(RolSeeder::class);
     }
     
 }
