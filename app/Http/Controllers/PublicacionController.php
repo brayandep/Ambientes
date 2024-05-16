@@ -7,6 +7,7 @@ use App\Models\Publicacion;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use App\Models\Log;
+use App\Utils\Logger;
 
 
 
@@ -45,12 +46,15 @@ class PublicacionController extends Controller
         $publicacion->visible = 1;
         $publicacion->save();
         // Registro de creación en la bitácora
-        Log::create([
+        /*Log::create([
             'event_type' => 'Publicación creada',
             //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
             'new_data' => json_encode($publicacion->toArray()),
             'operation' => 'Crear',
-        ]);
+        ]);*/
+        $new_data = json_encode($publicacion->toArray());
+        Logger::logCreation('Publicación creada', $new_data);
+        
         // Redireccionar al usuario con un mensaje de éxito
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido creada exitosamente.');
     }
