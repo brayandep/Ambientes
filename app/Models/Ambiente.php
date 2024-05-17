@@ -31,21 +31,45 @@ class Ambiente extends Model
             Log::create([
                 'event_type' => 'Ambiente creado',
                 //'user_id' => Auth::id(),
-                'new_data' => json_encode($ambiente->toArray()),
-                'operation' => 'Crear',
+                
+                'new_data' => json_encode(['ambientes_id' => $ambiente->id]),
+                'operation' => 'ambientes',
             ]);
         });
 
         static::updated(function ($ambiente) {
+            // Obtener los datos antiguos y nuevos
+            $oldData = $ambiente->getOriginal();
+            $newData = $ambiente->toArray();
+        
+            // Inicializar arrays para almacenar los campos que han cambiado
+            $changedFields = [];
+            $oldFields = [];
+        
+            // Definir los campos a excluir
+            $excludedFields = ['created_at', 'updated_at'];
+        
+            // Comparar los datos antiguos con los nuevos, excluyendo los campos especificados
+            foreach ($newData as $key => $value) {
+                if (!in_array($key, $excludedFields) && $value !== $oldData[$key]) {
+                    // Almacenar los campos que han cambiado
+                    $changedFields[$key] = $value;
+                    $oldFields[$key] = $oldData[$key];
+                }
+            }
+        
             // Registro de edición en la bitácora
             Log::create([
                 'event_type' => 'Ambiente editado',
                 //'user_id' => Auth::id(),
-                'old_data' => json_encode($ambiente->getOriginal()),
-                'new_data' => json_encode($ambiente->toArray()),
-                'operation' => 'Editar',
+                'old_data' => json_encode($oldFields),
+                'new_data' => json_encode($changedFields),
+                'operation' => 'ambientes',
+                'id_tabla' => $ambiente->id])
             ]);
         });
+        
+        
 
         static::deleted(function ($ambiente) {
             // Registro de eliminación en la bitácora
@@ -53,7 +77,7 @@ class Ambiente extends Model
                 'event_type' => 'Ambiente eliminado',
                 //'user_id' => Auth::id(),
                 'old_data' => json_encode($ambiente->toArray()),
-                'operation' => 'Eliminar',
+                'operation' => 'ambientes',
             ]);
         });
     }

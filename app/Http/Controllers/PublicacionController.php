@@ -46,10 +46,11 @@ class PublicacionController extends Controller
         $publicacion->save();
         // Registro de creación en la bitácora
         Log::create([
-            'event_type' => 'Publicación creada',
+            'event_type' => 'Publicacion Creada',
             //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
-            'new_data' => json_encode($publicacion->toArray()),
-            'operation' => 'Crear',
+            //'new_data' => json_encode($publicacion->toArray()),//es para guardar todos los datos de la tabla
+            'new_data' => json_encode(['publicacion_id' => $publicacion->id]),//solo guarda la id el la tabla log
+            'operation' => 'publicaciones',
         ]);
         // Redireccionar al usuario con un mensaje de éxito
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido creada exitosamente.');
@@ -63,7 +64,7 @@ class PublicacionController extends Controller
             'event_type' => 'Publicación eliminada',
             //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
             'old_data' => json_encode($publicacion->toArray()),
-            'operation' => 'Eliminar',
+            'operation' => 'publicaciones',
         ]);
         Publicacion::destroy($id);
         // Redirige a la página de publicaciones o a donde sea apropiado después de eliminar

@@ -59,7 +59,8 @@ th {
                         <th>Evento</th>
                         <th>Usuario</th>
                         <th>Fecha</th>
-                        <th>Operación</th>
+                        <th>Tabla Afectada</th>
+                        <th>ID</th>
                         <th>Datos Antiguos</th>
                         <th>Datos Nuevos</th>
                     </tr>
@@ -71,6 +72,7 @@ th {
                             <td>{{ $log->user ? $log->user->name : 'Anónimo' }}</td>
                             <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
                             <td>{{ $log->operation }}</td>
+                            <td>{{ $log->affected_id }}</td>
                             <td>{{ $log->old_data }}</td>
                             <td>{{ $log->new_data }}</td>
                         </tr>
