@@ -64,6 +64,14 @@
 #rangoFechas{
   display: none;
 }
+.SelecT{
+  
+  background-color:#AE7791;
+  width: 160px;
+  color:#E3E5F3;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
 .vigRol{
   display: flex;
   width: 60%;

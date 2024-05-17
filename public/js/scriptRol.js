@@ -20,6 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
     fechaInput.setAttribute('min', fechaMinima);
 })
 
+document.getElementById('selectAllPermissions').addEventListener('click', function() {
+    // Obtener todos los checkboxes de permisos
+    const checkboxes = document.querySelectorAll('input[name="permissions[]"]');
+    const currentState = this.textContent.includes('Seleccionar'); // Verifica el texto del botón para saber el estado
+    // Cambiar el estado de cada checkbox
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = currentState;
+    });
+    // Cambiar el texto del botón basado en el estado
+    this.textContent = currentState ? 'Deseleccionar Todos' : 'Seleccionar Todos';
+});
+
+
 function CancelarRegR(){
     PanelCancelarRegistroR.style.display = 'block';
     fondoGris.style.display = 'flex';

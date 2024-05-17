@@ -64,7 +64,8 @@
             
             {{-- name="fechaFin" --}}
             <div class="input-group" >
-                <label class="labRol" for="permissions">Permisos:</label>
+                <label class="labRol" for="permissions">Permisos:</label> 
+                <button type="button" id="selectAllPermissions" class="SelecT">Seleccionar Todos</button>
                 <section class="perm">
                     @foreach ($permissions as $permission)
                     <label class="labPerm" for="perm{{ $permission->id }}">
