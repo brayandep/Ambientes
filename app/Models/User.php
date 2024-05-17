@@ -19,23 +19,23 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $table = 'usuarios';
 
-    use HasFactory, Notifiable;
 
     protected $fillable = [
         'nombre',
-        'contraseña', // Nombre del campo de contraseña personalizado
+        'email',
+        'password',
+        // Nombre del campo de contraseña personalizado
     ];
 
     protected $hidden = [
-        'contraseña', // Nombre del campo de contraseña personalizado
+        'password', // Nombre del campo de contraseña personalizado
         'remember_token',
     ];
 
     public function getAuthPassword()
     {
-        return $this->contraseña;
+        return $this->password;
     }
     
 }

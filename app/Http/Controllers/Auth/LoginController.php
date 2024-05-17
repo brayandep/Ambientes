@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,22 +12,40 @@ class LoginController extends Controller
 {
     //
     
-    public function index()
+    
+    public function login(Request $request)
     {
-        return view('Login');
-    }
-public function login(Request $request)
-{
-      // Buscar al usuario por su nombre
-      $credentials = $request->only('nombre', 'contraseña');
-      if (Auth::attempt($credentials)) {
-        // Autenticación exitosa
-        return redirect()->intended('/');
-    } else {
-        // Autenticación fallida
-        return back()->withErrors([
-            'nombre' => 'Las credenciales proporcionadas no son válidas.',
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            return redirect()->intended('/invitado');
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => 'Las credenciales proporcionadas no son válidas.',
         ]);
     }
-}
+    public function register(Request $request){
+      // Validar los datos
+      $request->validate([
+        'nombre' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
+    ]);  
+      $user = new User();
+
+        $user->nombre = $request->nombre;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        Auth::login($user);
+        return redirect(route('inicio'));
+    }
+    public function logout(Request $request){
+        // Validar los datos
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+          return redirect(route('sesion.index'));
+      }
 }
