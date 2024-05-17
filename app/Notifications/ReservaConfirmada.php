@@ -11,11 +11,17 @@ class ReservaConfirmada extends Notification
 {
     use Queueable;
 
+    protected $nombreUsuario;
     protected $horario;
+    protected $nombreAmbiente;
+    protected $fechaSolicitud;
 
-    public function __construct($horario)
+    public function __construct($nombreUsuario, $horario, $nombreAmbiente, $fechaSolicitud)
     {
+        $this->nombreUsuario = $nombreUsuario;
         $this->horario = $horario;
+        $this->nombreAmbiente = $nombreAmbiente;
+        $this->fechaSolicitud = $fechaSolicitud;
     }
 
     public function via($notifiable)
@@ -28,7 +34,9 @@ class ReservaConfirmada extends Notification
         return (new MailMessage)
                     ->from('smartbyte626@gmail.com', 'Sistema de reservas UMSS')
                     ->subject('Reserva Confirmada')
-                    ->line('Su reserva de ambiente ha sido aceptada exitosamente')
+                    ->greeting('Hola ' . $this->nombreUsuario)
+                    ->line('Tu reserva de ambiente para el día ' . $this->fechaSolicitud . ' ha sido aceptada exitosamente.')
+                    ->line('El ambiente solicitado es: ' . $this->nombreAmbiente)
                     ->line('El horario solicitado es: ' . $this->horario)
                     ->action('Ver Detalles', url('/Versolicitudes'))
                     ->line('Gracias por usar nuestra aplicación!')

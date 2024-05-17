@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification; // Importamos la clase Notification
-use App\Notifications\ReservaConfirmada; // Importamos la notificación que quieres enviar
-use App\Notifications\ReservaRechazada; // Importamos la notificación que quieres enviar
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ReservaConfirmada;
+use App\Notifications\ReservaRechazada;
 
 class CorreoController extends Controller
 {
-    public function enviarCorreo($correoDestino, $horario)
+    public function enviarCorreoConfirmacion($correoDestino, $nombreUsuario, $horario, $nombreAmbiente, $fechaSolicitud)
     {
-        Notification::route('mail', $correoDestino)->notify(new ReservaConfirmada($horario));
+        Notification::route('mail', $correoDestino)->notify(new ReservaConfirmada($nombreUsuario, $horario, $nombreAmbiente, $fechaSolicitud));
 
-        return redirect()->back()->with('success', 'Correo electrónico enviado correctamente.');
+        return redirect()->back()->with('success', 'Correo de confirmación enviado correctamente.');
+    }
+
+    public function enviarCorreoRechazo($correoDestino, $nombreUsuario, $horario, $nombreAmbiente, $fechaSolicitud)
+    {
+        Notification::route('mail', $correoDestino)->notify(new ReservaRechazada($nombreUsuario, $horario, $nombreAmbiente, $fechaSolicitud));
+
+        return redirect()->back()->with('success', 'Correo de rechazo enviado correctamente.');
     }
 }
