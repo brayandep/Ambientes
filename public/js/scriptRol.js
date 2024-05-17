@@ -12,6 +12,14 @@ function mostrarFechas(vigencia){
         rangoFechas.style.display = 'none';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fechaInput = document.getElementById('fechaFin');
+    const hoy = new Date();
+    const fechaMinima = hoy.toISOString().split('T')[0]; // Formatea la fecha de hoy a YYYY-MM-DD
+    fechaInput.setAttribute('min', fechaMinima);
+})
+
 function CancelarRegR(){
     PanelCancelarRegistroR.style.display = 'block';
     fondoGris.style.display = 'flex';

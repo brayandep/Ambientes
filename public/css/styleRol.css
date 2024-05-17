@@ -64,6 +64,13 @@
 #rangoFechas{
   display: none;
 }
+.vigRol{
+  display: flex;
+  width: 60%;
+}
+#vigencia{
+  width: 50%;
+}
 
 .botones{
   display: flex;

@@ -59,7 +59,7 @@ class RolController extends Controller
             'descripcionRol' => 'max:100', // Modificado para permitir mayor longitud y caracteres
             'tipoVigencia' => 'required',
             // 'fechaInicioRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
-            // 'fechaFinRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
+            'fechaFinRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             'permissions' => 'required|array', // Asegura que se envíe al menos un permiso
             'permissions.*' => 'exists:permissions,id' // Cada permiso debe existir
         ]);
