@@ -35,13 +35,11 @@ class LoginController extends Controller
         'direccion' => 'required',
         'rol' => 'required',
         'ci' => 'required',
-        'apellido' => 'required',
     ]);  
       $user = new User();
 
         $user->nombre = $request->nombre;
         $user->email = $request->email;
-        $user->apellido = $request->apellido;
         $user->ci = $request->ci;
         $user->rol = $request->rol;
         $user->telefono = $request->telefono;
