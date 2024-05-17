@@ -16,7 +16,7 @@ class materiaController extends Controller
     {
         
         $materias = Materia::orderBy('id', 'desc')->paginate();
-        $usuarios = User::all();;
+        $usuarios = User::all();
         return view('materia.lista', compact('materias','usuarios'));
     }
 

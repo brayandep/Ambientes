@@ -187,3 +187,8 @@ Route::post('/iniciar-sesion',[LoginController::class, 'login'])->name('iniciar-
 Route::post('/validar-registro',[LoginController::class, 'register'])->name('validar-registro');
 Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
 
+//lista de usuario
+Route::get('/usuario/lista', [usuariocontroller::class, 'show'])->name('Usuario.show');
+Route::get('/usuario/roles/{usuario}', [usuariocontroller::class, 'edit'])->name('Usuario.edit');
+Route::put('/usuario/roles/{usuario}', [usuariocontroller::class, 'update'])->name('Usuario.update');
+//termina lista de usuario
