@@ -17,9 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
-    
-        
+        //seed del rol
+        $this -> call(RolSeeder::class);
         
         $this -> call(UnidadSeeder::class);
         $this -> call(EquipoSeeder::class);
@@ -29,9 +28,6 @@ class DatabaseSeeder extends Seeder
         $this -> call(DocenteSeeder::class);
         $this -> call(MateriaSeeder::class);
         $this -> call(GrupoSeeder::class);
-
-        //seed del rol
-        $this -> call(RolSeeder::class);
     }
     
 }

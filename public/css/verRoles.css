@@ -53,6 +53,7 @@
     display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
 }
 
+/* Panel de infromacion */
 .panel{
     position: absolute; 
     z-index: 2; /* un valor alto para estar por encima de otros elementos */
@@ -102,3 +103,12 @@
   list-style-type: circle;
   padding-left: 19px;
 }
+
+#negrita{
+  font-weight: bold;
+}
+
+.margen{
+  margin-bottom: 10px;
+}
+/* Termina panel de informacion */

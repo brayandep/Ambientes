@@ -36,7 +36,7 @@
                         <button class="nomCol">Vigencia</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol">Acciones</button>
+                        <button class="nomCol">Infromacion</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
                         <button class="nomCol">Habilitado</button>
@@ -67,16 +67,23 @@
                         <div class="panel" id="panelVerRol-{{ $rol->id }}">
                             <div class="info">
                                 <div class="informacion">
-                                    <p>Informacion</p>
+                                    <p>Informacion - {{$rol->name}}</p>
                                     <i class="fas fa-xmark" onclick="exitInfo('{{ $rol->id }}')"></i>
                                 </div>
-                                <p>Descripcion: {{$rol->descripcionRol}}</p>
-                                @if (!empty($rol->fechaFinRol))
-                                    <p>Vigencia: {{$rol->fechaInicioRol}} - {{$rol->fechaFinRol}}</p>
-                                @else
-                                    <p>Vigencia: Permanente</p>
-                                @endif
-                                <p>Los permisos son:</p>
+
+                                <div class="margen">
+                                    <p class="inline" id="negrita">Descripcion: </p><p class="inline">{{$rol->descripcionRol}}</p>
+                                </div>
+
+                                <div class="margen">
+                                    @if (!empty($rol->fechaFinRol))
+                                        <p class="inline" id="negrita">Vigencia: </p><p class="inline">{{$rol->fechaInicioRol}} - {{$rol->fechaFinRol}}</p>
+                                    @else
+                                        <p class="inline" id="negrita">Vigencia: </p><p class="inline">Permanente</p>
+                                    @endif
+                                </div>
+
+                                <p id="negrita">Permisos asignados:</p>
                                 
                                 <div class="permissionsList">
                                     @foreach($rol->permissions as $permiso)
