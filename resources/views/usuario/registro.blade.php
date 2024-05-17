@@ -91,12 +91,13 @@
             </div>
             <br>
             <div>
-                <label class="texto" for="nro_aula">Selecciona tipo de departamento:</label><br>
-                <select class="input" id="materia" name="materia">
-                    <option>Selecciona un departamento  </option>
-                  
-                </select>
+                <label class="texto" for="nro_aula">Dirección de domicilio </label><br>
+                <input class="input"  type="text" id="direccion" name="direccion" required autofocus  placeholder="Ingresar direccion de domicilio ">
+                @error('direccion')
+                    <p>{{ $message }}</p>
+                @enderror
             </div>
+            <br>
 
         </div>
     </div>   
