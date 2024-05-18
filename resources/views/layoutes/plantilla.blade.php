@@ -98,7 +98,7 @@
                         
                     </li>
                     <li>
-                        <a href="{{ route('Usuario.index') }}"><i class='fas fa-clipboard'></i> Registrar Usuario</a>
+                        <a href="{{ route('Usuario.index') }}"><i class='fas fa-user'></i> Registrar Usuario</a>
                     </li>
                 </ul>
                 
