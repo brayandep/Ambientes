@@ -83,6 +83,7 @@ if ($solicitudExistente) {
 $solicitud = new Solicitud();
 $solicitud->usuario = $request->usuario;
 $solicitud->fecha = $request->fecha;
+$solicitud->nombre = $request->nombre;
 $solicitud->motivo = $request->motivo;
 $solicitud->materia = $request->materia;
 $solicitud->grupo = $request->grupo;
@@ -238,6 +239,7 @@ public function solicitudMostrar(Request $request){
     }
     return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
+
 public function descargarReservasPDF(){
     $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
 

@@ -37,7 +37,7 @@ class WelcomeNotification extends Notification
                     ->line('Tu usuario es: ' . $this->email)
                     ->line('Tu contraseña es: ' . $this->password)
                     ->line('Por seguridad se recomienda cambiar la contraseña recibida, puedes hacerlo en la opción de "Modificar usuario" usando el siguiente enlace:')
-                    ->action('Ir al sistema de reservas', url('/iniciar-sesion/edit'))
+                    ->action('Ir al sistema de reservas', url('/inicio'))
                     ->line('Gracias por usar nuestra aplicación!')
                     ->salutation('Saludos, Sistema de Reservas UMSS');
     }

@@ -18,6 +18,7 @@ class Solicitud extends Model
     'grupo',
     'nro_aula',
     'horario' ,
+    'nombre',
     'estado',]; // Asegúrate de agregar los campos necesarios
 
     // Si la relación entre la solicitud y el usuario existe, puedes definirla aquí

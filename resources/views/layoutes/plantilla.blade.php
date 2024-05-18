@@ -110,8 +110,8 @@
                 <div class="user-menu-container">
                     <button id="userMenuButton" onclick="toggleUserMenu()"><i class='fas fa-user'></i> Usuario</button>
                     <div id="userMenu" class="user-menu">
+                        <a href='{{ route('user.edit') }}'>Modificar usuario</a>
                         <a href='{{ route('logout') }}'>Salir</a>
-                        <a href=''>Modificar usuario</a>
                     </div>
                 </div>
             </header>
