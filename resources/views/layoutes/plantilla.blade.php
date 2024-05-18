@@ -129,6 +129,9 @@
                             <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
                         </li>
                     @endcan
+                    <li>
+                        <a href='{{ route('Usuario.index') }}'><i class='fas fa-clipboard'></i> Registrar Usuario</a>
+                    </li>
 
                     @if (Auth::check())    
                         @if (Auth::user()->can('Ver rol') || Auth::user()->can('Registrar rol'))
@@ -173,7 +176,6 @@
                 @else
                     <a href='{{ route('sesion.index') }}'><i class='fas fa-user'></i></a>
                 @endif
-                <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu</h1>
                 <div class="user-menu-container">
                     <button id="userMenuButton" onclick="toggleUserMenu()"><i class='fas fa-user'></i> Usuario</button>
                     <div id="userMenu" class="user-menu">
@@ -201,7 +203,7 @@
         </div>          
     </footer>
 </body>
-{{-- <script src="{{asset('js/scriptPlantilla.js')}}">
+
 </script>
 <script>
     function toggleUserMenu() {
@@ -223,7 +225,7 @@
             }
         }
     }
-</script> --}}
+</script> 
 <script src="../../js/scriptPlantilla.js"></script>
 @yield('scripts')
 </html>

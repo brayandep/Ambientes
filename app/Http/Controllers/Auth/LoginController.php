@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -46,6 +47,8 @@ class LoginController extends Controller
         $user->direccion = $request->direccion;
         $user->password = Hash::make($request->password);
         $user->save();
+        
+        $user->assignRole($request->rol);
        
         return redirect(route('inicio'));
     }
@@ -64,6 +67,7 @@ class LoginController extends Controller
       {
           // Obtener el usuario autenticado
           $user = Auth::user();
+          
           
           // Mostrar el formulario de edición con los datos del usuario
           return view('usuario.modificar', compact('user'));

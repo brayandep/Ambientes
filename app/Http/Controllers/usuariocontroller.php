@@ -11,8 +11,8 @@ class usuariocontroller extends Controller
 {
     public function index()
     {
-       
-        return view('usuario.registro');
+        $roles = Role::all();
+        return view('usuario.registro',  compact( 'roles'));
     }
     public function index2()
     {

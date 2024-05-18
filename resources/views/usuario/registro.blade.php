@@ -69,9 +69,11 @@
             <div>
                 <label class="texto" for="nro_aula">Selecciona tipo de rol:</label><br>
                 <select class="input" id="rol" name="rol">
-                    <option>Selecciona un rol  </option>
-                  
-                </select>
+                    <option value="">Selecciona una rol</option>
+                    @foreach($roles as $rol)
+                      <option value="{{ $rol->name }}">{{ $rol->name }}</option>
+                    @endforeach
+                    </select>
             </div>
             <br>
 
