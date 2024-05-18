@@ -33,27 +33,21 @@
 
                 <div>
                     <label class="texto" for="nro_aula">Nombre Completo:</label><br>
-                    <input class="input"  type="text" id="nombre" name="nombre" required autofocus placeholder="Ingresar nombres ">
-                    @error('nombre')
-                        <p>{{ $message }}</p>
-                    @enderror
+                    <input class="input"  type="text" id="nombre" name="nombre"  autofocus placeholder="Ingresar nombres ">
+                  
                 </div>
                 <br>
                
                 <div>
                     <label class="texto" for="nro_aula">Telefono :</label><br>
-                    <input class="input"  type="number" id="telefono" name="telefono" required autofocus  placeholder="Ingresar nro de telefono ">
-                    @error('telefono')
-                        <p>{{ $message }}</p>
-                    @enderror
+                    <input class="input"  type="number" id="telefono" name="telefono"  autofocus  placeholder="Ingresar nro de telefono ">
+                    
                 </div>
                 <br>
                 <div>
                     <label class="texto" for="nro_aula">Carnet de identidad  :</label><br>
-                    <input class="input"  type="number" id="ci" name="ci" required autofocus  placeholder="Ingresar carnet de identidad ">
-                    @error('ci')
-                        <p>{{ $message }}</p>
-                    @enderror
+                    <input class="input"  type="number" id="ci" name="ci"  autofocus  placeholder="Ingresar carnet de identidad ">
+                   
                 </div>
                 <br>
                 <div>
@@ -66,10 +60,8 @@
                 <br>
                 <div>
                     <label class="texto" for="nro_aula">Dirección de domicilio </label><br>
-                    <input class="input"  type="text" id="direccion" name="direccion" required autofocus  placeholder="Ingresar direccion de domicilio ">
-                    @error('direccion')
-                        <p>{{ $message }}</p>
-                    @enderror
+                    <input class="input"  type="text" id="direccion" name="direccion"  autofocus  placeholder="Ingresar direccion de domicilio ">
+                
                 </div>
         </div>
 
