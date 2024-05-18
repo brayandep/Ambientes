@@ -1,6 +1,9 @@
 @extends('layoutes.plantilla')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @section('links')
-    <link rel="stylesheet" href="{{ asset('css/stylePublicacion.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/stylePublicacion.css') }}"> -->
+    <link rel="stylesheet" href="../../css/stylePublicacion.css">
 @endsection
 
 @section('contenido')
@@ -11,18 +14,14 @@
         <div class="publicaciones-list">
             @foreach($reglamentos as $publicacion)
                 <div class="publicacion">
-                    <a href="{{ route('publicacion.ver', $publicacion->id) }}" target="_blank">{{ $publicacion->titulo }}</a>
-                    <!-- <a href="{{ route('publicacion.ver', $publicacion->id) }}">{{ $publicacion->titulo }}</a> //nueva pestania-->
-
+                    
+                <a href="{{ route('publicacion.ver', $publicacion->id) }}" style="color: blue;">{{ $publicacion->titulo }}</a>
                     <div class="acciones-publicacion">
-                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
-                    <a href="#" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
-                        <i class="fa fa-edit"></i> <!-- Este es tu icono de editar -->
-                    </a>
-                       
-                        <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
-                    </div>
+                        <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
 
+                        <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -32,18 +31,11 @@
         <div class="publicaciones-list">
             @foreach($anuncios as $publicacion)
                 <div class="publicacion">
-               
-                  <a href="{{ route('publicacion.ver', $publicacion->id) }}" target="_blank">{{ $publicacion->titulo }}</a>
-                <!--<a href="{{ route('publicacion.ver', $publicacion->id) }}">{{ $publicacion->titulo }}</a>-->
-
+                <a href="{{ route('publicacion.ver', $publicacion->id) }}" style="color: blue;">{{ $publicacion->titulo }}</a>
                     <div class="acciones-publicacion">
-                    <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
-                       
-                    <a href="{{ route('publicaciones.detalles', ['id' => $publicacion->id]) }}" class="btn btn-primary btn-editar" data-id="{{ $publicacion->id }}" data-tipo="{{ $publicacion->tipo }}" onclick="editarPublicacion({{ $publicacion->id }})">
-                        <i class="fa fa-edit"></i> <!-- Este es tu icono de editar -->
-                    </a>
-
-                        <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> <!-- Nueva columna -->
+                        <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
+                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
+                        <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span> 
                     </div>
                 </div>
             @endforeach
@@ -53,7 +45,7 @@
         <button id="btn-crear-publicacion" class="btn btn-success">Crear Publicación</button>
 
 
-        <!-- Modal para crear/editar publicación -->
+        <!-- Modal para crear-->
         <div id="formulario-crear-publicacion" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="cerrarFormulario()">&times;</span>
@@ -102,52 +94,28 @@
 
 @section('scripts')
 <script>
-// para el modal
-        // Espera a que el documento esté listo
-    document.addEventListener('DOMContentLoaded', function() {
-        // Obtiene el botón de crear publicación
-        var btnCrearPublicacion = document.getElementById('btn-crear-publicacion');
+// Obtiene el botón de crear publicación
+var btnCrearPublicacion = document.getElementById('btn-crear-publicacion');
 
-        // Agrega un event listener para el clic en el botón
-        btnCrearPublicacion.addEventListener('click', function() {
-            // Muestra el modal para crear publicación
-            document.getElementById("formulario-crear-publicacion").style.display = "block";
-        });
-    });
-    function cerrarFormulario() {
-        // Cierra el modal de creación de publicación
-        document.getElementById("formulario-crear-publicacion").style.display = "none";
-    }
-    // termina para el modal
-    function eliminarPublicacion(id) {
-        // Aquí puedes implementar la lógica para eliminar la publicación con el ID proporcionado
-    }
+// Agrega un event listener para el clic en el botón
+btnCrearPublicacion.addEventListener('click', function() {
+    // Muestra el modal para crear publicación
+    document.getElementById("formulario-crear-publicacion").style.display = "block";
+});
 
-    function editarPublicacion(id) {
-    fetch(`/publicaciones/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('tipo').value = data.tipo;
-            document.getElementById('titulo').value = data.titulo;
-            document.getElementById('descripcion').value = data.descripcion;
-            // Llenar otros campos según sea necesario
+// Función para extraer el ID de la URL
+function obtenerIdDeUrl(url) {
+    // Dividir la URL por "/"
+    var partes = url.split("/");
+    // El ID es el último elemento de la URL
+    var id = partes[partes.length - 2];
+    return id;
+}
 
-            // Cambiar el texto del botón a "Actualizar"
-           // document.getElementById("btn btn-primary").innerText = "Actualizar";
-
-            // Mostrar el modal
-           
-                btnCrearPublicacion.addEventListener('click', function() {
-            // Muestra el modal para crear publicación
-            document.getElementById("formulario-crear-publicacion").style.display = "block";
-        });
-
-        })
-        .catch(error => console.error('Error al obtener los datos de la publicación:', error));
-    }
-
-
-
+function cerrarFormulario() {
+    // Cierra el modal de creación de publicación
+    document.getElementById("formulario-crear-publicacion").style.display = "none";
+}
 </script>
 
 @endsection

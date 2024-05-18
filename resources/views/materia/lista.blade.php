@@ -1,7 +1,8 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerMaterias.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styleVerMaterias.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="../../css/styleVerMaterias.css">
 @endsection
 
 @section('titulo', 'Lista de Materias')
@@ -42,9 +43,11 @@
                     <div class="contBotones" id="columnaPeque">
                         <button class="nomCol">Grupos</button>
                     </div>
-                    <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol">Editar</button>
-                    </div>
+                    @can('Editar materia')
+                        <div class="contBotones" id="columnaPeque">
+                            <button class="nomCol">Editar</button>
+                        </div>                        
+                    @endcan
                     <div class="contBotones" id="columnaPeque">
                         <button class="nomCol">Grupos</button>
                     </div>
@@ -58,9 +61,12 @@
                             <p id="columnaPeque">{{$Materia->codigo}}</p>
                             <p id="columnaPeque">{{$Materia->nivel}}</p>
                             <p id="columnaPeque">{{$Materia->cantGrupo}}</p>
-                            <div class="EditHab" id="columnaPeque">
-                                <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </div>
+
+                            @can('Editar materia')
+                                <div class="EditHab" id="columnaPeque">
+                                    <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                </div>                      
+                            @endcan
 
                             <div class="EditHab" id="columnaPeque">
                                 <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';"><i class="fa-solid fa-user-group"></i></button>

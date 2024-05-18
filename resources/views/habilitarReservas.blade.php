@@ -1,7 +1,7 @@
 @extends('layoutes.plantilla')
 
 @section('links')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
+<link rel="stylesheet" type="text/css" href="../../css/stylesbrayan.css">
 @endsection
 
 
@@ -90,7 +90,7 @@
                                  <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                                 @csrf
                                                 @method('put')
-                                                <button id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                                <button id="boton-salir" title="Denegar solicitud"  onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                             </form>
                                         
                             </div>
@@ -105,7 +105,7 @@
                             <form action="{{ route('solicitud.denegar', $solicitud->idsolicitud) }}" method="POST">
                                            @csrf
                                            @method('put')
-                                           <button id="boton-salir"   onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
+                                           <button id="boton-salir" title="Denegar solicitud"  onclick="botonCancelar2()" ><i class="fa-solid fa-circle-xmark" ></i></button>
                                        </form>
                                    
                        </div>

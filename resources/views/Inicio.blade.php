@@ -36,6 +36,7 @@
     background-color: #f0f0f0;
     padding: 20px;
     border-radius: 20px;
+    margin-top: 20px;
   }
   .announcements ul li  {
     margin-bottom: 15px; /* Ajusta el valor según el espacio deseado entre las líneas */
@@ -46,8 +47,15 @@
     margin-left: 80px;
     border-radius: 20px; 
   }
-  .header h1, .header p {
+  .header h1 {
     margin: 10px; /* Eliminamos el margen por defecto de los elementos */
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .header p {
+    margin: 10px; /* Eliminamos el margen por defecto de los elementos */
+    font-size: 20px;
+    font-weight: bold;
   }
   .header-text {
     display: flex;
@@ -58,9 +66,20 @@
     background-color:#933864; /* Fondo celeste */
     padding: 10px; /* Añadir relleno para dar más prominencia */
     border-radius: 5px; /* Añadir bordes redondeados */
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
   }
+  .link-publicacion {
+    color: blue;
+    text-decoration: none; /* Quita el subrayado predeterminado del enlace */
+    font-weight: bold;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta cualquier contenido que desborde del contenedor */
+    text-overflow: ellipsis;
+}
 </style>
-
+@section('contenido')
 <div class="container">
   <div class="header">
     <img src="{{asset('images\inicio.jpg')}}" alt="Logo de la Universidad">
@@ -70,13 +89,22 @@
     </div>
   </div>
 
+  @foreach($publicaciones as $publicacion)
+    @if($publicacion->fecha_vencimiento <= now()) <!-- Compara la fecha de vencimiento con la fecha actual -->
+        <!-- Aquí establece la columna visible a 0 -->
+        @if($publicacion->visible == 1) <!-- Solo si actualmente es visible -->
+            <?php $publicacion->update(['visible' => 0]); ?> <!-- Actualiza la columna visible a 0 -->
+        @endif
+    @endif
+  @endforeach
+
   <div class="sidebar">
     <div class="announcements">
       <h2 class="reglamento-title">Reglamento</h2>
       <ul>
         @foreach($publicaciones as $publicacion)
-        @if($publicacion->tipo == 'reglamento' && $publicacion->visible)
-            <li title="{{ $publicacion->titulo }}" class="truncate">{{ $publicacion->titulo }}</li>
+          @if($publicacion->visible && $publicacion->tipo == 'reglamento')
+            <li><a href="{{ route('publicacion.ver', $publicacion->id) }}" class="link-publicacion">{{ $publicacion->titulo }}</a></li>
           @endif
         @endforeach
       </ul>
@@ -84,8 +112,8 @@
       <h2 class="reglamento-title">Anuncios</h2>
       <ul>
         @foreach($publicaciones as $publicacion)
-        @if($publicacion->tipo == 'anuncio' && $publicacion->visible)
-            <li title="{{ $publicacion->titulo }}" class="truncate">{{ $publicacion->titulo }}</li>
+          @if($publicacion->visible && $publicacion->tipo == 'anuncio')
+            <li><a href="{{ route('publicacion.ver', $publicacion->id) }}" class="link-publicacion">{{ $publicacion->titulo }}</a></li>
           @endif
         @endforeach
       </ul>

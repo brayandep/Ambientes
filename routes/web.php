@@ -25,6 +25,11 @@ use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
 
+use App\Http\Controllers\BackupController;
+use App\Http\Controllers\RolController;
+use Spatie\Permission\Models\Permission;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,11 +50,11 @@ Route::get('/', function () {
 //rutas unidade
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
-})->middleware('auth')->name('unidad.registrar');
-Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->middleware('auth')->name('visualizar_unidad');
+})->middleware('can:Registrar unidad')->name('unidad.registrar');
+Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->middleware('can:Ver unidad')->name('visualizar_unidad');
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->middleware('auth')->name('unidad.store');
 Route::get('/unidad/dependencia/{nivel}',[DependenciaUnidadController::class, 'buscar'])->middleware('auth')->name('dependencia.buscar');
-Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->middleware('auth')->name('unidad.edit');
+Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->middleware('can:Editar unidad')->name('unidad.edit');
 Route::delete('/Visualizar_Unidad/{unidad}',[registroUnidadesController::class, 'destroy'])->middleware('auth')->name('unidad.destroy');
 Route::put('/Editar_unidad/{unidad}',[registroUnidadesController::class, 'update'])->middleware('auth')->name('unidad.update');
 Route::put('/Visualizar_unidad/{unidad}',[registroUnidadesController::class, 'updateEstado'])->middleware('auth')->name('unidad.updateEstado');
@@ -57,29 +62,30 @@ Route::put('/unidad/{unidad}', [registroUnidadesController::class, 'habilitarEst
 Route::put('/unidad/toggle/{unidad}', [registroUnidadesController::class, 'toggleEstado'])->middleware('auth')->name('unidad.toggle');
 //termina rutas unidades
 
-Route::get('/registro', function () {
-    return view('registro');
-})->name('registro');
+// Route::get('/registro', function () {
+//     return view('registro');
+// })->name('registro');
+
 //registrar solicitudes de ambientes
 Route::get('/Solicitud', function () {
     return view('SolicitudAmbiente');
-})->middleware('auth')->name('SolicitudAmbiente');
+})->middleware('can:Solicitar ambiente')->name('SolicitudAmbiente');
 //versolicitudes
-Route::get('/Versolicitudes', [SolicitudController::class, 'index'])->middleware('auth')->name('VerSolicitud');
-Route::get('/Versolicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->middleware('auth')->name('solicitud.edit');
+Route::get('/Versolicitudes', [SolicitudController::class, 'index'])->middleware('can:Solicitar ambiente')->name('VerSolicitud');
+Route::get('/Versolicitudes/{solicitud}/edit', [SolicitudController::class, 'edit'])->middleware('can:Solicitar ambiente')->name('solicitud.edit');
 Route::put('/Versolicitudes/{solicitud}', [SolicitudController::class, 'update'])->middleware('auth')->name('solicitud.update');
 Route::delete('/Versolicitudes/{solicitud}', [SolicitudController::class, 'destroy'])->middleware('auth')->name('solicitud.destroy');
 //envia datos
 Route::post('/registro', [RegistroController::class, 'store'])->middleware('auth')->name('registro.store');
 Route::post('/Solicitud', [SolicitudController::class, 'store'])->middleware('auth')->name('solicitud.store');
-Route::get('/Solicitud', [SolicitudController::class, 'create'])->middleware('auth')->name('solicitud.create'); 
+Route::get('/Solicitud', [SolicitudController::class, 'create'])->middleware('can:Solicitar ambiente')->name('solicitud.create'); 
 
 
 //rutas de materia
-Route::get('materia', [materiaController::class, 'show'])->middleware('auth')->name('materia.show');
-Route::get('materia/registrar', [materiaController::class, 'create'])->middleware('auth')->name('materia.reg');
+Route::get('materia', [materiaController::class, 'show'])->middleware('can:Ver materia')->name('materia.show');
+Route::get('materia/registrar', [materiaController::class, 'create'])->middleware('can:Registrar materia')->name('materia.reg');
 Route::post('materia', [materiaController::class, 'store'])->middleware('auth')->name('materia.store');
-Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->middleware('auth')->name('materia.editar');
+Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->middleware('can:Editar materia')->name('materia.editar');
 Route::put('materia/{materia}', [materiaController::class, 'update'])->middleware('auth')->name('materia.update');
 //termina rutas de materia
 
@@ -92,22 +98,22 @@ Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
 
-Route::get('/ambiente/create', [AmbienteController::class, 'create'])->middleware('auth')->name('ambiente.create');
+Route::get('/ambiente/create', [AmbienteController::class, 'create'])->middleware('can:Regsitrar ambiente')->name('ambiente.create');
 Route::post('/ambiente', [AmbienteController::class, 'store'])->middleware('auth')->name('ambiente.store');
-Route::get('/ambiente/{id}', [AmbienteController::class, 'edit'])->middleware('auth')->name('ambiente.edit');
+Route::get('/ambiente/{id}', [AmbienteController::class, 'edit'])->middleware('can:Editar ambiente')->name('ambiente.edit');
 Route::put('/ambiente/{id}', [AmbienteController::class, 'update'])->middleware('auth')->name('ambiente.update');
 
 //rutas visualizacion ambientes
-Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->middleware('auth')->name('AmbientesRegistrados');
-Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEstado'])->middleware('auth')->name('cambiar.estado');
+Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->middleware('can:Ver ambiente')->name('AmbientesRegistrados');
+Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEstado'])->middleware('can:can:Editar ambiente')->name('cambiar.estado');
 //termina rutas visualizacion ambientes
 
 //rutas buscador
-Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->middleware('auth')->name('buscador');
+Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
 
 //rutas calendario
-Route::get('/Calendario', [CalendarioController::class, 'index'])->middleware('auth')->name('calendario.index');
-Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->middleware('auth')->name('calendario.individual');
+Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
+Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->name('calendario.individual');
 Route::post('/Calendario/evento', [EventoController::class, 'store'])->middleware('auth')->name('evento.store');
 Route::delete('/Calendario/evento/{id}', [EventoController::class, 'destroy'])->middleware('auth')->name('evento.delete');
 Route::put('/Calendario/evento/{id}', [EventoController::class, 'update'])->middleware('auth')->name('evento.update');
@@ -116,7 +122,7 @@ Route::put('/Calendario/evento/{id}', [EventoController::class, 'update'])->midd
 
 
 //habilitar reservas
-Route::get('/habilitar', [SolicitudController::class, 'index2'])->middleware('auth')->name('habilitarReservas');
+Route::get('/habilitar', [SolicitudController::class, 'index2'])->middleware('can:Ver reserva')->name('habilitarReservas');
 Route::put('/suspender/{id}', [SolicitudController::class, 'suspender'])->middleware('auth')->name('solicitud.suspender');
 //habilitar
 Route::put('/habilitar/{id}', [SolicitudController::class, 'habilitar'])->middleware('auth')->name('solicitud.habilitar');
@@ -130,29 +136,49 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
     return view('Inicio');
 })->name('inicio');*/
 
-
-
 // Ruta para mostrar la página de inicio
+Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 // Rutas para las publicaciones
 
 
-Route::get('/publicaciones', [PublicacionController::class, 'index'])->middleware('auth')->name('publicaciones.index');
-Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->middleware('auth')->name('crear.publicacion');
+Route::get('/publicaciones', [PublicacionController::class, 'index'])->middleware('can:Registrar publicacion')->name('publicaciones.index');
+Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->middleware('can:Registrar publicacion')->name('crear.publicacion');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->middleware('auth')->name('guardar.publicacion');
 //Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
 Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->middleware('auth')->name('publicaciones.detalles');
-Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->middleware('auth')->name('eliminar.publicacion');
+Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->middleware('can:Eliminar publicacion')->name('eliminar.publicacion');
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->middleware('auth')->name('publicacion.ver');
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->middleware('auth')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->middleware('auth')->name('descargar.unidades.pdf');
 Route::get('/descargar-materias-pdf', 'App\Http\Controllers\materiaController@descargarMateriasPDF')->middleware('auth')->name('descargar.materias.pdf');
 Route::get('/descargar-reservas-pdf', 'App\Http\Controllers\SolicitudController@descargarReservasPDF')->middleware('auth')->name('descargar.reservas.pdf');
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
+
+Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
+
+//rutas backup
+Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+Route::post('/backup', [BackupController::class, 'store'])->name('backup.store');
+Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
+Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
+Route::get('/backup/{backupName}', [BackupController::class, 'show'])->name('backup.show');
+//termina rutas backup
 
 
-Route::get('/usuario', [usuariocontroller::class, 'index'])->name('Usuario.index');
+//Registrar roles nuevos
+Route::get('/Registrar_rol', [RolController::class, 'verForm'])->middleware('can:Registrar rol')->name('Formulario.Rol');
+Route::post('/Registrar_rol',[RolController::class, 'store'])->name('Rol.store');
+Route::get('/Rol/lista',[RolController::class, 'index'])->middleware('can:Ver rol')->name('Rol.index');
+Route::put('/Rol/habilitar/{id}',[RolController::class, 'habilitar'])->name('Rol.habilitar');
+Route::get('/Rol/Permisos/{id}', [RolController::class, 'show']);
+
+
+
+
+Route::get('/usuario', [usuariocontroller::class, 'index'])->middleware('can:Registrar usuario')->name('Usuario.index');
 
 Route::get('/inicio', [usuariocontroller::class, 'index2'])->name('sesion.index');
 Route::post('/iniciar-sesion',[LoginController::class, 'login'])->name('iniciar-sesion');
@@ -161,3 +187,8 @@ Route::get('/iniciar-sesion/edit', [LoginController::class, 'edit'])->name('user
 Route::post('/iniciar-sesion/update', [LoginController::class, 'update'])->name('user.update');
 Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
 
+//lista de usuario
+Route::get('/usuario/lista', [usuariocontroller::class, 'show'])->middleware('can:Ver usuario')->name('Usuario.show');
+Route::get('/usuario/roles/{usuario}', [usuariocontroller::class, 'edit'])->name('Usuario.edit');
+Route::put('/usuario/roles/{usuario}', [usuariocontroller::class, 'update'])->name('Usuario.update');
+//termina lista de usuario

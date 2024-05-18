@@ -13,7 +13,7 @@ class InicioController extends Controller
         $publicaciones = Publicacion::all(); // Esto es solo un ejemplo, podrías necesitar una consulta más específica
 
         // Pasar las publicaciones a la vista de inicio
-        return view('inicio', ['publicaciones' => $publicaciones]);
+        return view('Inicio', ['publicaciones' => $publicaciones]);
     }
     public function mostrarInicio2()
     {

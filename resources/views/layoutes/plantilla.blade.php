@@ -28,51 +28,81 @@
                     <li>
                         <a href="{{ route('calendario.index') }}"><i class='fas fa-calendar-days'></i> Calendario</a>
                     </li>
-                    <li onclick="gesAmbiente()">
-                        <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>
-                        
-                    </li>
+                    @if (Auth::check())    
+                        @if (Auth::user()->can('Ver ambiente') || Auth::user()->can('Regsitrar ambiente'))
+                            <li onclick="gesAmbiente()">
+                                <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>
+                                
+                            </li>
+                        @endif
+                    @endif
                     <nav class="subMenu" id="sub1">
                         <ul>
+                            @can('Registrar ambiente')   
                             <li>
                                 <a href="{{ route('ambiente.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
+                            @endcan
+                            @can('Ver ambiente')   
                             <li>
                                 <a href="{{ route('AmbientesRegistrados') }}"><i class="fa-solid fa-rectangle-list"></i> Ver Informacion de ambiente</a>
                             </li>
+                            @endcan
                         </ul>
                     </nav>
-                    <li onclick="gesUnidad()">
-                        <p><i class='fas fa-clipboard'></i> Gestionar Unidad</p>
-                    </li>
+
+                    @if (Auth::check())
+                        @if (Auth::user()->can('Ver unidad') || Auth::user()->can('Registrar unidad'))
+                            <li onclick="gesUnidad()">
+                                <p><i class='fas fa-clipboard'></i> Gestionar Unidad</p>
+                            </li>
+                        @endif
+                    @endif
+
                     <nav class="subMenu" id="sub2">
                         <ul>
+                            @can('Registrar unidad') 
                             <li>
                                 <a href='{{ route('unidad.registrar') }}'><i class="fas fa-building"></i> Registrar unidad nueva</a>
                             </li>
+                            @endcan
+                            @can('Ver unidad') 
                             <li>
                                 <a href='{{ route('visualizar_unidad') }}'><i class='fas fa-clipboard'></i> Visualizar unidad</a>
                             </li>
+                            @endcan
                         </ul>
                     </nav>
-                    <li onclick="gesMateria()">
-                        <p><i class='fas fa-clipboard'></i> Gestionar Materia</p>
-                    </li>
+
+                    @if (Auth::check())
+                        @if (Auth::user()->can('Ver materia') || Auth::user()->can('Registrar materia'))
+                            <li onclick="gesMateria()">
+                                <p><i class='fas fa-clipboard'></i> Gestionar Materia</p>
+                            </li>
+                        @endif
+                    @endif
+                    
                     <nav class="subMenu" id="subMateria">
                         <ul>
+                            @can('Registrar materia') 
                             <li>
                                 <a href='{{ route('materia.reg') }}'><i class="fas fa-book"></i> Registrar Materia</a>
                             </li>
+                            @endcan
+                            @can('Ver materia')
                             <li>
                                 <a href='{{ route('materia.show') }}'><i class='fas fa-rectangle-list'></i> Lista de Materias</a>
                             </li>
+                            @endcan
                         </ul>
                     </nav>
-                    <li onclick="gesReserva()">
-                        <p><i class='fas fa-clipboard'></i> Gestionar mis solicitudes</p>
-
                     
-                    </li>
+                    @can('Solicitar ambiente')
+                        <li onclick="gesReserva()">
+                            <p><i class='fas fa-clipboard'></i> Gestionar mis solicitudes</p>
+                        
+                        </li>
+                    @endcan
                     <nav class="subMenu" id="sub3">
                         <ul>
                             <li>
@@ -89,23 +119,60 @@
                             </li>-->
                         </ul>
                     </nav>
-                    <li >
-                        <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
-                        
-                    </li>
-                    <li>
-                        <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
-                        
-                    </li>
-                    <li>
-                        <a href="{{ route('Usuario.index') }}"><i class='fas fa-user'></i> Registrar Usuario</a>
-                    </li>
+                    @can('Confirmar reserva')
+                        <li >
+                            <a href='{{ route('habilitarReservas') }}'><i class='fas fa-clipboard'></i> Gestionar Reservas</a>
+                        </li>
+                    @endcan
+                    @can('Registrar publicacion')
+                        <li>
+                            <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
+                        </li>
+                    @endcan
+
+                    @if (Auth::check())    
+                        @if (Auth::user()->can('Ver rol') || Auth::user()->can('Registrar rol'))
+                            <li onclick="GesRol()">
+                                <p><i class='fas fa-clipboard'></i> Gestion de roles</p>
+                            </li>
+                        @endif
+                    @endif
+
+                    <nav class="subMenu" id="subRol">
+                        <ul>
+                            @can('Registrar rol')    
+                                <li>
+                                    <a href='{{ route('Formulario.Rol') }}'><i class="fas fa-book"></i> Registrar nuevo rol</a>
+                                </li>
+                            @endcan
+                            @can('Ver rol')    
+                                <li>
+                                    <a href='{{ route('Rol.index') }}'><i class='fas fa-rectangle-list'></i>Visualizar roles</a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </nav>
+
+
+                    
                 </ul>
                 
             </nav>
         </div>
         <div class="derecha">
             <header>
+                <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu </h1>
+                @if (Auth::check())
+                    {{-- <div>
+                        @can('Ver usuario')
+                            <a class="inline" href='{{ route('Usuario.show') }}'>Usuario:</a> 
+                        @endcan
+                        <h1 class="inline">{{ Auth::user()->nombre }}</h1>
+                    </div> --}}
+                    <a href="{{ route('logout') }}"><i class='fas fa-user'></i> Salir</a>
+                @else
+                    <a href='{{ route('sesion.index') }}'><i class='fas fa-user'></i></a>
+                @endif
                 <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu</h1>
                 <div class="user-menu-container">
                     <button id="userMenuButton" onclick="toggleUserMenu()"><i class='fas fa-user'></i> Usuario</button>
@@ -134,7 +201,7 @@
         </div>          
     </footer>
 </body>
-<script src="{{asset('js/scriptPlantilla.js')}}">
+{{-- <script src="{{asset('js/scriptPlantilla.js')}}">
 </script>
 <script>
     function toggleUserMenu() {
@@ -156,7 +223,8 @@
             }
         }
     }
-</script>
+</script> --}}
+<script src="../../js/scriptPlantilla.js"></script>
 @yield('scripts')
 </html>
 

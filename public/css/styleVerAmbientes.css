@@ -156,14 +156,10 @@
   margin-bottom: 5px;
 }
 
-.nomCol{
-  background-color: #C384B2;
-  padding: 7px;
-  border-radius: 5px;
-  color: #EBEBEB;
-  width: 100%;
+.texto-limitado {
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: 20ch;
 }
 
-#ubi{
-  width: 500px;
-}

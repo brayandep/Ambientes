@@ -127,80 +127,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         dateClick: function(info) {
-            limpiarFormulario();
-            if (info.view.type === 'dayGridMonth') {
-                $('#btnAgregar').show();
-                $('#btnModificar').hide();
-                $('#btnEliminar').hide();
-                $('#labelTitulo').text('Agregar evento en: '+info.dateStr);
+            if (regEvento) {
 
-                console.log(info);
-                $('#fechaStart').val(info.dateStr);
-                limitarFecha();
-                $('#exampleModal').modal('toggle');
+                limpiarFormulario();
+                if (info.view.type === 'dayGridMonth') {
+                    $('#btnAgregar').show();
+                    $('#btnModificar').hide();
+                    $('#btnEliminar').hide();
+                    $('#labelTitulo').text('Agregar evento en: '+info.dateStr);
+    
+                    console.log(info);
+                    $('#fechaStart').val(info.dateStr);
+                    limitarFecha();
+                    $('#exampleModal').modal('toggle');
+                }
+                //calendar.addEvent({title:"Evento Jhosemar", date:info.dateStr})
             }
-            //calendar.addEvent({title:"Evento Jhosemar", date:info.dateStr})
         },
 
         eventClick:function(info){
-            limpiarFormulario();
-            $('#btnAgregar').hide();
-            $('#btnModificar').show();
-            $('#btnEliminar').show();
-            $('#labelTitulo').text('Editar evento '+"'"+info.event.title+"'");
+            if(editEvento){
+                limpiarFormulario();
+                $('#btnAgregar').hide();
+                $('#btnModificar').show();
+                $('#btnEliminar').show();
+                $('#labelTitulo').text('Editar evento '+"'"+info.event.title+"'");
 
-            console.log(info);
-            console.log(info.event.title);
-            console.log(info.event.start);
-            console.log(info.event.end);
-            console.log(info.event.extendedProps.descripcion);
+                console.log(info);
+                console.log(info.event.title);
+                console.log(info.event.start);
+                console.log(info.event.end);
+                console.log(info.event.extendedProps.descripcion);
 
-            //hora minuto inicio
-            hora1 = info.event.start.getHours();
-            hora1 = (hora1<10)?"0"+hora1:hora1;
-            minuto1 = info.event.start.getMinutes();
-            minuto1 = (minuto1<10)?"0"+minuto1:minuto1;
+                //hora minuto inicio
+                hora1 = info.event.start.getHours();
+                hora1 = (hora1<10)?"0"+hora1:hora1;
+                minuto1 = info.event.start.getMinutes();
+                minuto1 = (minuto1<10)?"0"+minuto1:minuto1;
 
-            mesIni = (info.event.start.getMonth()+1); 
-            diaIni = (info.event.start.getDate()); 
-            anioIni = (info.event.start.getFullYear()); 
-            horaIni = (hora1+":"+minuto1); 
-            
-            mesIni = (mesIni<10)?"0"+mesIni:mesIni;
-            diaIni = (diaIni<10)?"0"+diaIni:diaIni;
+                mesIni = (info.event.start.getMonth()+1); 
+                diaIni = (info.event.start.getDate()); 
+                anioIni = (info.event.start.getFullYear()); 
+                horaIni = (hora1+":"+minuto1); 
+                
+                mesIni = (mesIni<10)?"0"+mesIni:mesIni;
+                diaIni = (diaIni<10)?"0"+diaIni:diaIni;
 
-            //hora minuto final
-            if(info.event.end > info.event.start){
-                hora2 = info.event.end.getHours();
-                hora2 = (hora2<10)?"0"+hora2:hora2;
-                minuto2 = info.event.end.getMinutes();
-                minuto2 = (minuto2<10)?"0"+minuto2:minuto2;
+                //hora minuto final
+                if(info.event.end > info.event.start){
+                    hora2 = info.event.end.getHours();
+                    hora2 = (hora2<10)?"0"+hora2:hora2;
+                    minuto2 = info.event.end.getMinutes();
+                    minuto2 = (minuto2<10)?"0"+minuto2:minuto2;
 
-                mesFin = (info.event.end.getMonth()+1); 
-                diaFin = (info.event.end.getDate()); 
-                anioFin = (info.event.end.getFullYear()); 
-                horaFin = (hora2+":"+minuto2); 
+                    mesFin = (info.event.end.getMonth()+1); 
+                    diaFin = (info.event.end.getDate()); 
+                    anioFin = (info.event.end.getFullYear()); 
+                    horaFin = (hora2+":"+minuto2); 
 
-                mesFin = (mesFin<10)?"0"+mesFin:mesFin;
-                diaFin = (diaFin<10)?"0"+diaFin:diaFin;
+                    mesFin = (mesFin<10)?"0"+mesFin:mesFin;
+                    diaFin = (diaFin<10)?"0"+diaFin:diaFin;
 
-                inputFin = anioFin+"-"+mesFin+"-"+diaFin
-            }else{
-                horaFin = horaIni;
-                inputFin = anioIni+"-"+mesIni+"-"+diaIni; 
+                    inputFin = anioFin+"-"+mesFin+"-"+diaFin
+                }else{
+                    horaFin = horaIni;
+                    inputFin = anioIni+"-"+mesIni+"-"+diaIni; 
+                }
+
+                limitarFecha(anioIni+"-"+mesIni+"-"+diaIni);
+                $('#idEvento').val(info.event.id);//id del evento
+                $('#titulo').val(info.event.title);
+                $('#fechaStart').val(anioIni+"-"+mesIni+"-"+diaIni);
+                $('#horaStart').val(horaIni);
+                $('#fechaEnd').val(inputFin);
+                $('#horaEnd').val(horaFin);
+                $('#descripcion').val(info.event.extendedProps.descripcion);
+                $('#color').val(info.event.backgroundColor);
+
+                $('#exampleModal').modal('toggle');
             }
-
-            limitarFecha(anioIni+"-"+mesIni+"-"+diaIni);
-            $('#idEvento').val(info.event.id);//id del evento
-            $('#titulo').val(info.event.title);
-            $('#fechaStart').val(anioIni+"-"+mesIni+"-"+diaIni);
-            $('#horaStart').val(horaIni);
-            $('#fechaEnd').val(inputFin);
-            $('#horaEnd').val(horaFin);
-            $('#descripcion').val(info.event.extendedProps.descripcion);
-            $('#color').val(info.event.backgroundColor);
-
-            $('#exampleModal').modal('toggle');
         },
 
         //lista eventos de la BD

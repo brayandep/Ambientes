@@ -85,11 +85,11 @@
 }
 .cancelar{
     background-color: #F35D5D;
-    
+    color: #e2eaec;
 }
 .registrar{
-    background-color: #933864;
-
+    background-color: #4e798c;
+    color: #e2eaec;
 }
 
 #fondoGris{
@@ -139,7 +139,7 @@
     overflow: auto;
 }
 .nomCol{
-    background-color: #C384B2;
+    background-color: #AE7791;
     padding: 7px;
     border-radius: 5px;
     color: #EBEBEB;
@@ -159,7 +159,7 @@
     gap: 5px;
 }
 .fila p{
-    width: 16%;
+    width: 30%;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -171,7 +171,7 @@
     
     display: flex;
     justify-content: center;
-    width: 15%;
+    width: 30%;
     min-width: 140px;
 }
 .EliEdi button{

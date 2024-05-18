@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Ambiente;
 use Illuminate\Http\Request;
 use App\Models\HorarioDisponible;
+use App\Models\Models\Solicitud;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class BuscadorController extends Controller
 {
@@ -11,6 +15,15 @@ class BuscadorController extends Controller
         $request->validate([
             'nombre' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/|max:25',
             'capacidad' => 'nullable|min:15|numeric',
+            'fecha' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    // Validar que la fecha seleccionada no sea domingo
+                    if (!empty($value) && date('N', strtotime($value)) == 7) {
+                        $fail('No se permite seleccionar el día domingo.');
+                    }
+                },
+            ],
             'horaInicio' => [
                 'nullable',
                 'date_format:H:i',
@@ -49,23 +62,28 @@ class BuscadorController extends Controller
                 'horaFin.before_or_equal' => 'La hora de fin debe ser igual o anterior o igual a las 09:45 PM.',
             ]);
 
-        $nombre = $request->input('nombre'); // Valor predeterminado: cadena vacía si no se proporciona
-        $capacidad = $request->input('capacidad'); // Valor predeterminado: cadena vacía si no se proporciona
+        $nombre = $request->input('nombre'); 
+        $capacidad = $request->input('capacidad'); 
         $dia = $request->input('dia');
-        // $fecha = $request->input('fecha', date('Y-m-d'));
+        $fecha = $request->input('fecha');
         $horaInicio = $request->input('horaInicio');
         $horaFin = $request->input('horaFin');
 
         // Obtener ambientes filtrados por nombre y/o capacidad
         $query = Ambiente::query();
 
-        if (!empty($nombre)) {
-            $query->where('nombre', 'like', "%$nombre%");
+        if (!is_null($nombre)) {
+            $query->where('nombre', 'like', DB::raw("'%$nombre%'"));
         }
 
         if (!empty($capacidad)) {
-            $query->where('capacidad', '>=', $capacidad);
-        }
+            $query->where('capacidad', $capacidad);
+        
+            // Si no hay ambientes con la capacidad exacta, buscar el siguiente valor superior
+            if ($query->count() === 0) {
+                $query->orWhere('capacidad', '>=', $capacidad);
+            }
+        }        
 
         $ambientes = $query->orderBy('nombre', 'asc')->get();
 
@@ -78,21 +96,46 @@ class BuscadorController extends Controller
             '6' => 'Sábado',
         ];
 
-        $horarios = HorarioDisponible::query()
+        // Convertir la fecha en el número correspondiente al día de la semana
+    $fechaNumero = date('N', strtotime($fecha));
+
+    // Filtrar los horarios disponibles
+    $horarios = HorarioDisponible::query()
         ->where('estadoHorario', 1) // Filtrar por estado de horario si es necesario
+        ->when(!empty($fecha), function ($query) use ($fechaNumero) {
+            $query->where('dia', $fechaNumero); // Filtrar por fecha si existe
+        })
         ->when(!empty($dia), function ($query) use ($dia) {
             $query->where('dia', $dia); // Filtrar por día si se ha seleccionado
         })
         ->when(!empty($horaInicio) && !empty($horaFin), function ($query) use ($horaInicio, $horaFin) {
-            $query->where('horaInicio', '>=', $horaInicio)
-                  ->where('horaFin', '<=', $horaFin);
+            $query->where(function ($query) use ($horaInicio, $horaFin) {
+                $query->where('horaInicio', '>=', $horaInicio)
+                      ->where('horaFin', '<=', $horaFin);
+            });
         })
         ->orderBy('dia', 'asc')
         ->orderBy('horaInicio', 'asc')
         ->get();
-        
+
+    // Obtener todas las solicitudes confirmadas para la fecha seleccionada
+    $solicitudesConfirmadas = Solicitud::where('fecha', $fecha)
+        ->where('estado', 'confirmado')
+        ->get();
+
+    // Filtrar los horarios para eliminar los ocupados por solicitudes confirmadas
+    foreach ($horarios as $key => $horario) {
+        foreach ($solicitudesConfirmadas as $solicitud) {
+            list($horaInicioSolicitud, $horaFinSolicitud) = explode(' - ', $solicitud->horario);
+            if ($horario->horaInicio >= $horaInicioSolicitud && $horario->horaFin <= $horaFinSolicitud) {
+                unset($horarios[$key]);
+                break;
+            }
+        }
+    }
+
         return view('Buscador.Buscador', 
-        compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin'));
+        compact('ambientes', 'horarios', 'nombre', 'capacidad', 'diaSemana', 'horaInicio', 'horaFin', 'fecha'));
     }
     public function show2(Request $request){
         $request->validate([

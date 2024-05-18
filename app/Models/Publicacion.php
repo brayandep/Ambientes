@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Publicacion extends Model
 {
     protected $table = 'publicaciones';
-   // protected $primaryKey = 'id_publicaciones';
-   protected $guarded = [];
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'titulo', 'descripcion', 'archivo', 'fecha_vencimiento', 'visible'
+    ];
 }

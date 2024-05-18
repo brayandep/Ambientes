@@ -50,16 +50,21 @@ class AmbienteController extends Controller
     public function store(Request $request)
     {
 
-       $request -> validate([
-            'codigo' => 'required|unique:ambientes,codigo',
-            /*'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
-            'nombre' => 'required|max:25|regex:/^[a-zA-Z\s]+$/|unique:ambientes,nombre',
+        $request -> validate([
+            'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
+            'nombre' => 'required|max:25|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜ,. -]+$/|unique:ambientes,nombre',
             'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'nullable|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
-            'descripcion' => 'nullable|max:40|regex:/^[a-zA-Z]+$/',
+            'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\/.*$/',
+            'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
             'unidad'=> 'required',
-            'tipo-ambiente'=> 'required'*/
-        ]);
+            'tipo-ambiente'=> 'required'
+       ],
+       [
+            'capacidad.min' => 'El valor del campo capacidad debe ser al menos 15.',
+            'unidad.required' => 'Seleccione una unidad.',
+            'tipo-ambiente.required' => 'Seleccione un tipo de ambiente.',
+            'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps/'
+       ]);
 
         //dd($request);
         $ambiente = new Ambiente();

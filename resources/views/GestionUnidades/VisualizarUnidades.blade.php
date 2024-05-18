@@ -1,6 +1,7 @@
 @extends('layoutes.plantilla')
 @section('links')
-    <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}">
+    <link rel="stylesheet" href="../../css/styleUnidades.css">
+    {{-- <link rel="stylesheet" href="{{ asset('css/styleUnidades.css') }}"> --}}
 @endsection
 @section('titulo', 'Visualizar unidades')
   
@@ -37,12 +38,14 @@
                         <div class="columnaT">
                             <button class="nomCol" id="noActivar">Dependencia</button>
                         </div>
-                        <div class="columnaT">
-                            <button class="nomCol" id="noActivar">Acciones</button>
-                        </div>
-                        <div class="columnaT">
-                            <button class="nomCol" id="noActivar">Habilitado</button>
-                        </div>
+                        @can('Editar unidad')
+                            <div class="columnaT">
+                                <button class="nomCol" id="noActivar">Acciones</button>
+                            </div>
+                            <div class="columnaT">
+                                <button class="nomCol" id="noActivar">Habilitado</button>
+                            </div>
+                        @endcan
                     </div>
                     <div>
                         @foreach ($unidades as $unidad)
@@ -61,22 +64,25 @@
                                     @endif
                                 <p class="columnaT">{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</p>
                                     
-                                <div class="EliEdi">
-                                    <button class="accion" onclick="location.href='{{ route('unidad.edit', $unidad) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <!--<button onclick="EliminarUnidad({{ $unidad->id }})" class="accion"><i class="fa-solid fa-trash"></i></button>-->
-                                </div>
-                                <div class="EliEdi">
-                                    <form action="{{ route('unidad.habilitar', $unidad->id) }}" method="post">
-                                        @csrf
-                                        @method('put')
-                                        <input type="hidden" name="form_submitted" value="1">
-                                        <div class="boton">
-                                            <input type="checkbox" id="btn-switch-{{ $unidad->id }}" name="UnidadHabilitada" {{ $unidad->UnidadHabilitada == 1 ? 'checked' : '' }} onchange="this.form.submit()">
-                                            <label for="btn-switch-{{ $unidad->id }}" class="lbl-switch"></label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div id="fondoGris"></div>
+                                @can('Editar unidad')
+                                    <div class="EliEdi">
+                                        <button class="accion" onclick="location.href='{{ route('unidad.edit', $unidad) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <!--<button onclick="EliminarUnidad({{ $unidad->id }})" class="accion"><i class="fa-solid fa-trash"></i></button>-->
+                                    </div>
+                                    <div class="EliEdi">
+                                        <form action="{{ route('unidad.habilitar', $unidad->id) }}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <input type="hidden" name="form_submitted" value="1">
+                                            <div class="boton">
+                                                <input type="checkbox" id="btn-switch-{{ $unidad->id }}" name="UnidadHabilitada" {{ $unidad->UnidadHabilitada == 1 ? 'checked' : '' }} onchange="this.form.submit()">
+                                                <label for="btn-switch-{{ $unidad->id }}" class="lbl-switch"></label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @endcan
+                                
+                                
                                <!--onchange="EliminarUnidad({{ $unidad->id }}, this)"-->
                                 <div class="mensaje_emergente" id="PanelEliminarUnidad-{{ $unidad->id }}">
                                     <div class="info">
@@ -110,7 +116,7 @@
                                     </div>
                                 </div>-->
                             </div>
-                            
+                            <div id="fondoGris"></div>
                             
                         @endforeach
                     </div>
@@ -124,5 +130,6 @@
         </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/scriptUnidades.js') }}"></script>
+    {{-- <script src="{{ asset('js/scriptUnidades.js') }}"></script> --}}
+    <script src="../../js/scriptUnidades.js"></script>
 @endsection
