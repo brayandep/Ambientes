@@ -63,6 +63,7 @@
                         <p>{{ $message }}</p>
                     @enderror
                 </div>
+                <br>
                 <div>
                     <label class="texto" for="nro_aula">Dirección de domicilio </label><br>
                     <input class="input"  type="text" id="direccion" name="direccion" required autofocus  placeholder="Ingresar direccion de domicilio ">

@@ -91,9 +91,11 @@ class LoginController extends Controller
           $user->rol = $request->rol;
           $user->telefono = $request->telefono;
           $user->direccion = $request->direccion;
-      
+          if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
           // Guardar los cambios
-          $user->save();
       
           // Redirigir al usuario a una página después de la actualización
           return redirect()->route('user.edit')->with('success', 'Datos actualizados correctamente');

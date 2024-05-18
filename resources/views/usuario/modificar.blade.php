@@ -63,6 +63,7 @@
                         <p>{{ $message }}</p>
                     @enderror
                 </div>
+                <br>
                 <div>
                     <label class="texto" for="nro_aula">Dirección de domicilio </label><br>
                     <input class="input"  type="text" id="direccion" name="direccion" value="{{ $user->direccion }}" required autofocus  placeholder="Ingresar direccion de domicilio ">
@@ -75,19 +76,17 @@
         <div class="der">
             <div>
                 <label class="texto" for="nro_aula">Selecciona tipo de rol:</label><br>
-                <select class="input" id="rol" name="rol" value="{{ $user->rol }}">
-                    <option>Selecciona un rol  </option>
+                <input class="input" id="rol" name="rol" value="{{ $user->rol }}" readonly>
                   
-                </select>
+                </input>
             </div>
+            
             <br>
 
             <div>
                 <label class="texto" for="password">Contraseña:</label><br>
-                <input class="input" type="password" id="password" name="password"  required placeholder="Ingresar nueva contraseña ">
-                @error('password')
-                    <p>{{ $message }}</p>
-                @enderror
+                <input class="input" type="password" id="password" name="password"   placeholder="Ingresar nueva contraseña ">
+            
             </div>
             <br>
          
