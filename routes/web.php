@@ -113,7 +113,7 @@ Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('busc
 
 //rutas calendario
 Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
-Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->middleware('auth')->name('calendario.individual');
+Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->name('calendario.individual');
 Route::post('/Calendario/evento', [EventoController::class, 'store'])->middleware('auth')->name('evento.store');
 Route::delete('/Calendario/evento/{id}', [EventoController::class, 'destroy'])->middleware('auth')->name('evento.delete');
 Route::put('/Calendario/evento/{id}', [EventoController::class, 'update'])->middleware('auth')->name('evento.update');

@@ -47,6 +47,7 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'Eliminar evento'])->syncRoles([$rol1, $rol3]);
 
         Permission::create(['name' => 'Registrar usuario'])->syncRoles([$rol1]);
+        Permission::create(['name' => 'Ver usuario'])->syncRoles([$rol1]);
 
         Permission::create(['name' => 'Control bitacora'])->syncRoles([$rol1]);
 
