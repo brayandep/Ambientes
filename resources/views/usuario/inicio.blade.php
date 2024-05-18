@@ -52,6 +52,9 @@
                 </div>
                 <button class="boton4" type="submit">Iniciar</button>
                 <br>
+                <br>
+                <a class="boton5" href="{{ route('inicio') }}">Modo Invitado</a>
+                <br>
                
             </div>
         </div>
