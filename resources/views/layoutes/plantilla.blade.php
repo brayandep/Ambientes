@@ -36,7 +36,7 @@
                     @endif
                     <nav class="subMenu" id="sub1">
                         <ul>
-                            @can('Regsitrar ambiente')   
+                            @can('Registrar ambiente')   
                             <li>
                                 <a href="{{ route('ambiente.create') }}"><i class='fas fa-clipboard'></i> Registrar Ambiente</a>
                             </li>
@@ -160,12 +160,12 @@
             <header>
                 <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu </h1>
                 @if (Auth::check())
-                    <div>
+                    {{-- <div>
                         @can('Ver usuario')
                             <a class="inline" href='{{ route('Usuario.show') }}'>Usuario:</a> 
                         @endcan
                         <h1 class="inline">{{ Auth::user()->nombre }}</h1>
-                    </div>
+                    </div> --}}
                     <a href="{{ route('logout') }}"><i class='fas fa-user'></i> Salir</a>
                 @else
                     <a href='{{ route('sesion.index') }}'><i class='fas fa-user'></i></a>
