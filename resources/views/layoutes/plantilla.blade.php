@@ -11,6 +11,7 @@
     <title>@yield('titulo')</title>
 </head>
 @yield('estilos')
+
 <body>
     <div class="contenedor">
         <div class="izquierda" id="menu">
@@ -134,25 +135,27 @@
     </footer>
 </body>
 <script src="{{asset('js/scriptPlantilla.js')}}">
-function toggleUserMenu() {
-    var userMenu = document.getElementById("userMenu");
-    if (userMenu.style.display === "block") {
-        userMenu.style.display = "none";
-    } else {
-        userMenu.style.display = "block";
-    }
-}
-
-// Cerrar el menú si se hace clic fuera de él
-window.onclick = function(event) {
-    if (!event.target.matches('#userMenuButton')) {
+</script>
+<script>
+    function toggleUserMenu() {
+        console.log("toggleUserMenu called");  // Añade esta línea
         var userMenu = document.getElementById("userMenu");
         if (userMenu.style.display === "block") {
             userMenu.style.display = "none";
+        } else {
+            userMenu.style.display = "block";
         }
     }
-}
 
+    // Cerrar el menú si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (!event.target.matches('#userMenuButton')) {
+            var userMenu = document.getElementById("userMenu");
+            if (userMenu.style.display === "block") {
+                userMenu.style.display = "none";
+            }
+        }
+    }
 </script>
 @yield('scripts')
 </html>
