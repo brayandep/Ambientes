@@ -22,7 +22,8 @@ class CreateLogsTable extends Migration
             $table->text('old_data')->nullable();
             
             $table->text('new_data')->nullable();
-            $table->string('operation'); // Crear, Editar o Eliminar
+            $table->string('tabla_afectada'); 
+            $table->string('id_afectado'); 
             $table->timestamps();
         });
     }

@@ -18,14 +18,21 @@ table {
 }
 
 /* Estilo para las celdas de la tabla */
-th, td {
+th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-    max-width: 500px; 
+    max-width: 250px; 
+    word-wrap: break-word;
+    border-radius: 10px;
+}
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    max-width: 250px; 
     word-wrap: break-word;
 }
-
 /* Estilo para las filas impares */
 tr:nth-child(odd) {
     background-color: #f2f2f2;
@@ -60,7 +67,7 @@ th {
                         <th>Usuario</th>
                         <th>Fecha</th>
                         <th>Tabla Afectada</th>
-                        <th>ID</th>
+                        <th>Id Afectado</th>
                         <th>Datos Antiguos</th>
                         <th>Datos Nuevos</th>
                     </tr>
@@ -71,8 +78,8 @@ th {
                             <td>{{ $log->event_type }}</td>
                             <td>{{ $log->user ? $log->user->name : 'Anónimo' }}</td>
                             <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
-                            <td>{{ $log->operation }}</td>
-                            <td>{{ $log->affected_id }}</td>
+                            <td>{{ $log->tabla_afectada }}</td>
+                            <td>{{ $log->id_afectado }}</td>
                             <td>{{ $log->old_data }}</td>
                             <td>{{ $log->new_data }}</td>
                         </tr>

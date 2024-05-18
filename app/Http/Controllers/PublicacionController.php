@@ -44,27 +44,29 @@ class PublicacionController extends Controller
         $publicacion->tipo = $request->tipo;
         $publicacion->visible = 1;
         $publicacion->save();
-        // Registro de creación en la bitácora
-        Log::create([
-            'event_type' => 'Publicacion Creada',
-            //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
-            //'new_data' => json_encode($publicacion->toArray()),//es para guardar todos los datos de la tabla
-            'new_data' => json_encode(['publicacion_id' => $publicacion->id]),//solo guarda la id el la tabla log
-            'operation' => 'publicaciones',
-        ]);
+            // Registro de creación en la bitácora
+            Log::create([
+                'event_type' => 'Publicacion Creada',
+                //'user_id' => Auth::id(),
+                'new_data' => json_encode(['Publicaciones_id' => $publicacion->id]),
+                'tabla_afectada' => 'publicaciones',
+                'id_afectado' => $publicacion->id,
+            ]);
+        
         // Redireccionar al usuario con un mensaje de éxito
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido creada exitosamente.');
     }
     
     public function eliminarPublicacion($id) {
-        // Encuentra y elimina la publicación con el ID proporcionado
         
         $publicacion = Publicacion::find($id);
+        // Registro de eliminacion en la bitácora
         Log::create([
             'event_type' => 'Publicación eliminada',
             //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
             'old_data' => json_encode($publicacion->toArray()),
-            'operation' => 'publicaciones',
+            'tabla_afectada' => 'publicaciones',
+            'id_afectado' => $publicacion->id,
         ]);
         Publicacion::destroy($id);
         // Redirige a la página de publicaciones o a donde sea apropiado después de eliminar
@@ -88,6 +90,7 @@ class PublicacionController extends Controller
         return redirect()->back()->with('error', 'El archivo no existe.');
     }
 }
+/*
 public function update(Request $request, $id)
     {
         // Encuentra la publicación por su ID
@@ -127,6 +130,50 @@ public function update(Request $request, $id)
     // Retorna la vista del formulario de edición con los detalles de la publicación creo que borramos
     return view('formularioEditarPublicacion', compact('publicacion'));
 }
+*/
+public function editar($id)
+{
+    // Encuentra la publicación por su ID
+    $publicacion = Publicacion::findOrFail($id);
 
-    
+    // Retorna la vista de edición con la publicación encontrada
+    return view('editarPublicacion', compact('publicacion'));
+}
+
+public function actualizar(Request $request, $id)
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'titulo' => 'required',
+        'descripcion' => 'required',
+        'archivo' => 'nullable|file',
+        'fecha_vencimiento' => 'required|date|after_or_equal:today',
+        'tipo' => 'required|in:reglamento,anuncio',
+    ]);
+
+    // Encuentra la publicación por su ID
+    $publicacion = Publicacion::findOrFail($id);
+
+    // Actualiza los campos de la publicación con los valores del formulario
+    $publicacion->titulo = $request->titulo;
+    $publicacion->descripcion = $request->descripcion;
+    $publicacion->fecha_vencimiento = $request->fecha_vencimiento;
+    $publicacion->tipo = $request->tipo;
+
+    // Verifica si se ha enviado un nuevo archivo para actualizar
+    if ($request->hasFile('archivo')) {
+        // Elimina el archivo anterior si existe
+        Storage::delete($publicacion->archivo);
+        // Guarda el nuevo archivo y actualiza la ruta en la base de datos
+        $publicacion->archivo = $request->file('archivo')->store('public/archivos');
+    }
+
+    // Guarda los cambios en la base de datos
+    $publicacion->save();
+
+    // Redirige al usuario con un mensaje de éxito
+    return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido actualizada exitosamente.');
+}
+   
+
 }

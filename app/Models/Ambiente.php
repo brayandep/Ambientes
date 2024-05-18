@@ -21,22 +21,21 @@ class Ambiente extends Model
         'descripcion_ubicacion',
         'estadoAmbiente',
     ];
-
     protected static function boot()
     {
         parent::boot();
-
+    
         static::created(function ($ambiente) {
             // Registro de creación en la bitácora
             Log::create([
                 'event_type' => 'Ambiente creado',
                 //'user_id' => Auth::id(),
-                
                 'new_data' => json_encode(['ambientes_id' => $ambiente->id]),
-                'operation' => 'ambientes',
+                'tabla_afectada' => 'ambientes',
+                'id_afectado' => $ambiente->id,
             ]);
         });
-
+    
         static::updated(function ($ambiente) {
             // Obtener los datos antiguos y nuevos
             $oldData = $ambiente->getOriginal();
@@ -63,22 +62,23 @@ class Ambiente extends Model
                 'event_type' => 'Ambiente editado',
                 //'user_id' => Auth::id(),
                 'old_data' => json_encode($oldFields),
-                'new_data' => json_encode($changedFields),
-                'operation' => 'ambientes',
-                'id_tabla' => $ambiente->id])
+                //'new_data' => json_encode($changedFields),
+                'tabla_afectada' => 'ambientes',
+                'id_afectado' => $ambiente->id,
             ]);
         });
-        
-        
-
+    
         static::deleted(function ($ambiente) {
             // Registro de eliminación en la bitácora
             Log::create([
                 'event_type' => 'Ambiente eliminado',
                 //'user_id' => Auth::id(),
                 'old_data' => json_encode($ambiente->toArray()),
-                'operation' => 'ambientes',
+                'tabla_afectada' => 'ambientes',
+                'id_afectado' => $ambiente->id,
             ]);
         });
     }
+    
+  
 }

@@ -14,7 +14,8 @@ class Log extends Model
         'user_id',
         'old_data',
         'new_data',
-        'operation',
+        'tabla_afectada',
+        'id_afectado',
     ];
 
     // Relación con el modelo de usuario si es necesario
