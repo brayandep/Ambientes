@@ -30,11 +30,10 @@ class materiaController extends Controller
     public function store(RegistrarMateria $request)
     {
         $materia = Materia::create($request->all());
-        $usuarios = User::all();;
         for ($i = 0; $i < $materia->cantGrupo; $i++) {
             $grupo = new Grupo();
             $grupo->numero = $i+1;
-            $grupo->idDocente = $usuarios->id;
+            $grupo->idDocente =null;
             $grupo->idMateria = $materia->id;
             $grupo->save();
         }
