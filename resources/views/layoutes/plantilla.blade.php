@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}"> --}}
-    <link rel="stylesheet" href="../../css/stylePlantilla.css">
+    <link rel="stylesheet" href="{{asset('css/stylePlantilla.css')}}">
+    <link rel="stylesheet" href="{{asset('css/stylelogin.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     @yield('links')
     <title>@yield('titulo')</title>
 </head>
 @yield('estilos')
+
 <body>
     <div class="contenedor">
         <div class="izquierda" id="menu">
@@ -20,6 +21,7 @@
                         <a href='{{ route('inicio') }}'><i class='fas fa-home'></i> Inicio</a>
                         
                     </li>
+                
                     <li>
                         <a href="{{ route('buscador') }}"><i class='fas fa-search'></i> Buscar</a>
                     </li>
@@ -127,6 +129,9 @@
                             <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
                         </li>
                     @endcan
+                    <li>
+                        <a href='{{ route('Usuario.index') }}'><i class='fas fa-clipboard'></i> Registrar Usuario</a>
+                    </li>
 
                     @if (Auth::check())    
                         @if (Auth::user()->can('Ver rol') || Auth::user()->can('Registrar rol'))
@@ -154,6 +159,7 @@
 
                     
                 </ul>
+                
             </nav>
         </div>
         <div class="derecha">
@@ -170,6 +176,13 @@
                 @else
                     <a href='{{ route('sesion.index') }}'><i class='fas fa-user'></i></a>
                 @endif
+                <div class="user-menu-container">
+                    <button id="userMenuButton" onclick="toggleUserMenu()"><i class='fas fa-user'></i> Usuario</button>
+                    <div id="userMenu" class="user-menu">
+                        <a href='{{ route('user.edit') }}'>Modificar usuario</a>
+                        <a href='{{ route('logout') }}'>Salir</a>
+                    </div>
+                </div>
             </header>
             <br>
             @yield('contenido')
@@ -190,7 +203,29 @@
         </div>          
     </footer>
 </body>
-{{-- <script src="{{asset('js/scriptPlantilla.js')}}"></script> --}}
+
+</script>
+<script>
+    function toggleUserMenu() {
+        console.log("toggleUserMenu called");  // Añade esta línea
+        var userMenu = document.getElementById("userMenu");
+        if (userMenu.style.display === "block") {
+            userMenu.style.display = "none";
+        } else {
+            userMenu.style.display = "block";
+        }
+    }
+
+    // Cerrar el menú si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (!event.target.matches('#userMenuButton')) {
+            var userMenu = document.getElementById("userMenu");
+            if (userMenu.style.display === "block") {
+                userMenu.style.display = "none";
+            }
+        }
+    }
+</script> 
 <script src="../../js/scriptPlantilla.js"></script>
 @yield('scripts')
 </html>

@@ -138,6 +138,7 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
 
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 // Rutas para las publicaciones
 
@@ -182,6 +183,8 @@ Route::get('/usuario', [usuariocontroller::class, 'index'])->middleware('can:Reg
 Route::get('/inicio', [usuariocontroller::class, 'index2'])->name('sesion.index');
 Route::post('/iniciar-sesion',[LoginController::class, 'login'])->name('iniciar-sesion');
 Route::post('/validar-registro',[LoginController::class, 'register'])->name('validar-registro');
+Route::get('/iniciar-sesion/edit', [LoginController::class, 'edit'])->name('user.edit');
+Route::post('/iniciar-sesion/update', [LoginController::class, 'update'])->name('user.update');
 Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
 
 //lista de usuario

@@ -7,17 +7,16 @@ use App\Models\Grupo;
 use App\Models\Materia;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
-use App\Models\User;
+
 use PDF;
 
 class materiaController extends Controller
 {
     public function show()
     {
-        
         $materias = Materia::orderBy('id', 'desc')->paginate();
-        $usuarios = User::all();
-        return view('materia.lista', compact('materias','usuarios'));
+        
+        return view('materia.lista', compact('materias'));
     }
 
     public function create()
@@ -33,7 +32,7 @@ class materiaController extends Controller
         for ($i = 0; $i < $materia->cantGrupo; $i++) {
             $grupo = new Grupo();
             $grupo->numero = $i+1;
-            $grupo->idDocente =null;
+            $grupo->idDocente = null;
             $grupo->idMateria = $materia->id;
             $grupo->save();
         }
@@ -67,7 +66,7 @@ class materiaController extends Controller
         for ($i = 0; $i < $materia->cantGrupo; $i++) {
             $grupo = new Grupo();
             $grupo->numero = $i+1;
-            $grupo->idDocente =  $materia->id;
+            $grupo->idDocente = null;
             $grupo->idMateria = $materia->id;
             $grupo->save();
         }
