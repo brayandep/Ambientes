@@ -33,16 +33,17 @@
 
                     <input type="hidden" name="grupo_id[]" value="{{ $grupo->id }}">
                     <input class="invisible" name="numero[]" value="{{$grupo->numero}}">
-
                     <div class="input-goup">
                         <label class="labMateria">Docente</label>
-                        <select class="inputMateria" id="usuario" >
+                        <select class="inputMateria" id="nivel" name="docente[]">
                             <option value="">Seleccione el docente</option> 
-                            @foreach ($usuarios as $usuario)
-                                <option value="{{ $usuario->id }}">{{ $usuario->nombre }}</option>
+                            @if ($grupo->idDocente)
+                            <option value="{{$grupo->idDocente}}" selected>{{$grupo->eldocente->nombreDocente}}</option>
+                            @endif
+                            @foreach ($docentes as $docente)
+                                <option value="{{ $docente->id }}">{{ $docente->nombreDocente }}</option>
                             @endforeach
                         </select>
-                        
                         @error('docente')
                             <span class="msgError">*{{$message}}</span>
                             <br>
