@@ -183,6 +183,7 @@ public function solicitudMostrar(Request $request){
     }
     return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
+
 public function descargarReservasPDF(){
     $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
 
