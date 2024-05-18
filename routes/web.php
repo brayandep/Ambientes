@@ -109,12 +109,10 @@ Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEsta
 //termina rutas visualizacion ambientes
 
 //rutas buscador
-Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->middleware('auth')->name('buscador');
-Route::get('/busqueda-ambiente2',[BuscadorController::class, 'show2'])->name('buscador2');
+Route::get('/busqueda-ambiente',[BuscadorController::class, 'show'])->name('buscador');
 
 //rutas calendario
-Route::get('/Calendario', [CalendarioController::class, 'index'])->middleware('auth')->name('calendario.index');
-Route::get('/Calendario2', [CalendarioController::class, 'index2'])->name('calendario2.index');
+Route::get('/Calendario', [CalendarioController::class, 'index'])->name('calendario.index');
 Route::get('/Calendario/Ambiente/{idAmbiente}', [CalendarioController::class, 'individual'])->middleware('auth')->name('calendario.individual');
 Route::post('/Calendario/evento', [EventoController::class, 'store'])->middleware('auth')->name('evento.store');
 Route::delete('/Calendario/evento/{id}', [EventoController::class, 'destroy'])->middleware('auth')->name('evento.delete');
@@ -139,8 +137,7 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
 })->name('inicio');*/
 
 // Ruta para mostrar la página de inicio
-Route::get('/', [InicioController::class, 'mostrarInicio2'])->name('invitado');
-Route::get('/invitado', [InicioController::class, 'mostrarInicio'])->middleware('auth')->name('inicio');
+Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 // Rutas para las publicaciones
 

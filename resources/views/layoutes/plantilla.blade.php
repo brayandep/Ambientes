@@ -26,11 +26,13 @@
                     <li>
                         <a href="{{ route('calendario.index') }}"><i class='fas fa-calendar-days'></i> Calendario</a>
                     </li>
-                    @if (Auth::user()->can('Ver ambiente') || Auth::user()->can('Regsitrar ambiente'))
-                        <li onclick="gesAmbiente()">
-                            <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>
-                            
-                        </li>
+                    @if (Auth::check())    
+                        @if (Auth::user()->can('Ver ambiente') || Auth::user()->can('Regsitrar ambiente'))
+                            <li onclick="gesAmbiente()">
+                                <p><i class='fas fa-clipboard'></i> Gestionar Ambiente</p>
+                                
+                            </li>
+                        @endif
                     @endif
                     <nav class="subMenu" id="sub1">
                         <ul>
@@ -47,11 +49,14 @@
                         </ul>
                     </nav>
 
-                    @if (Auth::user()->can('Ver unidad') || Auth::user()->can('Registrar unidad'))
-                        <li onclick="gesUnidad()">
-                            <p><i class='fas fa-clipboard'></i> Gestionar Unidad</p>
-                        </li>
+                    @if (Auth::check())
+                        @if (Auth::user()->can('Ver unidad') || Auth::user()->can('Registrar unidad'))
+                            <li onclick="gesUnidad()">
+                                <p><i class='fas fa-clipboard'></i> Gestionar Unidad</p>
+                            </li>
+                        @endif
                     @endif
+
                     <nav class="subMenu" id="sub2">
                         <ul>
                             @can('Registrar unidad') 
@@ -67,10 +72,12 @@
                         </ul>
                     </nav>
 
-                    @if (Auth::user()->can('Ver materia') || Auth::user()->can('Registrar materia'))
-                        <li onclick="gesMateria()">
-                            <p><i class='fas fa-clipboard'></i> Gestionar Materia</p>
-                        </li>
+                    @if (Auth::check())
+                        @if (Auth::user()->can('Ver materia') || Auth::user()->can('Registrar materia'))
+                            <li onclick="gesMateria()">
+                                <p><i class='fas fa-clipboard'></i> Gestionar Materia</p>
+                            </li>
+                        @endif
                     @endif
                     
                     <nav class="subMenu" id="subMateria">
@@ -121,10 +128,12 @@
                         </li>
                     @endcan
 
-                    @if (Auth::user()->can('Ver rol') || Auth::user()->can('Registrar rol'))
-                        <li onclick="GesRol()">
-                            <p><i class='fas fa-clipboard'></i> Gestion de roles</p>
-                        </li>
+                    @if (Auth::check())    
+                        @if (Auth::user()->can('Ver rol') || Auth::user()->can('Registrar rol'))
+                            <li onclick="GesRol()">
+                                <p><i class='fas fa-clipboard'></i> Gestion de roles</p>
+                            </li>
+                        @endif
                     @endif
 
                     <nav class="subMenu" id="subRol">
@@ -150,8 +159,12 @@
         <div class="derecha">
             <header>
                 <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu </h1>
-                <h1><a href='{{ route('Usuario.show') }}'>Usuario:</a> {{ Auth::user()->nombre }}</h1>
-                <a href='{{ route('logout') }}'>  <i class='fas fa-user'></i> Salir </a>
+                @if (Auth::check())
+                    <h1><a href='{{ route('Usuario.show') }}'>Usuario:</a> {{ Auth::user()->nombre }}</h1>
+                    <a href="{{ route('logout') }}"><i class='fas fa-user'></i> Salir</a>
+                @else
+                    <a href='{{ route('sesion.index') }}'><i class='fas fa-user'></i></a>
+                @endif
             </header>
             <br>
             @yield('contenido')
