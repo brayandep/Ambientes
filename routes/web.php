@@ -51,7 +51,7 @@ Route::get('/', function () {
 Route::get('/Registrar_Unidad', function () {
     return view('GestionUnidades.RegistroUnidades');
 })->middleware('auth')->name('unidad.registrar');
-Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->middleware('auth')->name('visualizar_unidad');
+Route::get('/Visualizar_Unidad',[registroUnidadesController::class, 'show'])->middleware('can:Ver unidad')->name('visualizar_unidad');
 Route::post('/Registrar_Unidad',[registroUnidadesController::class, 'store'])->middleware('auth')->name('unidad.store');
 Route::get('/unidad/dependencia/{nivel}',[DependenciaUnidadController::class, 'buscar'])->middleware('auth')->name('dependencia.buscar');
 Route::get('/Editar_Unidad/{unidad}', [registroUnidadesController::class, 'edit'])->middleware('auth')->name('unidad.edit');
