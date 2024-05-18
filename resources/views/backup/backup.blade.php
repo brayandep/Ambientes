@@ -36,15 +36,16 @@
                     @error('dia')
                         <span class="msgError">*{{ $message }}</span>
                     @enderror
-
+            
                     <label for="hora">Hora:</label>
                     <input type="time" name="hora" id="hora">
                     @error('hora')
                         <span class="msgError">*{{ $message }}</span>
                     @enderror
-
+            
                     <button type="submit" class="programar-backup">Programar</button>
                 </form>
+            
                 <div class="backup-programado">
                     @if (file_exists(storage_path('app/backup_schedule.json')))
                         @php
@@ -53,6 +54,10 @@
                             $hora = $config['hora'];
                         @endphp
                         <p>Backup programado: {{ ucfirst($dia) }} a las {{ $hora }}</p>
+                        <form action="{{ route('backup.schedule.delete') }}" method="POST">
+                            @csrf
+                            <button type="submit">Eliminar Programación</button>
+                        </form>
                     @else
                         <p>Backup programado: No establecido</p>
                     @endif

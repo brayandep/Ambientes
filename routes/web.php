@@ -164,4 +164,5 @@ Route::post('/backup', [BackupController::class, 'store'])->name('backup.store')
 Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
 Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
 Route::post('/backup/schedule', [BackupController::class, 'schedule'])->name('backup.schedule');
+Route::post('/backup/schedule/delete', [BackupController::class, 'deleteSchedule'])->name('backup.schedule.delete');
 //termina rutas backup
