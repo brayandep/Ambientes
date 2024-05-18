@@ -32,21 +32,14 @@
         <div class="izq">
 
                 <div>
-                    <label class="texto" for="nro_aula">Nombres :</label><br>
+                    <label class="texto" for="nro_aula">Nombre Completo:</label><br>
                     <input class="input"  type="text" id="nombre" name="nombre" required autofocus placeholder="Ingresar nombres ">
                     @error('nombre')
                         <p>{{ $message }}</p>
                     @enderror
                 </div>
                 <br>
-                <div>
-                    <label class="texto" for="nro_aula">Apellidos :</label><br>
-                    <input class="input"  type="text" id="apellido" name="apellido" required autofocus  placeholder="Ingresar apellidos ">
-                    @error('apellido')
-                        <p>{{ $message }}</p>
-                    @enderror
-                </div>
-                <br>
+               
                 <div>
                     <label class="texto" for="nro_aula">Telefono :</label><br>
                     <input class="input"  type="number" id="telefono" name="telefono" required autofocus  placeholder="Ingresar nro de telefono ">
@@ -70,6 +63,13 @@
                         <p>{{ $message }}</p>
                     @enderror
                 </div>
+                <div>
+                    <label class="texto" for="nro_aula">Dirección de domicilio </label><br>
+                    <input class="input"  type="text" id="direccion" name="direccion" required autofocus  placeholder="Ingresar direccion de domicilio ">
+                    @error('direccion')
+                        <p>{{ $message }}</p>
+                    @enderror
+                </div>
         </div>
 
         <div class="der">
@@ -90,13 +90,8 @@
                 @enderror
             </div>
             <br>
-            <div>
-                <label class="texto" for="nro_aula">Selecciona tipo de departamento:</label><br>
-                <select class="input" id="materia" name="materia">
-                    <option>Selecciona un departamento  </option>
-                  
-                </select>
-            </div>
+         
+            <br>
 
         </div>
     </div>   

@@ -40,6 +40,7 @@ class ReservaRechazada extends Notification
                     ->line('El horario solicitado fue: ' . $this->horario)
                     ->line('Puedes volver a hacer una solicitud en el sistema ingresando al enlace:')
                     ->action('Nueva solicitud', url('/Solicitud'))
-                    ->line('Gracias por usar nuestra aplicación!');
+                    ->line('Gracias por usar nuestra aplicación!')
+                    ->salutation('Saludos');
     }
 }
