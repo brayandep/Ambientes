@@ -87,9 +87,13 @@ class RolController extends Controller
      */
     public function habilitar(Request $request, $id)
     {
+
         $rol = Role::find($id);
         //print_r($request -> Estado);
-    
+         // Verificar si el rol está fuera de la fecha de vigencia
+        // if ($rol->fechaFinRol && $rol->fechaFinRol < now()) {
+        //     return redirect()->route('Rol.index')->withErrors(['message' => 'La vigencia del rol ha expirado. No se puede cambiar el estado.']);
+        // }
         // Cambiar el estado de 1 a 0 y viceversa
         $rol->Estado = $rol->Estado == 1 ? 0 : 1;
     

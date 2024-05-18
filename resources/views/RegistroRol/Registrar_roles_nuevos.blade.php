@@ -57,7 +57,7 @@
                     <label class="labRol">Fecha de fin:</label>
                     <input class="inputRol" name='fechaFinRol' type="date" id="fechaFin">
                 </div>
-                @error('fechaFinRol')
+            @error('fechaFinRol')
                 <span>*{{$message}}</span>
             @enderror
             </div>
