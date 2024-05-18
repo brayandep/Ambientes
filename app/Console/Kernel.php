@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:generate')->dailyAt('08:30'); //php artisan schedule:run (comando para ejecutar)
+        $schedule->command('backup:generate')->everyMinute(); //php artisan schedule:run (comando para ejecutar)
     }
 
     /**
