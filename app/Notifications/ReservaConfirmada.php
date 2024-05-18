@@ -40,6 +40,6 @@ class ReservaConfirmada extends Notification
                     ->line('El horario solicitado es: ' . $this->horario)
                     ->action('Ver Detalles', url('/Versolicitudes'))
                     ->line('Gracias por usar nuestra aplicación!')
-                    ->salutation('Saludos');
+                    ->salutation('Saludos, Sistema de Reservas UMSS');
     }
 }

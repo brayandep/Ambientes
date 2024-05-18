@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\Controllers\CorreoController;
+
 class LoginController extends Controller
 {
     //
@@ -25,19 +27,21 @@ class LoginController extends Controller
             'email' => 'Las credenciales proporcionadas no son válidas.',
         ]);
     }
-    public function register(Request $request){
-      // Validar los datos
-      $request->validate([
-        'nombre' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'telefono' => 'required',
-        'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
-        'direccion' => 'required',
-        'rol' => 'required',
-        'ci' => 'required',
-    ]);  
-      $user = new User();
+    public function register(Request $request)
+    {
+        // Validar los datos
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'telefono' => 'required',
+            'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
+            'direccion' => 'required',
+            'rol' => 'required',
+            'ci' => 'required',
+        ]);
 
+        // Crear el usuario
+        $user = new User();
         $user->nombre = $request->nombre;
         $user->email = $request->email;
         $user->ci = $request->ci;
@@ -46,7 +50,14 @@ class LoginController extends Controller
         $user->direccion = $request->direccion;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        // Autenticar al usuario
         Auth::login($user);
+
+        // Enviar correo de bienvenida
+        $correoController = new CorreoController();
+        $correoController->enviarCorreoBienvenida($user->email, $user->nombre, $user->email, $request->password);
+
         return redirect(route('inicio'));
     }
     public function logout(Request $request){
