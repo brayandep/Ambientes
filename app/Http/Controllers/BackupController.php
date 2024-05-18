@@ -176,4 +176,14 @@ class BackupController extends Controller
 
         return $days[$day];
     }
+
+    public function deleteSchedule()
+    {
+        if (File::exists(storage_path('app/backup_schedule.json'))) {
+            File::delete(storage_path('app/backup_schedule.json'));
+            return redirect()->back()->with('success', 'Programación de backup eliminada con éxito');
+        } else {
+            return redirect()->back()->withErrors(['error' => 'No hay programación de backup para eliminar']);
+        }
+    }
 }
