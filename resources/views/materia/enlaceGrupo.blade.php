@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../../css/styleMateria.css">
     <link rel="stylesheet" href="../../css/styleGrupo.css">
 @endsection
-
 @section('estilos')
     {{-- Aqui vendran estilos --}}
 @endsection
