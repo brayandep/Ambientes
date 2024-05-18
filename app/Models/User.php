@@ -25,6 +25,10 @@ class User extends Authenticatable
         'nombre',
         'email',
         'password',
+        'ci',
+        'direccion',
+        'telefono',
+        'rol',
         // Nombre del campo de contraseña personalizado
     ];
 

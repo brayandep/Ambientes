@@ -7,8 +7,7 @@ use App\Models\Docente;
 use App\Models\Grupo;
 use App\Models\Materia;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+
 class grupoController extends Controller
 {
     public function create($materia)
@@ -16,31 +15,26 @@ class grupoController extends Controller
         $mimateria = Materia::find($materia);
         $grupos = Grupo::where('idMateria', $materia)->get();
         $docentes = Docente::all();
-        $usuarios = User::all();;
-        return view('materia.enlaceGrupo', compact('grupos', 'mimateria', 'docentes','usuarios'));
+
+        return view('materia.enlaceGrupo', compact('grupos', 'mimateria', 'docentes'));
     }
 
-    public function jhosemar(Request $request)
-{
-    if(isset($request->docente) && is_array($request->docente)) {
-        foreach ($request->docente as $index => $docenteId) {
-            // Buscar el grupo por su índice
-            $grupo = Grupo::find($index + 1);
+    public function jhosemar(Request $request, $cantgrupo)
+    {
 
-            // Actualizar el ID del docente en el grupo
-            $grupo->idDocente = $docenteId;
-            
+        foreach ($request->grupo_id as $index => $grupoId) {
+            // Buscar el grupo por su ID
+            $grupo = Grupo::find($grupoId);
+    
+            // Actualizar los datos del grupo con los valores enviados desde el formulario
+            $grupo->numero = $request->numero[$index];
+            $grupo->idDocente = $request->docente[$index];
+            $grupo->idMateria = $request->materia[$index];
+            // Puedes agregar más campos aquí si es necesario
+    
             // Guardar los cambios en la base de datos
             $grupo->save();
         }
-    } else {
-        // Manejar el caso en el que no se enviaron docentes
-        // Por ejemplo, redirigiendo de nuevo al formulario con un mensaje de error
+        return redirect()->route('materia.show');
     }
-    
-    return redirect()->route('materia.show');
-}
-
-
-    
 }
