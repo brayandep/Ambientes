@@ -57,7 +57,7 @@
                                     @csrf
                                     @method('put')
                                     <div class="boton-sw">
-                                        <input type="checkbox" id="btn-switch-{{ $rol->id }}" name="Estado" {{ $rol->Estado == 1 ? 'checked' : '' }} onchange="this.form.submit()">
+                                        <input type="checkbox" id="btn-switch-{{ $rol->id }}" name="Estado" {{ $rol->Estado == 1 ? 'checked' : '' }} {{ $rol->fechaFinRol && $rol->fechaFinRol < now() ? 'disabled' : '' }} onchange="this.form.submit()">
                                         <label for="btn-switch-{{ $rol->id }}" class="lbl-switch"></label>
                                     </div>
                                 </form>
