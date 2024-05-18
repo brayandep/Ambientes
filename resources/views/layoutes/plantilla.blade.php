@@ -120,17 +120,25 @@
                             <a href='{{ route('publicaciones.index') }}'><i class='fas fa-clipboard'></i> Publicaciones</a>
                         </li>
                     @endcan
-                    <li onclick="GesRol()">
-                        <p><i class='fas fa-clipboard'></i> Rol</p>
-                    </li>
+
+                    @if (Auth::user()->can('Ver rol') || Auth::user()->can('Registrar rol'))
+                        <li onclick="GesRol()">
+                            <p><i class='fas fa-clipboard'></i> Gestion de roles</p>
+                        </li>
+                    @endif
+
                     <nav class="subMenu" id="subRol">
                         <ul>
-                            <li>
-                                <a href='{{ route('Formulario.Rol') }}'><i class="fas fa-book"></i> Registrar nuevo rol</a>
-                            </li>
-                            <li>
-                                <a href='{{ route('Rol.index') }}'><i class='fas fa-rectangle-list'></i>Visualizar roles</a>
-                            </li>
+                            @can('Registrar rol')    
+                                <li>
+                                    <a href='{{ route('Formulario.Rol') }}'><i class="fas fa-book"></i> Registrar nuevo rol</a>
+                                </li>
+                            @endcan
+                            @can('Ver rol')    
+                                <li>
+                                    <a href='{{ route('Rol.index') }}'><i class='fas fa-rectangle-list'></i>Visualizar roles</a>
+                                </li>
+                            @endcan
                         </ul>
                     </nav>
 

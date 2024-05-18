@@ -31,6 +31,10 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'Registrar unidad'])->syncRoles([$rol1]);
         Permission::create(['name' => 'Editar unidad'])->syncRoles([$rol1]);
 
+        Permission::create(['name' => 'Ver rol'])->syncRoles([$rol1]);
+        Permission::create(['name' => 'Registrar rol'])->syncRoles([$rol1]);
+        Permission::create(['name' => 'Editar rol'])->syncRoles([$rol1]);
+
         Permission::create(['name' => 'Ver reserva'])->syncRoles([$rol1]);
         Permission::create(['name' => 'Confirmar reserva'])->syncRoles([$rol1]);
 
