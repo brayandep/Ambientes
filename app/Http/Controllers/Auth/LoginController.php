@@ -28,13 +28,13 @@ class LoginController extends Controller
     public function register(Request $request){
       // Validar los datos
       $request->validate([
-        'nombre' => 'required|string|max:255',
+        'nombre' => '',
         'email' => 'required|string|email|max:255|unique:users',
-        'telefono' => 'required',
+        'telefono' => '',
         'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
         'direccion' => 'required',
-        'rol' => 'required',
-        'ci' => 'required',
+        'rol' => '',
+        'ci' => '',
     ]);  
       $user = new User();
 
