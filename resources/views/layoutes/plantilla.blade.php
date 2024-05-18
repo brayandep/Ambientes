@@ -166,23 +166,24 @@
             <header>
                 <h1 id="btnMenu" onclick="desMenu()"><i class='fas fa-bars'></i> Menu </h1>
                 @if (Auth::check())
-                    {{-- <div>
-                        @can('Ver usuario')
-                            <a class="inline" href='{{ route('Usuario.show') }}'>Usuario:</a> 
-                        @endcan
-                        <h1 class="inline">{{ Auth::user()->nombre }}</h1>
-                    </div> --}}
-                    <a href="{{ route('logout') }}"><i class='fas fa-user'></i> Salir</a>
+                    <div class="user-menu-container">
+                        <button id="userMenuButton" onclick="toggleUserMenu()"><i class='fas fa-user'></i> Usuario</button>
+                        <div id="userMenu" class="user-menu">
+                            <a href='{{ route('user.edit') }}'>Modificar usuario</a>
+                            @can('Generar backup')
+                                {{-- pon tu ruta aqui katherine :) --}}
+                                <a href='{{ route('user.edit') }}'>Backups</a>
+                            @endcan
+                            @can('Control bitacora')
+                                {{-- pon tu ruta aqui melvi :) --}}
+                                <a href='{{ route('user.edit') }}'>Biotacoras</a>
+                            @endcan
+                            <a href='{{ route('logout') }}'>Salir</a>
+                        </div>
+                    </div>
                 @else
                     <a href='{{ route('sesion.index') }}'><i class='fas fa-user'></i></a>
                 @endif
-                <div class="user-menu-container">
-                    <button id="userMenuButton" onclick="toggleUserMenu()"><i class='fas fa-user'></i> Usuario</button>
-                    <div id="userMenu" class="user-menu">
-                        <a href='{{ route('user.edit') }}'>Modificar usuario</a>
-                        <a href='{{ route('logout') }}'>Salir</a>
-                    </div>
-                </div>
             </header>
             <br>
             @yield('contenido')
