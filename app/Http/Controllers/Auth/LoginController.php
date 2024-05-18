@@ -28,13 +28,13 @@ class LoginController extends Controller
     public function register(Request $request){
       // Validar los datos
       $request->validate([
-        'nombre' => '',
+        'nombre' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
-        'telefono' => '',
+        'telefono' => 'required',
         'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
         'direccion' => 'required',
-        'rol' => '',
-        'ci' => '',
+        'rol' => 'required',
+        'ci' => 'required',
     ]);  
       $user = new User();
 
@@ -94,7 +94,7 @@ class LoginController extends Controller
           if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-        $user->save();
+         $user->save();
           // Guardar los cambios
       
           // Redirigir al usuario a una página después de la actualización
