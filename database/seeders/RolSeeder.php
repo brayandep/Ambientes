@@ -20,7 +20,7 @@ class RolSeeder extends Seeder
         $rol3 = Role::create(['name' => 'Jefe de carrera', 'Estado' => 1, 'descripcionRol' => 'Encargado de una carrera', 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
 
         Permission::create(['name' => 'Ver ambiente'])->syncRoles([$rol1]);
-        Permission::create(['name' => 'Regsitrar ambiente'])->syncRoles([$rol1]);
+        Permission::create(['name' => 'Registrar ambiente'])->syncRoles([$rol1]);
         Permission::create(['name' => 'Editar ambiente'])->syncRoles([$rol1]);
 
         Permission::create(['name' => 'Ver materia'])->syncRoles([$rol1]);

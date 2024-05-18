@@ -52,7 +52,7 @@ class UsuarioSeeder extends Seeder
         $usuario6 -> save();
 
         $usuario6 = new User();
-        $usuario6 -> nombre = "SamrtByte";
+        $usuario6 -> nombre = "SmartByte";
         $usuario6 -> password = Hash::make("byte123**");
         $usuario6 -> email = "smartbyte626@gmail.com";
         $usuario6 -> assignRole('Admin');
