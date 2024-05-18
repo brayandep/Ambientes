@@ -160,5 +160,7 @@ Route::get('/usuario', [usuariocontroller::class, 'index'])->name('Usuario.index
 Route::get('/inicio', [usuariocontroller::class, 'index2'])->name('sesion.index');
 Route::post('/iniciar-sesion',[LoginController::class, 'login'])->name('iniciar-sesion');
 Route::post('/validar-registro',[LoginController::class, 'register'])->name('validar-registro');
+Route::get('/iniciar-sesion/edit', [LoginController::class, 'edit'])->name('user.edit');
+Route::post('/iniciar-sesion/update', [LoginController::class, 'update'])->name('user.update');
 Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
 
