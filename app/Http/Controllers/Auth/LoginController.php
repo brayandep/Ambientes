@@ -28,13 +28,13 @@ class LoginController extends Controller
     public function register(Request $request){
       // Validar los datos
       $request->validate([
-        'nombre' => 'required|string|max:255',
+        'nombre' => '',
         'email' => 'required|string|email|max:255|unique:users',
-        'telefono' => 'required',
-        'password' => 'required|string|min:8', // Puedes agregar más reglas de validación según tus requisitos
-        'direccion' => 'required',
-        'rol' => 'required',
-        'ci' => 'required',
+        'telefono' => '', // Eliminamos la regla required
+        'password' => 'min:8', // Eliminamos la regla required
+        'direccion' => '', // Eliminamos la regla required
+        'rol' => '', // Eliminamos la regla required
+        'ci' => '', // Eliminamos la regla required
     ]);  
       $user = new User();
 
@@ -46,7 +46,7 @@ class LoginController extends Controller
         $user->direccion = $request->direccion;
         $user->password = Hash::make($request->password);
         $user->save();
-        Auth::login($user);
+       
         return redirect(route('inicio'));
     }
     public function logout(Request $request){
