@@ -497,6 +497,16 @@ body {
   height: 5%;
   
 }
+.boton5{
+  font-size: 15px;
+  background-color: #C384B2;
+  color: #e2eaec;
+  border-radius: 5px;
+  border: none;
+  width: 40%;
+  height: 6%;
+  
+}
 
 .boton3{
   margin: 10px;
