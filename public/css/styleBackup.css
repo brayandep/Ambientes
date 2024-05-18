@@ -99,7 +99,8 @@
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .generar-backup:hover{
@@ -139,7 +140,7 @@
   right: 0;
   bottom: 0;
   position: fixed;
-  display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+  display:none; 
 }
 
 .panel{
@@ -155,7 +156,7 @@
   transform: translate(-50%, -50%);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);  
   border-radius: 5px;
-  display: none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+  display: none; 
 }
 .btnPanel{
   margin-top: 10px;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -127,5 +128,52 @@ class BackupController extends Controller
         } else {
             return redirect()->back()->withErrors(['error' => 'El archivo de backup no existe']);
         }
+    }
+
+
+    public function schedule(Request $request)
+    {
+        $request->validate([
+            'dia' => 'in:Lunes,Martes,Miércoles,Jueves,Viernes,Sábado',
+            'hora' => 'date_format:H:i',
+        ],
+        [
+            'dia.in' => 'Seleccione un dia',
+            'hora.date_format' => 'Seleccione una hora',
+        ]);
+        
+        $dia = $request->input('dia');
+        $hora = $request->input('hora');
+
+        // Separar la hora y los minutos
+        list($hour, $minute) = explode(':', $hora);
+
+        // Construir la expresión cron
+        $cronExpression = "{$minute} {$hour} * * " . $this->convertDayToCron($dia);
+
+        // Guardar en un archivo de configuración
+        $config = [
+            'cron' => $cronExpression,
+            'dia' => $dia,
+            'hora' => $hora,
+        ];
+
+        File::put(storage_path('app/backup_schedule.json'), json_encode($config));
+
+        return redirect()->back()->with('backup_programado', "{$dia} a las {$hora}");
+    }
+    
+    private function convertDayToCron($day)
+    {
+        $days = [
+            'Lunes' => 1,
+            'Martes' => 2,
+            'Miércoles' => 3,
+            'Jueves' => 4,
+            'Viernes' => 5,
+            'Sábado' => 6,
+        ];
+
+        return $days[$day];
     }
 }

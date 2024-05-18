@@ -19,12 +19,53 @@
                 <h1 class="Titulo-backup"><i class="fa-solid fa-database"></i> Backups del Sistema </h1>
             </div>
 
+            <div class="programar-backup">
+                <h2>Programar Backup</h2>
+                <form action="{{ route('backup.schedule') }}" method="POST">
+                    @csrf
+                    <label for="dia">Día de la semana:</label>
+                    <select name="dia" id="dia">
+                        <option value="">Seleccionar</option>
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
+                    </select>
+                    @error('dia')
+                        <span class="msgError">*{{ $message }}</span>
+                    @enderror
+
+                    <label for="hora">Hora:</label>
+                    <input type="time" name="hora" id="hora">
+                    @error('hora')
+                        <span class="msgError">*{{ $message }}</span>
+                    @enderror
+
+                    <button type="submit" class="programar-backup">Programar</button>
+                </form>
+                <div class="backup-programado">
+                    @if (file_exists(storage_path('app/backup_schedule.json')))
+                        @php
+                            $config = json_decode(file_get_contents(storage_path('app/backup_schedule.json')), true);
+                            $dia = $config['dia'];
+                            $hora = $config['hora'];
+                        @endphp
+                        <p>Backup programado: {{ ucfirst($dia) }} a las {{ $hora }}</p>
+                    @else
+                        <p>Backup programado: No establecido</p>
+                    @endif
+                </div>
+            </div>
+
             <div class="boton-backup">
                 <form action="{{ route('backup.store') }}" method="POST">
                     @csrf
                     <button type="submit" class="generar-backup">Generar Backup</button>
                 </form>
             </div>
+
             <div class="tabla-backup">
                 <div class="fila-backup">
                     <div class="contBotones" id="columnaGrande">

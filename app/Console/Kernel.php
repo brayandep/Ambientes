@@ -4,18 +4,20 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\File;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:generate')->everyMinute(); //php artisan schedule:run (comando para ejecutar)
+        $configPath = storage_path('app/backup_schedule.json');
+
+        if (File::exists($configPath)) {
+            $config = json_decode(File::get($configPath), true);
+            if (!empty($config['cron'])) {
+                $schedule->command('backup:generate')->cron($config['cron']);
+            }
+        }
     }
 
     /**
