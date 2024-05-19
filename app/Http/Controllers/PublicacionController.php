@@ -115,6 +115,10 @@ class PublicacionController extends Controller
         ], $messages);
 
         $publicacion = Publicacion::findOrFail($id);
+        
+        // Capturar datos originales antes de cualquier cambio
+        $oldData = $publicacion->toArray();
+
         $publicacion->titulo = $request->titulo;
         $publicacion->descripcion = $request->descripcion;
         $publicacion->fecha_vencimiento = $request->fecha_vencimiento;
@@ -126,12 +130,42 @@ class PublicacionController extends Controller
         }
 
         $publicacion->save();
+//empieza guardado en bitacora de edicion
+        // Obtener los datos nuevos después de la actualización
+        $newData = $publicacion->fresh()->toArray();
 
+        // Inicializar arrays para almacenar los campos que han cambiado
+        $changedFields = [];
+        $oldFields = [];
+
+        // Definir los campos a excluir
+        $excludedFields = ['created_at', 'updated_at'];
+
+        // Comparar los datos antiguos con los nuevos, excluyendo los campos especificados
+        foreach ($newData as $key => $value) {
+            if (!in_array($key, $excludedFields) && array_key_exists($key, $oldData) && $value !== $oldData[$key]) {
+                // Almacenar los campos que han cambiado
+                $changedFields[$key] = $value;
+                $oldFields[$key] = $oldData[$key];
+            }
+        }
+
+        // Registro de edición en la bitácora
+        Log::create([
+            'event_type' => 'Publicacion editada',
+            //'user_id' => Auth::id(),
+            'old_data' => json_encode($oldFields),
+            //'new_data' => json_encode($changedFields),
+            'tabla_afectada' => 'publicaciones',
+            'id_afectado' => $publicacion->id,
+        ]);
+//termina guardado en bitacora edicion
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido actualizada exitosamente.');
     }
-     //método update que llama al método actualizar
-     public function update(Request $request, $id)
-     {
-         return $this->actualizar($request, $id);
-     }
+    
+    // Método update que llama al método actualizar
+    public function update(Request $request, $id)
+    {
+        return $this->actualizar($request, $id);
+    }
 }
