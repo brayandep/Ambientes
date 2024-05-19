@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="{{ asset('css/stylesbrayan.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/styleGrupo.css') }}">
+<link rel="stylesheet" type="text/css" href="../../css/stylesbrayan.css">
+<link rel="stylesheet" type="text/css" href="../../css/styleGrupo.css">
 <style>
     body {
         background-image: url('{{ asset("images/umss.jpg") }}');
