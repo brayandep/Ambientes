@@ -129,6 +129,9 @@
     display: flex; /* Usar flexbox para alinear los elementos en una fila */
     align-items: center; 
     margin-bottom: 10px;
+    font-size: 16px;
+    color: #0b2337;
+    font-weight: bold;
 }
 
 .Buscar-Reservar {
