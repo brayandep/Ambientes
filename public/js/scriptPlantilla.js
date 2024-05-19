@@ -12,6 +12,7 @@ function gesAmbiente(){
         subMateria.style.display = 'none';
         sub2.style.display = 'none'; 
         sub3.style.display = 'none';
+        subRol.style.display = 'none';
         sub1.style.display = 'flex';
     } else {
         sub1.style.display = 'none';
@@ -22,6 +23,7 @@ function gesUnidad(){
         sub1.style.display = 'none';
         subMateria.style.display = 'none';
         sub3.style.display = 'none';
+        subRol.style.display = 'none';
         sub2.style.display = 'flex';
     } else {
         sub2.style.display = 'none';
@@ -31,7 +33,8 @@ function gesReserva(){
     if (sub3.style.display === 'none' || sub3.style.display === '') {
         sub1.style.display = 'none';
         subMateria.style.display = 'none';
-        sub2.style.display = 'none'; 
+        sub2.style.display = 'none';
+        subRol.style.display = 'none'; 
         sub3.style.display = 'flex';
     } else {
         sub3.style.display = 'none';
@@ -43,6 +46,7 @@ function gesMateria(){
         sub1.style.display = 'none';
         sub2.style.display = 'none';
         sub3.style.display = 'none';
+        subRol.style.display = 'none';
         subMateria.style.display = 'flex';
     } else {
         subMateria.style.display = 'none';
@@ -52,6 +56,10 @@ function gesMateria(){
 function GesRol(){
     if (subRol.style.display === 'none' || subRol.style.display === '') {
         subRol.style.display = 'flex';
+        sub1.style.display = 'none';
+        sub2.style.display = 'none';
+        sub3.style.display = 'none';
+        subMateria.style.display = 'none';
         //btnPanelUsr.classList.add('seleccionado');
     } else {
         subRol.style.display = 'none';

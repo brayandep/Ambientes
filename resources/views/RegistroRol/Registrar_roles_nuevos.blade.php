@@ -1,6 +1,6 @@
 @extends('layoutes.plantilla')
 @section('links')
-<link rel="stylesheet" href="{{ asset('css/styleRol.css') }}">
+<link rel="stylesheet" href="../../css/styleRol.css">
 
 @endsection
 @section('titulo', 'Registro de rol')
@@ -98,6 +98,6 @@
         </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('js/scriptRol.js') }}"></script>
+<script src="../../js/scriptRol.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
