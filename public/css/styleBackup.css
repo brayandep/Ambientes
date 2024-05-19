@@ -19,7 +19,6 @@
   }
   
   .Titulo-backup {
-    margin-bottom: 10px;
     margin-top: 10px;
     font-size: 24px;
   }
@@ -99,11 +98,10 @@
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  .generar-backup:hover{
+  .generar-backup:hover {
     background-color: #AE7791;
   }
 
@@ -112,6 +110,7 @@
     display: flex;
     justify-content: center;
   }
+
   .accion-backup button{
     cursor: pointer;
     padding: 5px;
@@ -182,3 +181,104 @@
   background-color: #2f6074;
 }
 /*termina paneles emergaentes */
+
+/* Estilo para h2 */
+h2 {
+  font-size: 16px;
+  color: #0b2337;
+}
+
+/* Estilo para h2 */
+.programar-backup-contenido h2 {
+  font-size: 16px;
+  color: #0b2337;
+  font-weight: bold;
+}
+
+/* Contenedor del contenido de programar backup */
+.programar-backup-contenido {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Inputs */
+.form-fila-backup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  border-radius: 5px;
+  background-color: #ebebeb;
+  color: #0b2c37;
+  padding: 6px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  height: 32px; 
+}
+
+.msgError {
+  color: #b94848;
+  padding: 2px 0 0 6px;
+}
+
+/* Botones */
+.programar-backup {
+  background-color: #933864;
+  color: #f5f6f7;
+  padding: 7px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 100px;
+  text-align: center;
+}
+
+.programar-backup:hover {
+  background-color: #AE7791;
+}
+
+/* Centrado del botón Programar */
+.bton-fila-backup {
+  display: flex;
+  justify-content: center;
+}
+
+.backup-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ .backup-info button{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .backup-info button:hover{
+    background-color: #AE7791;
+    color: #EBEBEB;
+  }
+
+  .eliminar-programar i{
+    background-color: none;
+    font-size: 20px;
+  }
