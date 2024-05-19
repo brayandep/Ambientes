@@ -8,7 +8,8 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 use Illuminate\Support\Facades\Redirect;
@@ -16,11 +17,13 @@ class SolicitudController extends Controller
 {
     public function index()
     {
-        $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
-        $usuarios = Usuario::all();;
+        $usuario = Auth::user();
+        $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        return view('Versolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
+        
+        $usuarios = User::all();;
+        return view('VerSolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
     }
 
     public function index2()
@@ -29,19 +32,23 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-         return view('habilitarReservas', compact('solicitudes','usuarios','horarios','ambientes'));
+        $usuario = Auth::user();
+         return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
     }
+
+
 public function create()
 {
         
-        
+     
     $docentes = Docente::all(); 
     $ambientes = Ambiente::where('estadoAmbiente', 1)->get();
     $horarios = HorarioDisponible::all();
+    $usuario = Auth::user();
     // Obtén todas las solicitudes desde el modelo Solicitud
     //  $usuarios = Usuario::all();;
 
-    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios'));
+    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios', 'usuario'));
 
 }
 public function store(Request $request)
@@ -72,6 +79,7 @@ if ($solicitudExistente) {
 $solicitud = new Solicitud();
 $solicitud->usuario = $request->usuario;
 $solicitud->fecha = $request->fecha;
+$solicitud->nombre = $request->nombre;
 $solicitud->motivo = $request->motivo;
 $solicitud->materia = $request->materia;
 $solicitud->grupo = $request->grupo;
@@ -85,13 +93,15 @@ return redirect()->route('VerSolicitud')->with('success', 'Solicitud registrada 
 
 }       
 public function edit($id ){
-        
+          $usuario = Auth::user();
+        $usuario = Auth::user();
+        $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $solicitud = Solicitud::findOrFail($id);
         $ambientes = Ambiente::all();;
         $horarios = HorarioDisponible::all();;
         $idAmbienteSeleccionado = $solicitud->ambiente_id;
        // return $solicitud;
-        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado'));
+        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado','usuario'));
 }
 public function update(Request $request, Solicitud $solicitud)
 {
@@ -174,6 +184,7 @@ public function solicitudMostrar(Request $request){
     }
     return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
+
 public function descargarReservasPDF(){
     $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
 

@@ -6,6 +6,7 @@ use App\Http\Requests\EnlaceGrupoDocente;
 use App\Models\Docente;
 use App\Models\Grupo;
 use App\Models\Materia;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class grupoController extends Controller
@@ -14,12 +15,12 @@ class grupoController extends Controller
     {   
         $mimateria = Materia::find($materia);
         $grupos = Grupo::where('idMateria', $materia)->get();
-        $docentes = Docente::all();
+        $docentes = User::role('Docente')->get();
 
         return view('materia.enlaceGrupo', compact('grupos', 'mimateria', 'docentes'));
     }
 
-    public function jhosemar(Request $request, $cantgrupo)
+    public function update(Request $request, $cantgrupo)
     {
 
         foreach ($request->grupo_id as $index => $grupoId) {
