@@ -137,15 +137,13 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->name('
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 // Rutas para las publicaciones
-
-
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
 Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
 Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
-
-
 Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
+
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->name('descargar.unidades.pdf');
@@ -155,7 +153,7 @@ Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->nam
 
 Route::get('/publicaciones/{id}/editar', [PublicacionController::class, 'edit'])->name('editar.publicacion');
 
-//ruta para logs
+//inicia ruta para logs
 
 Route::get('/logs', [LogController::class, 'index'])->name('Log.index');
 
