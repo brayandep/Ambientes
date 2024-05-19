@@ -91,6 +91,9 @@
 
     <script>
         var misEventos = @json($eventos);
+        var regEvento = @json($regEvento);
+        var editEvento = @json($editEvento);
+        console.log(regEvento);
 
         function limitarFecha(){
             $('#fechaEnd').val($('#fechaStart').val());

@@ -32,13 +32,11 @@
             <div class="izq">
                 <div>
                     <label class="texto" for="nro_aula">Solicitante:</label><br>
-                    <select class="input" id="usuario" name="usuario">
-                        <option>Selecciona un usuario </option>
-                        @foreach($docentes as $docente)
-                        <option value="{{ $docente->nombreDocente}}" {{ isset($nombreDocente) ? 'selected' : '' }}>{{ $docente->nombreDocente }}</option>
-                        @endforeach
-                        
-                    </select>
+                    <input type="hidden" id="usuarioId" name="usuario" value="{{ $usuario->id }}">
+                    <input type="hidden" id="usuarioId" name="nombre" value="{{ $usuario->nombre }}">
+                    <input type="text" class="input" id="solicitanteNombre" value="{{ $usuario->nombre }}" readonly>
+                    
+                    
                 </div>
                 <br>
                 <div>

@@ -45,14 +45,16 @@
                         <button class="nomCol-v">Descripción</button>
                     </div>
                     <div class="contBotones-v" id="columnaPeque">
-                        <button class="nomCol-v">Editar</button>
-                    </div>
-                    <div class="contBotones-v" id="columnaPeque">
                         <button class="nomCol-v">Horario</button>
                     </div>
-                    <div class="contBotones-v" id="columnaPeque">
-                        <button class="nomCol-v">Habilitar</button>
-                    </div>   
+                    @can('Editar ambiente')
+                        <div class="contBotones-v" id="columnaPeque">
+                            <button class="nomCol-v">Editar</button>
+                        </div>
+                        <div class="contBotones-v" id="columnaPeque">
+                            <button class="nomCol-v">Habilitar</button>
+                        </div>   
+                    @endcan
                 </div>
             
                 @foreach ($ambientes as $ambiente)
@@ -63,11 +65,6 @@
                         <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
                         <p id="ubi" class="texto-limitado">{{ $ambiente->ubicacion }}</p> 
                         <p>{{ $ambiente->descripcion_ubicacion}}</p>
-                        <div class="EditHab" id="columnaPeque">
-                            <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </div>
                         
                         <div class="EditHab" id="columnaPeque">
                             <button class="accion" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';">
@@ -75,16 +72,24 @@
                             </button>
                         </div>
 
-                        <div class="EditHab" id="columnaPeque"> 
-                            <form action="{{ route('cambiar.estado', $ambiente->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="boton-sw">
-                                    <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }} onchange="this.form.submit()">
-                                    <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
-                                </div>
-                            </form>
-                        </div>
+                        @can('Editar ambiente')
+                            <div class="EditHab" id="columnaPeque">
+                                <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+
+                            <div class="EditHab" id="columnaPeque"> 
+                                <form action="{{ route('cambiar.estado', $ambiente->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="boton-sw">
+                                        <input type="checkbox" id="btn-switch-{{ $ambiente->id }}" name="estado" {{ $ambiente->estadoAmbiente == 1 ? 'checked' : '' }} onchange="this.form.submit()">
+                                        <label for="btn-switch-{{ $ambiente->id }}" class="lbl-switch"></label>
+                                    </div>
+                                </form>
+                            </div>
+                        @endcan
                     </div>
                 @endforeach
             </div> 

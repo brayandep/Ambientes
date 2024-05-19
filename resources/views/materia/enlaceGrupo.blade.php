@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../../css/styleMateria.css">
     <link rel="stylesheet" href="../../css/styleGrupo.css">
 @endsection
-
 @section('estilos')
     {{-- Aqui vendran estilos --}}
 @endsection
@@ -33,7 +32,6 @@
 
                     <input type="hidden" name="grupo_id[]" value="{{ $grupo->id }}">
                     <input class="invisible" name="numero[]" value="{{$grupo->numero}}">
-
                     <div class="input-goup">
                         <label class="labMateria">Docente</label>
                         <select class="inputMateria" id="nivel" name="docente[]">

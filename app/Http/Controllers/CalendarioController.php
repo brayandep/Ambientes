@@ -8,6 +8,7 @@ use App\Models\HorarioDisponible;
 use App\Models\Models\Solicitud;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarioController extends Controller
 {
@@ -26,8 +27,12 @@ class CalendarioController extends Controller
                 'backgroundColor' => $dato->color
             ];
         }
+        $regEvento = Auth::user()->can('Registrar evento');
+        $editEvento = Auth::user()->can('Editar evento');
 
-        return view('Calendario.general', compact('eventos'));
+        // print_r($regEvento);
+        // print_r($editEvento);
+        return view('Calendario.general', compact('eventos', 'regEvento', 'editEvento'));
     }
 
     public function individual($idAmbiente)

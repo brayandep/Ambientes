@@ -23,6 +23,7 @@ class CreateSolicitudTable extends Migration
         $table->string('grupo');
         $table->string('nro_aula');
         $table->string('horario');
+        $table->string('nombre');
         $table->string('estado')->nullable();
         $table->timestamps();
     });
