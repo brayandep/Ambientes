@@ -73,9 +73,8 @@
 
                     <div class="form-group">
                         <label for="archivo">Archivo:</label>
-                        <input id="archivo" type="file" class="form-control-file" name="archivo" required>
+                        <input id="archivo" type="file" class="form-control-file" name="archivo" accept=".pdf,.doc,.docx" required>
                     </div>
-
                     <div class="form-group">
                         <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
                         <input id="fecha_vencimiento" type="date" class="form-control" name="fecha_vencimiento" min="{{ now()->format('Y-m-d') }}" required>

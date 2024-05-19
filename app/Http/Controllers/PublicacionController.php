@@ -26,11 +26,14 @@ class PublicacionController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'archivo.mimes' => 'El archivo debe ser un documento de tipo: pdf, doc, docx.',
+        ];
         // Validar los datos del formulario
         $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
-            'archivo' => 'nullable|file',
+            'archivo' => 'nullable',
             'fecha_vencimiento' => 'required|date|after_or_equal:today',
             'tipo' => 'required|in:reglamento,anuncio',
         ]);
