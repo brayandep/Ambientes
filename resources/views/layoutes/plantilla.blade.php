@@ -171,8 +171,7 @@
                         <div id="userMenu" class="user-menu">
                             <a href='{{ route('user.edit') }}'>Modificar usuario</a>
                             @can('Generar backup')
-                                {{-- pon tu ruta aqui katherine :) --}}
-                                <a href='{{ route('user.edit') }}'>Backups</a>
+                                <a href='{{ route('backup.index') }}'>Backups</a>
                             @endcan
                             @can('Control bitacora')
                                 {{-- pon tu ruta aqui melvi :) --}}
