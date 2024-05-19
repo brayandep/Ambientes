@@ -42,4 +42,7 @@ class User extends Authenticatable
         return $this->password;
     }
     
+    function grupos(){
+        return $this->hasMany('App\Models\Grupo', 'idDocente', 'id');
+    }
 }

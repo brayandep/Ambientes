@@ -91,7 +91,7 @@ Route::put('materia/{materia}', [materiaController::class, 'update'])->middlewar
 
 //rutas de grupo
 Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->middleware('auth')->name('grupo.create');
-Route::put('grupo/{cantGrupo}', [grupoController::class, 'jhosemar'])->middleware('auth')->name('grupo.update');
+Route::put('grupo/{cantGrupo}', [grupoController::class, 'update'])->middleware('auth')->name('grupo.update');
 //termina rutas de grupo
 
 Route::get('/Registro', function () {

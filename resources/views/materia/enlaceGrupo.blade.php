@@ -37,10 +37,10 @@
                         <select class="inputMateria" id="nivel" name="docente[]">
                             <option value="">Seleccione el docente</option> 
                             @if ($grupo->idDocente)
-                            <option value="{{$grupo->idDocente}}" selected>{{$grupo->eldocente->nombreDocente}}</option>
+                            <option value="{{$grupo->idDocente}}" selected>{{$grupo->eldocente->nombre}}</option>
                             @endif
                             @foreach ($docentes as $docente)
-                                <option value="{{ $docente->id }}">{{ $docente->nombreDocente }}</option>
+                                <option value="{{ $docente->id }}">{{ $docente->nombre }}</option>
                             @endforeach
                         </select>
                         @error('docente')
