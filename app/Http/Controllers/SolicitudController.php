@@ -8,19 +8,26 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use PDF;
+
+use App\Models\UsuarioPrueba;
+use App\Http\Controllers\CorreoController; // Importa el controlador de correo
+
 
 use Illuminate\Support\Facades\Redirect;
 class SolicitudController extends Controller
 {
     public function index()
     {
-        $solicitudes = Solicitud::all(); // Obtén todas las solicitudes desde el modelo Solicitud
-        $usuarios = Usuario::all();;
+        $usuario = Auth::user();
+        $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        return view('Versolicitud', compact('solicitudes','usuarios','horarios','ambientes'));
+        
+        $usuarios = User::all();;
+        return view('Versolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
     }
 
     public function index2()
@@ -29,19 +36,23 @@ class SolicitudController extends Controller
         $usuarios = Usuario::all();;
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-         return view('habilitarReservas', compact('solicitudes','usuarios','horarios','ambientes'));
+        $usuario = Auth::user();
+         return view('habilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
     }
+
+
 public function create()
 {
         
-        
+     
     $docentes = Docente::all(); 
     $ambientes = Ambiente::where('estadoAmbiente', 1)->get();
     $horarios = HorarioDisponible::all();
+    $usuario = Auth::user();
     // Obtén todas las solicitudes desde el modelo Solicitud
     //  $usuarios = Usuario::all();;
 
-    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios'));
+    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios', 'usuario'));
 
 }
 public function store(Request $request)
@@ -72,6 +83,7 @@ if ($solicitudExistente) {
 $solicitud = new Solicitud();
 $solicitud->usuario = $request->usuario;
 $solicitud->fecha = $request->fecha;
+$solicitud->nombre = $request->nombre;
 $solicitud->motivo = $request->motivo;
 $solicitud->materia = $request->materia;
 $solicitud->grupo = $request->grupo;
@@ -85,13 +97,15 @@ return redirect()->route('VerSolicitud')->with('success', 'Solicitud registrada 
 
 }       
 public function edit($id ){
-        
+          $usuario = Auth::user();
+        $usuario = Auth::user();
+        $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $solicitud = Solicitud::findOrFail($id);
         $ambientes = Ambiente::all();;
         $horarios = HorarioDisponible::all();;
         $idAmbienteSeleccionado = $solicitud->ambiente_id;
        // return $solicitud;
-        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado'));
+        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado','usuario'));
 }
 public function update(Request $request, Solicitud $solicitud)
 {
@@ -132,28 +146,79 @@ public function suspender(Solicitud $id){
     $id->save();
     return redirect()->route('VerSolicitud');
 }
-public function habilitar(Solicitud $id){
+
+public function habilitar(Solicitud $id)
+{
     $id->estado = "confirmado";
     $id->save();
-     // Busca todas las solicitudes con la misma fecha, horario y aula
-     $solicitudes = Solicitud::where('fecha', $id->fecha)
-     ->where('horario', $id->horario)
-     ->where('nro_aula', $id->nro_aula)
-     ->where($id->getKeyName(), '!=', $id->getKey()) // Utilizar el nombre de la columna de la clave primaria
-     ->get();
+    
+    // Obtener el usuario y ambiente asociados a la solicitud
+    $usuario = User::find($id->usuario);
+    $ambiente = Ambiente::find($id->nro_aula);
 
-    // Actualiza el estado de las solicitudes encontradas a "denegado"
-    foreach ($solicitudes as $solicitud) {
-    $solicitud->estado = "denegado";
-    $solicitud->save();
+    if ($usuario && $ambiente) {
+        // Enviar correo de confirmación
+        $correo_destino = $usuario->email;
+        $nombre_usuario = $usuario->nombre;
+        $nombre_ambiente = $ambiente->nombre;
+        $horario = $id->horario;
+        $fecha_solicitud = $id->fecha;
+        
+        $correoController = new CorreoController();
+        $correoController->enviarCorreoConfirmacion($correo_destino, $nombre_usuario, $horario, $nombre_ambiente, $fecha_solicitud);
+        
+        // Actualizar el estado de otras solicitudes
+        $solicitudes = Solicitud::where('fecha', $id->fecha)
+            ->where('horario', $id->horario)
+            ->where('nro_aula', $id->nro_aula)
+            ->where($id->getKeyName(), '!=', $id->getKey())
+            ->get();
+
+        foreach ($solicitudes as $solicitud) {
+            $solicitud->estado = "denegado";
+            $solicitud->save();
+            
+            // Enviar correo de rechazo para cada solicitud denegada
+            $usuario_denegado = User::find($solicitud->usuario);
+            if ($usuario_denegado) {
+                $correo_destino_denegado = $usuario_denegado->email;
+                $nombre_usuario_denegado = $usuario_denegado->nombre;
+                $correoController->enviarCorreoRechazo($correo_destino_denegado, $nombre_usuario_denegado, $horario, $nombre_ambiente, $fecha_solicitud);
+            }
+        }
+
+        return redirect()->route('habilitarReservas')->with('success', 'Solicitud confirmada y correos electrónicos enviados.');
+    } else {
+        return redirect()->route('habilitarReservas')->with('error', 'No se encontró el usuario o el ambiente asociado a la solicitud.');
     }
-    return redirect()->route('habilitarReservas');
 }
-public function denegar(Solicitud $id){
+
+public function denegar(Solicitud $id)
+{
     $id->estado = "denegado";
     $id->save();
-    return redirect()->route('habilitarReservas');
+    
+    // Obtener el usuario y ambiente asociados a la solicitud
+    $usuario = User::find($id->usuario);
+    $ambiente = Ambiente::find($id->nro_aula);
+
+    if ($usuario && $ambiente) {
+        // Enviar correo de rechazo
+        $correo_destino = $usuario->email;
+        $nombre_usuario = $usuario->nombre;
+        $nombre_ambiente = $ambiente->nombre;
+        $horario = $id->horario;
+        $fecha_solicitud = $id->fecha;
+        
+        $correoController = new CorreoController();
+        $correoController->enviarCorreoRechazo($correo_destino, $nombre_usuario, $horario, $nombre_ambiente, $fecha_solicitud);
+
+        return redirect()->route('habilitarReservas')->with('success', 'Solicitud rechazada y correo electrónico enviado.');
+    } else {
+        return redirect()->route('habilitarReservas')->with('error', 'No se encontró el usuario o el ambiente asociado a la solicitud.');
+    }
 }
+
 /*public function confirmar(Solicitud $solicitud)
 {
     // Actualiza el estado de la solicitud a "confirmado"
@@ -174,6 +239,7 @@ public function solicitudMostrar(Request $request){
     }
     return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
+
 public function descargarReservasPDF(){
     $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
 

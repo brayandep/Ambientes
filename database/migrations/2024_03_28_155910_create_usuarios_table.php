@@ -17,7 +17,6 @@ class CreateUsuariosTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('contraseña');
-            $table->integer('tipoUsuario');//99 administrador, 1 autoridades,2 docentes, 3 auxiliar o docente invitado 
             $table->timestamps();
         });
     }

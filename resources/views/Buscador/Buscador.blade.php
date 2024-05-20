@@ -85,7 +85,7 @@
 
             <div class="titulo-boton">
                 <h2 class="Resultado-search"> Resultado de la búsqueda: </h2>
-                <button type="submit" class="Buscar-Reservar">Reservar</button>
+                {{-- <button type="submit" class="Buscar-Reservar">Reservar</button> --}}
             </div>
             <div class="tabla-search">
                 <div class="fila-b">

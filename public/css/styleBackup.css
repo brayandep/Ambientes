@@ -1,0 +1,284 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+} 
+
+  .Navegacion-contenido-backup {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Navegacion-backup {
+    height: 4%;
+    margin-top: 5px;
+    width: 50%;
+    font-size: 16px;
+    color: #0b2337; /* Color del texto */
+  }
+  
+  .Titulo-backup {
+    margin-top: 10px;
+    font-size: 24px;
+  }
+
+  .contenido-backup {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    width: 100%;
+    position: relative; 
+  }
+  
+  .datos-backup {
+    overflow: auto;
+    height: 500px;
+  }
+
+  .tabla-backup{
+    background-color: #e2eaec;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+    /* width: 55%; */
+  }
+
+  .contBotones{
+    min-width: 140px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #columnaPeque{
+    min-width: 90px;
+    max-width: 90px;
+  }
+
+  #columnaGrande{
+    min-width: 235px;
+    max-width: 235px;
+  }
+
+  .nomCol-backup{
+    background-color: #AE7791;
+    padding: 7px;
+    border-radius: 5px;
+    color: #EBEBEB;
+    width: 100%;
+  }
+
+  .fila-backup{
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin-top: 7px;
+    width: 100%;
+    gap: 5px;
+    max-width: 500px;
+  }
+
+  .fila-backup p{
+    min-width: 140px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 5px;
+    margin-left: 5px;
+  }
+
+  /*boton generar backup*/
+  .generar-backup {
+    background-color: #933864;
+    color: #f5f6f7;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .generar-backup:hover {
+    background-color: #AE7791;
+  }
+
+  /*botones de acciones*/
+  .accion-backup{
+    display: flex;
+    justify-content: center;
+  }
+
+  .accion-backup button{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .accion-backup button:hover{
+    background-color: #AE7791;
+    color: #EBEBEB;
+  }
+
+  .accion i{
+    background-color: none;
+    font-size: 20px;
+  }
+
+  /* paneles emergaentes */
+#fondoGris{
+  background-color: #40505577;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display:none; 
+}
+
+.panel{
+  position: absolute; 
+  z-index: 2; /* un valor alto para estar por encima de otros elementos */
+  background-color: #933864;
+  color: #f5f6f7;
+  padding: 25px;
+  width: 21%;
+  min-width: 197px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.288);  
+  border-radius: 5px;
+  display: none; 
+}
+.btnPanel{
+  margin-top: 10px;
+  justify-content: end;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.btnPanel button{
+  padding: 5px 15px 5px 15px;;
+  border-radius: 5px;
+}
+.no{
+  background-color: #F35D5D;
+}
+.si{
+  background-color: #538296;
+}
+.no:hover{
+  background-color: #b94848;
+}
+.si:hover{
+  background-color: #2f6074;
+}
+/*termina paneles emergaentes */
+
+/* Estilo para h2 */
+h2 {
+  font-size: 16px;
+  color: #0b2337;
+}
+
+/* Estilo para h2 */
+.programar-backup-contenido h2 {
+  font-size: 16px;
+  color: #0b2337;
+  font-weight: bold;
+}
+
+/* Contenedor del contenido de programar backup */
+.programar-backup-contenido {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Inputs */
+.form-fila-backup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  border-radius: 5px;
+  background-color: #ebebeb;
+  color: #0b2c37;
+  padding: 6px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  height: 32px; 
+}
+
+.msgError {
+  color: #b94848;
+  padding: 2px 0 0 6px;
+}
+
+/* Botones */
+.programar-backup {
+  background-color: #933864;
+  color: #f5f6f7;
+  padding: 7px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 100px;
+  text-align: center;
+}
+
+.programar-backup:hover {
+  background-color: #AE7791;
+}
+
+/* Centrado del botón Programar */
+.bton-fila-backup {
+  display: flex;
+  justify-content: center;
+}
+
+.backup-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ .backup-info button{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .backup-info button:hover{
+    background-color: #AE7791;
+    color: #EBEBEB;
+  }
+
+  .eliminar-programar i{
+    background-color: none;
+    font-size: 20px;
+  }
