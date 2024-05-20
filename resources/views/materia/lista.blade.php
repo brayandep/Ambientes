@@ -47,10 +47,10 @@
                         <div class="contBotones" id="columnaPeque">
                             <button class="nomCol">Editar</button>
                         </div>                        
+                        <div class="contBotones" id="columnaPeque">
+                            <button class="nomCol">Grupos</button>
+                        </div>
                     @endcan
-                    <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol">Grupos</button>
-                    </div>
                 </div>
                 <div>
                     @foreach ($materias as $Materia)
@@ -66,11 +66,11 @@
                                 <div class="EditHab" id="columnaPeque">
                                     <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
                                 </div>                      
+                                <div class="EditHab" id="columnaPeque">
+                                    <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';"><i class="fa-solid fa-user-group"></i></button>
+                                </div>
                             @endcan
 
-                            <div class="EditHab" id="columnaPeque">
-                                <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';"><i class="fa-solid fa-user-group"></i></button>
-                            </div>
                         </div>
                     @endforeach
                 </div>

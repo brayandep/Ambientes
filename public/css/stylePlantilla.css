@@ -30,7 +30,8 @@ body{
     color: #ffffff;
     display: none;
     position: absolute;
-    top: 75px;
+    left: 0;
+    top: 76px;
     border-bottom-right-radius: 5px;
     z-index: 1;
     box-shadow: 2px 2px 5px #93386475;
@@ -83,13 +84,23 @@ body{
 }
 
 header{
+    position: fixed; /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 20px;
     display: flex;
     font-size: 24px;
     justify-content: space-between;
+    align-items: center;
     background-color: #933864;
     color: #f5f6f7;
+    z-index: 2;
 }
+.separarHeader{
+    padding-top: 76px;
+}
+
 #btnMenu{
     transition: color 0.2s;
 }
