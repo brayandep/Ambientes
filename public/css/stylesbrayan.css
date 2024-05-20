@@ -455,16 +455,23 @@ body {
   background-attachment: fixed;
   
 }
+
+*{
+  margin: 0;
+}
+
 .section{
+  font-family: sans-serif;
   background-color: #933864bc;
   text-align: center;
-  height: 50%;
   width: 30%;
-  margin-top: 10%;
-  margin-left: 35%;
-  border-radius: 15px;
-  font: 25px;
+  min-width: 300px;
+  /* margin-top: 10%;
+  margin-left: 35%; */
+  margin: auto;
+  border-radius: 10px;
   color: #e2eaec;
+  padding-bottom: 20px;
 }
 
 .inicio {
@@ -485,17 +492,20 @@ body {
   width: 70%;
   padding: 8px;
   box-sizing: border-box;
-  
+  border-radius: 5px;
 }
 .boton4{
-  font-size: 15px;
+  font-size: 14px;
   background-color: #C384B2;
   color: #e2eaec;
   border-radius: 5px;
   border: none;
-  width: 30%;
   height: 5%;
-  
+  padding: 7px;
+  margin-top: 5px;
+}
+.boton4:hover{
+  background-color: #a8759b;
 }
 
 .boton3{
@@ -509,3 +519,17 @@ body {
   border: none;
 }
 
+.boton5{
+  color: #f5f6f7;
+  background-color: #a8759b;
+  padding: 5px 8px 5px 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+
+}
+
+.registro-container{
+  height: 100%;
+  display: flex;
+}
