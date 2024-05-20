@@ -23,7 +23,7 @@ class SolicitudController extends Controller
         $ambientes = Ambiente::all();;
         
         $usuarios = User::all();;
-        return view('VerSolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
+        return view('Versolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
     }
 
     public function index2()
@@ -33,7 +33,7 @@ class SolicitudController extends Controller
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
         $usuario = Auth::user();
-         return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
+         return view('habilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
     }
 
 
