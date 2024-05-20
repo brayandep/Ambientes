@@ -26,6 +26,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
 
 use App\Http\Controllers\BackupController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\RolController;
 use Spatie\Permission\Models\Permission;
 
@@ -166,6 +167,10 @@ Route::post('/backup/restore', [BackupController::class, 'restore'])->name('back
 Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
 Route::post('/backup/schedule', [BackupController::class, 'schedule'])->name('backup.schedule');
 Route::post('/backup/schedule/delete', [BackupController::class, 'deleteSchedule'])->name('backup.schedule.delete');
+Route::get('/run-backup', function () {
+    Artisan::call('backup:generate');
+    return 'Backup command executed';
+})->name('run.backup');
 //termina rutas backup
 
 
