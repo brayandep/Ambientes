@@ -59,7 +59,7 @@
                     @if (file_exists(storage_path('app/backup_schedule.json')))
                         @php
                             $config = json_decode(file_get_contents(storage_path('app/backup_schedule.json')), true);
-                            $dia = $config['dia'];
+                            $dia = $config['diaVer'];
                             $hora = $config['hora'];
                         @endphp
                         <div class="backup-info">

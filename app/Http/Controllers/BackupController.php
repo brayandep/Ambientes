@@ -155,8 +155,9 @@ class BackupController extends Controller
         // Guardar en un archivo de configuración
         $config = [
             'cron' => $cronExpression,
-            'dia' => $dia,
+            'diaVer' => $dia,
             'hora' => $hora,
+            'dia' => $this->convertDayToShow($dia),
         ];
 
         File::put(storage_path('app/backup_schedule.json'), json_encode($config));
@@ -173,6 +174,20 @@ class BackupController extends Controller
             'Jueves' => 4,
             'Viernes' => 5,
             'Sábado' => 6,
+        ];
+
+        return $days[$day];
+    }
+
+    private function convertDayToShow($day)
+    {
+        $days = [
+            'Lunes' => 'Monday',
+            'Martes' => 'Tuesday',
+            'Miércoles' => 'Wednesday',
+            'Jueves' => 'Thursday',
+            'Viernes' => 'Friday',
+            'Sábado' => 'Saturday',
         ];
 
         return $days[$day];
