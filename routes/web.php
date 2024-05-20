@@ -141,7 +141,7 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
 
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
-Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+
 
 // Rutas para las publicaciones
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
