@@ -93,11 +93,11 @@
                          <form action="{{ route('solicitud.suspender', $solicitud->idsolicitud) }}" method="POST">
                          @csrf
                         @method('put')
-                        <button  id="boton-cancelar" class="botones" type="submit" onclick="botonCancelar()" >Suspender</button>     
+                        <button   class="fa-solid fa-circle-xmark" type="submit" onclick="botonCancelar()" ></button>     
                          </form>
                       @endif
                     
-                        <a  class="botonedit" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}">Modificar</a>
+                        <a  class="fa-solid fa-pen-to-square" href="{{ route('solicitud.edit', $solicitud->idsolicitud) }}"></a>
                         
 
 
