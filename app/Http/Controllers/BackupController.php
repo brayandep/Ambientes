@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 class BackupController extends Controller
 {
     public function index()
@@ -202,4 +203,48 @@ class BackupController extends Controller
         }
     }
 
+    public function runBackup(Request $request)
+    {
+        $token = $request->query('token');
+
+        if ($token !== "pass123cron") {
+            abort(403, 'Unauthorized');
+        }
+
+        $configPath = storage_path('app/backup_schedule.json');
+
+        if (!File::exists($configPath)) {
+            return 'No backup schedule found';
+        }
+
+        $config = json_decode(File::get($configPath), true);
+        if (empty($config['cron'])) {
+            return 'No backup schedule found';
+        }
+
+        // Obtener el día de la semana actual
+        $currentDayOfWeek = date('l');
+
+        // Obtener el día programado del archivo JSON
+        $scheduledDayOfWeek = $config['dia'];
+
+        // Verificar si el día actual coincide con el día programado
+        if ($currentDayOfWeek === $scheduledDayOfWeek) {
+            // Obtener la hora actual
+            $currentHour = date('H:i');
+
+            // Obtener la hora programada del archivo JSON
+            $scheduledHour = $config['hora'];
+
+            // Verificar si la hora actual coincide con la hora programada
+            if ($currentHour === $scheduledHour) {
+                Artisan::call('backup:generate');
+                return 'Backup command executed';
+            } else {
+                return 'No backup scheduled at this time';
+            }
+        } else {
+            return 'No backup scheduled for today';
+        }
+    }
 }
