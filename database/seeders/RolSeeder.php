@@ -18,12 +18,13 @@ class RolSeeder extends Seeder
         $rol1 = Role::create(['name' => 'Admin', 'Estado' => 1, 'descripcionRol' => 'Controla todo', 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
         $rol2 = Role::create(['name' => 'Docente', 'Estado' => 1,  'descripcionRol' => 'Docente regular de la UMSS','tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
         $rol3 = Role::create(['name' => 'Jefe de carrera', 'Estado' => 1, 'descripcionRol' => 'Encargado de una carrera', 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
+        $rol4 = Role::create(['name' => 'Encargado de ambientes', 'Estado' => 1, 'descripcionRol' => 'Encargado los ambientes', 'tipoVigencia' => 'permanente', 'fechaInicioRol' => '2024-05-13']);
 
-        Permission::create(['name' => 'Ver ambiente'])->syncRoles([$rol1]);
-        Permission::create(['name' => 'Registrar ambiente'])->syncRoles([$rol1]);
-        Permission::create(['name' => 'Editar ambiente'])->syncRoles([$rol1]);
+        Permission::create(['name' => 'Ver ambiente'])->syncRoles([$rol1, $rol4]);
+        Permission::create(['name' => 'Registrar ambiente'])->syncRoles([$rol1, $rol4]);
+        Permission::create(['name' => 'Editar ambiente'])->syncRoles([$rol1, $rol4]);
 
-        Permission::create(['name' => 'Ver materia'])->syncRoles([$rol1]);
+        Permission::create(['name' => 'Ver materia'])->syncRoles([$rol1, $rol3]);
         Permission::create(['name' => 'Registrar materia'])->syncRoles([$rol1]);
         Permission::create(['name' => 'Editar materia'])->syncRoles([$rol1]);
 

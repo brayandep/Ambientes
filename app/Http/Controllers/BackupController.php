@@ -27,39 +27,44 @@ class BackupController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'No se pudo establecer la conexión a la base de datos']);
         }
-
+    
         // Obtener el nombre del archivo de backup
         $backupName = date('d_m_Y_H-i-s') . '_backup.sql';
-
+    
         // Iniciar la construcción del archivo SQL
         $sql = "-- Respaldo de la base de datos $databaseName\n\n";
-
+    
         // Agregar comando para deshabilitar las verificaciones de clave externa
         $sql .= "SET FOREIGN_KEY_CHECKS=0;\n\n";
-
+    
         // Agregar comando para crear la base de datos si no existe y seleccionarla
         $sql .= "CREATE DATABASE IF NOT EXISTS $databaseName;\n";
         $sql .= "USE $databaseName;\n\n";
-
+    
         // Obtener el listado de tablas en la base de datos
         $tables = DB::select('SHOW TABLES');
-
+    
         foreach ($tables as $table) {
             $tableName = reset($table);
-
-            // Agregar comando para eliminar la tabla si existe
-            $sql .= "DROP TABLE IF EXISTS $tableName;\n\n";
-
-            $tableInfo = DB::select("SHOW CREATE TABLE $tableName");
-
-            // Agregar comando para crear la tabla de nuevo
-            $sql .= $tableInfo[0]->{'Create Table'} . ";\n\n";
-
+    
+            if ($tableName == 'users') {
+                // No eliminar la tabla 'users', solo agregar los datos
+                $sql .= "-- Datos para la tabla $tableName\n\n";
+            } else {
+                // Agregar comando para eliminar la tabla si existe
+                $sql .= "DROP TABLE IF EXISTS $tableName;\n\n";
+    
+                $tableInfo = DB::select("SHOW CREATE TABLE $tableName");
+    
+                // Agregar comando para crear la tabla de nuevo
+                $sql .= $tableInfo[0]->{'Create Table'} . ";\n\n";
+            }
+    
             // Agregar los datos de la tabla al archivo SQL
             $tableData = DB::table($tableName)->get()->toArray();
             foreach ($tableData as $row) {
                 $sql .= "INSERT INTO $tableName VALUES (";
-
+    
                 // Formatear manualmente cada fila de datos
                 foreach ($row as $key => $value) {
                     // Si el valor es una cadena, escapar comillas
@@ -74,17 +79,18 @@ class BackupController extends Controller
             }
             $sql .= "\n\n\n";
         }
-
+    
         // Agregar comando para habilitar las verificaciones de clave externa
         $sql .= "SET FOREIGN_KEY_CHECKS=1;\n\n";
-
+    
         // Guardar el archivo de backup
         Storage::put('backup/' . $backupName, $sql);
-
+    
         return redirect()->back()->with('success', 'Copia de seguridad realizada con éxito');
     }
+    
 
-    public function restore(Request $request)
+public function restore(Request $request)
     {
         $restorePoint = $request->input('restorePoint');
 
@@ -93,19 +99,28 @@ class BackupController extends Controller
 
         // Verifica si el archivo de backup existe
         if (Storage::exists($filePath)) {
-            $sql = explode(";", Storage::get($filePath));
+            $sqlStatements = explode(";\n", Storage::get($filePath));
             $totalErrors = 0;
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            foreach ($sql as $query) {
-                if (!empty(trim($query))) {
+
+            foreach ($sqlStatements as $statement) {
+                if (!empty(trim($statement))) {
+                    // No ejecutar DROP TABLE para la tabla 'users'
+                    if (stripos($statement, 'DROP TABLE IF EXISTS users') !== false) {
+                        continue;
+                    }
+
+                    // Ejecución de otras declaraciones SQL
                     try {
-                        DB::statement($query);
+                        DB::statement($statement);
                     } catch (\Exception $e) {
                         $totalErrors++;
                     }
                 }
             }
+
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
             if ($totalErrors <= 0) {
                 return redirect()->back()->with('success', 'Restauración completada con éxito');
             } else {
@@ -115,7 +130,6 @@ class BackupController extends Controller
             return redirect()->back()->withErrors(['error' => 'El archivo de backup no existe']);
         }
     }
-
 
     public function destroy($backupName)
     {
