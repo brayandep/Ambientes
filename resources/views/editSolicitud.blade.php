@@ -25,8 +25,8 @@
             <div class="izq">
                 <div>
                 <label class="texto" for="usuario">Usuario:</label><br>
-                <input class="input" type="text" id="solicitante" name="usuario" value="{{ $usuario->nombre }}" readonly>
-                <input type="hidden" name="usuario_id" value="{{ $usuario->id }}">
+                <input class="input" type="text" id="solicitante"  value="{{ $usuario->nombre }}" readonly>
+                <input type="hidden" name="usuario" value="{{ $usuario->id }}">
                 
                 </div>
                 <br>

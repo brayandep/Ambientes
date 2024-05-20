@@ -52,9 +52,6 @@ class LoginController extends Controller
         
         $user->assignRole($request->rol);
 
-        // Autenticar al usuario
-        Auth::login($user);
-
         // Enviar correo de bienvenida
         $correoController = new CorreoController();
         $correoController->enviarCorreoBienvenida($user->email, $user->nombre, $user->email, $request->password);

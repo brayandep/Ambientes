@@ -7,20 +7,63 @@
     display: none;
     position: absolute;
     right: 0;
-    background-color: white;
+    background-color: #e2eaec;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    min-width: 160px;
+    width: 200px;
+    padding: 5px 0 5px 0;
+    border-radius: 5px;
+    color: #0B2C37;
+}
+
+.nombreUser{
+    padding: 10px 14px 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.user-menu hr{
+    background-color: #d2d5d6;
+    height: 2px;
+    z-index: 1;
 }
 
 .user-menu a {
-    color: black;
-    padding: 12px 16px;
+    padding: 10px 14px;
     text-decoration: none;
     display: block;
-    font-size: 15px;
+    font-size: 14px;
+    display: flex; 
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .user-menu a:hover {
-    background-color: #ddd;
+    background-color: #933864;
+    color: #f5f6f7;
 }
+
+#userMenuButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #933864;
+    background-color: #f5f6f7;
+    padding: 5px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 21px;
+    transition: background-color 0.2s, color 0.2s;
+}
+#userMenuButton:hover{
+    background-color: #AE7791;
+    color: #f5f6f7;
+}
+
+#userMenuButton i{
+    z-index: 1;
+}
+
+
