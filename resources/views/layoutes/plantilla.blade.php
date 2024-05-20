@@ -194,7 +194,7 @@
         <div class="footer-content">
             <img src="{{asset('images\logo.png')}}" alt="Logo" class="logo">
             
-            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.srl</p>
+            <p class="copyright">Derechos de autor © 2024 | Todos los derechos reservados SmartByte.SRL</p>
             <div class="contact-info">
                 <p>Contactenos: Gmail: SmartByte@gmail.com</p>
                 <p>Celular: 6954890 </p>

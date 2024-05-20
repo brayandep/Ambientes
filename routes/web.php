@@ -30,6 +30,8 @@ use App\Http\Controllers\RolController;
 use Spatie\Permission\Models\Permission;
 
 
+use App\Http\Controllers\CorreoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -191,3 +193,7 @@ Route::get('/usuario/lista', [usuariocontroller::class, 'show'])->middleware('ca
 Route::get('/usuario/roles/{usuario}', [usuariocontroller::class, 'edit'])->name('Usuario.edit');
 Route::put('/usuario/roles/{usuario}', [usuariocontroller::class, 'update'])->name('Usuario.update');
 //termina lista de usuario
+
+//inicia enviar norificaciones
+Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviar.correo');
+//finaliza enviar norificaciones
