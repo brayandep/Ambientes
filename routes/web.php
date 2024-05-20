@@ -24,7 +24,7 @@ use App\Http\Controllers\usuariocontroller;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
-
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\BackupController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\RolController;
@@ -141,7 +141,7 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
 
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
-Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+
 
 // Rutas para las publicaciones
 
@@ -149,10 +149,10 @@ Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->middleware('can:Registrar publicacion')->name('publicaciones.index');
 Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->middleware('can:Registrar publicacion')->name('crear.publicacion');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->middleware('auth')->name('guardar.publicacion');
-//Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
-Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->middleware('auth')->name('publicaciones.detalles');
 Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->middleware('can:Eliminar publicacion')->name('eliminar.publicacion');
-Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->middleware('auth')->name('publicacion.ver');
+Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');//ver sin restriccion
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->middleware('auth')->name('actualizar.publicacion');
+
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->middleware('auth')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->middleware('auth')->name('descargar.unidades.pdf');
@@ -201,3 +201,8 @@ Route::put('/usuario/roles/{usuario}', [usuariocontroller::class, 'update'])->na
 //inicia enviar norificaciones
 Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviar.correo');
 //finaliza enviar norificaciones
+//inicia ruta para logs
+
+Route::get('/logs', [LogController::class, 'index'])->name('Log.index');
+
+//termina ruta para logs

@@ -8,6 +8,8 @@ use App\Models\HorarioDisponible;
 use App\Models\TipoAmbiente;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
+use App\Models\Log;
+
 
 use PDF;
 

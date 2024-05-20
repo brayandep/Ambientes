@@ -10,6 +10,6 @@ class Publicacion extends Model
     protected $table = 'publicaciones';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'titulo', 'descripcion', 'archivo', 'fecha_vencimiento', 'visible'
+        'titulo', 'descripcion', 'archivo', 'fecha_vencimiento','tipo', 'visible'
     ];
 }
