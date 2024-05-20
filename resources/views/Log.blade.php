@@ -76,7 +76,7 @@ th {
                     @foreach($logs as $log)
                         <tr>
                             <td>{{ $log->event_type }}</td>
-                            <td>{{ $log->user ? $log->user->name : 'Anónimo' }}</td>
+                            <td>{{ $log->user_id }}</td>
                             <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
                             <td>{{ $log->tabla_afectada }}</td>
                             <td>{{ $log->id_afectado }}</td>

@@ -144,12 +144,14 @@ Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 
 
 // Rutas para las publicaciones
-Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
-Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->name('crear.publicacion');
-Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('guardar.publicacion');
-Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->name('eliminar.publicacion');
-Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');
-Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->name('actualizar.publicacion');
+
+
+Route::get('/publicaciones', [PublicacionController::class, 'index'])->middleware('can:Registrar publicacion')->name('publicaciones.index');
+Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->middleware('can:Registrar publicacion')->name('crear.publicacion');
+Route::post('/publicaciones', [PublicacionController::class, 'store'])->middleware('auth')->name('guardar.publicacion');
+Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->middleware('can:Eliminar publicacion')->name('eliminar.publicacion');
+Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');//ver sin restriccion
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->middleware('auth')->name('actualizar.publicacion');
 
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->middleware('auth')->name('descargar.ambientes.pdf');
@@ -201,7 +203,8 @@ Route::put('/usuario/roles/{usuario}', [usuariocontroller::class, 'update'])->na
 
 //inicia enviar norificaciones
 Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviar.correo');
-//finaliza enviar norificaciones//inicia ruta para logs
+//finaliza enviar norificaciones
+//inicia ruta para logs
 
 Route::get('/logs', [LogController::class, 'index'])->name('Log.index');
 

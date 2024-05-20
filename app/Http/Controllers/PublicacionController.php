@@ -7,6 +7,7 @@ use App\Models\Publicacion;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use App\Models\Log;
+use Illuminate\Support\Facades\Auth;
 
 class PublicacionController extends Controller
 {
@@ -54,7 +55,7 @@ class PublicacionController extends Controller
         // Registro de creación en la bitácora
         Log::create([
             'event_type' => 'Publicacion Creada',
-            //'user_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'new_data' => json_encode(['Publicaciones_id' => $publicacion->id]),
             'tabla_afectada' => 'publicaciones',
             'id_afectado' => $publicacion->id,
@@ -71,7 +72,7 @@ class PublicacionController extends Controller
             // Registro de eliminación en la bitácora
             Log::create([
                 'event_type' => 'Publicación eliminada',
-                //'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
+                'user_id' => auth()->id(), // Obtener el ID del usuario autenticado
                 'old_data' => json_encode($publicacion->toArray()),
                 'tabla_afectada' => 'publicaciones',
                 'id_afectado' => $publicacion->id,
@@ -153,7 +154,7 @@ class PublicacionController extends Controller
         // Registro de edición en la bitácora
         Log::create([
             'event_type' => 'Publicacion editada',
-            //'user_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'old_data' => json_encode($oldFields),
             //'new_data' => json_encode($changedFields),
             'tabla_afectada' => 'publicaciones',

@@ -29,7 +29,7 @@ class Ambiente extends Model
             // Registro de creación en la bitácora
             Log::create([
                 'event_type' => 'Ambiente creado',
-                //'user_id' => Auth::id(),
+                'user_id' => Auth::id(),
                 'new_data' => json_encode(['ambientes_id' => $ambiente->id]),
                 'tabla_afectada' => 'ambientes',
                 'id_afectado' => $ambiente->id,
@@ -60,7 +60,7 @@ class Ambiente extends Model
             // Registro de edición en la bitácora
             Log::create([
                 'event_type' => 'Ambiente editado',
-                //'user_id' => Auth::id(),
+                'user_id' => Auth::id(),
                 'old_data' => json_encode($oldFields),
                 //'new_data' => json_encode($changedFields),
                 'tabla_afectada' => 'ambientes',
@@ -72,7 +72,7 @@ class Ambiente extends Model
             // Registro de eliminación en la bitácora
             Log::create([
                 'event_type' => 'Ambiente eliminado',
-                //'user_id' => Auth::id(),
+                'user_id' => Auth::id(),
                 'old_data' => json_encode($ambiente->toArray()),
                 'tabla_afectada' => 'ambientes',
                 'id_afectado' => $ambiente->id,
