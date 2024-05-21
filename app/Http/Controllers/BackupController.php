@@ -222,29 +222,24 @@ class BackupController extends Controller
             return 'No backup schedule found';
         }
 
-        // Obtener el día de la semana actual
-        $currentDayOfWeek = date('l');
+        // Obtener la hora actual
+        $currentHour = date('H:i');
+
+        // Obtener el día actual
+        $currentDay = date('l');
+
+        // Obtener la hora programada del archivo JSON
+        $scheduledHour = $config['hora'];
 
         // Obtener el día programado del archivo JSON
-        $scheduledDayOfWeek = $config['dia'];
+        $scheduledDay = $config['dia'];
 
-        // Verificar si el día actual coincide con el día programado
-        if ($currentDayOfWeek === $scheduledDayOfWeek) {
-            // Obtener la hora actual
-            $currentHour = date('H:i');
-
-            // Obtener la hora programada del archivo JSON
-            $scheduledHour = $config['hora'];
-
-            // Verificar si la hora actual coincide con la hora programada
-            if ($currentHour === $scheduledHour) {
-                Artisan::call('backup:generate');
-                return 'Backup command executed';
-            } else {
-                return 'No backup scheduled at this time';
-            }
+        // Verificar si es el día correcto y la hora adecuada
+        if ($currentDay === $scheduledDay && $currentHour === $scheduledHour) {
+            Artisan::call('backup:generate');
+            return 'Backup command executed';
         } else {
-            return 'No backup scheduled for today';
+            return 'No backup scheduled at this time';
         }
     }
 }
