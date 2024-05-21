@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 class BackupController extends Controller
 {
     public function index()
@@ -200,6 +201,29 @@ class BackupController extends Controller
             // Si el archivo no existe, redireccionar con un mensaje de error
             return redirect()->back()->withErrors(['error' => 'El archivo de backup no existe']);
         }
+    }
+
+    public function runBackup(Request $request)
+    {
+        $token = $request->query('token');
+
+        if ($token !== "pass123cron") {
+            abort(403, 'Unauthorized');
+        }
+
+        $configPath = storage_path('app/backup_schedule.json');
+
+        if (!File::exists($configPath)) {
+            return 'No backup schedule found';
+        }
+
+        $config = json_decode(File::get($configPath), true);
+        if (empty($config['cron'])) {
+            return 'No backup schedule found';
+        }
+
+        Artisan::call('backup:generate');
+        return 'Backup command executed';
     }
 
 }
