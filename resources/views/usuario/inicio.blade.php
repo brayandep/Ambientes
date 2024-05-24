@@ -50,7 +50,7 @@
                     <label class="form-check-label" for="remenberCheck">
                         Mantener sesión iniciada</label>
                 </div>
-                <button class="boton4" type="submit">Iniciar</button>
+                <button class="boton4" type="submit">Iniciar Sesion</button>
                 <br>
                 <br>
                 <a class="boton5" href="{{ route('inicio') }}">Modo Invitado</a>

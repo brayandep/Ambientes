@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Log; // Asegúrate de importar el modelo Log
+use Illuminate\Support\Facades\Auth;
+use App\Models\Log;
 
 class Unidad extends Model
 {
@@ -29,7 +30,7 @@ class Unidad extends Model
         // Registro de creación en la bitácora
         Log::create([
             'event_type' => 'Unidad creada',
-            //'user_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'new_data' => json_encode(['unidad_id' => $unidad->id]),
             'tabla_afectada' => 'unidades',
             'id_afectado' => $unidad->id,
@@ -61,7 +62,7 @@ class Unidad extends Model
         // Registro de edición en la bitácora
         Log::create([
             'event_type' => 'Unidad editada',
-            //'user_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'old_data' => json_encode($oldFields),
             //'new_data' => json_encode($changedFields),
             'tabla_afectada' => 'unidades',
