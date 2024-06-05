@@ -66,7 +66,7 @@
                                     
                                 @can('Editar unidad')
                                     <div class="EliEdi">
-                                        <button class="accion" onclick="location.href='{{ route('unidad.edit', $unidad) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button title="Modificar Unidad" class="accion" onclick="location.href='{{ route('unidad.edit', $unidad) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
                                         <!--<button onclick="EliminarUnidad({{ $unidad->id }})" class="accion"><i class="fa-solid fa-trash"></i></button>-->
                                     </div>
                                     <div class="EliEdi">
