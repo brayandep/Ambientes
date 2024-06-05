@@ -9,6 +9,8 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\Controllers\CorreoController;
+
 class LoginController extends Controller
 {
     //
@@ -49,7 +51,11 @@ class LoginController extends Controller
         $user->save();
         
         $user->assignRole($request->rol);
-       
+
+        // Enviar correo de bienvenida
+        $correoController = new CorreoController();
+        $correoController->enviarCorreoBienvenida($user->email, $user->nombre, $user->email, $request->password);
+
         return redirect(route('inicio'));
     }
     public function logout(Request $request){

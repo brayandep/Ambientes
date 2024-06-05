@@ -9,6 +9,8 @@ use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BD;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Log;
 
 class RolController extends Controller
 {
@@ -61,12 +63,12 @@ class RolController extends Controller
             // 'fechaInicioRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             'fechaFinRol' => 'nullable|required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             'permissions' => 'required|array', // Asegura que se envíe al menos un permiso
-            'permissions.*' => 'exists:permissions,id' // Cada permiso debe existir
+            // 'permissions.*' => 'exists:permissions,id' // Cada permiso debe existir
         ]);
 
         $rol = Role::create([
             'name' => $request->input('name'),
-            'guard_name' => 'web', // asumiendo que estás usando el guard por defecto
+            // 'guard_name' => 'web', // asumiendo que estás usando el guard por defecto
             'Estado' => $request->input('Estado'),
             'descripcionRol' => $request->input('descripcionRol'),
             'tipoVigencia' => $request->input('tipoVigencia'),
@@ -74,8 +76,16 @@ class RolController extends Controller
             'fechaFinRol' => $request->input('fechaFinRol')
         ]);
 
-        $rol->syncPermissions($request->input('permissions'));
-
+        $rol->syncPermissions($request->permissions);
+        // Registro de creación en la bitácora
+        Log::create([
+            'event_type' => 'Rol creado',
+            'user_id' => Auth::id(),
+            'new_data' => json_encode(['rol_id' => $rol->id]),
+            'tabla_afectada' => 'roles',
+            'id_afectado' => $rol->id,
+        ]);
+        //termina bitacora
         return redirect()->route('Rol.index'); // Asegúrate de que esta ruta está bien definida
     }
 
@@ -96,7 +106,16 @@ class RolController extends Controller
         // }
         // Cambiar el estado de 1 a 0 y viceversa
         $rol->Estado = $rol->Estado == 1 ? 0 : 1;
-    
+            
+        Log::create([
+            'event_type' => 'Rol editado',
+            'user_id' => Auth::id(),
+            'old_data' => $rol->Estado,
+            //'new_data' => json_encode($role->fresh()->toArray()),
+            'tabla_afectada' => 'roles',
+            'id_afectado' => $rol->id,
+        ]);
+
         $rol->save();
         return redirect()->route('Rol.index');
     }
@@ -132,10 +151,42 @@ class RolController extends Controller
             // 'fechaInicioRol' => 'required',
             'permission'=> 'required'
         ]);
+         // Capturar datos originales antes de cualquier cambio
+         $oldData = $role->toArray();
         $role ->name= $request->name;
         $role->save();
         $role->syncPermissions($request->input('permission'));
         return redirect()->route('roles.index');
+        //empieza guardado en bitacora de edicion
+        // Obtener los datos nuevos después de la actualización
+        $newData = $role->fresh()->toArray();
+
+        // Inicializar arrays para almacenar los campos que han cambiado
+        $changedFields = [];
+        $oldFields = [];
+
+        // Definir los campos a excluir
+        $excludedFields = ['created_at', 'updated_at'];
+
+        // Comparar los datos antiguos con los nuevos, excluyendo los campos especificados
+        foreach ($newData as $key => $value) {
+            if (!in_array($key, $excludedFields) && array_key_exists($key, $oldData) && $value !== $oldData[$key]) {
+                // Almacenar los campos que han cambiado
+                $changedFields[$key] = $value;
+                $oldFields[$key] = $oldData[$key];
+            }
+        }
+
+        // Registro de edición en la bitácora
+        Log::create([
+            'event_type' => 'Rol editado',
+            'user_id' => Auth::id(),
+            'old_data' => json_encode($role->getOriginal()),
+            //'new_data' => json_encode($role->fresh()->toArray()),
+            'tabla_afectada' => 'roles',
+            'id_afectado' => $role->id,
+        ]);
+//termina guardado en bitacora edicion
     }
 
     /**

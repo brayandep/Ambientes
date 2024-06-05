@@ -29,7 +29,6 @@ class materiaController extends Controller
     public function store(RegistrarMateria $request)
     {
         $materia = Materia::create($request->all());
-
         for ($i = 0; $i < $materia->cantGrupo; $i++) {
             $grupo = new Grupo();
             $grupo->numero = $i+1;

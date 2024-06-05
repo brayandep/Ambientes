@@ -5,6 +5,7 @@ const sub3 = document.getElementById("sub3");
 const btnMenu = document.getElementById("btnMenu");
 const menu = document.getElementById("menu");
 const subRol = document.getElementById("subRol");
+const subUser = document.getElementById("subUser");
 
 
 function gesAmbiente(){
@@ -12,6 +13,8 @@ function gesAmbiente(){
         subMateria.style.display = 'none';
         sub2.style.display = 'none'; 
         sub3.style.display = 'none';
+        subRol.style.display = 'none';
+        subUser.style.display = 'none';
         sub1.style.display = 'flex';
     } else {
         sub1.style.display = 'none';
@@ -22,6 +25,8 @@ function gesUnidad(){
         sub1.style.display = 'none';
         subMateria.style.display = 'none';
         sub3.style.display = 'none';
+        subRol.style.display = 'none';
+        subUser.style.display = 'none';
         sub2.style.display = 'flex';
     } else {
         sub2.style.display = 'none';
@@ -31,7 +36,9 @@ function gesReserva(){
     if (sub3.style.display === 'none' || sub3.style.display === '') {
         sub1.style.display = 'none';
         subMateria.style.display = 'none';
-        sub2.style.display = 'none'; 
+        sub2.style.display = 'none';
+        subRol.style.display = 'none'; 
+        subUser.style.display = 'none';
         sub3.style.display = 'flex';
     } else {
         sub3.style.display = 'none';
@@ -43,15 +50,34 @@ function gesMateria(){
         sub1.style.display = 'none';
         sub2.style.display = 'none';
         sub3.style.display = 'none';
+        subRol.style.display = 'none';
+        subUser.style.display = 'none';
         subMateria.style.display = 'flex';
     } else {
         subMateria.style.display = 'none';
     }
 }
 
+function gesUsuario(){
+    if (subUser.style.display === 'none' || subUser.style.display === '') {
+        sub1.style.display = 'none';
+        subMateria.style.display = 'none';
+        sub2.style.display = 'none';
+        subRol.style.display = 'none'; 
+        subUser.style.display = 'flex';
+    } else {
+        subUser.style.display = 'none';
+    }
+}
+
 function GesRol(){
     if (subRol.style.display === 'none' || subRol.style.display === '') {
         subRol.style.display = 'flex';
+        sub1.style.display = 'none';
+        sub2.style.display = 'none';
+        sub3.style.display = 'none';
+        subMateria.style.display = 'none';
+        subUser.style.display = 'none';
         //btnPanelUsr.classList.add('seleccionado');
     } else {
         subRol.style.display = 'none';

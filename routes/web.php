@@ -24,11 +24,14 @@ use App\Http\Controllers\usuariocontroller;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\grupoController;
-
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\BackupController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\RolController;
 use Spatie\Permission\Models\Permission;
 
+
+use App\Http\Controllers\CorreoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,14 +94,14 @@ Route::put('materia/{materia}', [materiaController::class, 'update'])->middlewar
 
 //rutas de grupo
 Route::get('materia/{materia}/grupos', [grupoController::class, 'create'])->middleware('auth')->name('grupo.create');
-Route::put('grupo/{cantGrupo}', [grupoController::class, 'jhosemar'])->middleware('auth')->name('grupo.update');
+Route::put('grupo/{cantGrupo}', [grupoController::class, 'update'])->middleware('auth')->name('grupo.update');
 //termina rutas de grupo
 
 Route::get('/Registro', function () {
     return view('registrarAmbiente.index');
 })->name('registro');
 
-Route::get('/ambiente/create', [AmbienteController::class, 'create'])->middleware('can:Regsitrar ambiente')->name('ambiente.create');
+Route::get('/ambiente/create', [AmbienteController::class, 'create'])->middleware('can:Registrar ambiente')->name('ambiente.create');
 Route::post('/ambiente', [AmbienteController::class, 'store'])->middleware('auth')->name('ambiente.store');
 Route::get('/ambiente/{id}', [AmbienteController::class, 'edit'])->middleware('can:Editar ambiente')->name('ambiente.edit');
 Route::put('/ambiente/{id}', [AmbienteController::class, 'update'])->middleware('auth')->name('ambiente.update');
@@ -138,7 +141,7 @@ Route::get('/mostrar', [SolicitudController::class, 'solicitudMostrar'])->middle
 
 // Ruta para mostrar la página de inicio
 Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
-Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
+
 
 // Rutas para las publicaciones
 
@@ -146,10 +149,10 @@ Route::get('/', [InicioController::class, 'mostrarInicio'])->name('inicio');
 Route::get('/publicaciones', [PublicacionController::class, 'index'])->middleware('can:Registrar publicacion')->name('publicaciones.index');
 Route::get('/publicaciones/crear', [PublicacionController::class, 'crear'])->middleware('can:Registrar publicacion')->name('crear.publicacion');
 Route::post('/publicaciones', [PublicacionController::class, 'store'])->middleware('auth')->name('guardar.publicacion');
-//Route::get('/editar/publicacion/{id}', 'PublicacionController@editar')->name('editar.publicacion');
-Route::get('/publicaciones/{id}', [PublicacionController::class, 'obtenerDetalles'])->middleware('auth')->name('publicaciones.detalles');
 Route::get('/eliminar-publicacion/{id}', [PublicacionController::class, 'eliminarPublicacion'])->middleware('can:Eliminar publicacion')->name('eliminar.publicacion');
-Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->middleware('auth')->name('publicacion.ver');
+Route::get('/publicacion/{id}/ver', [PublicacionController::class, 'verArchivo'])->name('publicacion.ver');//ver sin restriccion
+Route::put('/publicaciones/{id}', [PublicacionController::class, 'update'])->middleware('auth')->name('actualizar.publicacion');
+
 //descargar pdf de reporte de ambientes registrados
 Route::get('/descargar-ambientes-pdf', 'App\Http\Controllers\AmbienteController@descargarAmbientesPDF')->middleware('auth')->name('descargar.ambientes.pdf');
 Route::get('/descargar-unidades-pdf', 'App\Http\Controllers\registroUnidadesController@descargarUnidadesPDF')->middleware('auth')->name('descargar.unidades.pdf');
@@ -164,7 +167,9 @@ Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
 Route::post('/backup', [BackupController::class, 'store'])->name('backup.store');
 Route::post('/backup/restore', [BackupController::class, 'restore'])->name('backup.restore');
 Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
-Route::get('/backup/{backupName}', [BackupController::class, 'show'])->name('backup.show');
+Route::post('/backup/schedule', [BackupController::class, 'schedule'])->name('backup.schedule');
+Route::post('/backup/schedule/delete', [BackupController::class, 'deleteSchedule'])->name('backup.schedule.delete');
+Route::get('/run-backup', [BackupController::class, 'runBackup'])->name('run.backup');
 //termina rutas backup
 
 
@@ -192,3 +197,12 @@ Route::get('/usuario/lista', [usuariocontroller::class, 'show'])->middleware('ca
 Route::get('/usuario/roles/{usuario}', [usuariocontroller::class, 'edit'])->name('Usuario.edit');
 Route::put('/usuario/roles/{usuario}', [usuariocontroller::class, 'update'])->name('Usuario.update');
 //termina lista de usuario
+
+//inicia enviar norificaciones
+Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviar.correo');
+//finaliza enviar norificaciones
+//inicia ruta para logs
+
+Route::get('/logs', [LogController::class, 'index'])->name('Log.index');
+
+//termina ruta para logs
