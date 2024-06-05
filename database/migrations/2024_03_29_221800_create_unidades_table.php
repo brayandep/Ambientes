@@ -16,7 +16,7 @@ class CreateUnidadesTable extends Migration
         Schema::create('unidades', function (Blueprint $table) {
             $table->id();
             $table->string('nombreUnidad');
-            $table->integer('codigoUnidad');
+            // $table->integer('codigoUnidad');
             $table->string('Responsable');
             $table->integer('Nivel');
             $table->integer('Dependencia');
