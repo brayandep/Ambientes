@@ -94,14 +94,19 @@
   transition: background-color 0.2s, color 0.2s;
 }
 
-.EditHab button:hover{
+/* .EditHab button:hover{
   background-color: #AE7791;
   color: #EBEBEB;
-}
+} */
 
 .accion i {
   background-color: none;
   font-size: 20px;
+}
+
+.accion[disabled] {
+  opacity: 0.2;
+  cursor: default;
 }
 
 #columnaPeque{
@@ -163,3 +168,6 @@
   max-width: 20ch;
 }
 
+#noActivar{
+  cursor: default;
+}

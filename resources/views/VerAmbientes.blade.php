@@ -29,32 +29,32 @@
             <div class="tabla-ver">
                 <div class="fila-v">
                     <div class="contBotones-v" id="columnaPeque">
-                        <button class="nomCol-v">Código</button>
+                        <button class="nomCol-v" id="noActivar">Código</button>
                     </div>
                     <div class="contBotones-v">
-                        <button class="nomCol-v">Unidad</button>
+                        <button class="nomCol-v" id="noActivar">Unidad</button>
                     </div>
                     <div class="contBotones-v">
-                        <button class="nomCol-v">Nombre </button>
+                        <button class="nomCol-v" id="noActivar">Nombre </button>
                     </div>
                     <div class="contBotones-v" id="columnaPeque">
-                        <button class="nomCol-v">Capacidad</button>
+                        <button class="nomCol-v" id="noActivar">Capacidad</button>
                     </div>
                     <div class="contBotones-v" id="ubi">
-                        <button class="nomCol-v">Ubicación</button>
+                        <button class="nomCol-v" id="noActivar">Ubicación</button>
                     </div>
                     <div class="contBotones-v">
-                        <button class="nomCol-v">Descripción</button>
+                        <button class="nomCol-v" id="noActivar">Descripción</button>
                     </div>
                     <div class="contBotones-v" id="columnaPeque">
-                        <button class="nomCol-v">Horario</button>
+                        <button class="nomCol-v" id="noActivar">Horario</button>
                     </div>
                     @can('Editar ambiente')
                         <div class="contBotones-v" id="columnaPeque">
-                            <button class="nomCol-v">Editar</button>
+                            <button class="nomCol-v" id="noActivar">Editar</button>
                         </div>
                         <div class="contBotones-v" id="columnaPeque">
-                            <button class="nomCol-v">Habilitar</button>
+                            <button class="nomCol-v" id="noActivar">Habilitar</button>
                         </div>   
                     @endcan
                 </div>
@@ -76,7 +76,8 @@
 
                         @can('Editar ambiente')
                             <div class="EditHab" id="columnaPeque">
-                                <button class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';">
+                                <button title="Modificar Ambiente" class="accion" onclick="location.href='{{ route('ambiente.edit', $ambiente) }}';"
+                                {{ $ambiente->estadoAmbiente == 0 ? 'disabled' : '' }}>
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                             </div>
