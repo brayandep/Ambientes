@@ -25,7 +25,7 @@ class SolicitudController extends Controller
         $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        
+    
         $usuarios = User::all();;
         return view('Versolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
     }
@@ -61,8 +61,8 @@ public function store(Request $request)
         $request->validate([
             'usuario' => 'required',
             'nro_aula' => 'required',
-            'materia' => 'required',
-            'grupo' => 'required',
+           
+           
             'motivo' => 'required',
             'fecha' => 'required|date',
             'horario' => 'required',
@@ -97,7 +97,7 @@ return redirect()->route('VerSolicitud')->with('success', 'Solicitud registrada 
 
 }       
 public function edit($id ){
-          $usuario = Auth::user();
+        $usuario = Auth::user();
         $usuario = Auth::user();
         $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $solicitud = Solicitud::findOrFail($id);

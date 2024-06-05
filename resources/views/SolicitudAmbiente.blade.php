@@ -41,13 +41,14 @@
                 <br>
                 <div>
                     <label class="texto" for="materia">Materia:</label><br>
-                    <input class="input" type="text" id="materia" name="materia" required>
+                    <input class="input" type="text" id="materia" name="materia" placeholder="ingresa la materia si desea">
                 </div>
                 <br>
                 <div>
                     <label class="texto" for="grupo">Nro Grupo:</label><br>
-                    <input class="input" type="text" id="grupo" name="grupo" required>
+                    <input class="input" type="text" id="grupo" name="grupo"  placeholder="ingresa el grupo si desea" >
                 </div>
+                
                 <br>
                 <div>
                     <label class="texto" for="motivo">Motivo:</label><br>
