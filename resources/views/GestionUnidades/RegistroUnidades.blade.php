@@ -37,7 +37,7 @@
                             @enderror --}}
 
                             <label class="titulo"for="Responsable">Responsable: </label>
-                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad, no use . ni ," required maxlength="40" autocomplete="off" value="{{old('Responsable')}}">
+                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad" required maxlength="40" autocomplete="off" value="{{old('Responsable')}}">
                             @error('Responsable')
                                 <span>*{{$message}}</span>
                             @enderror
