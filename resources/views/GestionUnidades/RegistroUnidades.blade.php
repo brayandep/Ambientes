@@ -30,14 +30,14 @@
                                 <span>*{{$message}}</span>
                             @enderror
                             
-                            <label class="titulo" for="codigoUnidad">Codigo: </label>
+                            {{-- <label class="titulo" for="codigoUnidad">Codigo: </label>
                             <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="6" maxlength="6" autocomplete="off" value="{{old('codigoUnidad')}}">
                             @error('codigoUnidad')
                                 <span>*{{$message}}</span>
-                            @enderror
+                            @enderror --}}
 
                             <label class="titulo"for="Responsable">Responsable: </label>
-                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad" required maxlength="40" autocomplete="off" value="{{old('Responsable')}}">
+                            <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad, no use . ni ," required maxlength="40" autocomplete="off" value="{{old('Responsable')}}">
                             @error('Responsable')
                                 <span>*{{$message}}</span>
                             @enderror

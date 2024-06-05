@@ -24,10 +24,10 @@
                 <div class="pizarra">
                     <div class="fila">
                         <div class="columnaT">
-                           <button class="nomCol" id="noActivar">Nombre</button>
+                           <button class="nomCol" id="noActivar">Id Unidad</button>
                         </div>
                         <div class="columnaT">
-                            <button class="nomCol" id="noActivar">Codigo</button>
+                            <button class="nomCol" id="noActivar">Nombre</button>
                         </div>
                         <div class="columnaT">
                             <button class="nomCol" id="noActivar">Responsable</button>
@@ -50,8 +50,8 @@
                     <div>
                         @foreach ($unidades as $unidad)
                             <div class="fila">
+                                <p class="columnaT">{{$unidad->id}}</p>
                                 <p class="columnaT">{{$unidad->nombreUnidad}}</p>
-                                <p class="columnaT">{{$unidad->codigoUnidad}}</p>
                                 <p class="columnaT">{{$unidad->Responsable}}</p>
                                     @if ($unidad->Nivel == 1)
                                         <p class="columnaT">Facultad</p>
@@ -62,7 +62,7 @@
                                         @elseif ($unidad->Nivel == 4)
                                         <p class="columnaT">Laboratorio</p>
                                     @endif
-                                <p class="columnaT">{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</p>
+                                <p class="columnaT">{{ $unidad->unidadPadre->id ?? 'Sin dependencia' }}</p>
                                     
                                 @can('Editar unidad')
                                     <div class="EliEdi">
