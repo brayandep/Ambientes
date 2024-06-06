@@ -28,9 +28,6 @@
             <!-- tabla -->
             <div class="tabla-ver">
                 <div class="fila-v">
-                    <div class="contBotones-v" id="columnaPeque">
-                        <button class="nomCol-v" id="noActivar">Código</button>
-                    </div>
                     <div class="contBotones-v">
                         <button class="nomCol-v" id="noActivar">Unidad</button>
                     </div>
@@ -61,15 +58,15 @@
             
                 @foreach ($ambientes as $ambiente)
                     <div class="fila-v">
-                        <p id="columnaPeque">{{ $ambiente->codigo }}</p>
-                        <p>{{ $ambiente->unidad }}</p>
-                        <p>{{ $ambiente->nombre }}</p>
-                        <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
-                        <p id="ubi" class="texto-limitado">{{ $ambiente->ubicacion }}</p> 
-                        <p>{{ $ambiente->descripcion_ubicacion}}</p>
+                        <p class="contBotones-v">{{ $ambiente->unidad }}</p>
+                        <p class="contBotones-v">{{ $ambiente->nombre }}</p>
+                        <p class="contBotones-v" id="columnaPeque">{{ $ambiente->capacidad }}</p>
+                        <p class="contBotones-v" id="ubi"><span>{{ $ambiente->ubicacion }}</span></p> 
+                        <p class="contBotones-v">{{ $ambiente->descripcion_ubicacion}}</p>
                         
                         <div class="EditHab" id="columnaPeque">
-                            <button class="accion" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';">
+                            <button title="Ver calendario de Ambiente" class="accion" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';"
+                                {{ $ambiente->estadoAmbiente == 0 ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-calendar-days"></i>
                             </button>
                         </div>

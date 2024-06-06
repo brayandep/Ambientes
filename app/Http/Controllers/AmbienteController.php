@@ -56,7 +56,7 @@ class AmbienteController extends Controller
             'codigo' => 'required|numeric|digits:5||unique:ambientes,codigo',
             'nombre' => 'required|max:25|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜ,. -]+$/|unique:ambientes,nombre',
             'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:80|regex:/^https?:\/\/\www\.google\.com\/maps\.*$/',
+            'ubicacion' => 'required|max:200|regex:/^https?:\/\/www\.google\.com\/maps(\/.*)?$/',
             'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
             'unidad'=> 'required',
             'tipo-ambiente' => 'required',
@@ -67,7 +67,7 @@ class AmbienteController extends Controller
             'unidad.required' => 'Seleccione una unidad.',
             'tipo-ambiente.required' => 'Seleccione un tipo de ambiente.',
             'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps',
-            'equipos-disponibles.required' => 'Seleccione al menos un equipo',
+            'equipos-disponibles.required' => 'Seleccione al menos un equipo.',
        ]);
 
         //dd($request);
