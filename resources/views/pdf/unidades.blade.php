@@ -94,8 +94,8 @@
 <table>
     <thead>
         <tr>
+            <th>Id unidad</th>
             <th>Nombre</th>
-            <th>Código</th>
             <th>Responsable</th>
             <th>Nivel</th>
             <th>Dependencia</th>
@@ -105,8 +105,8 @@
     <tbody>
         @foreach ($unidades as $unidad)
         <tr>
+            <td>{{ $unidad->id }}</td>
             <td>{{ $unidad->nombreUnidad }}</td>
-            <td>{{ $unidad->codigoUnidad }}</td>
             <td>{{ $unidad->Responsable }}</td>
             <td>
                 @if ($unidad->Nivel == 1)
