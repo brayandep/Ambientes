@@ -95,11 +95,17 @@ class PublicacionController extends Controller
         $rutaArchivo = storage_path('app/' . $publicacion->archivo);
 
         if (file_exists($rutaArchivo)) {
-            return Response::download($rutaArchivo, $publicacion->titulo);
+            return response()->download($rutaArchivo, $publicacion->titulo, [
+                'Content-Type' => mime_content_type($rutaArchivo),
+                'Content-Disposition' => 'attachment; filename="' . $publicacion->titulo . '"',
+                'Content-Length' => filesize($rutaArchivo),
+                'X-Content-Type-Options' => 'nosniff'
+            ]);
         }
 
         return redirect()->back()->with('error', 'El archivo no existe.');
     }
+
 
     public function actualizar(Request $request, $id)
     {
