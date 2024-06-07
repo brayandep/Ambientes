@@ -27,9 +27,15 @@ class CalendarioController extends Controller
                 'backgroundColor' => $dato->color
             ];
         }
-        $regEvento = Auth::user()->can('Registrar evento');
-        $editEvento = Auth::user()->can('Editar evento');
 
+        
+        if (Auth::check()){
+            $regEvento = Auth::user()->can('Registrar evento');
+            $editEvento = Auth::user()->can('Editar evento');
+        }else{
+            $regEvento = false;
+            $editEvento = false;
+        }
         // print_r($regEvento);
         // print_r($editEvento);
         return view('Calendario.general', compact('eventos', 'regEvento', 'editEvento'));

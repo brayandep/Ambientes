@@ -18,12 +18,7 @@
             <div>
                 <h1 class="Titulo-ver"><i class="fa-solid fa-rectangle-list"></i> Ver Ambientes Registrados </h1>
             </div>
-            <!-- enviar correo -->
-            <form action="{{ route('enviar.correo') }}" method="POST">
-                @csrf
-                <input type="email" name="correo_destino" placeholder="Correo electrónico destino">
-                <button type="submit">Enviar Correo</button>
-            </form>
+         
 
             <!-- Botón para descargar el PDF -->
                 <form class="btnReporte" action="{{ route('descargar.ambientes.pdf') }}" method="GET" target="_blank">

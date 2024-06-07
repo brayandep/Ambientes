@@ -69,7 +69,7 @@
                 <section class="perm">
                     @foreach ($permissions as $permission)
                     <label class="labPerm" for="perm{{ $permission->id }}">
-                        <input type="checkbox" id="perm{{ $permission->id }}" name="permissions[]" value="{{ $permission->id }}" {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}>
+                        <input type="checkbox" id="perm{{ $permission->id }}" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}>
                         {{ $permission->name }}
                     </label>
                     @endforeach

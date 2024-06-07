@@ -169,10 +169,7 @@ Route::post('/backup/restore', [BackupController::class, 'restore'])->name('back
 Route::delete('/backup/{backupName}', [BackupController::class, 'destroy'])->name('backup.destroy');
 Route::post('/backup/schedule', [BackupController::class, 'schedule'])->name('backup.schedule');
 Route::post('/backup/schedule/delete', [BackupController::class, 'deleteSchedule'])->name('backup.schedule.delete');
-Route::get('/run-backup', function () {
-    Artisan::call('backup:generate');
-    return 'Backup command executed';
-})->name('run.backup');
+Route::get('/run-backup', [BackupController::class, 'runBackup'])->name('run.backup');
 //termina rutas backup
 
 

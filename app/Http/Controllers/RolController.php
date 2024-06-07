@@ -63,12 +63,12 @@ class RolController extends Controller
             // 'fechaInicioRol' => 'required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             'fechaFinRol' => 'nullable|required_if:tipoVigencia,temporal|date', // Sólo requerido si tipoVigencia es temporal
             'permissions' => 'required|array', // Asegura que se envíe al menos un permiso
-            'permissions.*' => 'exists:permissions,id' // Cada permiso debe existir
+            // 'permissions.*' => 'exists:permissions,id' // Cada permiso debe existir
         ]);
 
         $rol = Role::create([
             'name' => $request->input('name'),
-            'guard_name' => 'web', // asumiendo que estás usando el guard por defecto
+            // 'guard_name' => 'web', // asumiendo que estás usando el guard por defecto
             'Estado' => $request->input('Estado'),
             'descripcionRol' => $request->input('descripcionRol'),
             'tipoVigencia' => $request->input('tipoVigencia'),
@@ -76,7 +76,7 @@ class RolController extends Controller
             'fechaFinRol' => $request->input('fechaFinRol')
         ]);
 
-        $rol->syncPermissions($request->input('permissions'));
+        $rol->syncPermissions($request->permissions);
         // Registro de creación en la bitácora
         Log::create([
             'event_type' => 'Rol creado',
