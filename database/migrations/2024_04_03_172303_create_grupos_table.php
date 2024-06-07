@@ -19,7 +19,7 @@ class CreateGruposTable extends Migration
 
             $table->unsignedBigInteger('idDocente')->nullable();
             $table->foreign('idDocente')
-                  ->references('id')->on('docentes')
+                  ->references('id')->on('users')
                   ->onDelete('set null');
 
             $table->unsignedBigInteger('idMateria')->nullable();

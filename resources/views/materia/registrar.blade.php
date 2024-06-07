@@ -80,7 +80,7 @@
                 </div>
                 <div class="input-group">
                     <label class="labMateria" id="labMateria">Codigo</label>
-                    <input name="codigo" autocomplete="off" class="inputMateria" id="nomPl" placeholder="Ingrese el codigo" value="{{old('codigo')}}">
+                    <input name="codigo" autocomplete="off" class="inputMateria" id="nomPl" placeholder="Ingrese codigo SIS de 6 digitos" value="{{old('codigo')}}">
                     @error('codigo')
                         <span class="msgError">*{{$message}}</span>
                     @enderror
@@ -135,6 +135,7 @@
                     <button onclick="CancelarReg()" type="button" class="btnCancelar">Cancelar</button>
                     <button type="submit" class="btnRegistrar">Registrar</button>
                 </div>
+                <input type="text" value="1" name="estado" style="display: none;">
             </form>
         </div>
 

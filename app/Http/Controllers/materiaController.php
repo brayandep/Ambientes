@@ -21,7 +21,7 @@ class materiaController extends Controller
 
     public function create()
     {
-        $departamentos = Unidad::where('nivel', '3')->get();
+        $departamentos = Unidad::where('nivel', '3')->where('UnidadHabilitada','1')->get();
 
         return view('materia.registrar', compact('departamentos'));
     }
@@ -50,7 +50,7 @@ class materiaController extends Controller
         $request->validate([
             'departamento' => 'required',
             'carrera' => 'required',
-            'nombre' => 'required|max:100|regex:/^[a-zA-Z\s]+$/',
+            'nombre' => 'required|max:100|regex:/^[a-zA-Z\s]+$/|unique:materia,nombre, '. $materia -> id,
             'codigo' => 'required|digits:6|numeric',
             'nivel' => 'required',
             'cantGrupo' => 'required'
@@ -73,6 +73,16 @@ class materiaController extends Controller
 
 
         return redirect()->route('materia.show');
+    }
+
+    public function estado(Materia $materia)
+    {
+        // Cambiar el estado de 1 a 0 y viceversa
+        $materia->estado = $materia->estado == 1 ? 0 : 1;
+        
+        $materia->save();
+
+        return redirect()->back()->with('success', 'Estado del materia actualizado correctamente');
     }
 
     public function descargarMateriasPDF(){

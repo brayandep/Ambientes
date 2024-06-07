@@ -90,6 +90,7 @@ Route::get('materia/registrar', [materiaController::class, 'create'])->middlewar
 Route::post('materia', [materiaController::class, 'store'])->middleware('auth')->name('materia.store');
 Route::get('materia/{materia}/editar', [materiaController::class, 'editar'])->middleware('can:Editar materia')->name('materia.editar');
 Route::put('materia/{materia}', [materiaController::class, 'update'])->middleware('auth')->name('materia.update');
+Route::put('materia/estado/{materia}', [materiaController::class, 'estado'])->middleware('auth')->name('materia.estado');
 //termina rutas de materia
 
 //rutas de grupo
