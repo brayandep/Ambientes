@@ -496,6 +496,9 @@
                         </tr>
                     </tbody>
                     </table>
+                    @error('horarios')
+                        <span class="msgError">*{{$message}}</span>
+                    @enderror
                 </div>
                 
                 <div class="botones">

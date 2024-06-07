@@ -61,6 +61,7 @@ class AmbienteController extends Controller
             'unidad'=> 'required',
             'tipo-ambiente' => 'required',
             'equipos-disponibles' => 'required',
+            'horarios' => 'required',
        ],
        [
             'capacidad.min' => 'El valor del campo capacidad debe ser al menos 15.',
@@ -68,6 +69,7 @@ class AmbienteController extends Controller
             'tipo-ambiente.required' => 'Seleccione un tipo de ambiente.',
             'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps',
             'equipos-disponibles.required' => 'Seleccione al menos un equipo.',
+            'horarios.required' => 'Seleccione al menos un horario.',
        ]);
 
         //dd($request);
