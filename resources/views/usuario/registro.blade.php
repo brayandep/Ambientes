@@ -50,14 +50,7 @@
                    
                 </div>
                 <br>
-                <div>
-                    <label class="texto" for="email">Correo electrónico:</label><br>
-                    <input class="input" type="email" id="email" name="email"  value="{{ old('email') }}" required  placeholder="Ingresar correo electronico ">
-                    @error('email')
-                        <p>{{ $message }}</p>
-                    @enderror
-                </div>
-                <br>
+               
                 <div>
                     <label class="texto" for="nro_aula">Dirección de domicilio </label><br>
                     <input class="input"  type="text" id="direccion" name="direccion"value="{{ old('direccion') }}"   autofocus  placeholder="Ingresar direccion de domicilio ">
@@ -76,7 +69,14 @@
                     </select>
             </div>
             <br>
-
+            <div>
+                <label class="texto" for="email">Correo electrónico:</label><br>
+                <input class="input" type="email" id="email" name="email"  value="{{ old('email') }}" required  placeholder="Ingresar correo electronico ">
+                @error('email')
+                    <p>{{ $message }}</p>
+                @enderror
+            </div>
+            <br>
             <div>
                 <label class="texto" for="password">Contraseña:</label><br>
                 <input class="input" type="password" id="password" name="password" required placeholder="Ingresar contraseña ">
