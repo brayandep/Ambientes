@@ -16,81 +16,65 @@
                       @method('PUT')
                   @endif
   
-                <div class="form-fila-s">
+                  <div class="form-fila-s">
                     <div class="input-group">
-                    <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" maxlength="5" autocomplete="off" placeholder="Ingrese codigo de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->codigo : '' }}">
-                    @error('codigo')
-                        <span class="msgError">*{{$message}}</span>
-                    @enderror
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ old('nombre', isset($ambienteDatos) ? $ambienteDatos->nombre : '') }}">
+                        @error('nombre')
+                            <span class="msgError">*{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="input-group">
-                    <label for="unidad">Unidad:</label>
+                        <label for="unidad">Unidad:</label>
                         <select class="selectAmbiente" id="unidad" name="unidad">
-                        <option value="">Selecciona una unidad</option>
-                        @foreach($unidades as $unidad)
-                          <option value="{{ $unidad->nombreUnidad }}" {{ isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
-                        @endforeach
+                            <option value="">Selecciona una unidad</option>
+                            @foreach($unidades as $unidad)
+                                <option value="{{ $unidad->nombreUnidad }}" {{ old('unidad', isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '') }}>{{ $unidad->nombreUnidad }}</option>
+                            @endforeach
                         </select>
                         @error('unidad')
-                            <span class="msgError">*{{$message}}</span>
+                            <span class="msgError">*{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
                 <div class="form-fila-s">
                     <div class="input-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->nombre : '' }}">
-                    @error('nombre')
-                        <span class="msgError">*{{$message}}</span>
-                    @enderror
+                        <label for="tipo-ambiente">Tipo de ambiente:</label>
+                        <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtroAmbiente(this);verificarOtro(this)">
+                            <option value="">Selecciona un tipo de ambiente</option>
+                            @foreach($tipoAmbientes as $tipoAmbiente)
+                                <option value="{{ $tipoAmbiente->nombreTipo }}" {{ old('tipo-ambiente', isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '') }}>{{ $tipoAmbiente->nombreTipo }}</option>
+                            @endforeach
+                            <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
+                        </select>
+                        @error('tipo-ambiente')
+                            <span class="msgError">*{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="input-group">
-                    <label for="capacidad">Capacidad:</label>
-                    <input type="number" id="capacidad" name="capacidad"  maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->capacidad : '' }}">
-                    @error('capacidad')
-                        <span class="msgError">*{{$message}}</span>
-                    @enderror
+                        <label for="capacidad">Capacidad:</label>
+                        <input type="number" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ old('capacidad', isset($ambienteDatos) ? $ambienteDatos->capacidad : '') }}">
+                        @error('capacidad')
+                            <span class="msgError">*{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
-    
-    
-    
                 <div class="form-fila-s">
                     <div class="input-group">
-                    <label for="ubicacion">Ubicación:</label>
-                    <input type="text" id="ubicacion" name="ubicacion" maxlength="80" autocomplete="off" placeholder="Ingrese URL: https://www.google.com/maps/ del ambiente" value="{{ isset($ambienteDatos) ? $ambienteDatos->ubicacion : '' }}">
-                    @error('ubicacion')
-                        <span class="msgError">*{{$message}}</span>
-                    @enderror
+                        <label for="ubicacion">Ubicación:</label>
+                        <input type="text" id="ubicacion" name="ubicacion" maxlength="80" autocomplete="off" placeholder="Ingrese URL: https://www.google.com/maps/ del ambiente" value="{{ old('ubicacion', isset($ambienteDatos) ? $ambienteDatos->ubicacion : '') }}">
+                        @error('ubicacion')
+                            <span class="msgError">*{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="input-group">
-                  <label for="tipo-ambiente">Tipo de ambiente:</label>
-                  <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtroAmbiente(this);verificarOtro(this)">
-                    <option value="">Selecciona un tipo de ambiente</option>
-                    @foreach($tipoAmbientes as $tipoAmbiente)
-                      <option value="{{ $tipoAmbiente->nombreTipo}}" {{ isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '' }}>{{ $tipoAmbiente->nombreTipo }}</option>
-                    @endforeach
-                      <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
-                  </select>
-                    @error('tipo-ambiente')
-                        <span class="msgError">*{{$message}}</span>
-                    @enderror
-                    </div>
-              </div>
-    
-
-  
+                </div>
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" maxlength="40" autocomplete="off">{{ isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '' }}</textarea>
+                    <textarea id="descripcion" name="descripcion" maxlength="40" autocomplete="off">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
                     @error('descripcion')
-                        <span class="msgError">*{{$message}}</span>
+                        <span class="msgError">*{{ $message }}</span>
                     @enderror
                 </div>
-                
-                
-                
                 <div class="form-grupo">
                     <label>Equipos disponibles:</label><br>
                     <div class="checkbox-columns" style="padding-left: 20px;">
@@ -98,8 +82,8 @@
                             @foreach($equiposDisponibles as $equipo)
                                 <label>
                                     <input type="checkbox" name="equipos-disponibles[]" value="{{ $equipo }}"
-                                        @isset($equiposSeleccionados) 
-                                            {{ in_array($equipo, $equiposSeleccionados) ? 'checked' : '' }}
+                                        @isset($equiposSeleccionados)
+                                            {{ in_array($equipo, old('equipos-disponibles', $equiposSeleccionados)) ? 'checked' : '' }}
                                         @endisset>
                                     {{ $equipo }}
                                 </label><br>
@@ -165,52 +149,52 @@
                             <!-- Horarios para el Lunes -->
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 06:45 08:15" id="horario1" {{ in_array('Lunes 06:45 08:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 06:45 08:15" id="horario1" {{ in_array('Lunes 06:45 08:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario1">06:45 - 08:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 08:15 09:45" id="horario2" {{ in_array('Lunes 08:15 09:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 08:15 09:45" id="horario2" {{ in_array('Lunes 08:15 09:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario2">08:15 - 09:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 09:45 11:15" id="horario3"{{ in_array('Lunes 09:45 11:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 09:45 11:15" id="horario3"{{ in_array('Lunes 09:45 11:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario3">09:45 - 11:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 11:15 12:45" id="horario4"{{ in_array('Lunes 11:15 12:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 11:15 12:45" id="horario4"{{ in_array('Lunes 11:15 12:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario4">11:15 - 12:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 12:45 14:15" id="horario5"{{ in_array('Lunes 12:45 14:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 12:45 14:15" id="horario5"{{ in_array('Lunes 12:45 14:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario5">12:45 - 14:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 14:15 15:45" id="horario6"{{ in_array('Lunes 14:15 15:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 14:15 15:45" id="horario6"{{ in_array('Lunes 14:15 15:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario6">14:15 - 15:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 15:45 17:15" id="horario7"{{ in_array('Lunes 15:45 17:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 15:45 17:15" id="horario7"{{ in_array('Lunes 15:45 17:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario7">15:45 - 17:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 17:15 18:45" id="horario8"{{ in_array('Lunes 17:15 18:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 17:15 18:45" id="horario8"{{ in_array('Lunes 17:15 18:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario8">17:15 - 18:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 18:45 20:15" id="horario9"{{ in_array('Lunes 18:45 20:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 18:45 20:15" id="horario9"{{ in_array('Lunes 18:45 20:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario9">18:45 - 20:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 20:15 21:45" id="horario10"{{ in_array('Lunes 20:15 21:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-lunes" name="horarios[]" value="Lunes 20:15 21:45" id="horario10"{{ in_array('Lunes 20:15 21:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario10">20:15 - 21:45</label>
                             </div>
                         </td>
@@ -225,52 +209,52 @@
                             
                             <!-- Horarios para el Martes -->
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 06:45 08:15" id="horario1"{{ in_array('Martes 06:45 08:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 06:45 08:15" id="horario1"{{ in_array('Martes 06:45 08:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario1">06:45 - 08:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 08:15 09:45" id="horario2"{{ in_array('Martes 08:15 09:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 08:15 09:45" id="horario2"{{ in_array('Martes 08:15 09:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario2">08:15 - 09:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 09:45 11:15" id="horario3"{{ in_array('Martes 09:45 11:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 09:45 11:15" id="horario3"{{ in_array('Martes 09:45 11:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario3">09:45 - 11:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 11:15 12:45" id="horario4"{{ in_array('Martes 11:15 12:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 11:15 12:45" id="horario4"{{ in_array('Martes 11:15 12:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario4">11:15 - 12:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 12:45 14:15" id="horario5"{{ in_array('Martes 12:45 14:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 12:45 14:15" id="horario5"{{ in_array('Martes 12:45 14:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario5">12:45 - 14:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 14:15 15:45" id="horario6"{{ in_array('Martes 14:15 15:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 14:15 15:45" id="horario6"{{ in_array('Martes 14:15 15:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario6">14:15 - 15:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 15:45 17:15" id="horario7"{{ in_array('Martes 15:45 17:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 15:45 17:15" id="horario7"{{ in_array('Martes 15:45 17:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario7">15:45 - 17:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 17:15 18:45" id="horario8"{{ in_array('Martes 17:15 18:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 17:15 18:45" id="horario8"{{ in_array('Martes 17:15 18:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario8">17:15 - 18:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 18:45 20:15" id="horario9"{{ in_array('Martes 18:45 20:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 18:45 20:15" id="horario9"{{ in_array('Martes 18:45 20:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario9">18:45 - 20:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 20:15 21:45" id="horario10"{{ in_array('Martes 20:15 21:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-martes" name="horarios[]" value="Martes 20:15 21:45" id="horario10"{{ in_array('Martes 20:15 21:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario10">20:15 - 21:45</label>
                             </div>
                         </td>
@@ -285,52 +269,52 @@
                             
                             <!-- Horarios para el Miércoles -->
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 06:45 08:15" id="horario1" {{ in_array('Miércoles 06:45 08:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 06:45 08:15" id="horario1" {{ in_array('Miércoles 06:45 08:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario1">06:45 - 08:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 08:15 09:45" id="horario2" {{ in_array('Miércoles 08:15 09:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 08:15 09:45" id="horario2" {{ in_array('Miércoles 08:15 09:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario2">08:15 - 09:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 09:45 11:15" id="horario3" {{ in_array('Miércoles 09:45 11:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 09:45 11:15" id="horario3" {{ in_array('Miércoles 09:45 11:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario3">09:45 - 11:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 11:15 12:45" id="horario4" {{ in_array('Miércoles 11:15 12:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 11:15 12:45" id="horario4" {{ in_array('Miércoles 11:15 12:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario4">11:15 - 12:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 12:45 14:15" id="horario5" {{ in_array('Miércoles 12:45 14:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 12:45 14:15" id="horario5" {{ in_array('Miércoles 12:45 14:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario5">12:45 - 14:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 14:15 15:45" id="horario6" {{ in_array('Miércoles 14:15 15:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 14:15 15:45" id="horario6" {{ in_array('Miércoles 14:15 15:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario6">14:15 - 15:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 15:45 17:15" id="horario7" {{ in_array('Miércoles 15:45 17:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 15:45 17:15" id="horario7" {{ in_array('Miércoles 15:45 17:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario7">15:45 - 17:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 17:15 18:45" id="horario8" {{ in_array('Miércoles 17:15 18:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 17:15 18:45" id="horario8" {{ in_array('Miércoles 17:15 18:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario8">17:15 - 18:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 18:45 20:15" id="horario9" {{ in_array('Miércoles 18:45 20:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 18:45 20:15" id="horario9" {{ in_array('Miércoles 18:45 20:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario9">18:45 - 20:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 20:15 21:45" id="horario10" {{ in_array('Miércoles 20:15 21:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Miércoles" name="horarios[]" value="Miércoles 20:15 21:45" id="horario10" {{ in_array('Miércoles 20:15 21:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario10">20:15 - 21:45</label>
                             </div>
                         </td>
@@ -343,57 +327,55 @@
                                 <br>
                             </div>
                             
-                            <!-- Horarios para el Jueves -->
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 06:45 08:15" id="horario1" {{ in_array('Jueves 06:45 08:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 06:45 08:15" id="horario1" {{ in_array('Jueves 06:45 08:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario1">06:45 - 08:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 08:15 09:45" id="horario2" {{ in_array('Jueves 08:15 09:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 08:15 09:45" id="horario2" {{ in_array('Jueves 08:15 09:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario2">08:15 - 09:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 09:45 11:15" id="horario3" {{ in_array('Jueves 09:45 11:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 09:45 11:15" id="horario3" {{ in_array('Jueves 09:45 11:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario3">09:45 - 11:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 11:15 12:45" id="horario4" {{ in_array('Jueves 11:15 12:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 11:15 12:45" id="horario4" {{ in_array('Jueves 11:15 12:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario4">11:15 - 12:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 12:45 14:15" id="horario5" {{ in_array('Jueves 12:45 14:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 12:45 14:15" id="horario5" {{ in_array('Jueves 12:45 14:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario5">12:45 - 14:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 14:15 15:45" id="horario6" {{ in_array('Jueves 14:15 15:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 14:15 15:45" id="horario6" {{ in_array('Jueves 14:15 15:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario6">14:15 - 15:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 15:45 17:15" id="horario7" {{ in_array('Jueves 15:45 17:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 15:45 17:15" id="horario7" {{ in_array('Jueves 15:45 17:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario7">15:45 - 17:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 17:15 18:45" id="horario8" {{ in_array('Jueves 17:15 18:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 17:15 18:45" id="horario8" {{ in_array('Jueves 17:15 18:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario8">17:15 - 18:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 18:45 20:15" id="horario9" {{ in_array('Jueves 18:45 20:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 18:45 20:15" id="horario9" {{ in_array('Jueves 18:45 20:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario9">18:45 - 20:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 20:15 21:45" id="horario10" {{ in_array('Jueves 20:15 21:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-jueves" name="horarios[]" value="Jueves 20:15 21:45" id="horario10" {{ in_array('Jueves 20:15 21:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario10">20:15 - 21:45</label>
                             </div>
-                        </td>
 
                         <td id="Viernes">
                             <!-- Checkbox para marcar todos los horarios del Viernes -->
@@ -405,52 +387,52 @@
                             
                             <!-- Horarios para el Viernes -->
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 06:45 08:15" id="horario1" {{ in_array('Viernes 06:45 08:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 06:45 08:15" id="horario1" {{ in_array('Viernes 06:45 08:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario1">06:45 - 08:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 08:15 09:45" id="horario2" {{ in_array('Viernes 08:15 09:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 08:15 09:45" id="horario2" {{ in_array('Viernes 08:15 09:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario2">08:15 - 09:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 09:45 11:15" id="horario3" {{ in_array('Viernes 09:45 11:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 09:45 11:15" id="horario3" {{ in_array('Viernes 09:45 11:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario3">09:45 - 11:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 11:15 12:45" id="horario4" {{ in_array('Viernes 11:15 12:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 11:15 12:45" id="horario4" {{ in_array('Viernes 11:15 12:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario4">11:15 - 12:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 12:45 14:15" id="horario5" {{ in_array('Viernes 12:45 14:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 12:45 14:15" id="horario5" {{ in_array('Viernes 12:45 14:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario5">12:45 - 14:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 14:15 15:45" id="horario6" {{ in_array('Viernes 14:15 15:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 14:15 15:45" id="horario6" {{ in_array('Viernes 14:15 15:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario6">14:15 - 15:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 15:45 17:15" id="horario7" {{ in_array('Viernes 15:45 17:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 15:45 17:15" id="horario7" {{ in_array('Viernes 15:45 17:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario7">15:45 - 17:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 17:15 18:45" id="horario8" {{ in_array('Viernes 17:15 18:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 17:15 18:45" id="horario8" {{ in_array('Viernes 17:15 18:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario8">17:15 - 18:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 18:45 20:15" id="horario9" {{ in_array('Viernes 18:45 20:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 18:45 20:15" id="horario9" {{ in_array('Viernes 18:45 20:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario9">18:45 - 20:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 20:15 21:45" id="horario10" {{ in_array('Viernes 20:15 21:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-viernes" name="horarios[]" value="Viernes 20:15 21:45" id="horario10" {{ in_array('Viernes 20:15 21:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario10">20:15 - 21:45</label>
                             </div>
                         </td>
@@ -465,27 +447,27 @@
                             
                             <!-- Horarios para el Sábado -->
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 06:45 08:15" id="horario1" {{ in_array('Sábado 06:45 08:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 06:45 08:15" id="horario1" {{ in_array('Sábado 06:45 08:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario1">06:45 - 08:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 08:15 09:45" id="horario2" {{ in_array('Sábado 08:15 09:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 08:15 09:45" id="horario2" {{ in_array('Sábado 08:15 09:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario2">08:15 - 09:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 09:45 11:15" id="horario3" {{ in_array('Sábado 09:45 11:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 09:45 11:15" id="horario3" {{ in_array('Sábado 09:45 11:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario3">09:45 - 11:15</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 11:15 12:45" id="horario4" {{ in_array('Sábado 11:15 12:45', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 11:15 12:45" id="horario4" {{ in_array('Sábado 11:15 12:45', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario4">11:15 - 12:45</label>
                             </div>
 
                             <div class="checkbox-container">
-                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 12:45 14:15" id="horario5" {{ in_array('Sábado 12:45 14:15', $horariosDisponibles) ? 'checked' : '' }}>
+                                <input type="checkbox" class="checkbox-Sábado" name="horarios[]" value="Sábado 12:45 14:15" id="horario5" {{ in_array('Sábado 12:45 14:15', old('horarios', $horariosDisponibles)) ? 'checked' : '' }}>
                                 <label for="horario5">12:45 - 14:15</label>
                             </div>
                         </td>
