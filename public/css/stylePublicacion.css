@@ -1,15 +1,20 @@
-.container{
+.container {
     padding: 70px;
+    width: 90%; /* Utiliza el 90% del ancho del viewport */
+    max-width: 1200px; /* Establece un ancho máximo para evitar que el contenido se extienda demasiado */
+    margin: 0 auto; /* Centra el contenedor en la pantalla */
 }
 
-.publicaciones-list{
+.publicaciones-list {
     padding: 10px;
 }
+
 .container h2 {
     font-size: 24px;
     padding: 20px;
     font-weight: bold;
 }
+
 /* Estilos para las publicaciones */
 .publicacion {
     display: flex; /* Utiliza flexbox para alinear los elementos internos */
@@ -19,10 +24,12 @@
     color: #0B2C37;
     margin-left: 40px;
 }
+
 .container h1 {
     font-size: 24px; /* Tamaño de fuente */
     font-weight: bold; /* Negrita */
-  }
+}
+
 /* Estilos para los botones de eliminar y editar */
 .publicacion .btn-danger,
 .publicacion .btn-primary {
@@ -45,16 +52,15 @@
     color: #ffff;
 }
 
-
 /* Estilos para el icono de basurero */
 .fa-trash {
     font-size: 20px; /* Tamaño del icono */
 }
 
-/* empieza Estilos para el modal */
+/* Empieza Estilos para el modal */
 .modal {
     display: none; /* Oculta el modal por defecto */
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     position: fixed;
     z-index: 1;
@@ -64,8 +70,8 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4); /* Fondo oscuro translúcido */
-   
 }
+
 .modal-content {
     background-color: #EBEBEB;
     margin: auto; /* Ajusta el margen para centrar horizontalmente */
@@ -74,17 +80,16 @@
     border: 1px solid #888;
     width: 350px;
     border-radius: 10px;
-    
 }
-
 
 .form-group {
     margin-bottom: 20px; /* Espaciado entre los campos */
 }
+
 label {
     display: block; /* Hace que las etiquetas se muestren en líneas separadas */
-    
 }
+
 /* Estilos para los campos de entrada */
 input[type="text"],
 input[type="date"],
@@ -96,6 +101,7 @@ textarea {
     border-radius: 4px; /* Borde redondeado del campo */
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
+
 .close {
     color: #aaa;
     float: right;
@@ -109,6 +115,7 @@ textarea {
     text-decoration: none;
     cursor: pointer;
 }
+
 /* Estilos para los botones en el modal */
 .modal-content .btn {
     background-color: #C384B2; /* Cambia el color de fondo del botón */
@@ -117,11 +124,9 @@ textarea {
     border-radius: 5px; /* Agrega bordes redondeados al botón */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
     margin-right: 10px; /* Agrega margen derecho para separar los botones */
-    margin-top: 20px; 
+    margin-top: 20px;
     border: none;
 }
-
-
 
 /* Estilos específicos para el botón de cancelar */
 .modal-content .btn-secondary {
@@ -132,12 +137,13 @@ textarea {
     border-radius: 5px; /* Agrega bordes redondeados al botón */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
 }
+
 /* Estilos para el contenedor de los botones */
 .botones {
     text-align: right; /* Alinea los botones hacia la derecha */
 }
 
-/* termina Estilos para el modal */
+/* Termina Estilos para el modal */
 /* Estilos para el modal de edición */
 .modal-formulario {
     display: none; /* Oculta el modal por defecto */
@@ -204,4 +210,62 @@ textarea {
 /* Estilos para el contenedor de los botones en el modal de edición */
 .modal-formulario .botones {
     text-align: right; /* Alinea los botones hacia la derecha */
+}
+
+/* Ajustar el diseño para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .publicacion {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .publicacion .info {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .publicacion .botones {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container {
+        padding: 30px; /* Reduce el padding en dispositivos aún más pequeños */
+    }
+    .container h1 {
+        font-size: 20px; /* Reduce el tamaño de fuente del encabezado principal en dispositivos más pequeños */
+    }
+    .container h2 {
+        font-size: 20px; /* Reduce el tamaño de fuente de los encabezados secundarios en dispositivos más pequeños */
+    }
+    .publicacion {
+        margin-left: 0; /* Elimina el margen izquierdo en dispositivos más pequeños */
+    }
+    .acciones-publicacion {
+        padding: 10px; /* Reduce el espacio alrededor de las acciones en dispositivos más pequeños */
+        display: table;
+    }
+    .botones {
+        text-align: center; /* Centra los botones en dispositivos más pequeños */
+    }
+    .modal-content {
+        width: 90%; /* Utiliza el 90% del ancho del viewport en dispositivos más pequeños */
+    }
+    .publicacion a {
+        font-size: 16px; /* Reduce el tamaño de fuente del título en dispositivos más pequeños */
+    }
+    .acciones-publicacion a {
+        font-size: 14px; /* Reduce el tamaño de fuente de los botones en dispositivos más pequeños */
+    }
+    .acciones-publicacion span {
+        font-size: 14px; /* Reduce el tamaño de fuente del texto en dispositivos más pequeños */
+        display: contents;
+
+    }
 }

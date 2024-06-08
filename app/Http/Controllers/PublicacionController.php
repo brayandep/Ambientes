@@ -95,11 +95,17 @@ class PublicacionController extends Controller
         $rutaArchivo = storage_path('app/' . $publicacion->archivo);
 
         if (file_exists($rutaArchivo)) {
-            return Response::download($rutaArchivo, $publicacion->titulo);
+            return response()->download($rutaArchivo, $publicacion->titulo, [
+                'Content-Type' => mime_content_type($rutaArchivo),
+                'Content-Disposition' => 'attachment; filename="' . $publicacion->titulo . '"',
+                'Content-Length' => filesize($rutaArchivo),
+                'X-Content-Type-Options' => 'nosniff'
+            ]);
         }
 
         return redirect()->back()->with('error', 'El archivo no existe.');
     }
+
 
     public function actualizar(Request $request, $id)
     {
@@ -111,7 +117,7 @@ class PublicacionController extends Controller
             'titulo' => 'required',
             'descripcion' => 'required',
             'archivo' => 'nullable|file|mimes:pdf,doc,docx',
-            'fecha_vencimiento' => 'required|date|after_or_equal:today',
+            'fecha_vencimiento' => 'required|date',
             'tipo' => 'required|in:reglamento,anuncio',
         ], $messages);
 
@@ -128,6 +134,11 @@ class PublicacionController extends Controller
         if ($request->hasFile('archivo')) {
             Storage::delete($publicacion->archivo);
             $publicacion->archivo = $request->file('archivo')->store('public/archivos');
+        }
+        if ($request->fecha_vencimiento < now()) {
+            $publicacion->visible = 0;
+        } else {
+            $publicacion->visible = 1;
         }
 
         $publicacion->save();
@@ -160,6 +171,7 @@ class PublicacionController extends Controller
             'tabla_afectada' => 'publicaciones',
             'id_afectado' => $publicacion->id,
         ]);
+
 //termina guardado en bitacora edicion
         return redirect()->route('publicaciones.index')->with('success', 'La publicación ha sido actualizada exitosamente.');
     }
