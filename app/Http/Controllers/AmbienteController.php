@@ -34,8 +34,8 @@ class AmbienteController extends Controller
         $request->validate([
             'nombre' => 'required|max:25|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜ,. -]+$/|unique:ambientes,nombre',
             'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:200|regex:/^https?:\/\/www\.google\.com\/maps(\/.*)?$/',
-            'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
+            'ubicacion' => 'required|max:400|regex:/^https?:\/\/www\.google\.com\/maps(\/.*)?$/',
+            'descripcion' => 'nullable|max:120|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
             'unidad'=> 'required',
             'tipo-ambiente' => 'required',
             'equipos-disponibles' => 'required',
@@ -226,8 +226,8 @@ class AmbienteController extends Controller
         $request->validate([
             'nombre' => 'required|max:25|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜ,. -]+$/|unique:ambientes,nombre,' . $id,
             'capacidad' => 'required|numeric|min:15',
-            'ubicacion' => 'required|max:80|regex:/^https?:\/\/www\.google\.com\/maps\/.*$/',
-            'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
+            'ubicacion' => 'required|max:400|regex:/^https?:\/\/www\.google\.com\/maps\/.*$/',
+            'descripcion' => 'nullable|max:120|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
             'unidad'=> 'required',
             'tipo-ambiente'=> 'required',
             'equipos-disponibles' => 'required',

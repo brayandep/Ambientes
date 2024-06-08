@@ -66,7 +66,7 @@
                 <div class="form-fila-s">
                     <div class="input-group">
                         <label for="ubicacion">Ubicación:</label>
-                        <input type="text" id="ubicacion" name="ubicacion" maxlength="80" autocomplete="off" placeholder="Ingrese URL del ambiente. Ejem: https://www.google.com/maps " value="{{ old('ubicacion', isset($ambienteDatos) ? $ambienteDatos->ubicacion : '') }}">
+                        <input type="text" id="ubicacion" name="ubicacion" maxlength="400" autocomplete="off" placeholder="Ingrese URL del ambiente. Ejem: https://www.google.com/maps " value="{{ old('ubicacion', isset($ambienteDatos) ? $ambienteDatos->ubicacion : '') }}">
                         @error('ubicacion')
                             <span class="msgError">*{{ $message }}</span>
                         @enderror
@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" maxlength="40" autocomplete="off" placeholder="Ingrese una descripción sobre la ubicación del ambiente. Ejem: Ambiente ubicado en el primer piso de... ">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
+                    <textarea id="descripcion" name="descripcion" maxlength="120" autocomplete="off" placeholder="Ingrese una descripción sobre la ubicación del ambiente. Ejem: Ambiente ubicado en el primer piso de... ">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
                     @error('descripcion')
                         <span class="msgError">*{{ $message }}</span>
                     @enderror
