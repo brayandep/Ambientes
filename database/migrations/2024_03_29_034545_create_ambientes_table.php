@@ -17,7 +17,7 @@ class CreateAmbientesTable extends Migration
             $table->id();
             $table->integer('tipo_ambiente_id');
             //$table->foreign('tipo_ambiente_id')->references('id')->on('tipo_ambientes');
-            $table->string('codigo')->unique();
+            $table->string('codigo')->nullable();
             $table->string('unidad'); 
             $table->string('nombre');
             $table->integer('capacidad'); 
