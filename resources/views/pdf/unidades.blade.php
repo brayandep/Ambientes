@@ -111,7 +111,7 @@
                     Laboratorio
                 @endif
             </td>
-            <td>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</td>
+            <td>{{ $unidad->unidadPadre->id ?? 'Sin dependencia' }}</td>
             <td>
                 @if ($unidad->UnidadHabilitada == 1)
                     Habilitado
