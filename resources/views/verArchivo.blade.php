@@ -19,5 +19,6 @@ Copy code
 
     <br>
     <button onclick="window.print()">Imprimir Archivo</button>
+    
 </body>
 </html>

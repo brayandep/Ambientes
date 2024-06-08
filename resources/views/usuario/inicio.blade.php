@@ -2,7 +2,7 @@
 {{-- <link rel="stylesheet" type="text/css" href="../../css/styleGrupo.css"> --}}
 <style>
     body {
-        background-image: url('{{ asset("images/umss.jpg") }}');
+        background-image: url('{{ asset("images/umss2.jpg") }}');
         /* Ajusta otros estilos según sea necesario */
     }
 </style>
