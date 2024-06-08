@@ -265,5 +265,7 @@ textarea {
     }
     .acciones-publicacion span {
         font-size: 14px; /* Reduce el tamaño de fuente del texto en dispositivos más pequeños */
+        display: flow;
+
     }
 }
