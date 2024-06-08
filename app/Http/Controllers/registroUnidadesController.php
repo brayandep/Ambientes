@@ -58,10 +58,18 @@ class registroUnidadesController extends Controller
     }
     public function update(Request $request, Unidad $unidad){
 
-        $request -> validate([
-            'nombreUnidad' => 'required|max:50|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/|unique:unidades,nombreUnidad',
+        // Validar solo si el nombreUnidad ha cambiado
+    if ($request->nombreUnidad != $unidad->nombreUnidad) {
+        $request->validate([
+            'nombreUnidad' => 'max:50|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/|unique:unidades,nombreUnidad',
+            'Responsable' => 'required|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/',
         ]);
-
+    } else {
+        $request->validate([
+            'nombreUnidad' => 'max:50|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/',
+            'Responsable' => 'required|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/',
+        ]);
+    }
         $unidad->nombreUnidad = $request ->nombreUnidad;
         // $unidad->codigoUnidad = $unidad ->codigoUnidad;
         $unidad->Responsable = $request ->Responsable;
