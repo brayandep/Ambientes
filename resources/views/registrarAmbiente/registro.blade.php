@@ -66,7 +66,7 @@
                 <div class="form-fila-s">
                     <div class="input-group">
                         <label for="ubicacion">Ubicación:</label>
-                        <input type="text" id="ubicacion" name="ubicacion" maxlength="80" autocomplete="off" placeholder="Ingrese URL: https://www.google.com/maps/ del ambiente" value="{{ old('ubicacion', isset($ambienteDatos) ? $ambienteDatos->ubicacion : '') }}">
+                        <input type="text" id="ubicacion" name="ubicacion" maxlength="80" autocomplete="off" placeholder="Ingrese URL del ambiente. Ejem: https://www.google.com/maps " value="{{ old('ubicacion', isset($ambienteDatos) ? $ambienteDatos->ubicacion : '') }}">
                         @error('ubicacion')
                             <span class="msgError">*{{ $message }}</span>
                         @enderror

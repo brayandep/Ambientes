@@ -86,6 +86,7 @@
 <table>
     <thead>
         <tr>
+            <th>Id unidad</th>
             <th>Nombre</th>
             <th>Responsable</th>
             <th>Nivel</th>
@@ -96,6 +97,7 @@
     <tbody>
         @foreach ($unidades as $unidad)
         <tr>
+            <td>{{ $unidad->id }}</td>
             <td>{{ $unidad->nombreUnidad }}</td>
             <td>{{ $unidad->Responsable }}</td>
             <td>

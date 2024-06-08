@@ -14,9 +14,9 @@ class registroUnidadesController extends Controller
     public function store(Request $request){
         
         $request -> validate([
-            'nombreUnidad' => 'required|max:50|regex:/^[a-zA-Z\s]+$/|unique:unidades,nombreUnidad',
-            'codigoUnidad' => 'required|digits:6|numeric|unique:unidades,codigoUnidad',
-            'Responsable' => 'required|max:40|regex:/^[a-zA-Z\s]+$/',
+            'nombreUnidad' => 'required|max:50|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/|unique:unidades,nombreUnidad',
+            // 'codigoUnidad' => 'required|digits:6|numeric|unique:unidades,codigoUnidad',
+            'Responsable' => 'required|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/',
             'Nivel' => 'required',
             'Dependencia' => 'required',
             'UnidadHabilitada'=> 'required'
@@ -24,7 +24,7 @@ class registroUnidadesController extends Controller
         
         $unidad = new Unidad();
         $unidad->nombreUnidad = $request->nombreUnidad;
-        $unidad->codigoUnidad = $request->codigoUnidad;
+        // $unidad->codigoUnidad = $request->codigoUnidad;
         $unidad->Responsable = $request->Responsable;
         $unidad->Nivel = $request->Nivel;
         $unidad->Dependencia = $request->Dependencia;
@@ -57,8 +57,13 @@ class registroUnidadesController extends Controller
         return view('GestionUnidades.EditarUnidades', compact('unidad'));
     }
     public function update(Request $request, Unidad $unidad){
+
+        $request -> validate([
+            'nombreUnidad' => 'required|max:50|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.]+$/|unique:unidades,nombreUnidad',
+        ]);
+
         $unidad->nombreUnidad = $request ->nombreUnidad;
-        $unidad->codigoUnidad = $unidad ->codigoUnidad;
+        // $unidad->codigoUnidad = $unidad ->codigoUnidad;
         $unidad->Responsable = $request ->Responsable;
         $unidad->Nivel = $unidad->Nivel;
         $unidad->Dependencia =  $unidad ->Dependencia;

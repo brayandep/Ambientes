@@ -8,7 +8,9 @@ use App\Models\Ambiente;
 use App\Models\Docente;
 use App\Models\HorarioDisponible;
 use App\Models\Models\Usuario;
+use App\Models\Grupo;
 use App\Models\User;
+use App\Models\Materia;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 
@@ -25,9 +27,15 @@ class SolicitudController extends Controller
         $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
-        
+        $grupos = Grupo::all();;
+        $materias = Grupo::where('idDocente', $usuario->id)
+        ->join('materia', 'grupos.idMateria', '=', 'materia.id')
+        ->select('materia.nombre', 'materia.id')
+        ->get();
+
+
         $usuarios = User::all();;
-        return view('Versolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
+        return view('Versolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios','grupos','materias'));
     }
 
     public function index2()
@@ -49,10 +57,15 @@ public function create()
     $ambientes = Ambiente::where('estadoAmbiente', 1)->get();
     $horarios = HorarioDisponible::all();
     $usuario = Auth::user();
+    $materias = Grupo::where('idDocente', $usuario->id)
+    ->join('materia', 'grupos.idMateria', '=', 'materia.id')
+    ->select('materia.nombre', 'materia.id')
+    ->get();
+
     // Obtén todas las solicitudes desde el modelo Solicitud
     //  $usuarios = Usuario::all();;
 
-    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios', 'usuario'));
+    return view('SolicitudAmbiente', compact( 'docentes', 'ambientes','horarios', 'usuario','materias'));
 
 }
 public function store(Request $request)
@@ -61,8 +74,8 @@ public function store(Request $request)
         $request->validate([
             'usuario' => 'required',
             'nro_aula' => 'required',
-            'materia' => 'required',
-            'grupo' => 'required',
+           
+           
             'motivo' => 'required',
             'fecha' => 'required|date',
             'horario' => 'required',
@@ -97,15 +110,19 @@ return redirect()->route('VerSolicitud')->with('success', 'Solicitud registrada 
 
 }       
 public function edit($id ){
-          $usuario = Auth::user();
+        $usuario = Auth::user();
         $usuario = Auth::user();
         $solicitudes = Solicitud::where('usuario', $usuario->id)->get();
         $solicitud = Solicitud::findOrFail($id);
         $ambientes = Ambiente::all();;
         $horarios = HorarioDisponible::all();;
         $idAmbienteSeleccionado = $solicitud->ambiente_id;
+        $materias = Grupo::where('idDocente', $usuario->id)
+    ->join('materia', 'grupos.idMateria', '=', 'materia.id')
+    ->select('materia.nombre', 'materia.id')
+    ->get();
        // return $solicitud;
-        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado','usuario'));
+        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado','usuario','materias'));
 }
 public function update(Request $request, Solicitud $solicitud)
 {
