@@ -19,7 +19,7 @@
                   <div class="form-fila-s">
                     <div class="input-group">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Ingrese nombre del ambiente" value="{{ old('nombre', isset($ambienteDatos) ? $ambienteDatos->nombre : '') }}">
+                        <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Ingrese el nombre del ambiente. Ejem: 617, 617C" value="{{ old('nombre', isset($ambienteDatos) ? $ambienteDatos->nombre : '') }}">
                         @error('nombre')
                             <span class="msgError">*{{ $message }}</span>
                         @enderror
@@ -57,7 +57,7 @@
 
                     <div class="input-group">
                         <label for="capacidad">Capacidad:</label>
-                        <input type="number" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ old('capacidad', isset($ambienteDatos) ? $ambienteDatos->capacidad : '') }}">
+                        <input type="number" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Ingrese capacidad del ambiente. Ejem: 80, 100" value="{{ old('capacidad', isset($ambienteDatos) ? $ambienteDatos->capacidad : '') }}">
                         @error('capacidad')
                             <span class="msgError">*{{ $message }}</span>
                         @enderror
@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" maxlength="120" autocomplete="off" placeholder="Ingrese una descripción sobre la ubicación del ambiente. Ejem: Ambiente ubicado en el primer piso de... ">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
+                    <textarea id="descripcion" name="descripcion" maxlength="120" autocomplete="off" placeholder="Ingrese una descripción sobre la ubicación del ambiente. Ejem: Ambiente ubicado en el primer piso del edificio académico. ">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
                     @error('descripcion')
                         <span class="msgError">*{{ $message }}</span>
                     @enderror

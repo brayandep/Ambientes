@@ -25,14 +25,14 @@
                     <div class="form-fila-s">
                         <div class="input-group">
                             <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente" value="{{ old('nombre', request('nombre')) }}">
+                            <input type="text" id="nombre" name="nombre" maxlength="25" autocomplete="off" placeholder="Nombre del ambiente. Ejem: 617, 617C" value="{{ old('nombre', request('nombre')) }}">
                             @error('nombre')
                             <span class="msgError">*{{$message}}</span>
                             @enderror
                         </div>
                         <div class="input-group">
                             <label for="capacidad">Capacidad:</label>
-                            <input type="text" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Capacidad" value="{{ old('capacidad', request('capacidad')) }}">
+                            <input type="text" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Capacidad del ambiente. Ejem: 80, 100" value="{{ old('capacidad', request('capacidad')) }}">
                             @error('capacidad')
                                 <span class="msgError">*{{ $message }}</span>
                             @enderror
@@ -85,30 +85,29 @@
 
             <div class="titulo-boton">
                 <h2 class="Resultado-search"> Resultado de la búsqueda: </h2>
-                {{-- <button type="submit" class="Buscar-Reservar">Reservar</button> --}}
             </div>
             <div class="tabla-search">
                 <div class="fila-b">
                     <div class="contBotones">
-                        <button class="nomCol-b">Nombre</button>
+                        <button class="nomCol-b" id="noActivar">Nombre</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol-b">Capacidad</button>
+                        <button class="nomCol-b" id="noActivar">Capacidad</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol-b">Dia</button>
+                        <button class="nomCol-b" id="noActivar">Dia</button>
                     </div>
                     <!--<div class="contBotones">
                         <button class="nomCol-b">Fecha</button>
                     </div>-->
                     <div class="contBotones">
-                        <button class="nomCol-b">Hora de inicio</button>
+                        <button class="nomCol-b" id="noActivar">Hora de inicio</button>
                     </div>
                     <div class="contBotones">
-                        <button class="nomCol-b">Hora de fin</button>
+                        <button class="nomCol-b" id="noActivar">Hora de fin</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol-b">Calendario</button>
+                        <button class="nomCol-b" id="noActivar">Calendario</button>
                     </div>             
                 </div>
                 <div class="datos">
@@ -118,18 +117,11 @@
                         @foreach ($horarios as $horario)
                             @if ($horario->ambiente_id === $ambiente->id )
                                 <div class="fila-b">
-                                    <div class="seleccionAmb">
-                                    <div class="seleccion">
-                                        <input type="checkbox" class="checkbox-seleccion" value="{{ $ambiente->nombre }}"
-                                data-nombre="{{ $ambiente->nombre }}" data-dia="{{ $diaSemana[$horario->dia] }}"
-                                onchange="limitarSeleccion(this)">
-                                    </div>
-                                    <p>{{ $ambiente->nombre }}</p>
-                                    </div>
-                                    <p id="columnaPeque">{{ $ambiente->capacidad }}</p>
-                                    <p id="columnaPeque">{{ $diaSemana[$horario->dia] }}</p>
-                                    <p>{{ $horario->horaInicio }}</p>
-                                    <p>{{ $horario->horaFin }}</p>
+                                    <p class="contBotones">{{ $ambiente->nombre }}</p>
+                                    <p class="contBotones" id="columnaPeque">{{ $ambiente->capacidad }}</p>
+                                    <p class="contBotones" id="columnaPeque">{{ $diaSemana[$horario->dia] }}</p>
+                                    <p class="contBotones">{{ $horario->horaInicio }}</p>
+                                    <p class="contBotones">{{ $horario->horaFin }}</p>
                                     <div class="Buscar-Calendario" id="columnaPeque">
                                         <button class="buscaCalendario" onclick="location.href='{{ route('calendario.individual', $ambiente) }}';">
                                             <i class="fa-solid fa-calendar-days"></i>
@@ -168,21 +160,5 @@
             });
         });
     });
-</script>
-
-<script>
-    function limitarSeleccion(checkbox) {
-        // Obtener el nombre del ambiente y el día seleccionado del checkbox
-        var nombreAmbiente = checkbox.dataset.nombre;
-        var diaSeleccionado = checkbox.dataset.dia;
-
-        // Deshabilitar los checkboxes con diferentes nombres de ambiente o días seleccionados
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(function(cb) {
-            if (cb.dataset.nombre !== nombreAmbiente || cb.dataset.dia !== diaSeleccionado) {
-                cb.disabled = checkbox.checked;
-            }
-        });
-    }
 </script>
 @endsection
