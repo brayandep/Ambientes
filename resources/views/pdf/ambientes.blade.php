@@ -86,7 +86,6 @@
 <table>
     <thead>
         <tr>
-            <th>Código</th>
             <th>Unidad</th>
             <th>Nombre</th>
             <th>Capacidad</th>
@@ -98,7 +97,6 @@
     <tbody>
         @foreach ($ambientes as $ambiente)
         <tr>
-            <td>{{ $ambiente->codigo }}</td>
             <td>{{ $ambiente->unidad }}</td>
             <td>{{ $ambiente->nombre }}</td>
             <td>{{ $ambiente->capacidad }}</td>
