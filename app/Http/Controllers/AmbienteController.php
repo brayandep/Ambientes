@@ -37,12 +37,16 @@ class AmbienteController extends Controller
             'ubicacion' => 'required|max:80|regex:/^https?:\/\/www\.google\.com\/maps\/.*$/',
             'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
             'unidad'=> 'required',
-            'tipo-ambiente'=> 'required'
+            'tipo-ambiente'=> 'required',
+            'equipos-disponibles' => 'required',
+            'horarios' => 'required',
         ], [
             'capacidad.min' => 'El valor del campo capacidad debe ser al menos 15.',
             'unidad.required' => 'Seleccione una unidad.',
             'tipo-ambiente.required' => 'Seleccione un tipo de ambiente.',
-            'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps/'
+            'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps/',
+            'equipos-disponibles.required' => 'Seleccione al menos un equipo.',
+            'horarios.required' => 'Seleccione al menos un horario.',
         ]);
 
         $ambiente = new Ambiente();
@@ -223,13 +227,17 @@ class AmbienteController extends Controller
             'capacidad' => 'required|numeric|min:15',
             'ubicacion' => 'required|max:80|regex:/^https?:\/\/www\.google\.com\/maps\/.*$/',
             'descripcion' => 'nullable|max:40|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,. -]+$/u',
-            'unidad' => 'required',
-            'tipo-ambiente' => 'required'
+            'unidad'=> 'required',
+            'tipo-ambiente'=> 'required',
+            'equipos-disponibles' => 'required',
+            'horarios' => 'required',
         ], [
             'capacidad.min' => 'El valor del campo capacidad debe ser al menos 15.',
             'unidad.required' => 'Seleccione una unidad.',
             'tipo-ambiente.required' => 'Seleccione un tipo de ambiente.',
-            'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps/'
+            'ubicacion.regex' => 'La ubicación debe iniciar con: https://www.google.com/maps/',
+            'equipos-disponibles.required' => 'Seleccione al menos un equipo.',
+            'horarios.required' => 'Seleccione al menos un horario.',
         ]);
 
         $ambiente = Ambiente::findOrFail($id);
@@ -350,10 +358,14 @@ class AmbienteController extends Controller
         return redirect()->back();
     }
 
-    public function generatePDF()
+    public function descargarAmbientesPDF()
     {
-        $ambientes = Ambiente::all();
-        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'));
-        return $pdf->stream('ambientes.pdf');
+        $ambientes = Ambiente::all()->reverse(); // Obtén todos los ambientes e invierte el orden
+
+        //Horientación de la pagina en horizontal y Generar el PDF
+        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'))
+                    ->setPaper('a4', 'landscape');
+
+        return $pdf->download('ambientes.pdf');
     }
 }

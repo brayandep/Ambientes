@@ -29,28 +29,32 @@
                         <select class="selectAmbiente" id="unidad" name="unidad">
                             <option value="">Selecciona una unidad</option>
                             @foreach($unidades as $unidad)
-                                <option value="{{ $unidad->nombreUnidad }}" {{ old('unidad', isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad ? 'selected' : '') }}>{{ $unidad->nombreUnidad }}</option>
+                                <option value="{{ $unidad->nombreUnidad }}" {{ old('unidad', (isset($ambienteDatos) && $ambienteDatos->unidad == $unidad->nombreUnidad) ? $unidad->nombreUnidad : '') == $unidad->nombreUnidad ? 'selected' : '' }}>{{ $unidad->nombreUnidad }}</option>
                             @endforeach
                         </select>
                         @error('unidad')
                             <span class="msgError">*{{ $message }}</span>
                         @enderror
                     </div>
+
                 </div>
                 <div class="form-fila-s">
-                    <div class="input-group">
-                        <label for="tipo-ambiente">Tipo de ambiente:</label>
-                        <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtroAmbiente(this);verificarOtro(this)">
-                            <option value="">Selecciona un tipo de ambiente</option>
-                            @foreach($tipoAmbientes as $tipoAmbiente)
-                                <option value="{{ $tipoAmbiente->nombreTipo }}" {{ old('tipo-ambiente', isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id ? 'selected' : '') }}>{{ $tipoAmbiente->nombreTipo }}</option>
-                            @endforeach
-                            <option value="Otro">Otro</option> <!-- Opción adicional "Otro" -->
-                        </select>
-                        @error('tipo-ambiente')
-                            <span class="msgError">*{{ $message }}</span>
-                        @enderror
-                    </div>
+                <div class="input-group">
+                    <label for="tipo-ambiente">Tipo de ambiente:</label>
+                    <select class="selectAmbiente" id="tipo-ambiente" name="tipo-ambiente" onchange="verificarOtroAmbiente(this);verificarOtro(this)">
+                        <option value="">Selecciona un tipo de ambiente</option>
+                        @foreach($tipoAmbientes as $tipoAmbiente)
+                            <option value="{{ $tipoAmbiente->nombreTipo }}" {{ old('tipo-ambiente', (isset($ambienteDatos) && $ambienteDatos->tipo_ambiente_id == $tipoAmbiente->id) ? $tipoAmbiente->nombreTipo : '') == $tipoAmbiente->nombreTipo ? 'selected' : '' }}>
+                                {{ $tipoAmbiente->nombreTipo }}
+                            </option>
+                        @endforeach
+                        <option value="Otro" {{ old('tipo-ambiente') == 'Otro' ? 'selected' : '' }}>Otro</option> <!-- Opción adicional "Otro" -->
+                    </select>
+                    @error('tipo-ambiente')
+                        <span class="msgError">*{{ $message }}</span>
+                    @enderror
+                </div>
+
                     <div class="input-group">
                         <label for="capacidad">Capacidad:</label>
                         <input type="number" id="capacidad" name="capacidad" maxlength="3" autocomplete="off" placeholder="Ingrese capacidad de ambiente" value="{{ old('capacidad', isset($ambienteDatos) ? $ambienteDatos->capacidad : '') }}">
@@ -70,7 +74,7 @@
                 </div>
                 <div class="form-grupo">
                     <label for="descripcion">Descripción de ubicación:</label>
-                    <textarea id="descripcion" name="descripcion" maxlength="40" autocomplete="off">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
+                    <textarea id="descripcion" name="descripcion" maxlength="40" autocomplete="off" placeholder="Ingrese una descripción sobre la ubicación del ambiente. Ejem: Ambiente ubicado en el primer piso de... ">{{ old('descripcion', isset($ambienteDatos) ? $ambienteDatos->descripcion_ubicacion : '') }}</textarea>
                     @error('descripcion')
                         <span class="msgError">*{{ $message }}</span>
                     @enderror
@@ -82,44 +86,43 @@
                             @foreach($equiposDisponibles as $equipo)
                                 <label>
                                     <input type="checkbox" name="equipos-disponibles[]" value="{{ $equipo }}"
-                                        @isset($equiposSeleccionados)
-                                            {{ in_array($equipo, old('equipos-disponibles', $equiposSeleccionados)) ? 'checked' : '' }}
-                                        @endisset>
+                                        {{ in_array($equipo, old('equipos-disponibles', isset($equiposSeleccionados) ? $equiposSeleccionados : [])) ? 'checked' : '' }}>
                                     {{ $equipo }}
                                 </label><br>
                             @endforeach
                         </div>
                     </div>
+                    @error('equipos-disponibles')
+                        <span class="msgError">*{{$message}}</span>
+                    @enderror
                 </div>
     
                 <div class="form-grupo">
                     <label style="width: 120px;">Horas hábiles:</label>
                     <table class="pizarra1">
-                    <thead class="fila">
-                        <tr>
-                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Lunes')">Lunes</button></th>
-                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Martes')">Martes</button></th>
-                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Miércoles')">Miércoles</button></th>
-                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Jueves')">Jueves</button></th>
-                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Viernes')">Viernes</button></th>
-                            <th><button type="button" class="nomCol" onclick="abrirModalHora('Sábado')">Sábado</button></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="Lunes"></td>
-                            <td id="Martes"></td>
-                            <td id="Miércoles"></td>
-                            <td id="Jueves"></td>
-                            <td id="Viernes"></td>
-                            <td id="Sábado"></td>
-                            
-                        </tr>
-                        <ul id="listaHorarios">
-                            <!-- Los horarios se añadirán aquí dinámicamente -->
-                        </ul>
-                    </tbody>
-                    
+                        <thead class="fila">
+                            <tr>
+                                <th><button type="button" class="nomCol" onclick="abrirModalHora('Lunes')">Lunes</button></th>
+                                <th><button type="button" class="nomCol" onclick="abrirModalHora('Martes')">Martes</button></th>
+                                <th><button type="button" class="nomCol" onclick="abrirModalHora('Miércoles')">Miércoles</button></th>
+                                <th><button type="button" class="nomCol" onclick="abrirModalHora('Jueves')">Jueves</button></th>
+                                <th><button type="button" class="nomCol" onclick="abrirModalHora('Viernes')">Viernes</button></th>
+                                <th><button type="button" class="nomCol" onclick="abrirModalHora('Sábado')">Sábado</button></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="Lunes"></td>
+                                <td id="Martes"></td>
+                                <td id="Miércoles"></td>
+                                <td id="Jueves"></td>
+                                <td id="Viernes"></td>
+                                <td id="Sábado"></td>
+                            </tr>
+                            <ul id="listaHorarios">
+                                <!-- Los horarios se añadirán aquí dinámicamente -->
+                            </ul>
+                        </tbody>
                     </table>
 
 
@@ -474,6 +477,9 @@
                         </tr>
                     </tbody>
                     </table>
+                    @error('horarios')
+                        <span class="msgError">*{{$message}}</span>
+                    @enderror
                 </div>
                 
                 <div class="botones">
@@ -509,6 +515,11 @@
                   </div>
               </div>
   
+
+                <!-- Hidden inputs to store selected horarios -->
+                    @foreach(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'] as $dia)
+                        <input type="hidden" name="horarios[{{ $dia }}]" value="{{ old('horarios.' . $dia) }}">
+                    @endforeach
                 <!-- Modal para AÑADIR HORA -->
                 <div id="otroModal" class="modal">
                     <div class="modal-content">
@@ -516,39 +527,22 @@
                         <h2>Seleccione el horario:</h2> <!-- Título del modal-->
                         <div class="horarios">
                             <label for="modalHoraInicio">Hora inicio:</label>
-                            <select id="modalHoraInicio">
-                                <option value="08:00">08:00</option>
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
+                            <select id="modalHoraInicio" name="modalHoraInicio">
+                                @foreach(['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'] as $hora)
+                                    <option value="{{ $hora }}" {{ old('modalHoraInicio') == $hora ? 'selected' : '' }}>{{ $hora }}</option>
+                                @endforeach
                             </select>
                             <label style="padding-left: 30px;" for="modalHoraFin">Hora fin:</label>
-                            <select id="modalHoraFin">
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
+                            <select id="modalHoraFin" name="modalHoraFin">
+                                @foreach(['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'] as $hora)
+                                    <option value="{{ $hora }}" {{ old('modalHoraFin') == $hora ? 'selected' : '' }}>{{ $hora }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <span id="errorMensaje" style="color: red;"></span> <!-- Mensaje de error -->
                         <button type="button" id="modalAceptar" onclick="guardarHorario()">Aceptar</button>
                     </div>
+                </div>
                 </div>
 @endsection
 

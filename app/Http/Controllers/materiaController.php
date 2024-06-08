@@ -91,16 +91,11 @@ class materiaController extends Controller
         // Invertir el orden de las materias
         $materias = $materias->reverse();
     
-        // Contar las páginas manualmente
-        $itemsPerPage = 20; // Número de ítems por página
-        $totalItems = $materias->count();
-        $totalPages = ceil($totalItems / $itemsPerPage);
-    
-        $pageNumber = 1; // Página actual
-        $pageCount = $totalPages; // Total de páginas
-    
-        // Generar el PDF
-        $pdf = PDF::loadView('pdf.materias', compact('materias', 'pageNumber', 'pageCount'));
+        //Horientación de la pagina en horizontal y Generar el PDF
+        $pdf = PDF::loadView('pdf.materias', compact('materias'))
+        ->setPaper('a4', 'landscape');
+
+        
     
         return $pdf->download('materias.pdf');
     }

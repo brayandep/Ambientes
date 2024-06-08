@@ -58,14 +58,6 @@
         th {
             background-color: #f2f2f2;
         }
-        .pagina {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            margin-bottom: 0px;
-            margin-right: 15px;
-            font-size: 14px;
-        }
 
     </style>
 </head>
@@ -123,10 +115,6 @@
     </tbody>
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
-<!-- <div class="pagina">
-    
-    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p> 
-</div> -->
 
 </body>
 </html>
