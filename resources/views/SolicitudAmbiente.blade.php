@@ -25,7 +25,8 @@
         @endif    
         </div>
     </div>
-    <form class="container2" method="POST" action="{{ route('solicitud.store') }}"id="solicitudForm">
+    <form class="container2" method="POST" action="{{ route('solicitud.store') }}">
+        @csrf
         <div class="izqDer">
             <div class="izq">
                 <div>
