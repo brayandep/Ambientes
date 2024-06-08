@@ -25,11 +25,11 @@
                                 <span>*{{$message}}</span>
                             @enderror
                             
-                            <label class="titulo" for="codigoUnidad">Codigo: </label>
+                            {{-- <label class="titulo" for="codigoUnidad">Codigo: </label>
                             <input class="imput" type="text" id="codigoUnidad" name="codigoUnidad" placeholder="Ingrese codigo de la unidad" minlength="8" maxlength="8" autocomplete="off" value="{{$unidad->codigoUnidad}}"disabled>
                             @error('codigoUnidad')
                                 <span>*{{$message}}</span>
-                            @enderror
+                            @enderror --}}
 
                             <label class="titulo"for="Responsable">Responsable: </label>
                             <input class="imput" type="text" id="Responsable" name="Responsable" placeholder="Ingrese responsable de la unidad" required maxlength="40" autocomplete="off" value="{{$unidad->Responsable}}">
@@ -40,32 +40,22 @@
                     <div class="div2Seleccion">
                         <div class="seleccion">
                             <label class="titulo" for="Nivel">Nivel:</label>
-                            <select class="imput" id="Nivel" name="Nivel" disabled>
-                               
-                               
-                               @if ($unidad->Nivel == 1)
-                                <option selected value="1">Decanato</option>
-                                @elseif ($unidad->Nivel == 2)
-                                    <option selected value="2">Departamento</option>
+                            <select class="imput" id="Nivel" name="Nivel" disabled>    
+                               @if ($unidad->Nivel == 2)
+                                <option selected value="2">Decanato</option>
                                 @elseif ($unidad->Nivel == 3)
-                                    <option selected value="3">Laboratorio</option>
-                                @endif
-                               
+                                    <option selected value="3">Departamento</option>
+                                @elseif ($unidad->Nivel == 4)
+                                    <option selected value="4">Laboratorio</option>
+                                @endif  
                             </select>
                         </div>
-                        @error('Nivel')
-                                <span>*{{$message}}</span>
-                        @enderror
                         <div class="seleccion">
                             <label class="titulo" for="Dependencia">Dependencia:</label>
                             <select class="imput" id="Dependencia" name="Dependencia" value="{{$unidad->Dependencia}}"disabled>
-                                
-                               
+                                    
                             </select>
                         </div>
-                        @error('Dependencia')
-                                <span>*{{$message}}</span>
-                        @enderror
                     </div>
                     <div class="div3Botones">
                         <button type="button" class= "cancelar" onclick="CancelarRegU()">Cancelar</button>
