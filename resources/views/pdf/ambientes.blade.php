@@ -58,14 +58,6 @@
         th {
             background-color: #f2f2f2;
         }
-        .pagina {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            margin-bottom: 0px;
-            margin-right: 15px;
-            font-size: 14px;
-        }
 
     </style>
 </head>
@@ -94,7 +86,6 @@
 <table>
     <thead>
         <tr>
-            <th>Código</th>
             <th>Unidad</th>
             <th>Nombre</th>
             <th>Capacidad</th>
@@ -106,7 +97,6 @@
     <tbody>
         @foreach ($ambientes as $ambiente)
         <tr>
-            <td>{{ $ambiente->codigo }}</td>
             <td>{{ $ambiente->unidad }}</td>
             <td>{{ $ambiente->nombre }}</td>
             <td>{{ $ambiente->capacidad }}</td>
@@ -124,11 +114,7 @@
     </tbody>
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
-<!-- Paginación
-<div class="pagina">
-     
-    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p>
-</div> -->
+
 
 </body>
 </html>

@@ -58,14 +58,6 @@
         th {
             background-color: #f2f2f2;
         }
-        .pagina {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            margin-bottom: 0px;
-            margin-right: 15px;
-            font-size: 14px;
-        }
 
     </style>
 </head>
@@ -94,8 +86,8 @@
 <table>
     <thead>
         <tr>
+            <th>Id unidad</th>
             <th>Nombre</th>
-            <th>Código</th>
             <th>Responsable</th>
             <th>Nivel</th>
             <th>Dependencia</th>
@@ -105,8 +97,8 @@
     <tbody>
         @foreach ($unidades as $unidad)
         <tr>
+            <td>{{ $unidad->id }}</td>
             <td>{{ $unidad->nombreUnidad }}</td>
-            <td>{{ $unidad->codigoUnidad }}</td>
             <td>{{ $unidad->Responsable }}</td>
             <td>
                 @if ($unidad->Nivel == 1)
@@ -119,7 +111,7 @@
                     Laboratorio
                 @endif
             </td>
-            <td>{{ $unidad->unidadPadre->codigoUnidad ?? 'Sin dependencia' }}</td>
+            <td>{{ $unidad->unidadPadre->id ?? 'Sin dependencia' }}</td>
             <td>
                 @if ($unidad->UnidadHabilitada == 1)
                     Habilitado
@@ -132,11 +124,6 @@
     </tbody>
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
-<!-- Paginación
-<div class="pagina">
-     
-    <p>Página {{ $pageNumber }} de {{ $pageCount }}</p>
-</div> -->
 
 </body>
 </html>

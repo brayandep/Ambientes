@@ -203,8 +203,7 @@
                                 <a href='{{ route('backup.index') }}'>Backups <i class="fas fa-clock-rotate-left"></i></a>
                             @endcan
                             @can('Control bitacora')
-                                {{-- pon tu ruta aqui melvi :) --}}
-                                <a href='{{ route('Log.index') }}'>Biotacoras <i class="fas fa-timeline"></i></a>
+                                <a href='{{ route('Log.index') }}'>Bitacoras <i class="fas fa-timeline"></i></a>
                             @endcan
                             <a href='{{ route('logout') }}'>Salir <i class="fas fa-right-from-bracket"></i></a>
                         </div>

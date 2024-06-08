@@ -17,7 +17,7 @@
                     <div class="acciones-publicacion">
                         <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
                         <a href="#" class="btn btn-primary" onclick='abrirFormularioEdicion(@json($publicacion))'><i class="fa fa-edit"></i></a>
-                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
+                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ \Carbon\Carbon::parse($publicacion->fecha_vencimiento)->format('d/m/Y') }}</span>
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="acciones-publicacion">
                         <a href="{{ route('eliminar.publicacion', ['id' => $publicacion->id]) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta publicación?');"><i class="fa fa-trash"></i></a>
                         <a href="#" class="btn btn-primary" onclick='abrirFormularioEdicion(@json($publicacion))'><i class="fa fa-edit"></i></a>
-                        <span style="color: #904368;padding: 20px;">Vencimiento: {{ $publicacion->fecha_vencimiento }}</span>
+                        <span style="color: #904368;padding: 20px;">Vencimiento: {{\Carbon\Carbon::parse($publicacion->fecha_vencimiento)->format('d/m/Y')}}</span>
                         <span>{{ $publicacion->visible ? 'Visible' : 'No visible' }}</span>
                     </div>
                 </div>

@@ -121,17 +121,10 @@ class registroUnidadesController extends Controller
         // Invertir el orden de las unidades
         $unidades = $unidades->reverse();
 
-        // Contar las páginas manualmente
-        $itemsPerPage = 20; // Número de ítems por página
-        $totalItems = $unidades->count();
-        $totalPages = ceil($totalItems / $itemsPerPage);
-
-        $pageNumber = 1; // Página actual
-        $pageCount = $totalPages; // Total de páginas
-
-        // Generar el PDF
-        $pdf = PDF::loadView('pdf.unidades', compact('unidades', 'pageNumber', 'pageCount'));
-
+        //Horientación de la pagina en horizontal y Generar el PDF
+        $pdf = PDF::loadView('pdf.unidades', compact('unidades'))
+                ->setPaper('a4', 'landscape'); 
+       
         return $pdf->download('unidades.pdf');
     }
     
