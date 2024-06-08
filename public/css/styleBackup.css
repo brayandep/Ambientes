@@ -43,14 +43,12 @@
     font-size: 14px;
     flex-direction: column;
     display: flex;
-    /* width: 55%; */
+    width: 100%;
   }
 
-  .contBotones{
-    min-width: 140px;
+  .contBotones-v {
     width: 30%;
-    display: flex;
-    justify-content: center;
+    min-width: 140px;
   }
 
   #columnaPeque{
@@ -83,11 +81,12 @@
 
   .fila-backup p{
     min-width: 140px;
+    width: 60%;
     text-align: center;
     justify-content: center;
     display: flex;
     padding: 5px;
-    margin-left: 5px;
+    overflow: hidden;
   }
 
   /*boton generar backup*/
@@ -281,4 +280,8 @@ h2 {
   .eliminar-programar i{
     background-color: none;
     font-size: 20px;
+  }
+
+  #noActivar{
+    cursor: default;
   }

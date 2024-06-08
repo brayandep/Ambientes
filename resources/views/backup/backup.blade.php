@@ -29,7 +29,7 @@
                         <div class="input-group">
                             <label for="dia">Día de la semana:</label>
                             <select name="dia" id="dia">
-                                <option value="">Seleccionar</option>
+                                <option value="">Seleccionar día</option>
                                 <option value="Lunes">Lunes</option>
                                 <option value="Martes">Martes</option>
                                 <option value="Miércoles">Miércoles</option>
@@ -85,19 +85,19 @@
             <div class="tabla-backup">
                 <div class="fila-backup">
                     <div class="contBotones" id="columnaGrande">
-                        <button class="nomCol-backup">Nombre del archivo</button>
+                        <button class="nomCol-backup" id="noActivar">Nombre del archivo</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol-backup">Restaurar</button>
+                        <button class="nomCol-backup" id="noActivar">Restaurar</button>
                     </div>
                     <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol-backup">Eliminar</button>
+                        <button class="nomCol-backup" id="noActivar">Eliminar</button>
                     </div>
                 </div>
                 <div class="datos-backup">
                     @foreach($backups as $backup)
                         <div class="fila-backup">
-                            <p>{{ $backup }}</p>
+                            <p class="contBotones">{{ $backup }}</p>
                             <div id="columnaPeque" class="accion-backup">
                                 <form id="restaurarForm_{{ $backup }}" action="{{ route('backup.restore') }}" method="POST">
                                     @csrf
