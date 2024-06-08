@@ -19,8 +19,8 @@ class CreateSolicitudTable extends Migration
           $table->String('usuario');
         $table->date('fecha');
         $table->string('motivo');
-        $table->string('materia');
-        $table->string('grupo');
+        $table->string('materia')->nullable();
+        $table->string('grupo')->nullable();
         $table->string('nro_aula');
         $table->string('horario');
         $table->string('nombre');

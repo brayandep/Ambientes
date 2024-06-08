@@ -26,7 +26,7 @@
                     </div>
                        <br>
                         <div class="form-group">
-                        <input class="input3" type="text" id="email" name="email" required autofocus placeholder="Ingresa el correo del usuario">
+                        <input class="input3" type="text" id="email" name="email" required autofocus placeholder="Ingresa el correo electronico">
                         
                         @error('email')
                             <p>{{ $message }}</p>
@@ -55,9 +55,10 @@
                 <br>
                 <a class="boton5" href="{{ route('inicio') }}">Modo Invitado</a>
                 <br>
-               
+                <br>
             </div>
         </div>
     </form>
+    
 </body>
 

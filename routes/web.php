@@ -109,7 +109,7 @@ Route::put('/ambiente/{id}', [AmbienteController::class, 'update'])->middleware(
 
 //rutas visualizacion ambientes
 Route::get('/ver-ambientes',[EstadoAmbienteController::class, 'show'])->middleware('can:Ver ambiente')->name('AmbientesRegistrados');
-Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEstado'])->middleware('can:can:Editar ambiente')->name('cambiar.estado');
+Route::put('/cambiar-estado/{id}',[EstadoAmbienteController::class, 'cambiarEstado'])->middleware('can:Editar ambiente')->name('cambiar.estado');
 //termina rutas visualizacion ambientes
 
 //rutas buscador

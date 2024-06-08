@@ -139,6 +139,13 @@ footer {
     }
 }
 
+@media(max-height: 710px){
+    .izquierda{
+        height: 80vh;
+        overflow-y: auto;
+    }
+}
+
 .fixed-button {
     position: fixed;
     top: 20px; /* Puedes ajustar la posición vertical según tus necesidades */
