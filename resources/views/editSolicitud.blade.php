@@ -32,7 +32,12 @@
                 <br>
                 <div>
                     <label class="texto" for="materia">Materia:</label><br>
-                    <input class="input" type="text" id="materia" name="materia" value="{{$solicitud->materia}}" required>
+                    <select class="input" id="materia" name="materia">
+                        <option value="">Selecciona una materia:</option>
+                        @foreach($materias as $materia)
+                            <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <br>
         

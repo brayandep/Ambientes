@@ -117,8 +117,12 @@ public function edit($id ){
         $ambientes = Ambiente::all();;
         $horarios = HorarioDisponible::all();;
         $idAmbienteSeleccionado = $solicitud->ambiente_id;
+        $materias = Grupo::where('idDocente', $usuario->id)
+    ->join('materia', 'grupos.idMateria', '=', 'materia.id')
+    ->select('materia.nombre', 'materia.id')
+    ->get();
        // return $solicitud;
-        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado','usuario'));
+        return view('editSolicitud', compact('solicitud','ambientes','horarios','idAmbienteSeleccionado','usuario','materias'));
 }
 public function update(Request $request, Solicitud $solicitud)
 {
