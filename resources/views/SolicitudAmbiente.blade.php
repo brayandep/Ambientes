@@ -25,12 +25,11 @@
         @endif    
         </div>
     </div>
-   
-    <form class="container2" method="POST" action="{{ route('solicitud.store') }}">
-        @csrf <!-- Incluye el campo csrf aquí -->
+    <form class="container2" method="POST" action="{{ route('solicitud.store') }}"id="solicitudForm">
         <div class="izqDer">
             <div class="izq">
                 <div>
+                  
                     <label class="texto" for="nro_aula">Solicitante:</label><br>
                     <input type="hidden" id="usuarioId" name="usuario" value="{{ $usuario->id }}">
                     <input type="hidden" id="usuarioId" name="nombre" value="{{ $usuario->nombre }}">
@@ -41,13 +40,19 @@
                 <br>
                 <div>
                     <label class="texto" for="materia">Materia:</label><br>
-                    <input class="input" type="text" id="materia" name="materia" required>
+                    <select class="input" id="materia" name="materia" >
+                        <option value="">Selecciona una materia:</option>
+                        @foreach($materias as $materia)
+                            <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <br>
                 <div>
-                    <label class="texto" for="grupo">Nro Grupo:</label><br>
-                    <input class="input" type="text" id="grupo" name="grupo" required>
+                    <label class="texto" for="grupo">Nro Grupo:</label><br >
+                    <input class="input" type="text" id="grupo" name="grupo"  placeholder="ingresa el grupo si desea"  >
                 </div>
+                
                 <br>
                 <div>
                     <label class="texto" for="motivo">Motivo:</label><br>
@@ -61,10 +66,10 @@
             <div class="der">
                 <div>
                     <label class="texto" for="nro_aula">Ambiente:</label><br>
-                    <select class="input" id="nro_aula" name="nro_aula">
-                        <option>Selecciona un ambiente</option>
+                    <select class="input" id="nro_aula" name="nro_aula" onchange="handleTipoAmbienteChange()">
+                        <option value="">Selecciona un ambiente</option>
                         @foreach($ambientes as $ambiente)
-                            <option value="{{ $ambiente->id }}" {{ isset($id) && $id == $ambiente->id ? 'selected' : '' }}>
+                            <option value="{{ $ambiente->id }}" data-tipo="{{ $ambiente->tipo_ambiente_id }}" {{ isset($id) && $id == $ambiente->id ? 'selected' : '' }}>
                                 {{ $ambiente->nombre }}
                             </option>
                         @endforeach
@@ -88,7 +93,7 @@
         <div>
             <button class="boton" type="submit">Enviar Solicitud</button> 
        </div>
-      
+
     </form>  
       
 </div>    
@@ -197,6 +202,32 @@
     document.getElementById('nro_aula').addEventListener('change', filtrarHorarios);
     // Agrega un evento change al campo de selección de fecha
     document.getElementById('fecha').addEventListener('change', filtrarHorarios);
+
+
+    function handleTipoAmbienteChange() {
+        var ambienteSelect = document.getElementById('nro_aula');
+        var selectedOption = ambienteSelect.options[ambienteSelect.selectedIndex];
+        var tipoAmbienteId = selectedOption.getAttribute('data-tipo');
+
+        var materiaSelect = document.getElementById('materia');
+        var motivoSelect = document.getElementById('motivo');
+
+        if (tipoAmbienteId == '1') {
+            materiaSelect.required = true;
+            motivoSelect.required = true;
+        } else {
+            materiaSelect.required = false;
+            motivoSelect.required = false;
+        }
+    }
+
+    // Inicializar la validación cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+        handleTipoAmbienteChange();
+    });
+
+    
 </script>
+
 
 @endsection
