@@ -28,10 +28,6 @@
     white-space: nowrap; /* Para evitar que el texto se divida en varias líneas */
     border-radius: 20px;
   }
-  .truncate {
-    text-overflow: ellipsis; /* Añade puntos suspensivos (...) al final del texto */
-    overflow: hidden; /* Oculta cualquier texto que se desborde */
-  }
   .announcements {
     background-color: #f0f0f0;
     padding: 20px;
@@ -78,6 +74,7 @@
     overflow: hidden; /* Oculta cualquier contenido que desborde del contenedor */
     text-overflow: ellipsis;
 }
+
 </style>
 @section('contenido')
 <div class="container">

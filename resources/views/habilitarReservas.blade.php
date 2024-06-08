@@ -95,7 +95,7 @@
                                         
                             </div>
                             <div>
-                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->nombre }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
                                 
@@ -139,7 +139,6 @@
                         <div class="datos">
                             <p id="nombre"></p>
                             <p id="materia"></p>
-                            <p id="aula"></p>
                             <p id="horario"></p>
                         </div>
                         <button class="botones" onclick="cerrarModalMensaje()">Cerrar</button>
@@ -190,7 +189,7 @@
         // Llenar el modal con los datos recibidos
         document.getElementById('nombre').innerText = 'Nombre: ' + nombre;
         document.getElementById('materia').innerText = 'Materia: ' + materia;
-        document.getElementById('aula').innerText = 'Aula: ' + aula;
+    
         document.getElementById('horario').innerText = 'Horario: ' + horario;
 
         // Mostrar el modal

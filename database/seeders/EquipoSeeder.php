@@ -17,7 +17,7 @@ class EquipoSeeder extends Seeder
         $equipo = new Equipo();
         $equipo->tipo_ambiente_id = 1;
         $equipo->ambiente_id = null;
-        $equipo->nombreEquipo = 'Pizara';
+        $equipo->nombreEquipo = 'Pizarra';
         $equipo->estadoEquipo = true;
         $equipo->save();
 

@@ -21,6 +21,7 @@ class MateriaSeeder extends Seeder
         $mimateria->codigo = 142772;
         $mimateria->nivel = 'A';
         $mimateria->cantGrupo = 2;
+        $mimateria->estado = 1;
         $mimateria->save();
 
         $mimateria2 = new Materia();
@@ -30,6 +31,7 @@ class MateriaSeeder extends Seeder
         $mimateria2->codigo = 215896;
         $mimateria2->nivel = 'C';
         $mimateria2->cantGrupo = 1;
+        $mimateria2->estado = 1;
         $mimateria2->save();
 
         $mimateria3 = new Materia();
@@ -39,6 +41,7 @@ class MateriaSeeder extends Seeder
         $mimateria3->codigo = 657415;
         $mimateria3->nivel = 'G';
         $mimateria3->cantGrupo = 3;
+        $mimateria3->estado = 1;
         $mimateria3->save();
 
     }

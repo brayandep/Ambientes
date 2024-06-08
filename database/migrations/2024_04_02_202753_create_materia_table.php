@@ -21,6 +21,7 @@ class CreateMateriaTable extends Migration
             $table->integer('codigo')->unique();
             $table->string('nivel');
             $table->integer('cantGrupo');
+            $table->boolean('estado'); 
             $table->timestamps();
         });
     }

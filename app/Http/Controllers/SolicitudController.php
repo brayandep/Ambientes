@@ -12,6 +12,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 
+use App\Models\UsuarioPrueba;
+use App\Http\Controllers\CorreoController; // Importa el controlador de correo
+
+
 use Illuminate\Support\Facades\Redirect;
 class SolicitudController extends Controller
 {
@@ -23,7 +27,7 @@ class SolicitudController extends Controller
         $ambientes = Ambiente::all();;
         
         $usuarios = User::all();;
-        return view('VerSolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
+        return view('Versolicitud', compact('solicitudes','horarios','ambientes', 'usuario','usuarios'));
     }
 
     public function index2()
@@ -33,7 +37,7 @@ class SolicitudController extends Controller
         $horarios = HorarioDisponible::all();;
         $ambientes = Ambiente::all();;
         $usuario = Auth::user();
-         return view('HabilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
+         return view('habilitarReservas', compact('solicitudes','usuarios','horarios','ambientes', 'usuario'));
     }
 
 
@@ -79,6 +83,7 @@ if ($solicitudExistente) {
 $solicitud = new Solicitud();
 $solicitud->usuario = $request->usuario;
 $solicitud->fecha = $request->fecha;
+$solicitud->nombre = $request->nombre;
 $solicitud->motivo = $request->motivo;
 $solicitud->materia = $request->materia;
 $solicitud->grupo = $request->grupo;
@@ -141,28 +146,79 @@ public function suspender(Solicitud $id){
     $id->save();
     return redirect()->route('VerSolicitud');
 }
-public function habilitar(Solicitud $id){
+
+public function habilitar(Solicitud $id)
+{
     $id->estado = "confirmado";
     $id->save();
-     // Busca todas las solicitudes con la misma fecha, horario y aula
-     $solicitudes = Solicitud::where('fecha', $id->fecha)
-     ->where('horario', $id->horario)
-     ->where('nro_aula', $id->nro_aula)
-     ->where($id->getKeyName(), '!=', $id->getKey()) // Utilizar el nombre de la columna de la clave primaria
-     ->get();
+    
+    // Obtener el usuario y ambiente asociados a la solicitud
+    $usuario = User::find($id->usuario);
+    $ambiente = Ambiente::find($id->nro_aula);
 
-    // Actualiza el estado de las solicitudes encontradas a "denegado"
-    foreach ($solicitudes as $solicitud) {
-    $solicitud->estado = "denegado";
-    $solicitud->save();
+    if ($usuario && $ambiente) {
+        // Enviar correo de confirmación
+        $correo_destino = $usuario->email;
+        $nombre_usuario = $usuario->nombre;
+        $nombre_ambiente = $ambiente->nombre;
+        $horario = $id->horario;
+        $fecha_solicitud = $id->fecha;
+        
+        $correoController = new CorreoController();
+        $correoController->enviarCorreoConfirmacion($correo_destino, $nombre_usuario, $horario, $nombre_ambiente, $fecha_solicitud);
+        
+        // Actualizar el estado de otras solicitudes
+        $solicitudes = Solicitud::where('fecha', $id->fecha)
+            ->where('horario', $id->horario)
+            ->where('nro_aula', $id->nro_aula)
+            ->where($id->getKeyName(), '!=', $id->getKey())
+            ->get();
+
+        foreach ($solicitudes as $solicitud) {
+            $solicitud->estado = "denegado";
+            $solicitud->save();
+            
+            // Enviar correo de rechazo para cada solicitud denegada
+            $usuario_denegado = User::find($solicitud->usuario);
+            if ($usuario_denegado) {
+                $correo_destino_denegado = $usuario_denegado->email;
+                $nombre_usuario_denegado = $usuario_denegado->nombre;
+                $correoController->enviarCorreoRechazo($correo_destino_denegado, $nombre_usuario_denegado, $horario, $nombre_ambiente, $fecha_solicitud);
+            }
+        }
+
+        return redirect()->route('habilitarReservas')->with('success', 'Solicitud confirmada y correos electrónicos enviados.');
+    } else {
+        return redirect()->route('habilitarReservas')->with('error', 'No se encontró el usuario o el ambiente asociado a la solicitud.');
     }
-    return redirect()->route('habilitarReservas');
 }
-public function denegar(Solicitud $id){
+
+public function denegar(Solicitud $id)
+{
     $id->estado = "denegado";
     $id->save();
-    return redirect()->route('habilitarReservas');
+    
+    // Obtener el usuario y ambiente asociados a la solicitud
+    $usuario = User::find($id->usuario);
+    $ambiente = Ambiente::find($id->nro_aula);
+
+    if ($usuario && $ambiente) {
+        // Enviar correo de rechazo
+        $correo_destino = $usuario->email;
+        $nombre_usuario = $usuario->nombre;
+        $nombre_ambiente = $ambiente->nombre;
+        $horario = $id->horario;
+        $fecha_solicitud = $id->fecha;
+        
+        $correoController = new CorreoController();
+        $correoController->enviarCorreoRechazo($correo_destino, $nombre_usuario, $horario, $nombre_ambiente, $fecha_solicitud);
+
+        return redirect()->route('habilitarReservas')->with('success', 'Solicitud rechazada y correo electrónico enviado.');
+    } else {
+        return redirect()->route('habilitarReservas')->with('error', 'No se encontró el usuario o el ambiente asociado a la solicitud.');
+    }
 }
+
 /*public function confirmar(Solicitud $solicitud)
 {
     // Actualiza el estado de la solicitud a "confirmado"
@@ -183,6 +239,7 @@ public function solicitudMostrar(Request $request){
     }
     return view('habilitarReservas', compact('solicitudes','ambientes'));
 }
+
 public function descargarReservasPDF(){
     $solicitudes = Solicitud::all(); // Obtén todas las solicitudes
 

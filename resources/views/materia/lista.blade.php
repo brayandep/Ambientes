@@ -47,10 +47,13 @@
                         <div class="contBotones" id="columnaPeque">
                             <button class="nomCol">Editar</button>
                         </div>                        
+                        <div class="contBotones" id="columnaPeque">
+                            <button class="nomCol">Grupos</button>
+                        </div>
+                        <div class="contBotones" id="columnaPeque">
+                            <button class="nomCol">Habilitar</button>
+                        </div>
                     @endcan
-                    <div class="contBotones" id="columnaPeque">
-                        <button class="nomCol">Grupos</button>
-                    </div>
                 </div>
                 <div>
                     @foreach ($materias as $Materia)
@@ -64,13 +67,23 @@
 
                             @can('Editar materia')
                                 <div class="EditHab" id="columnaPeque">
-                                    <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="accion" onclick="location.href='{{ route('materia.editar', $Materia) }}';" {{ $Materia->estado == 0 ? 'disabled' : '' }}><i class="fa-solid fa-pen-to-square"></i></button>
                                 </div>                      
+                                <div class="EditHab" id="columnaPeque">
+                                    <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';" {{ $Materia->estado == 0 ? 'disabled' : '' }}><i class="fa-solid fa-user-group"></i></button>
+                                </div>
+                                <div class="EditHab" id="columnaPeque"> 
+                                    <form class="formSwitch" action="{{ route('materia.estado', $Materia->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="boton-sw">
+                                            <input type="checkbox" id="btn-switch-{{ $Materia->id }}" name="estado" {{ $Materia->estado == 1 ? 'checked' : '' }} onchange="this.form.submit()">
+                                            <label for="btn-switch-{{ $Materia->id }}" class="lbl-switch"></label>
+                                        </div>
+                                    </form>
+                                </div>
                             @endcan
 
-                            <div class="EditHab" id="columnaPeque">
-                                <button class="accion" onclick="location.href='{{ route('grupo.create', $Materia) }}';"><i class="fa-solid fa-user-group"></i></button>
-                            </div>
                         </div>
                     @endforeach
                 </div>

@@ -21,7 +21,7 @@ class Grupo extends Model
     //relacion uno a muchos (inversa)
     public function eldocente()
     {
-        return $this->belongsTo('App\Models\Docente', 'idDocente', 'id');
+        return $this->belongsTo('App\Models\User', 'idDocente', 'id');
     }
     public function materia()
     {
