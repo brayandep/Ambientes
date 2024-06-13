@@ -41,10 +41,10 @@
                 <br>
                 <div>
                     <label class="texto" for="materia">Materia:</label><br>
-                    <select class="input" id="materia" name="materia" >
+                    <select class="input" id="materia" name="materia">
                         <option value="">Selecciona una materia:</option>
                         @foreach($materias as $materia)
-                            <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                            <option value="{{ $materia->nombre }}">{{ $materia->nombre }}</option>
                         @endforeach
                     </select>
                 </div>

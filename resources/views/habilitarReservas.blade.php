@@ -109,26 +109,26 @@
                                        </form>
                                    
                        </div>
-                            <div>
-                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </button>
-                            
-                            </div>
+                       <div>
+                        <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->nombre }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </button>
+                        
+                    </div>
                         @elseif($solicitud->estado == 'denegado')
-                            <div>
-                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </button>
-                                
-                            </div>  
+                        <div>
+                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->nombre }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                            
+                        </div>
                         @elseif($solicitud->estado == 'suspendido')
-                            <div>
-                                <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->usuario }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </button>
-                                
-                            </div>
+                        <div>
+                            <button title="Mas informacion" type="submit" onclick="mostrarModalMensaje('{{ $solicitud->nombre }}', '{{ $solicitud->materia }}', '{{ $solicitud->nro_aula }}', '{{ $solicitud->horario }}')">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                            
+                        </div>
                         @endif
                     </div>
                     
