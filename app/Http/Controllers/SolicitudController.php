@@ -263,14 +263,7 @@ public function descargarReservasPDF(){
     // Obtener información de los ambientes
     $ambientes = Ambiente::all();
 
-    // Invertir el orden de las solicitudes
-    //$solicitudes = $solicitudes->reverse();
-
-    //Horientación de la pagina en horizontal y Generar el PDF
-    $pdf = PDF::loadView('pdf.solicitudes', compact('solicitudes', 'ambientes'))
-    ->setPaper('a4', 'landscape');
-
-    return $pdf->download('reservas.pdf');
+    return view('pdf.solicitudes', compact('solicitudes', 'ambientes'));
 }
 
 }

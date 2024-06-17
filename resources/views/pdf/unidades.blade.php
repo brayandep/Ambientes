@@ -58,7 +58,35 @@
         th {
             background-color: #f2f2f2;
         }
+        input[type="submit"] {
+            background-color: #4e798c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
 
+        .cancelar {
+            background-color: #F35D5D;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .botones-imprimir {
+            text-align: right;
+        }
+
+        /* Estilo para la impresión */
+        @media print {
+            .no-imprimir {
+                display: none;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -81,6 +109,10 @@
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
+</div>
+<div class="botones-imprimir">
+    <input type="submit" value="Imprimir" onclick="imprimirBoleta()" id="botonImprimir">
+    <input type="button" value="Cerrar" onclick="confirmarCancelacion()" class="cancelar">
 </div>
 
 <table>
@@ -125,5 +157,23 @@
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
 
+<script>
+    function imprimirBoleta() {
+            // Oculta los botones al imprimir
+
+            document.querySelector('.botones-imprimir').style.display = 'none';
+            window.print();
+
+            // Muestra los botones después de un segundo
+            setTimeout(function() {
+                document.querySelector('.botones-imprimir').style.display = 'block';
+            }, 1000);
+        }
+
+    function confirmarCancelacion() {
+        // Aquí puedes redirigir o cerrar la ventana como lo necesites
+        window.close();
+    }
+</script>
 </body>
 </html>

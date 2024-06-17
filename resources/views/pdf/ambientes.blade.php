@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Reporte de Ambientes</title>
     <style>
         body {
@@ -15,24 +15,24 @@
         }
         .membrete-table {
             width: 100%;
-            border: none; 
+            border: none;
             margin-bottom: 5px;
         }
         .membrete-table td {
             padding: 0;
             vertical-align: middle;
-            border: none; 
+            border: none;
         }
         .membrete img {
             max-width: 150px;
             vertical-align: middle;
         }
         .membrete-texto {
-            padding-left: 5px; 
+            padding-left: 5px;
             vertical-align: middle;
         }
         .membrete-texto h1, .membrete-texto p {
-            margin: 0; 
+            margin: 0;
         }
         .titulo {
             text-align: center;
@@ -59,6 +59,35 @@
             background-color: #f2f2f2;
         }
 
+        input[type="submit"] {
+            background-color: #4e798c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .cancelar {
+            background-color: #F35D5D;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .botones-imprimir {
+            text-align: right;
+        }
+
+        /* Estilo para la impresión */
+        @media print {
+            .no-imprimir {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -76,13 +105,16 @@
         </tr>
     </table>
 </div>
-<div class="titulo"> 
-    <h1>Reporte de Ambientes Registrados</h1> 
+<div class="titulo">
+    <h1>Reporte de Ambientes Registrados</h1>
 </div>
 <div class="fecha">
     <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
 </div>
-
+<div class="botones-imprimir">
+    <input type="submit" value="Imprimir" onclick="imprimirBoleta()" id="botonImprimir">
+    <input type="button" value="Cerrar" onclick="confirmarCancelacion()" class="cancelar">
+</div>
 <table>
     <thead>
         <tr>
@@ -101,7 +133,7 @@
             <td>{{ $ambiente->nombre }}</td>
             <td>{{ $ambiente->capacidad }}</td>
             <td>{{ $ambiente->ubicacion }}</td>
-            <td>{{ $ambiente->descripcion_ubicacion}}</td>
+            <td>{{ $ambiente->descripcion_ubicacion }}</td>
             <td>
                 @if ($ambiente->estadoAmbiente == 1)
                     Habilitado
@@ -115,6 +147,24 @@
 </table>
 <p>Administrador: Esteban Rodriguez Arce</p>
 
+<script>
+    function imprimirBoleta() {
+            // Oculta los botones al imprimir
+
+            document.querySelector('.botones-imprimir').style.display = 'none';
+            window.print();
+
+            // Muestra los botones después de un segundo
+            setTimeout(function() {
+                document.querySelector('.botones-imprimir').style.display = 'block';
+            }, 1000);
+        }
+
+    function confirmarCancelacion() {
+        // Aquí puedes redirigir o cerrar la ventana como lo necesites
+        window.close();
+    }
+</script>
 
 </body>
 </html>

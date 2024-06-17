@@ -125,15 +125,10 @@ class registroUnidadesController extends Controller
     
     public function descargarUnidadesPDF(){
         $unidades = Unidad::all(); // Obtén todas las unidades
-
         // Invertir el orden de las unidades
         $unidades = $unidades->reverse();
-
-        //Horientación de la pagina en horizontal y Generar el PDF
-        $pdf = PDF::loadView('pdf.unidades', compact('unidades'))
-                ->setPaper('a4', 'landscape'); 
-       
-        return $pdf->download('unidades.pdf');
+        
+        return view('pdf.unidades', compact('unidades'));
     }
     
 }

@@ -87,16 +87,9 @@ class materiaController extends Controller
 
     public function descargarMateriasPDF(){
         $materias = Materia::all(); // Obtén todas las materias
-    
         // Invertir el orden de las materias
         $materias = $materias->reverse();
-    
-        //Horientación de la pagina en horizontal y Generar el PDF
-        $pdf = PDF::loadView('pdf.materias', compact('materias'))
-        ->setPaper('a4', 'landscape');
 
-        
-    
-        return $pdf->download('materias.pdf');
+        return view('pdf.materias',compact('materias'));
     }
 }

@@ -8,7 +8,7 @@ use App\Models\HorarioDisponible;
 use App\Models\TipoAmbiente;
 use App\Models\Unidad;
 use Illuminate\Http\Request;
-use PDF;
+
 
 class AmbienteController extends Controller
 {
@@ -363,10 +363,6 @@ class AmbienteController extends Controller
     {
         $ambientes = Ambiente::all()->reverse(); // Obtén todos los ambientes e invierte el orden
 
-        //Horientación de la pagina en horizontal y Generar el PDF
-        $pdf = PDF::loadView('pdf.ambientes', compact('ambientes'))
-                    ->setPaper('a4', 'landscape');
-
-        return $pdf->download('ambientes.pdf');
+        return view('pdf.ambientes',compact('ambientes'));
     }
 }
